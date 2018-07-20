@@ -1,7 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -86,7 +83,7 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View v) {
                 if (radio_hombre.isChecked() == true) {
-                    setSexo("hombre");
+                    setSexo("Hombre");
                     //radioButton_trabajar.setError(null);
                     //radioButton_trabajar.setChecked(false);
                 }
@@ -96,13 +93,16 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View v) {
                 if (radio_mujer.isChecked() == true) {
-                    setSexo("mujer");
+                    setSexo("Mujer");
                     //radioButton_contrato.setError(null);
                     //radioButton_contrato.setChecked(false);
                 }
             }
         });
     }
+
+
+
 
     /*public AlertDialog createSimpleDialog(final int id_solicitud) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

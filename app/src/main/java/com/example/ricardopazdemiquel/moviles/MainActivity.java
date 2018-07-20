@@ -188,9 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case "Mapa":
                 fragmentoGenerico= new fr_map();
                 break;
-
         }
-
             fragmentManager.beginTransaction().replace(R.id.contenmain, fragmentoGenerico).commit();
         if (fragmentoGenerico != null) {
         }

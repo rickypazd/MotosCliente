@@ -1,5 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,12 +10,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 import java.util.Hashtable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
@@ -27,7 +34,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
     private EditText edit_fecha;
     private EditText edit_username;
     private EditText edit_pass;
-    private EditText edit_pass2;
     private EditText edit_correo;
     private Button btn_crear_usuario;
     private JSONObject obj_us;
@@ -44,11 +50,11 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         edit_fecha = findViewById(R.id.edit_fecha);
         edit_username= findViewById(R.id.edit_username);
         edit_pass = findViewById(R.id.edit_pass);
-        edit_pass2 = findViewById(R.id.edit_pass2);
         edit_correo = findViewById(R.id.edit_correo);
         btn_crear_usuario = findViewById(R.id.btn_crear_usuario);
 
         btn_crear_usuario.setOnClickListener(this);
+        edit_fecha.setOnClickListener(this);
 
         String d = getIntent().getStringExtra("obj_cliente");
         if(d.length()>0){
@@ -115,15 +121,80 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
                 Guardar();
                 break;
         }
-
+        switch (view.getId()) {
+            case R.id.edit_fecha:
+                ShowDatapinckerDialog();
+                break;
+        }
     }
+
+
+
+    private void ShowDatapinckerDialog(){
+        final java.util.Calendar c = java.util.Calendar.getInstance();
+        c.set(Calendar.YEAR , 1900);
+        c.set(Calendar.MONTH , 0);
+        c.set(Calendar.DAY_OF_MONTH , 0);
+        int año = c.get(java.util.Calendar.YEAR);
+        int mes = c.get(java.util.Calendar.MONTH);
+        int dia = c.get(Calendar.DAY_OF_MONTH);
+        final DatePickerDialog datePickerDialog = new DatePickerDialog
+                (this ,new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        String fecha;
+                        if ((month+1)<10) {
+                            fecha = year + "-0" + (month+1);
+                        }else{
+                            fecha = year + "-" + (month+1);
+                        }
+                        if(dayOfMonth<10){
+                            fecha += "-0"+ dayOfMonth;
+                        }else{
+                            fecha += "-" + dayOfMonth;
+                        }
+                        edit_fecha.setText(fecha);
+                        edit_fecha.setError(null);
+                    }
+                }, dia, mes , año);
+        datePickerDialog.show();
+    }
+
+    private String md5(String in) {
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("MD5");
+            digest.reset();
+            digest.update(in.getBytes());
+            byte[] a = digest.digest();
+            int len = a.length;
+            StringBuilder sb = new StringBuilder(len << 1);
+            for (int i = 0; i < len; i++) {
+                sb.append(Character.forDigit((a[i] & 0xf0) >> 4, 16));
+                sb.append(Character.forDigit(a[i] & 0x0f, 16));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) { e.printStackTrace(); }
+        return null;
+    }
+
+    public static boolean validarEmailSimple(String email) {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean isPasswordValid(String password) {
+        return password.length() > 4;
+    }
+
 
     private void Guardar() {
 
         String fechaV = edit_fecha.getText().toString().trim();
         String usernameV = edit_username.getText().toString().trim();
         String passV = edit_pass.getText().toString().trim();
-        String passV2 = edit_pass2.getText().toString().trim();
         String correoV = edit_correo.getText().toString().trim();
 
         boolean isValid = true;
@@ -139,38 +210,35 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         if (passV.isEmpty()) {
             edit_pass.setError("campo obligarotio");
             isValid = false;
-        }
-        if (passV2.isEmpty()) {
-            edit_pass2.setError("campo obligarotio");
+        } else if (isPasswordValid(passV) == false) {
+            edit_pass.setError("la contraseña debe ser mayor a 4 digitos");
             isValid = false;
         }
         if (correoV.isEmpty()) {
             edit_correo.setError("campo obligarotio");
             isValid = false;
+        }else if (validarEmailSimple(correoV) == false) {
+            edit_correo.setError("email no valido");
+            isValid = false;
         }
         if (!isValid) {
             return;
         }
-
-        new Registrar(fechaV,usernameV,passV,correoV).execute();
+        String passmd5 = md5(passV);
+        new Registrar(fechaV,usernameV,passmd5,correoV).execute();
     }
 
 
     private class Registrar extends AsyncTask<Void, String, String> {
 
-
         private ProgressDialog progreso;
-
         private String  fecha ,  usuario ,  pass , correo;
-
         public Registrar( String fecha ,String usuario , String pass
                 , String correo ) {
-
             this.fecha = fecha;
             this.usuario = usuario;
             this.pass = pass;
             this.correo = correo;
-
         }
 
         @Override
@@ -187,7 +255,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         protected String doInBackground(Void... params) {
             if(obj_us!=null){
                 try {
-
                     Hashtable<String,String> param = new Hashtable<>();
                     param.put("evento","registrar_usuario_cliente");
                     param.put("nombre",obj_us.getString("nombre"));

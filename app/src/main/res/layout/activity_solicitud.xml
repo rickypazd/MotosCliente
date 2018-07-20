@@ -38,7 +38,7 @@
         android:textAlignment="center"
         android:text="Datos Personales"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="22sp" />
+        android:textSize="23sp" />
 </LinearLayout>
 
 
@@ -157,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Numero de telefóno"
-                    android:inputType="textPersonName" />
+                    android:inputType="text|phone" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -196,7 +196,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="1"
+        android:layout_weight="0.94"
         android:gravity="center|fill"
         >
         <Button

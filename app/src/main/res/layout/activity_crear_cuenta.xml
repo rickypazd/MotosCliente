@@ -8,21 +8,14 @@
     tools:context=".Crear_CuentaActivity">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
     </android.support.v7.widget.Toolbar>
-
-    </LinearLayout>
 
 
 <LinearLayout
@@ -65,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="fecha de nacimiento"
+                    android:focusable="false"
                     android:inputType="textPersonName" />
 
             </android.support.design.widget.TextInputLayout>
@@ -157,38 +151,6 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/edit_pass2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="digite de nuevo la contraseña"
-                    android:inputType="textPersonName" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
-        >
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
                     android:id="@+id/edit_correo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -205,8 +167,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:gravity="center|fill"
+        android:layout_weight="0.9"
+        android:gravity="center"
         >
         <Button
             android:id="@+id/btn_crear_usuario"
