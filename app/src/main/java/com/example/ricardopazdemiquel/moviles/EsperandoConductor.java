@@ -61,7 +61,7 @@ public class EsperandoConductor extends AppCompatActivity {
     private GoogleMap googleMap;
     JSONObject json_carrera;
     private LinearLayout ll_conductor_llego;
-    private LinearLayout perfil_condutor;
+//    private LinearLayout perfil_condutor;
 
     //añadiendo los broadcaast
     private BroadcastReceiver broadcastReceiverMessage;
@@ -74,13 +74,14 @@ public class EsperandoConductor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esperando_conductor);
+
         try {
             json_carrera=new JSONObject(getIntent().getStringExtra("obj_carrera"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         ll_conductor_llego=findViewById(R.id.ll_condctor);
-        perfil_condutor=findViewById(R.id.perfil_conductor);
+    //    perfil_condutor=findViewById(R.id.perfil_conductor);
 
         mMapView=findViewById(R.id.mapView2);
         mMapView.onCreate(savedInstanceState);
@@ -221,7 +222,7 @@ public class EsperandoConductor extends AppCompatActivity {
     private void finalizo_carrera(Intent intenta){
         Intent intent = new Intent( EsperandoConductor.this, finalizar_viajeCliente.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("id_carrera",intenta.getStringExtra("id_carrera"));
+        intent.putExtra("carrera",intenta.getStringExtra("carrera"));
         startActivity(intent);
         finish();
     }

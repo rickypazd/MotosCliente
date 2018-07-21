@@ -61,27 +61,6 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
 
-            <com.sothree.slidinguppanel.SlidingUpPanelLayout
-                xmlns:sothree="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/sliding_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                sothree:umanoPanelHeight="68dp"
-                sothree:umanoShadowHeight="4dp">
-
-                <include
-                    layout="@layout/prueba_perfilcon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-            </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
         </LinearLayout>
-
-
-
-
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

@@ -31,6 +31,7 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_finalizar_viaje_fragment_2, container, false);
 
         edit_mensaje = view.findViewById(R.id.edit_mensaje);
+        edit_mensaje.setOnClickListener(this);
         return view;
     }
 
@@ -39,13 +40,9 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_enviar_mensaje:
-                String mensaje=edit_mensaje.getText().toString();
+                String mensaje = edit_mensaje.getText().toString().trim();
                 ((finalizar_viajeCliente)getActivity()).finalizo(mensaje);
                 break;
         }
     }
-
-
-
-
 }

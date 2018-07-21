@@ -57,6 +57,7 @@
                 android:background="@drawable/botonwhite"
                 android:drawableStart="@drawable/ic_map_marker"
                 android:hint="Direccion Inicial"
+                android:inputType="text"
                 android:padding="10dp" />
 
             <AutoCompleteTextView

@@ -118,7 +118,6 @@ public class PidiendoSiete extends AppCompatActivity {
         @Override
         protected void onPostExecute(String pacientes) {
             super.onPostExecute(pacientes);
-
             if (pacientes.equals("falso")) {
                 finish();
                 return;

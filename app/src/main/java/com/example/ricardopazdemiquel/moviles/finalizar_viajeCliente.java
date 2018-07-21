@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Hashtable;
@@ -30,7 +31,8 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
    // private Button nombre;
 
     private RatingBar ratingBar;
-    private int id_carrera;
+    //private int id_carrera;
+    private  JSONObject carrera;
     Fragment fragment_1 = null;
     Fragment fragment_2  = null;
     private float ratings;
@@ -39,7 +41,14 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar_viajecliente);
 
-        id_carrera = Integer.parseInt(getIntent().getStringExtra("id_carrera"));
+        String res = getIntent().getStringExtra("carrera");
+        //id_carrera = Integer.parseInt(getIntent().getStringExtra("id_carrera"));
+        try {
+            carrera = new JSONObject(res);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         ratingBar = findViewById(R.id.ratingBar);
         fragment_1= new FinalizarViajeFragment_1();
         fragment_2= new FinalizarViajeFragment_2();
@@ -56,13 +65,20 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
 
     }
 
+    public JSONObject get_carrera(){
+        return carrera;
+    }
     @Override
     public void onClick(View view) {
 
     }
 
     public void finalizo(String mensaje){
-        new Finalizo(id_carrera, ratings, mensaje).execute();
+        try {
+            new Finalizo(carrera.getInt("id"), ratings, mensaje).execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     //asyncTask Finalizo carrera

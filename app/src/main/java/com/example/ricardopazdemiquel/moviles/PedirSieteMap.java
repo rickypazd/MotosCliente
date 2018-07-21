@@ -344,6 +344,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         }
     };
+
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -367,7 +368,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
         return strAdd;
     }
-
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(hasFocus){

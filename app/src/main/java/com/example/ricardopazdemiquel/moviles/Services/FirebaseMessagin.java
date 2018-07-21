@@ -55,7 +55,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
 
     private void Finalizo_Carrera(RemoteMessage remoteMessage) {
         Intent notificationIntent = new Intent(this, finalizar_viajeCliente.class);
-        notificationIntent.putExtra("id_carrera",remoteMessage.getData().get("json"));
+        notificationIntent.putExtra("carrera",remoteMessage.getData().get("json"));
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
@@ -67,7 +67,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         notificationManager.notify(2,notification);
         Intent intent = new Intent();
         intent.putExtra("message",remoteMessage.getData().get("mensaje"));
-        intent.putExtra("id_carrera",remoteMessage.getData().get("json"));
+        intent.putExtra("carrera",remoteMessage.getData().get("json"));
         intent.setAction("Finalizo_Carrera");
         sendBroadcast(intent);
     }
