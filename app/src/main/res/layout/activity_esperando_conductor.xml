@@ -11,56 +11,325 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
-            android:id="@+id/ll_condctor"
+            android:id="@+id/Container_cancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/backgroundcolor"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
             android:orientation="vertical"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
             android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <Button
+                android:id="@+id/btn_cancelar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Su vehiculo llego"
-                android:textAlignment="center"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                android:text="Cancelar Siete"
                 android:textColor="@color/colorWhite"
-                android:textSize="16dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="El conductor esta esperando"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="16dp" />
+                android:textSize="22dp"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/perfil_conductor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent">
+        <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/Container_verPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/button_sheet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    app:behavior_hideable="true"
+                    app:behavior_peekHeight="55dp"
+                    app:layout_behavior="@string/bottom_sheet_behavior">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/backgroundcolor2">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:text="Ver perfil"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="22dp"
+                                android:gravity="center" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1">
+
+                                    <EditText
+                                        android:id="@+id/button"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:background="@drawable/ic_logo_phone"
+                                        android:layout_gravity="center"
+                                        android:padding="17dp"
+                                        android:drawableStart="@drawable/ic_telefono"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:id="@+id/img_foto"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:src="@mipmap/ic_miperfil_round"
+                                        android:drawableStart="@drawable/ic_sobre"
+                                        android:padding="17dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center">
+
+                                    <Button
+                                        android:id="@+id/button2"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/ic_logo_phone"
+                                        android:drawableStart="@drawable/ic_sobre"
+                                        android:padding="17dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_marginEnd="40dp"
+                                android:layout_marginStart="40dp"
+                                android:layout_weight="1.1">
+
+                                <TextView
+                                    android:id="@+id/text_nombreConductor"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/colorWhite"
+                                    android:gravity="center"
+                                    android:background="@drawable/ic_redondo1_finalizar"
+                                    android:inputType="textPersonName" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_marginStart="40dp"
+                                android:layout_marginEnd="40dp"
+                                android:layout_weight="1.1">
+
+                                <TextView
+                                    android:id="@+id/text_nombreAuto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:textSize="15dp"
+                                    android:textColor="@color/colorWhite"
+                                    android:gravity="center"
+                                    android:background="@drawable/botonred"
+                                    android:inputType="textPersonName"
+                                    android:layout_weight="1"/>
+
+                                <TextView
+                                    android:id="@+id/text_numeroPlaca"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:textSize="15dp"
+                                    android:textColor="@color/colorWhite"
+                                    android:gravity="center"
+                                    android:layout_marginStart="20dp"
+                                    android:background="@drawable/botonred"
+                                    android:inputType="textPersonName"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:layout_weight="1.04">
+
+                                <TextView
+                                    android:id="@+id/text_Viajes"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:text="Ha completado 256 viajes"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:textColor="#fff"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/text_Logros"
+                                    android:layout_width="180dp"
+                                    android:layout_height="45dp"
+                                    android:gravity="center"
+                                    android:text="Logros"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="22dp"
+                                    android:textStyle="bold"
+                                    android:background="@drawable/ic_redondo1_finalizar"
+                                    android:inputType="textPersonName" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_weight="1">
+
+                                    <Button
+                                        android:id="@+id/button6"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:background="@drawable/round_foreground" />
+
+                                    <TextView
+                                        android:id="@+id/textView12"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:textAlignment="center"
+                                        android:text="Amable"
+                                        android:textColor="#fff" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_weight="1">
+
+                                    <Button
+                                        android:id="@+id/button3"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:background="@drawable/round_foreground" />
+
+                                    <TextView
+                                        android:id="@+id/textView11"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:textAlignment="center"
+                                        android:text="Buena Ruta"
+                                        android:textColor="#fff" />
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_weight="1">
+
+                                    <Button
+                                        android:id="@+id/button7"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:background="@drawable/round_foreground" />
+
+                                    <TextView
+                                        android:id="@+id/textView13"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Auto limpio"
+                                        android:textAlignment="center"
+                                        android:paddingTop="10dp"
+                                        android:textColor="#fff" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="40dp"
+                                android:layout_marginStart="40dp"
+                                android:layout_marginBottom="20dp"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/textView14"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:alpha="0.5"
+                                    android:background="@drawable/rounded_corner"
+                                    android:padding="10dp"
+                                    android:inputType="textMultiLine"
+                                    android:text="nombre"
+                                    android:textColor="#fff" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

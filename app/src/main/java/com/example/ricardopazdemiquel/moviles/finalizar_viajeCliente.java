@@ -36,6 +36,8 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
     Fragment fragment_1 = null;
     Fragment fragment_2  = null;
     private float ratings;
+    private int frag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,9 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 ratings = rating;
-                getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_2).commit();
-
+                if(frag == 0){
+                    frag = getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_2).commit();
+                }
             }
         });
 

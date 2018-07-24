@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.Hashtable;
@@ -22,6 +23,7 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
 
     private static final String TAG ="fragment_explorar";
     private EditText edit_mensaje;
+    private Button btn_enviar_mensaje;
 
     public FinalizarViajeFragment_2() {
     }
@@ -31,7 +33,8 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_finalizar_viaje_fragment_2, container, false);
 
         edit_mensaje = view.findViewById(R.id.edit_mensaje);
-        edit_mensaje.setOnClickListener(this);
+        btn_enviar_mensaje = view.findViewById(R.id.btn_enviar_mensaje);
+        btn_enviar_mensaje.setOnClickListener(this);
         return view;
     }
 

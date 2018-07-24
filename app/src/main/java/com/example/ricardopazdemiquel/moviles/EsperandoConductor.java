@@ -12,14 +12,19 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -56,11 +62,20 @@ import clienteHTTP.StandarRequestConfiguration;
 import utiles.Constants;
 import utiles.DirectionsJSONParser;
 
+
 public class EsperandoConductor extends AppCompatActivity {
     MapView mMapView;
     private GoogleMap googleMap;
     JSONObject json_carrera;
-    private LinearLayout ll_conductor_llego;
+    private LinearLayout Container_cancelar;
+    private CoordinatorLayout Container_verPerfil;
+    private BottomSheetBehavior bottomSheetBehavior;
+
+    private TextView text_nombreConductor;
+    private TextView text_nombreAuto;
+    private TextView text_numeroPlaca;
+    private TextView text_Viajes;
+
 //    private LinearLayout perfil_condutor;
 
     //añadiendo los broadcaast
@@ -74,14 +89,40 @@ public class EsperandoConductor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esperando_conductor);
+        text_nombreConductor = findViewById(R.id.text_nombreConductor);
+        text_nombreAuto = findViewById(R.id.text_nombreAuto);
+        text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
+        text_Viajes= findViewById(R.id.text_Viajes);
+
+        Container_cancelar = findViewById(R.id.Container_cancelar);
+        Container_verPerfil = findViewById(R.id.Container_verPerfil);
 
         try {
-            json_carrera=new JSONObject(getIntent().getStringExtra("obj_carrera"));
+            json_carrera = new JSONObject(getIntent().getStringExtra("obj_carrera"));
+            if(json_carrera.getInt("estado")>=3){
+                    conductor_llego(getIntent());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ll_conductor_llego=findViewById(R.id.ll_condctor);
-    //    perfil_condutor=findViewById(R.id.perfil_conductor);
+
+
+        View view =findViewById(R.id.button_sheet);
+        bottomSheetBehavior=BottomSheetBehavior.from(view);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState){
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        break;
+                }
+            }
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
 
         mMapView=findViewById(R.id.mapView2);
         mMapView.onCreate(savedInstanceState);
@@ -189,7 +230,7 @@ public class EsperandoConductor extends AppCompatActivity {
                 while(hilo){
                     try {
                         new posicion_conductor().execute();
-                        Thread.sleep(3000);
+                        Thread.sleep(1500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -206,15 +247,18 @@ public class EsperandoConductor extends AppCompatActivity {
 
     private void conductor_llego(Intent intent){
         Toast.makeText(EsperandoConductor.this,"El conductor Llego",Toast.LENGTH_SHORT).show();
+        Container_cancelar.setVisibility(View.GONE);
+        try {
+            new Get_ObtenerPerfilConductor(json_carrera.getString("id")).execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        ll_conductor_llego.setVisibility(View.VISIBLE);
-        //perfil_condutor.setVisibility(View.VISIBLE);
     }
 
     private void Inicio_Carrera(Intent intent){
         Toast.makeText(EsperandoConductor.this,"Su carrera ha comenzado, Que tenga buen viaje.",
                 Toast.LENGTH_SHORT).show();
-        ll_conductor_llego.setVisibility(View.GONE);
         new buscar_carrera().execute();
         //perfil_condutor.setVisibility(View.VISIBLE);
     }
@@ -252,6 +296,8 @@ public class EsperandoConductor extends AppCompatActivity {
 
         return url;
     }
+
+
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -366,7 +412,6 @@ public class EsperandoConductor extends AppCompatActivity {
             while( ( line = br.readLine()) != null){
                 sb.append(line);
             }
-
             data = sb.toString();
 
             br.close();
@@ -378,14 +423,16 @@ public class EsperandoConductor extends AppCompatActivity {
             urlConnection.disconnect();
         }
         return data;
-    }
 
+    }
+    private float dist=0;
+    private Marker marauto;
+    private Marker mardest;
     private class posicion_conductor extends AsyncTask<Void, String, String> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override
@@ -399,8 +446,6 @@ public class EsperandoConductor extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
             return respuesta;
         }
@@ -425,25 +470,42 @@ public class EsperandoConductor extends AppCompatActivity {
                     }
 
                     String url = obtenerDireccionesURL(ll1,ll2);
-                    DownloadTask downloadTask= new DownloadTask();
-                    downloadTask.execute(url);
-                    googleMap.clear();
-                    googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-                    googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").icon(BitmapDescriptorFactory.fromResource(R.drawable.taximark)));
-                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                    builder.include(ll1);
-                    builder.include(ll2);
-                    LatLngBounds bounds=builder.build();
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
-                    googleMap.moveCamera(cu);
+                    float[] results = new float[1];
+                    Location.distanceBetween(
+                            ll1.latitude,
+                            ll1.longitude,
+                            ll2.latitude,
+                            ll2.longitude,
+                            results);
+                    if((dist-results[0])> 100 || (dist-results[0])< -100|| dist==0){
+                        googleMap.clear();
+                        mardest=null;
+                        marauto=null;
+                        dist=results[0];
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        builder.include(ll1);
+                        builder.include(ll2);
+                        LatLngBounds bounds=builder.build();
+                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
+                        googleMap.moveCamera(cu);
+                        DownloadTask downloadTask= new DownloadTask();
+                        downloadTask.execute(url);
+                    }
+                    if(mardest==null){
+                        mardest=googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+                    }else{
+                        mardest.setPosition(ll2);
+                    }
+                    if(marauto==null){
+                        marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").icon(BitmapDescriptorFactory.fromResource(R.drawable.taximark)));
+                    }else{
+                        marauto.setPosition(ll1);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
-
-
         }
         @Override
         protected void onProgressUpdate(String... values) {
@@ -502,6 +564,59 @@ public class EsperandoConductor extends AppCompatActivity {
             super.onProgressUpdate(values);
             progreso.setMessage(values[0]);
         }
+    }
 
+    public class Get_ObtenerPerfilConductor extends AsyncTask<Void, String, String> {
+        private String id;
+
+        public Get_ObtenerPerfilConductor(String id){
+            this.id=id;
+        }
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_info_con_carrera");
+            parametros.put("id_carrera",id);
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            try {
+                JSONObject object = new JSONObject(resp);
+                if(object != null){
+                    String nombreConductor = object.getString("nombre").toString();
+                    String apellido_pa = object.getString("apellido_pa").toString();
+                    String apellido_ma = object.getString("apellido_ma").toString();
+                    String modelo = object.getString("modelo").toString();
+                    String marca =  object.getString("marca").toString();
+                    int viajes = object.getInt("cant_car");
+                    String placa = object.getString("placa");
+                    text_nombreConductor.setText(nombreConductor +" "+apellido_pa+ " " +apellido_ma);
+                    text_nombreAuto.setText(marca + "-" +modelo);
+                    text_numeroPlaca.setText(placa);
+                    text_Viajes.setText("ha completado: " + viajes);
+                    Container_verPerfil.setVisibility(View.VISIBLE);
+                }else {
+                    return;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
     }
 }

@@ -248,7 +248,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeGPS, longitudeGPS), 18);
+                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeGPS, longitudeGPS), 14);
                 googleMap.animateCamera(cu);
                 //mMap.setMapStyle(new MapStyleOptions(getResources().getString(R.string.style_map)));
                 if (ActivityCompat.checkSelfPermission(PedirSieteMap.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(PedirSieteMap.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -261,7 +261,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                     public void onMyLocationChange(Location location) {
                         if (!entroLocation){
                             entroLocation=true;
-                            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
+                            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14);
                             googleMap.animateCamera(cu);
                         }
                     }
@@ -506,8 +506,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             if(lineOptions!=null) {
                 googleMap.addPolyline(lineOptions);
 
-
-
                 int size = points.size() - 1;
                 float[] results = new float[1];
                 float sum = 0;
@@ -523,6 +521,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 }
                 double mont = sum*0.008;
                 monto.setText("Monto aproximado: "+String.format("%.0f", mont)+" - "+String.format("%.0f", (mont+2)));
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                builder.include(points.get(0));
+                builder.include(points.get(points.size()-1));
+                LatLngBounds bounds=builder.build();
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
+                googleMap.moveCamera(cu);
                 //sum = metros
             }
         }

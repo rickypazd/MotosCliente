@@ -57,7 +57,7 @@ public class FinalizarViajeFragment_1 extends Fragment {
             String inicial = get_localizacion(lat_i , lng_i);
             String finales =  get_localizacion(lat_f , lng_f);
             textNombre.setText(nombre+" "+apellidoP+" "+apellidoM);
-            textplaca.setText(placa + "*=)" + telefono);
+            textplaca.setText(placa + " ° " + telefono);
             textInicio.setText(inicial);
             textFin.setText(finales);
         } catch (JSONException e) {
