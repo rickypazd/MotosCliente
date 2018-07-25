@@ -57,12 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private BroadcastReceiver broadcastReceiver;
     private  BroadcastReceiver broadcastReceiverMessage;
-        private Button btn_nav_pidesiete;
-         private Button btn_nav_formaspago;
-         private Button btn_nav_miperfil;
-         private Button btn_nav_misviajes;
-         private Button btn_nav_preferencias;
-         private JSONObject usr_log;
+
+    private Button btn_nav_pidesiete;
+    private Button btn_nav_formaspago;
+    private Button btn_nav_miperfil;
+    private Button btn_nav_misviajes;
+    private Button btn_nav_preferencias;
+    private JSONObject usr_log;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,16 +94,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
         btn_nav_pidesiete=header.findViewById(R.id.btn_nav_pidesiete);
-        btn_nav_pidesiete.setOnClickListener(this);
         btn_nav_formaspago=header.findViewById(R.id.btn_nav_formaspago);
-        btn_nav_formaspago.setOnClickListener(this);
         btn_nav_miperfil=header.findViewById(R.id.btn_nav_miperfil);
-        btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes=header.findViewById(R.id.btn_nav_misviajes);
-        btn_nav_misviajes.setOnClickListener(this);
         btn_nav_preferencias=header.findViewById(R.id.btn_nav_preferencias);
-        btn_nav_preferencias.setOnClickListener(this);
 
+        btn_nav_pidesiete.setOnClickListener(this);
+        btn_nav_formaspago.setOnClickListener(this);
+        btn_nav_miperfil.setOnClickListener(this);
+        btn_nav_misviajes.setOnClickListener(this);
+        btn_nav_preferencias.setOnClickListener(this);
 
 
         if(getUsr_log()!=null){
@@ -120,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
 
     }
 
@@ -179,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          }
 
 
-
     private void seleccionarFragmento(String fragmento) {
         Fragment fragmentoGenerico = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -195,10 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean runtime_permissions() {
-        if(Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},100);
-
+        if(Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){      requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},100);
             return true;
         }
         return false;
@@ -218,28 +215,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showDirections(double lat, double lng, double lat1, double lng1) {
-
         final Intent intent = new
                 Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?" +
                 "saddr=" + lat + "," + lng + "&daddr=" + lat1 + "," +
                 lng1));
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
         startActivity(intent);
-
     }
-
 
          @Override
          public void onClick(View v) {
-             int id=v.getId();
-             switch (id){
+            Intent intent;
+            int id=v.getId();
+            switch (id){
                  case R.id.btn_nav_pidesiete:
-                     Toast.makeText(this,"sdfsdf",   Toast.LENGTH_LONG).show();
+                     intent = new Intent(MainActivity.this , Elejir_tipo_siete.class);
+                     startActivity(intent);
                      break;
                  case R.id.btn_nav_formaspago:
-                        selectWaze();
                      break;
                  case R.id.btn_nav_miperfil:
+                     intent =  new Intent(MainActivity.this , Perfil_ClienteFragment.class);
+                     startActivity(intent);
                      break;
                  case R.id.btn_nav_misviajes:
                      break;
@@ -250,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
              drawer.closeDrawer(GravityCompat.START);
          }
+
         public void selectWaze(){
             try
             {

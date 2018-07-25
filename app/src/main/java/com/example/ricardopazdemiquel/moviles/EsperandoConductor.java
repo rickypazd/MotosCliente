@@ -611,7 +611,6 @@ public class EsperandoConductor extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
         }
         @Override
         protected void onProgressUpdate(String... values) {

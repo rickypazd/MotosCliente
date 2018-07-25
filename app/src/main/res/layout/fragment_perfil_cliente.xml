@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Perfil_ClienteFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.4"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_fotoPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="120sp"
+            android:layout_marginBottom="10dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:src="@mipmap/ic_miperfil" />
+
+        <TextView
+            android:id="@+id/creditos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="120dp"
+            android:layout_marginStart="120dp"
+            android:gravity="center"
+            android:autoSizeMaxTextSize="30sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="10sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/ic_button_perfil"
+            android:text="6.3"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_weight="0.8"
+        android:paddingBottom="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Nombre"
+                android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart"
+                android:textColor="#9a50ef"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_nombreCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="Apellido Apellido Apellido"
+                android:textColor="#626262"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Apellido"
+                android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart"
+                android:textColor="#9a50ef"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_apellidoCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="Apellido Apellido Apellido"
+                android:textColor="#626262"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Numero de teléfono"
+                android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart"
+                android:textColor="#9a50ef"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_numero_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="Apellido Apellido Apellido"
+                android:textColor="#626262"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="E-mail"
+                android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart"
+                android:textColor="#9a50ef"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_email_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="Apellido Apellido Apellido"
+                android:textColor="#626262"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Contraseña"
+                android:autoSizeMaxTextSize="35sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="textStart"
+                android:textColor="#9a50ef"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/text_contraseñaCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text="123456789falso"
+                android:textColor="#626262"
+                android:inputType="numberPassword"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

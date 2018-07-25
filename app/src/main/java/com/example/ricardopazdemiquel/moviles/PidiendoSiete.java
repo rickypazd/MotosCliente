@@ -131,10 +131,8 @@ public class PidiendoSiete extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 finish();
             }
-
         }
 
         @Override
@@ -142,10 +140,7 @@ public class PidiendoSiete extends AppCompatActivity {
             super.onProgressUpdate(values);
 
         }
-
     }
-
-
 
 
 }
