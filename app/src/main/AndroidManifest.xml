@@ -68,13 +68,13 @@
         </activity>
         <activity
             android:name=".LoginCliente"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
         <activity
             android:name=".PidiendoSiete"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity android:name=".IniciarCuentaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Perfil_ClienteFragment"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -102,10 +102,10 @@
         <activity android:name=".Detalle_viaje_Cliente" />
 
         <activity android:name=".Iniciar_Sesion_Activity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Crear_CuentaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
     </application>
 

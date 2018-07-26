@@ -20,16 +20,15 @@
             android:layout_height="1dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:background="#626262">
-        </View>
+            android:background="#626262"></View>
 
         <TextView
             android:id="@+id/text_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Nombre de conductor"
             android:textAlignment="center"
-            android:layout_marginTop="10dp"
             android:textSize="20dp" />
 
 
@@ -54,11 +53,11 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="10sp"
             android:background="@drawable/ic_button_favoritos"
+            android:inputType="text"
             android:maxWidth="370dp"
             android:padding="10dp"
             android:paddingLeft="20dp"
             android:text="Direccion"
-            android:inputType="text"
             android:textColor="#424242"
             android:textSize="14dp" />
 
@@ -70,20 +69,20 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="5sp"
             android:background="@drawable/ic_button_favoritos"
+            android:inputType="text"
             android:maxWidth="370dp"
             android:padding="10dp"
             android:paddingLeft="20dp"
             android:text="Direccion"
-            android:inputType="text"
             android:textColor="#424242"
             android:textSize="14dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:background="#626262">
 
         </View>

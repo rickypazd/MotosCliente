@@ -72,6 +72,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
@@ -115,7 +116,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     // inicializamos los iconos de confirmar carrera
     private TextView icono1, icono2 ,icono3 , icono4 ,icono5, icono6,icono7;
-
+    double mont;
     public PedirSieteMap() {
     }
 
@@ -519,8 +520,28 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             results);
                     sum += results[0];
                 }
-                double mont = sum*0.008;
-                monto.setText("Monto aproximado: "+String.format("%.0f", mont)+" - "+String.format("%.0f", (mont+2)));
+
+                try {
+                    String resp = new validar_precio(tipo_carrera).execute().get();
+                        JSONObject object = new JSONObject(resp);
+                        if(object != null){
+                            double costo_metro = object.getDouble("costo_metro");
+                            double costo_minuto = object.getDouble("costo_minuto");
+                            double costo_basico = object.getDouble("costo_basico");
+                            double costo_hora = object.getDouble("costo_basico");
+                            mont = costo_basico + (costo_metro * sum ) + ((sum/50)*costo_minuto);
+                        }else {
+                            return;
+                        }
+
+                    monto.setText("Monto aproximado: " +(mont-2)+" - "+(mont+2));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 builder.include(points.get(0));
                 builder.include(points.get(points.size()-1));
@@ -531,6 +552,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
+
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -603,7 +626,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             ll_ubic.setVisibility(View.GONE);
             iv_marker.setVisibility(View.GONE);
             recyclerView.setVisibility(view.GONE);
-
             view.setVisibility(View.GONE);
             googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
             googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
@@ -619,7 +641,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //aqui me quede
     private void mostraConfirmar(int valor){
         switch (valor){
             case 1:
@@ -651,8 +672,35 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 icono7.setVisibility(View.VISIBLE);
                 break;
 
-
         }
+    }
+
+
+    public class validar_precio extends AsyncTask<Void, String, String> {
+        private int id;
+
+        public validar_precio(int id ){
+            this.id=id;
+        }
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_costo");
+            parametros.put("id",id+"");
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+        }
+
     }
 
 }
