@@ -10,15 +10,14 @@
     <LinearLayout
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="230dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.1"
-            android:gravity="center"
-            android:background="@color/colorWhite">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
@@ -26,6 +25,7 @@
                 android:text="Alerta"
                 android:textColor="@color/colorBlack"
                 android:textSize="30sp"
+                android:fontFamily="sans-serif"
                 android:textAlignment="center"/>
         </LinearLayout>
 
@@ -53,9 +53,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:gravity="bottom"
             android:orientation="horizontal">

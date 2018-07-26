@@ -81,14 +81,14 @@
 
         <activity
             android:name=".finalizar_viajeCliente"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".Elejir_tipo_siete"
             android:theme="@style/AppThemeone"/>
         <activity android:name=".Calificar_viaje" />
 
         <activity android:name=".EsperandoConductor"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity
             android:name=".Sin_conexion"
@@ -96,7 +96,7 @@
         <activity android:name=".Metodo_de_pagoCliente" />
         <activity
             android:name=".CanceloViaje_Cliente"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity android:name=".Favoritos_Clientes" />
 
         <activity android:name=".Detalle_viaje_Cliente" />

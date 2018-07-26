@@ -49,8 +49,8 @@
             android:id="@+id/text_inicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10sp"
             android:background="@drawable/ic_button_favoritos"
             android:inputType="text"
@@ -65,8 +65,8 @@
             android:id="@+id/text_fin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5sp"
             android:background="@drawable/ic_button_favoritos"
             android:inputType="text"
@@ -80,8 +80,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:background="#626262">
 
