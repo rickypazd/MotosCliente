@@ -1,5 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -85,6 +86,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
         finish();
     }
 
+
     private void cargarUsuario(){
         final JSONObject usr_log = getUsr_log();
         if (usr_log != null) {
@@ -97,7 +99,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
                 String credito = usr_log.getString("creditos");
                 textNombre.setText(nombre);
                 textApellido.setText(apellido_pa+" "+apellido_ma);
-                textTelefono.setText(telefono);
+                textTelefono.setText("+591 "+telefono);
                 textEmail.setText(correo);
                 textcredito.setText(credito);
             } catch (JSONException e) {
@@ -126,11 +128,20 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
 
     public class User_getPerfil extends AsyncTask<Void, String, String> {
 
+        private ProgressDialog progreso;
         private final String id;
-
-
         User_getPerfil(String id_usr) {
             id = id_usr;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progreso = new ProgressDialog(Perfil_ClienteFragment.this);
+            progreso.setIndeterminate(true);
+            progreso.setTitle("Esperando Respuesta");
+            progreso.setCancelable(false);
+            progreso.show();
         }
 
         @Override
@@ -149,6 +160,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
+            progreso.dismiss();
             if (!success.isEmpty()){
                 try {
                     JSONObject usr = new JSONObject(success);
@@ -165,6 +177,10 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
 
         }
     }

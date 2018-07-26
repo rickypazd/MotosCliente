@@ -11,6 +11,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,6 +108,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private RecyclerView recyclerView;
+    private int tipo_pago;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.9720));
 
@@ -117,6 +120,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     // inicializamos los iconos de confirmar carrera
     private TextView icono1, icono2 ,icono3 , icono4 ,icono5, icono6,icono7;
     double mont;
+
+
     public PedirSieteMap() {
     }
 
@@ -124,14 +129,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedir_siete_map);
+
         ll_ubic=findViewById(R.id.linearLayoutPedir);
         layoutButon=findViewById(R.id.ll_boton);
-        //btn_estandar_recicler=findViewById(R.id.btn_estandar_recicler);
         iv_marker=findViewById(R.id.ivmarker);
         monto=findViewById(R.id.tv_monto);
 
         final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
         final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
+
         tipo_carrera = getIntent().getIntExtra("tipo",0);
 
 
@@ -174,9 +180,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
 
-
-        //View one = findViewById(R.id.viewOne);
-        //View two = findViewById(R.id.viewtwo);
+        final RadioButton radio_efectivo = findViewById(R.id.radio_efectivo);
+        final RadioButton radio_credito = findViewById(R.id.radio_credito);
+        radio_efectivo.setOnClickListener(this);
+        radio_credito.setOnClickListener(this);
 
         icono1 = findViewById(R.id.icono1);
         icono2 = findViewById(R.id.icono2);
@@ -224,18 +231,44 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 try {
-                    Intent inte = new Intent(PedirSieteMap.this,PidiendoSiete.class);
-                    inte.putExtra("latInicio",inicio.latitude+"");
-                    inte.putExtra("lngInicio",inicio.longitude+"");
-                    inte.putExtra("latFin",fin.latitude+"");
-                    inte.putExtra("lngFin",fin.longitude+"");
-                    inte.putExtra("token", Token.currentToken);
-                    inte.putExtra("id_usr", usr_log.getInt("id")+"");
-                    inte.putExtra("tipo", tipo_carrera +"");
-                    startActivity(inte);
+                    String id = usr_log.getString("id");
+                    String resp =new User_getPerfil(id).execute().get();
+                    android.app.FragmentManager fragmentManager = getFragmentManager();
+                    if (!resp.isEmpty()){
+                            JSONObject usr = new JSONObject(resp);
+                            if(usr.getString("exito").equals("si")){
+                               double credito = usr.getDouble("creditos");
+                               boolean acept = true;
+                                if(radio_credito.isChecked() == true){
+                                    tipo_pago=2;
+                                    if(credito < mont){
+                                        new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
+                                        acept=false;
+                                    }
+                                }
+                                else {
+                                    tipo_pago=1;
+                                   if(credito < 0){
+                                       new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
+                                       //esta en deuda , aler se cobrara el monto + viej
+                                       acept=false;
+                                   }
+                                }
+                                if(acept){
+                                    ok_predir_viaje();
+                                }
+
+                            }
+                    }
+
                 } catch (JSONException e) {
+                        e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
             }
         });
 
@@ -295,6 +328,20 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
+    public void ok_predir_viaje() throws JSONException {
+        Intent inte = new Intent(PedirSieteMap.this, PidiendoSiete.class);
+        inte.putExtra("latInicio", inicio.latitude + "");
+        inte.putExtra("lngInicio", inicio.longitude + "");
+        inte.putExtra("latFin", fin.latitude + "");
+        inte.putExtra("lngFin", fin.longitude + "");
+        inte.putExtra("token", Token.currentToken);
+        inte.putExtra("id_usr", usr_log.getInt("id") + "");
+        inte.putExtra("tipo", tipo_carrera + "");
+        inte.putExtra("tipo_pago", tipo_pago + "");
+        startActivity(inte);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -529,12 +576,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             double costo_minuto = object.getDouble("costo_minuto");
                             double costo_basico = object.getDouble("costo_basico");
                             double costo_hora = object.getDouble("costo_basico");
-                            mont = costo_basico + (costo_metro * sum ) + ((sum/50)*costo_minuto);
+                            mont = costo_basico + (costo_metro * sum ) + ((sum/500)*costo_minuto);
                         }else {
                             return;
                         }
-
-                    monto.setText("Monto aproximado: " +(mont-2)+" - "+(mont+2));
+                    int montoaux = (int) mont;
+                    monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -609,7 +656,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
     public void calculando_ruta(View view , int tipo){
         selected=null;
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
@@ -678,7 +724,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     public class validar_precio extends AsyncTask<Void, String, String> {
         private int id;
-
         public validar_precio(int id ){
             this.id=id;
         }
@@ -693,7 +738,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_costo");
             parametros.put("id",id+"");
-            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, parametros));
             return respuesta;
         }
         @Override
@@ -703,4 +748,45 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     }
 
+
+    public class User_getPerfil extends AsyncTask<Void, String, String> {
+
+        private final String id;
+        User_getPerfil(String id_usr) {
+            id = id_usr;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_usuario");
+            parametros.put("id",id);
+            String respuesta ="";
+            try {
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            } catch (Exception ex) {
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(final String success) {
+            super.onPostExecute(success);
+            if (!success.isEmpty()){
+                try {
+                    JSONObject usr = new JSONObject(success);
+                    if(usr.getString("exito").equals("si")){
+                        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferencias.edit();
+                        editor.putString("usr_log", usr.toString());
+                        editor.commit();
+                    }else{
+                        return;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

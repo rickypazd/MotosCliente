@@ -56,10 +56,10 @@
 
         <activity
             android:name=".PedirSieteMap"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".Carga"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppThemeone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,20 +71,20 @@
             android:theme="@style/AppThemeone"/>
         <activity
             android:name=".PidiendoSiete"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppThemeone" />
 
         <activity android:name=".IniciarCuentaActivity"
             android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Perfil_ClienteFragment"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity
             android:name=".finalizar_viajeCliente"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Elejir_tipo_siete"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
         <activity android:name=".Calificar_viaje" />
 
         <activity android:name=".EsperandoConductor"

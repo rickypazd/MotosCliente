@@ -157,6 +157,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Numero de telefóno"
+                    android:drawableStart="@drawable/ic_banderabolivia_siete"
+                    android:drawablePadding="10dp"
                     android:inputType="text|phone" />
 
             </android.support.design.widget.TextInputLayout>
