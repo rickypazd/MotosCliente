@@ -102,6 +102,7 @@ public class EsperandoConductor extends AppCompatActivity {
             if(json_carrera.getInt("estado")>=3){
                     conductor_llego(getIntent());
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -179,6 +180,7 @@ public class EsperandoConductor extends AppCompatActivity {
             broadcastReceiverMessageconductor = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
+                    Toast.makeText(EsperandoConductor.this,"El conductor Llego",Toast.LENGTH_SHORT).show();
                     conductor_llego(intent);
                 }
             };
@@ -246,7 +248,7 @@ public class EsperandoConductor extends AppCompatActivity {
     }
 
     private void conductor_llego(Intent intent){
-        Toast.makeText(EsperandoConductor.this,"El conductor Llego",Toast.LENGTH_SHORT).show();
+
         Container_cancelar.setVisibility(View.GONE);
         try {
             new Get_ObtenerPerfilConductor(json_carrera.getString("id")).execute();
@@ -257,7 +259,7 @@ public class EsperandoConductor extends AppCompatActivity {
     }
 
     private void Inicio_Carrera(Intent intent){
-        Toast.makeText(EsperandoConductor.this,"Su carrera ha comenzado, Que tenga buen viaje.",
+        Toast.makeText(EsperandoConductor.this,"Su viaje ha comenzado, Que tenga buen viaje.",
                 Toast.LENGTH_SHORT).show();
         new buscar_carrera().execute();
         //perfil_condutor.setVisibility(View.VISIBLE);
@@ -546,7 +548,7 @@ public class EsperandoConductor extends AppCompatActivity {
             super.onPostExecute(resp);
             progreso.dismiss();
             if (resp == null) {
-                Toast.makeText(EsperandoConductor.this,"Eroor al optener Datos",
+                Toast.makeText(EsperandoConductor.this,"Error al optener Datos",
                         Toast.LENGTH_SHORT).show();
                 return;
             }else{
@@ -618,4 +620,7 @@ public class EsperandoConductor extends AppCompatActivity {
 
         }
     }
+
+
+
 }

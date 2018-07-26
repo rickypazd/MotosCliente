@@ -1,7 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -52,6 +51,7 @@ import utiles.Contexto;
 import utiles.GPS_service;
 import utiles.MapService;
 import utiles.Token;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

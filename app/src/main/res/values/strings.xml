@@ -10,7 +10,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Califica tu viaje</string>
     <string name="apikey">AIzaSyAxdWoqiMpucK4ZOf5M8JzQii8m1x9WrR4</string>
+<<<<<<< HEAD
     <string name="url_servlet_admin">http://204.93.196.61:8080/sietePrueva/admin/adminController</string>
+=======
+    <string name="url_servlet_admin">http://204.93.196.61:8080/sietePrsueva/admin/adminController</string>
+>>>>>>> e7e51be263c3d7bbbe77a4bd3c0ea100f2962674
     <string name="url_servlet_index">http://204.93.196.61:8080/sietePrueva/indexController</string>
     <string name="style_map">[
   {
@@ -41,9 +45,7 @@
     "featureType": "administrative",
     "elementType": "geometry.stroke",
     "stylers": [
-      {
-        "color": "#c9b2a6"
-      }
+      {        "color": "#c9b2a6"      }
     ]
   },
   {

@@ -56,10 +56,10 @@
 
         <activity
             android:name=".PedirSieteMap"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".Carga"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppThemeone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,27 +68,27 @@
         </activity>
         <activity
             android:name=".LoginCliente"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
         <activity
             android:name=".PidiendoSiete"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
 
         <activity android:name=".IniciarCuentaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Perfil_ClienteFragment"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity
             android:name=".finalizar_viajeCliente"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".Elejir_tipo_siete"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
         <activity android:name=".Calificar_viaje" />
 
         <activity android:name=".EsperandoConductor"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity
             android:name=".Sin_conexion"
@@ -96,16 +96,16 @@
         <activity android:name=".Metodo_de_pagoCliente" />
         <activity
             android:name=".CanceloViaje_Cliente"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeone" />
         <activity android:name=".Favoritos_Clientes" />
 
         <activity android:name=".Detalle_viaje_Cliente" />
 
         <activity android:name=".Iniciar_Sesion_Activity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Crear_CuentaActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppThemeone"/>
 
     </application>
 

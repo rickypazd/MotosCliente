@@ -30,6 +30,7 @@ public class PidiendoSiete extends AppCompatActivity {
     private String token;
     private String id_usr;
     private String tipoCarrera;
+    private String tipo_pago;
     private BroadcastReceiver broadcastReceiverConfirmoCarrera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class PidiendoSiete extends AppCompatActivity {
         token=intent.getStringExtra("token");
         id_usr=intent.getStringExtra("id_usr");
         tipoCarrera = intent.getStringExtra("tipo");
+        tipo_pago = intent.getStringExtra("tipo_pago");
 
         new Get_ActualizarToken(id_usr).execute();
 
@@ -110,6 +112,7 @@ public class PidiendoSiete extends AppCompatActivity {
             param.put("token", token);
             param.put("id",id_usr);
             param.put("tipo",tipoCarrera);
+            param.put("tipo_pago",tipo_pago);
 
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
             return respuesta;

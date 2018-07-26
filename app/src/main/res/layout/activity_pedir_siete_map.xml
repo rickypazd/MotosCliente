@@ -167,7 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/linear_confirm"
@@ -178,7 +178,7 @@
             android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -260,6 +260,34 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp">
+
+                <RadioButton
+                    android:id="@+id/radio_efectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Efectivo"/>
+
+                <RadioButton
+                    android:id="@+id/radio_credito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Credito"/>
+
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="40dp"
+                android:background="#626262"></View>
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
@@ -282,8 +310,8 @@
                 android:id="@+id/btn_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_marginRight="70dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/backgroundcolor2"
                 android:elevation="0dp"
