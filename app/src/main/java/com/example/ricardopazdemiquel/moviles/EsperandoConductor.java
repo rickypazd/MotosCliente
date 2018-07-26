@@ -477,7 +477,7 @@ public class EsperandoConductor extends AppCompatActivity {
                             ll2.latitude,
                             ll2.longitude,
                             results);
-                    if((dist-results[0])> 100 || (dist-results[0])< -100|| dist==0){
+                    if((dist-results[0])> 20 || (dist-results[0])< -20|| dist==0){
                         googleMap.clear();
                         mardest=null;
                         marauto=null;
@@ -486,7 +486,7 @@ public class EsperandoConductor extends AppCompatActivity {
                         builder.include(ll1);
                         builder.include(ll2);
                         LatLngBounds bounds=builder.build();
-                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
+                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,300);
                         googleMap.moveCamera(cu);
                         DownloadTask downloadTask= new DownloadTask();
                         downloadTask.execute(url);
