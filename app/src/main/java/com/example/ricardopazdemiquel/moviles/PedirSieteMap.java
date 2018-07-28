@@ -575,7 +575,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             double costo_metro = object.getDouble("costo_metro");
                             double costo_minuto = object.getDouble("costo_minuto");
                             double costo_basico = object.getDouble("costo_basico");
-                            double costo_hora = object.getDouble("costo_basico");
                             mont = costo_basico + (costo_metro * sum ) + ((sum/500)*costo_minuto);
                         }else {
                             return;
