@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/email_login_form"
-        android:layout_width="match_parent"
+        android:layout_width="250sp"
         android:layout_height="230dp"
         android:orientation="vertical">
 
@@ -45,7 +45,7 @@
                 android:inputType="textMultiLine"
                 android:text="Lo siento usted no cuenta con credito."
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBlack"
                 android:textSize="24sp" />
 
         </LinearLayout>

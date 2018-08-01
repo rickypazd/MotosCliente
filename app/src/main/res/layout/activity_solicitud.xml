@@ -205,7 +205,7 @@
             android:id="@+id/btn_siguiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear una Cuenta"
+            android:text="Siguiente"
             android:textAllCaps="false"
             android:textColor="#656565"
             android:textSize="18dp"
