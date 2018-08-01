@@ -113,8 +113,7 @@ public class fr_map extends Fragment implements View.OnClickListener{
         Pide_tu_siete = view.findViewById(R.id.Pide_tu_siete);
         Pide_tu_siete.setOnClickListener(this);
 
-        if (mMapView != null &&
-                mMapView.findViewById(Integer.parseInt("1")) != null) {
+        if (mMapView != null && mMapView.findViewById(Integer.parseInt("1")) != null) {
             ImageView locationButton = (ImageView) ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
