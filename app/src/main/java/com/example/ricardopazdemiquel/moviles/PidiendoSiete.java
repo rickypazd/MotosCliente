@@ -59,9 +59,7 @@ public class PidiendoSiete extends AppCompatActivity {
 
 
     public class Get_ActualizarToken extends AsyncTask<Void, String, String>{
-
         private String id;
-
         public Get_ActualizarToken(String id){
             this.id=id;
         }
@@ -97,7 +95,6 @@ public class PidiendoSiete extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         @Override

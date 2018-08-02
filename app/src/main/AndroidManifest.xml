@@ -79,6 +79,9 @@
         <activity android:name=".Perfil_ClienteFragment"
             android:theme="@style/AppThemeone"/>
 
+        <activity android:name=".MisViajes_Cliente_Activity"
+            android:theme="@style/AppThemeone"/>
+
         <activity
             android:name=".finalizar_viajeCliente"
             android:theme="@style/AppThemeone" />

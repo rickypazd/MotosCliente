@@ -239,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      startActivity(intent);
                      break;
                  case R.id.btn_nav_misviajes:
+                     intent =  new Intent(MainActivity.this , MisViajes_Cliente_Activity.class);
+                     startActivity(intent);
                      break;
                  case R.id.btn_nav_preferencias:
                      break;
