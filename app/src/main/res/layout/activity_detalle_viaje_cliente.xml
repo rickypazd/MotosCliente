@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,28 +9,29 @@
     >
 
     <LinearLayout
-        android:id="@+id/linearLa34"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@drawable/backgroundcolor2"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-
-        <TextView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Detalle del viaje"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="35dp"
-            android:textStyle="normal" />
+            android:background="@drawable/backgroundcolor2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalle del viaje"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal" />
+        </android.support.v7.widget.Toolbar>
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout9"
@@ -38,21 +39,14 @@
         android:layout_height="208dp"
         android:layout_marginBottom="0dp"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLa34"
-        app:layout_constraintVertical_bias="0.0">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NOmbre de conductor"
+            android:text="Nombre de conductor"
             android:textAlignment="center"
             android:textSize="20dp" />
-
 
         <TextView
             android:layout_width="match_parent"
@@ -92,47 +86,44 @@
             android:textColor="#424242"
             android:textSize="18dp" />
 
-
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="222dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="20dp"
             android:text="Forma de pago"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="48dp"
-            android:text="Forma de pago"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.786"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="20dp"
+            android:text="Valor del viaje"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Total"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"/>
 
-    </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
-
-
-
-
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
