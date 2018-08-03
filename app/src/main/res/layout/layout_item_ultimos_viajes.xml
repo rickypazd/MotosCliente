@@ -111,27 +111,55 @@
 
                     </LinearLayout>
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/text_tipoPago"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            >
+
+                            <TextView
+                                android:id="@+id/text_tipoPago"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                tools:text="Efectivo" />
+
+                            <TextView
+                                android:id="@+id/text_monto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                tools:text="55 bs" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            tools:text="Efectivo" />
+                            android:gravity="center|end"
+                            android:paddingEnd="20dp"
+                            android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/text_monto"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            tools:text="55 bs" />
+                            <ImageView
+                                android:id="@+id/btn_next"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_next_page"/>
+
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
+
+
 
                 </LinearLayout>
 

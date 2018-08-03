@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +21,8 @@ public class Adaptador_mis_viajes extends BaseAdapter {
 
     private JSONArray array;
     private Context contexto;
+    private static final int EFECTIVO = 1;
+    private static final int CREDITO = 2;
 
     public Adaptador_mis_viajes(Context contexto, JSONArray lista) {
         this.contexto = contexto;
@@ -57,6 +60,7 @@ public class Adaptador_mis_viajes extends BaseAdapter {
         TextView text_fin = view.findViewById(R.id.text_FinViaje);
         TextView text_tipo_pago = view.findViewById(R.id.text_tipoPago);
         TextView text_monto= view.findViewById(R.id.text_monto);
+        ImageView btn_next = view.findViewById(R.id.btn_next);
 
         try {
             final JSONObject viajes = array.getJSONObject(i);
@@ -69,19 +73,40 @@ public class Adaptador_mis_viajes extends BaseAdapter {
             String id_carrera = viajes.getString("id_carrera");
             int estado= viajes.getInt("estado");
             int costo = viajes.getInt("costo_final");
+            int tipo = viajes.getInt("tipo_pago");
 
             text_fecha.setText(viajes.getString("fecha_pedido"));
             text_auto.setText(viajes.getString("marca"));
             if(get_estado(estado)){
                 text_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
                 text_fin.setText(getCompleteAddressString(lat_final_real,lng_final_real));
-                text_monto.setText(costo+" "+"bs");
+                text_monto.setText("bs. "+costo);
             }else if(!get_estado(estado)){
                 text_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
                 text_fin.setText(getCompleteAddressString(latfinal,lngfinal));
                 text_monto.setText("cancelado");
             }
+            switch (tipo){
+                case(EFECTIVO):
+                    text_tipo_pago.setText("Efectivo");
+                    break;
+                case(CREDITO):
+                    text_tipo_pago.setText("Credito");
+                    break;
+            }
             //text_tipo_pago.setText(viajes.getString(""));
+            btn_next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(contexto,Detalle_viaje_Cliente.class);
+                    try {
+                        intent.putExtra("id_carrera", viajes.getString("id_carrera"));
+                        contexto.startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
 
         } catch (JSONException e) {
@@ -124,6 +149,5 @@ public class Adaptador_mis_viajes extends BaseAdapter {
         }
         return null;
     }
-
 
 }
