@@ -3,6 +3,7 @@ package com.example.ricardopazdemiquel.moviles;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -199,7 +201,6 @@ public class LoginCliente extends AppCompatActivity {
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, String, String> {
-
         private final String mEmail;
         private final String mPassword;
 
@@ -207,6 +208,8 @@ public class LoginCliente extends AppCompatActivity {
             mEmail = email;
             mPassword = password;
         }
+
+
 
         @Override
         protected String doInBackground(Void... params) {
@@ -231,27 +234,33 @@ public class LoginCliente extends AppCompatActivity {
             super.onPostExecute(success);
             mAuthTask = null;
             showProgress(false);
+            if(success==null){
+                Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                if(success.equals("falso")){
+                    Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
+                        JSONObject usr = new JSONObject(success);
+                        if(usr.getString("exito").equals("si")){
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("usr_log", usr.toString());
+                            editor.commit();
 
-            if (success.length()>0){
-                try {
-                    JSONObject usr = new JSONObject(success);
-                    if(usr.getString("exito").equals("si")){
-                        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferencias.edit();
-                        editor.putString("usr_log", usr.toString());
-                        editor.commit();
-
-                        Intent intent = new Intent(LoginCliente.this,MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else{
-                        mPasswordView.setError(getString(R.string.error_incorrect_password));
-                        mPasswordView.requestFocus();
+                            Intent intent = new Intent(LoginCliente.this,MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            mPasswordView.setError(getString(R.string.error_incorrect_password));
+                            mPasswordView.requestFocus();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
+
 
         }
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -278,13 +279,20 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         @Override
         protected void onPostExecute(String pacientes) {
             super.onPostExecute(pacientes);
-            if (pacientes.equals("falso")) {
-                return;
+            progreso.dismiss();
+            if(pacientes==null){
+                Toast.makeText(Crear_CuentaActivity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
-                Intent inte = new Intent(Crear_CuentaActivity.this,LoginCliente.class);
-                startActivity(inte);
-                finish();
+                if (pacientes.equals("falso")) {
+                    return;
+                }else{
+                    Intent inte = new Intent(Crear_CuentaActivity.this,LoginCliente.class);
+                    startActivity(inte);
+                    finish();
+                }
+
             }
+
 
         }
 

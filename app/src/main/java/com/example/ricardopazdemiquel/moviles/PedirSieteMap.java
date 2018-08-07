@@ -233,12 +233,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 try {
                     String id = usr_log.getString("id");
                     String resp =new User_getPerfil(id).execute().get();
-                    android.app.FragmentManager fragmentManager = getFragmentManager();
-                    if (!resp.isEmpty()){
+                    if(resp==null){
+                        Toast.makeText(PedirSieteMap.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                    }else{
+                        android.app.FragmentManager fragmentManager = getFragmentManager();
+                        if (!resp.isEmpty()){
                             JSONObject usr = new JSONObject(resp);
                             if(usr.getString("exito").equals("si")){
-                               double credito = usr.getDouble("creditos");
-                               boolean acept = true;
+                                double credito = usr.getDouble("creditos");
+                                boolean acept = true;
                                 if(radio_credito.isChecked() == true){
                                     tipo_pago=2;
                                     if(credito < mont){
@@ -248,18 +251,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                                 }
                                 else {
                                     tipo_pago=1;
-                                   if(credito < 0){
-                                       new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
-                                       //esta en deuda , aler se cobrara el monto + viej
-                                       acept=false;
-                                   }
+                                    if(credito < 0){
+                                        new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
+                                        //esta en deuda , aler se cobrara el monto + viej
+                                        acept=false;
+                                    }
                                 }
                                 if(acept){
                                     ok_predir_viaje();
                                 }
 
                             }
+                        }
+
                     }
+
 
                 } catch (JSONException e) {
                         e.printStackTrace();
@@ -570,6 +576,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
                 try {
                     String resp = new validar_precio(tipo_carrera).execute().get();
+                    if(resp==null){
+                        Toast.makeText(PedirSieteMap.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                    }else{
                         JSONObject object = new JSONObject(resp);
                         if(object != null){
                             double costo_metro = object.getDouble("costo_metro");
@@ -579,8 +588,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         }else {
                             return;
                         }
-                    int montoaux = (int) mont;
-                    monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                        int montoaux = (int) mont;
+                        monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -770,21 +781,24 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         @Override
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
-            if (!success.isEmpty()){
-                try {
-                    JSONObject usr = new JSONObject(success);
-                    if(usr.getString("exito").equals("si")){
-                        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferencias.edit();
-                        editor.putString("usr_log", usr.toString());
-                        editor.commit();
-                    }else{
-                        return;
+            if(success==null){
+                Toast.makeText(PedirSieteMap.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                if (!success.isEmpty()){
+                    try {
+                        JSONObject usr = new JSONObject(success);
+                        if(usr.getString("exito").equals("si")) {
+                            SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("usr_log", usr.toString());
+                            editor.commit();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
+
         }
     }
 }

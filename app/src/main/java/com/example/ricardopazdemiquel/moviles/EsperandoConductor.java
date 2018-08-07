@@ -454,60 +454,62 @@ public class EsperandoConductor extends AppCompatActivity {
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
-
-            if (resp.equals("falso")) {
-                Toast.makeText(EsperandoConductor.this,"No se Encontro Conductor Disculpe las Molestias",
-                        Toast.LENGTH_SHORT).show();
-
-                return;
+            if(resp==null){
+                Toast.makeText(EsperandoConductor.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
-                try {
-                    JSONObject obj=new JSONObject(resp);
-                    LatLng ll1 = new LatLng(obj.getDouble("lat"),obj.getDouble("lng"));
-                    LatLng ll2;
-                    if(json_carrera.getInt("estado")==4){
-                        ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
-                    }else{
-                          ll2=new LatLng(json_carrera.getDouble("latinicial"),json_carrera.getDouble("lnginicial"));
-                    }
+                if (resp.equals("falso")) {
+                    Toast.makeText(EsperandoConductor.this,"No se Encontro Conductor Disculpe las Molestias",
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
+                        JSONObject obj=new JSONObject(resp);
+                        LatLng ll1 = new LatLng(obj.getDouble("lat"),obj.getDouble("lng"));
+                        LatLng ll2;
+                        if(json_carrera.getInt("estado")==4){
+                            ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
+                        }else{
+                            ll2=new LatLng(json_carrera.getDouble("latinicial"),json_carrera.getDouble("lnginicial"));
+                        }
 
-                    String url = obtenerDireccionesURL(ll1,ll2);
-                    float[] results = new float[1];
-                    Location.distanceBetween(
-                            ll1.latitude,
-                            ll1.longitude,
-                            ll2.latitude,
-                            ll2.longitude,
-                            results);
-                    if((dist-results[0])> 100 || (dist-results[0])< -100|| dist==0){
-                        googleMap.clear();
-                        mardest=null;
-                        marauto=null;
-                        dist=results[0];
-                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                        builder.include(ll1);
-                        builder.include(ll2);
-                        LatLngBounds bounds=builder.build();
-                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
-                        googleMap.moveCamera(cu);
-                        DownloadTask downloadTask= new DownloadTask();
-                        downloadTask.execute(url);
-                    }
-                    if(mardest==null){
-                        mardest=googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-                    }else{
-                        mardest.setPosition(ll2);
-                    }
-                    if(marauto==null){
-                        marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").icon(BitmapDescriptorFactory.fromResource(R.drawable.taximark)));
-                    }else{
-                        marauto.setPosition(ll1);
-                    }
+                        String url = obtenerDireccionesURL(ll1,ll2);
+                        float[] results = new float[1];
+                        Location.distanceBetween(
+                                ll1.latitude,
+                                ll1.longitude,
+                                ll2.latitude,
+                                ll2.longitude,
+                                results);
+                        if((dist-results[0])> 20 || (dist-results[0])< -20|| dist==0){
+                            googleMap.clear();
+                            mardest=null;
+                            marauto=null;
+                            dist=results[0];
+                            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                            builder.include(ll1);
+                            builder.include(ll2);
+                            LatLngBounds bounds=builder.build();
+                            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,300);
+                            googleMap.moveCamera(cu);
+                            DownloadTask downloadTask= new DownloadTask();
+                            downloadTask.execute(url);
+                        }
+                        if(mardest==null){
+                            mardest=googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+                        }else{
+                            mardest.setPosition(ll2);
+                        }
+                        if(marauto==null){
+                            marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").icon(BitmapDescriptorFactory.fromResource(R.drawable.taximark)));
+                        }else{
+                            marauto.setPosition(ll1);
+                        }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
         }
         @Override
         protected void onProgressUpdate(String... values) {
@@ -550,7 +552,6 @@ public class EsperandoConductor extends AppCompatActivity {
             if (resp == null) {
                 Toast.makeText(EsperandoConductor.this,"Error al optener Datos",
                         Toast.LENGTH_SHORT).show();
-                return;
             }else{
                 try {
                     JSONObject obj = new JSONObject(resp);
@@ -606,8 +607,6 @@ public class EsperandoConductor extends AppCompatActivity {
                     text_numeroPlaca.setText(placa);
                     text_Viajes.setText("ha completado: " + viajes);
                     Container_verPerfil.setVisibility(View.VISIBLE);
-                }else {
-                    return;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
