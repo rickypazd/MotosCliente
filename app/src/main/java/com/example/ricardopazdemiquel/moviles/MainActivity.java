@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_nav_misviajes.setOnClickListener(this);
         btn_nav_preferencias.setOnClickListener(this);
 
-
         if(getUsr_log()!=null){
             if(!runtime_permissions()){
                 seleccionarFragmento("Mapa");
@@ -289,22 +288,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          @Override
          protected void onPostExecute(String resp) {
              super.onPostExecute(resp);
-             if (resp.contains("falso")) {
-                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-                 return;
-             } else {
-                 try {
-                     JSONObject obj = new JSONObject(resp);
-                     if(obj.getBoolean("exito")) {
-                         Intent intent = new Intent(MainActivity.this, EsperandoConductor.class);
-                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                         intent.putExtra("obj_carrera", obj.toString());
-                         startActivity(intent);
+             if(resp==null){
+                 Toast.makeText(MainActivity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+             }else{
+                 if (resp.contains("falso")) {
+                     Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                 } else {
+                     try {
+                         JSONObject obj = new JSONObject(resp);
+                         if(obj.getBoolean("exito")) {
+                             Intent intent = new Intent(MainActivity.this, EsperandoConductor.class);
+                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                             intent.putExtra("obj_carrera", obj.toString());
+                             startActivity(intent);
+                         }
+                     } catch (JSONException e) {
+                         e.printStackTrace();
                      }
-                 } catch (JSONException e) {
-                     e.printStackTrace();
                  }
              }
+
          }
          @Override
          protected void onProgressUpdate(String... values) {

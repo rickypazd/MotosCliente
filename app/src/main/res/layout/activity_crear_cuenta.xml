@@ -1,187 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Crear_CuentaActivity">
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
-    </android.support.v7.widget.Toolbar>
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_weight="1">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Crear Cuenta"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="25sp" />
-</LinearLayout>
-
-
+    tools:context=".Crear_CuentaActivity"
+    android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
+        android:orientation="vertical"
         >
 
-        <android.support.constraint.ConstraintLayout
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp">
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+        </android.support.v7.widget.Toolbar>
 
-            <android.support.design.widget.TextInputLayout
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/edit_fecha"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="fecha de nacimiento"
-                    android:focusable="false"
-                    android:inputType="textPersonName" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Crear Cuenta"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp" />
+        </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
-        >
-
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout4"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp">
 
-                <EditText
-                    android:id="@+id/edit_username"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="usuario"
-                    android:inputType="textPersonName" />
+                    android:layout_height="match_parent">
 
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/edit_fecha"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="fecha de nacimiento"
+                        android:focusable="false"
+                        android:inputType="textPersonName" />
 
-        </android.support.constraint.ConstraintLayout>
+                </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
-        >
+        </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
 
-            <android.support.design.widget.TextInputLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp">
 
-                <EditText
-                    android:id="@+id/edit_pass"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayout4"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Contraseña"
-                    android:inputType="textPersonName" />
+                    android:layout_height="match_parent">
 
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/edit_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="usuario"
+                        android:inputType="textPersonName" />
 
-        </android.support.constraint.ConstraintLayout>
+                </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_weight="1"
-        >
-
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
 
-            <android.support.design.widget.TextInputLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edit_correo"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Correo electronico"
-                    android:inputType="textPersonName" />
+                    android:layout_height="match_parent">
 
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/edit_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Contraseña"
+                        android:inputType="textPassword" />
 
-        </android.support.constraint.ConstraintLayout>
+                </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="0.9"
-        android:gravity="center"
-        >
-        <Button
-            android:id="@+id/btn_crear_usuario"
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Crear Cuenta"
-            android:textAllCaps="false"
-            android:textColor="#656565"
-            android:textSize="18dp"
-            android:fontFamily="sans-serif"
-            android:background="@drawable/botonwhite"
-            android:layout_marginEnd="40dp"
-            android:layout_marginStart="40dp"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/edit_correo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Correo electronico"
+                        android:inputType="textEmailAddress" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.9"
+            android:gravity="center"
+            >
+            <Button
+                android:id="@+id/btn_crear_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crear Cuenta"
+                android:textAllCaps="false"
+                android:textColor="#656565"
+                android:textSize="18dp"
+                android:fontFamily="sans-serif"
+                android:background="@drawable/botonwhite"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="40dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
+
 
