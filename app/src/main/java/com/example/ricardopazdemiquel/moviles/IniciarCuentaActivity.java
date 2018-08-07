@@ -101,9 +101,6 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-
-
-
     /*public AlertDialog createSimpleDialog(final int id_solicitud) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Solicitud")
@@ -152,8 +149,8 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void Guardar() {
 
+    private void Guardar() {
         String nombreV = edit_nombre.getText().toString().trim();
         String apellidoPV = edit_apellidoP.getText().toString().trim();
         String apellidoMV = edit_apellidoM.getText().toString().trim();

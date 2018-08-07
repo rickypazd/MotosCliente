@@ -60,22 +60,22 @@ import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
 import utiles.Constants;
+import utiles.Contexto;
 import utiles.DirectionsJSONParser;
 
 
-public class EsperandoConductor extends AppCompatActivity {
+public class EsperandoConductor extends AppCompatActivity implements View.OnClickListener{
     MapView mMapView;
     private GoogleMap googleMap;
     JSONObject json_carrera;
     private LinearLayout Container_cancelar;
     private CoordinatorLayout Container_verPerfil;
     private BottomSheetBehavior bottomSheetBehavior;
-
     private TextView text_nombreConductor;
     private TextView text_nombreAuto;
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
-
+    private Button btn_cancelar_viaje;
 //    private LinearLayout perfil_condutor;
 
     //añadiendo los broadcaast
@@ -85,17 +85,22 @@ public class EsperandoConductor extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiverFinalizoCarrera;
     private BroadcastReceiver broadcastReceiverCanceloCarrera;
 
+    private final static int TIPO_CANCELACION = 2;
+    private final static int ID_TIPO = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esperando_conductor);
+
         text_nombreConductor = findViewById(R.id.text_nombreConductor);
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
         text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
         text_Viajes= findViewById(R.id.text_Viajes);
-
         Container_cancelar = findViewById(R.id.Container_cancelar);
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
+        btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
+        btn_cancelar_viaje.setOnClickListener(this);
 
         try {
             json_carrera = new JSONObject(getIntent().getStringExtra("obj_carrera"));
@@ -299,6 +304,18 @@ public class EsperandoConductor extends AppCompatActivity {
         return url;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_cancelar_viaje:
+                try {
+                    new Cancelar_viaje().execute();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
+
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -324,7 +341,7 @@ public class EsperandoConductor extends AppCompatActivity {
             parserTask.execute(result);
         }
     }
-    private boolean first=false;
+
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
 
         @Override
@@ -390,6 +407,8 @@ public class EsperandoConductor extends AppCompatActivity {
             }
         }
     }
+
+
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -427,6 +446,7 @@ public class EsperandoConductor extends AppCompatActivity {
         return data;
 
     }
+
     private float dist=0;
     private Marker marauto;
     private Marker mardest;
@@ -467,6 +487,7 @@ public class EsperandoConductor extends AppCompatActivity {
                         LatLng ll2;
                         if(json_carrera.getInt("estado")==4){
                             ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
+                            //cfdfgd
                         }else{
                             ll2=new LatLng(json_carrera.getDouble("latinicial"),json_carrera.getDouble("lnginicial"));
                         }
@@ -515,7 +536,6 @@ public class EsperandoConductor extends AppCompatActivity {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
         }
-
     }
 
     private class buscar_carrera extends AsyncTask<Void, String, String> {
@@ -620,6 +640,83 @@ public class EsperandoConductor extends AppCompatActivity {
         }
     }
 
+    public JSONObject getUsr_log() {
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+        String usr = preferencias.getString("usr_log", "");
+        if (usr.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONObject usr_log = new JSONObject(usr);
+                return usr_log;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    private class Cancelar_viaje extends AsyncTask<Void, String, String> {
+
+        String id_usr = getUsr_log().getString("id");
+        private ProgressDialog progreso;
+
+        private Cancelar_viaje() throws JSONException {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progreso = new ProgressDialog(EsperandoConductor.this);
+            progreso.setIndeterminate(true);
+            progreso.setTitle("Esperando Respuesta");
+            progreso.setCancelable(false);
+            progreso.show();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            publishProgress("por favor espere...");
+            Hashtable<String,String> param = new Hashtable<>();
+            param.put("evento","cancelar_carrera");
+            try {
+                param.put("id_carrera",json_carrera.getInt("id")+"");
+                param.put("id_usr",id_usr);
+                param.put("tipo_cancelacion",TIPO_CANCELACION+"");
+                param.put("id_tipo",ID_TIPO+"");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String respuesta ="";
+            try {
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
+            } catch (Exception e) {
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            progreso.dismiss();
+            if (resp.isEmpty()) {
+                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+            }else{
+                try {
+                    JSONObject obj = new JSONObject(resp);
+                    json_carrera=obj;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            progreso.setMessage(values[0]);
+        }
+    }
 
 
 }

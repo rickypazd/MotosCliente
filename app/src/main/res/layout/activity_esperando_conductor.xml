@@ -24,8 +24,8 @@
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
             android:orientation="vertical"
-            android:paddingEnd="15dp"
-            android:paddingStart="15dp"
+            android:paddingEnd="25dp"
+            android:paddingStart="25dp"
             android:paddingBottom="10dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +33,13 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                android:id="@+id/btn_cancelar"
+                android:id="@+id/btn_cancelar_viaje"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#000000"
+                android:background="@color/colorBlack"
                 android:text="Cancelar Siete"
                 android:textColor="@color/colorWhite"
-                android:textSize="22dp"/>
+                android:textSize="18dp"/>
 
         </LinearLayout>
 

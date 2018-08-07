@@ -1,36 +1,29 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_transaccion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.PublicKey;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Locale;
 
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
 
-public class MisViajes_Cliente_Activity extends AppCompatActivity {
+public class Transaccion_cliente_Activity extends AppCompatActivity {
 
     private static final String TAG ="fragment_explorar";
     private ListView lv;
@@ -38,19 +31,19 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
-        setContentView(R.layout.activity_list_mis_viajes);
+        setContentView(R.layout.activity_list_transaccion);
 
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        lv = findViewById(R.id.list_misViajes);
+        lv = findViewById(R.id.list_transaccion);
 
         final JSONObject usr_log = getUsr_log();
         if (usr_log != null) {
             try {
-                new User_getPerfil(usr_log.getString("id")).execute();
+                new get_transacciones(usr_log.getString("id")).execute();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -96,18 +89,18 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         }
     }
 
-    public class User_getPerfil extends AsyncTask<Void, String, String> {
+    public class get_transacciones extends AsyncTask<Void, String, String> {
 
         private ProgressDialog progreso;
         private final String id;
-        User_getPerfil(String id_usr) {
+        get_transacciones(String id_usr) {
             id = id_usr;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progreso = new ProgressDialog(MisViajes_Cliente_Activity.this);
+            progreso = new ProgressDialog(Transaccion_cliente_Activity.this);
             progreso.setIndeterminate(true);
             progreso.setTitle("Esperando Respuesta");
             progreso.setCancelable(false);
@@ -117,7 +110,7 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
-            parametros.put("evento", "get_mis_viajes");
+            parametros.put("evento", "get_mis_transacciones");
             parametros.put("id",id);
             String respuesta ="";
             try {
@@ -135,8 +128,8 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
             if (!success.isEmpty()){
                 try {
                     JSONArray jsonArray = new JSONArray(success);
-                    Adaptador_mis_viajes mis_viajes= new Adaptador_mis_viajes(MisViajes_Cliente_Activity.this,jsonArray);
-                    lv.setAdapter(mis_viajes);
+                    Adapter_transaccion adaptador_mis_viajes = new Adapter_transaccion(Transaccion_cliente_Activity.this,jsonArray);
+                    lv.setAdapter(adaptador_mis_viajes);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
