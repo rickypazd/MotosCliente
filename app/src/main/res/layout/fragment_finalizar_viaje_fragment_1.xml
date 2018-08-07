@@ -62,7 +62,7 @@
             android:textSize="14dp" />
 
         <TextView
-            android:id="@+id/text_fin"
+            android:id="@+id/text_direccion_final"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"

@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#C23E54</color>
     <color name="colorAccent">#C23E54</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGris">#626262</color>
     <color name="colorWhite">#fff</color>
 
 </resources>

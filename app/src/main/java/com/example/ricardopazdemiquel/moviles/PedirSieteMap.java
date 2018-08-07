@@ -716,7 +716,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 layoutButon.setVisibility(View.VISIBLE);
                 icono7.setVisibility(View.VISIBLE);
                 break;
-
         }
     }
 

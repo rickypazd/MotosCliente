@@ -35,7 +35,7 @@ public class FinalizarViajeFragment_1 extends Fragment {
         textNombre = view.findViewById(R.id.text_nombre);
         textplaca = view.findViewById(R.id.text_placa);
         textInicio = view.findViewById(R.id.text_inicio);
-        textFin = view.findViewById(R.id.text_fin);
+        textFin = view.findViewById(R.id.text_direccion_final);
 
         carrera=((finalizar_viajeCliente)getActivity()).get_carrera();
         cargar();
