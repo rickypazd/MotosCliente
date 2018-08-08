@@ -20,7 +20,7 @@ import org.json.JSONException;
 public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClickListener {
 
     private Button btn_cancelar;
-    private Button btn_confirmar;
+    private Button btn_confirmar_cancelacion;
 
     public static String APP_TAG = "registro";
 
@@ -39,14 +39,14 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogFragmanetstyle);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_confirma_viaje, null);
+        View v = inflater.inflate(R.layout.dialog_cancelar_viaje, null);
         builder.setView(v);
 
-        btn_cancelar = v.findViewById(R.id.btn_cancelarD);
-        btn_confirmar = v.findViewById(R.id.btn_confirmarD);
+        btn_confirmar_cancelacion = v.findViewById(R.id.btn_confirmar_cancelacion);
+        btn_cancelar = v.findViewById(R.id.btn_cancelar);
 
         btn_cancelar.setOnClickListener(this);
-        btn_confirmar.setOnClickListener(this);
+        btn_confirmar_cancelacion.setOnClickListener(this);
 
         return builder.create();
     }
@@ -54,7 +54,7 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_confirmarD:
+            case R.id.btn_confirmar_cancelacion:
                 try {
                     ((PedirSieteMap)getActivity()).ok_predir_viaje();
                     dismiss();
@@ -62,7 +62,7 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
                     e.printStackTrace();
                 }
                 break;
-            case R.id.btn_cancelarD:
+            case R.id.btn_cancelar:
                 dismiss();
                 break;
         }

@@ -41,9 +41,7 @@ public class Sin_conexion extends AppCompatActivity {
             finish();
             moveTaskToBack(true);
             System.exit(0);
-
         }
-
 
     }
 

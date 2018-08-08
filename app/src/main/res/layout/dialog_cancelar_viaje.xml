@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:background="#f7f7f7"
     >
 
@@ -11,23 +12,45 @@
         android:id="@+id/email_login_form"
         android:layout_width="250sp"
         android:layout_height="230dp"
+        android:background="#EEEEEE"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.1"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Señor C"
-                android:textColor="@color/colorBlack"
-                android:textSize="30sp"
-                android:fontFamily="sans-serif"
-                android:textAlignment="center"/>
-        </LinearLayout>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_alert_mark"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_cancelar"
+                android:layout_width="26dp"
+                android:layout_height="29dp"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,10 +66,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:inputType="textMultiLine"
-                android:text="Lo siento usted no cuenta con credito."
+                android:text="Es posible que se cobre un monto por cancelacion."
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="24sp" />
+                android:textSize="17sp" />
 
         </LinearLayout>
 
@@ -58,13 +81,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_aceptarD"
+                android:id="@+id/btn_confirmar_cancelacion"
                 android:layout_width="match_parent"
                 android:layout_height="52sp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorWhite"
+                android:layout_margin="5dp"
                 android:text="Aceptar"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

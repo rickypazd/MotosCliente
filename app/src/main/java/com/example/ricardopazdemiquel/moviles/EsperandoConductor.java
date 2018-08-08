@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Dialog.Cancelar_viaje_Dialog;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -308,11 +309,8 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_cancelar_viaje:
-                try {
-                    new Cancelar_viaje().execute();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                new Cancelar_viaje().execute();
+                break;
         }
     }
 
@@ -658,12 +656,16 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     private class Cancelar_viaje extends AsyncTask<Void, String, String> {
 
-        String id_usr = getUsr_log().getString("id");
-        private ProgressDialog progreso;
-
-        private Cancelar_viaje() throws JSONException {
+        String id_usr;
+        {
+            try {
+                id_usr = getUsr_log().getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
+        private ProgressDialog progreso;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -703,14 +705,14 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
+                    android.app.FragmentManager fragmentManager = getFragmentManager();
+                    new Cancelar_viaje_Dialog().show(fragmentManager, "Dialog");
                     JSONObject obj = new JSONObject(resp);
-                    json_carrera=obj;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
-
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
