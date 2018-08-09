@@ -517,10 +517,13 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         }else{
                             mardest.setPosition(ll2);
                         }
+                        float degre = Float.parseFloat(obj.getString("bearing"));
                         if(marauto==null){
-                            marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").icon(BitmapDescriptorFactory.fromResource(R.drawable.taximark)));
+
+                            marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").rotation(degre).icon(BitmapDescriptorFactory.fromResource(R.drawable.auto)).anchor(0.5f,0.5f));
                         }else{
                             marauto.setPosition(ll1);
+                            marauto.setRotation(degre);
                         }
 
                     } catch (JSONException e) {
