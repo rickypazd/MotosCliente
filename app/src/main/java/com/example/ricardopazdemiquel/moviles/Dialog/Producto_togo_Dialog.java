@@ -38,6 +38,10 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
         this.obj=json_cancelarViaje;
     }
 
+    public Producto_togo_Dialog() {
+
+    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogFragmanetstyle);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_cancelar_viaje, null);
+        View v = inflater.inflate(R.layout.dialog_producto_togo, null);
         builder.setView(v);
 
         btn_confirmar_cancelacion = v.findViewById(R.id.btn_confirmar_cancelacion);
