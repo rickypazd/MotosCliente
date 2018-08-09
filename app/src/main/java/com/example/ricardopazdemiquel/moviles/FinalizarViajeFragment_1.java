@@ -63,7 +63,6 @@ public class FinalizarViajeFragment_1 extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
 

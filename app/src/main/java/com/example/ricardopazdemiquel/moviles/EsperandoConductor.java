@@ -77,6 +77,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
+    JSONObject Json_cancelarViaje;
 //    private LinearLayout perfil_condutor;
 
     //añadiendo los broadcaast
@@ -281,7 +282,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     private void Cancelo_carrera(Intent intenta){
         Intent intent = new Intent( EsperandoConductor.this, CanceloViaje_Cliente.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("id_carrera",intenta.getStringExtra("id_carrera"));
         startActivity(intent);
         finish();
@@ -691,7 +691,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             }
             String respuesta ="";
             try {
-                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
             } catch (Exception e) {
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }
@@ -705,9 +705,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
+                    Json_cancelarViaje = new JSONObject(resp);
                     android.app.FragmentManager fragmentManager = getFragmentManager();
-                    new Cancelar_viaje_Dialog().show(fragmentManager, "Dialog");
-                    JSONObject obj = new JSONObject(resp);
+                    new Cancelar_viaje_Dialog(Json_cancelarViaje).show(fragmentManager, "Dialog");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -720,5 +720,66 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         }
     }
 
+    public void confirmar(){
+        new Confirmar_cancelacion().execute();
+
+    }
+
+    public class Confirmar_cancelacion extends AsyncTask<Void, String, String> {
+
+        String id_usr;
+        {
+            try {
+                id_usr = getUsr_log().getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private ProgressDialog progreso;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progreso = new ProgressDialog(EsperandoConductor.this);
+            progreso.setIndeterminate(true);
+            progreso.setTitle("Esperando Respuesta");
+            progreso.setCancelable(false);
+            progreso.show();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            publishProgress("por favor espere...");
+            Hashtable<String,String> param = new Hashtable<>();
+            param.put("evento","ok_cancelar_carrera");
+            param.put("json",Json_cancelarViaje.toString());
+            String respuesta ="";
+            try {
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
+            } catch (Exception e) {
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            progreso.dismiss();
+            if(resp.isEmpty()){
+                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+            }else if (resp.contains("exito")) {
+                Toast.makeText(EsperandoConductor.this,"viaje cancelado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EsperandoConductor.this , MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }else{
+                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            progreso.setMessage(values[0]);
+        }
+    }
 
 }

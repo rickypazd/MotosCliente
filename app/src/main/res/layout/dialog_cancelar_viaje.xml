@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:background="#f7f7f7"
-    >
+    android:gravity="center">
 
     <LinearLayout
         android:id="@+id/email_login_form"
-        android:layout_width="250sp"
+        android:layout_width="match_parent"
         android:layout_height="230dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
         android:background="#EEEEEE"
         android:orientation="vertical">
 
@@ -61,7 +61,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_mensaje"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

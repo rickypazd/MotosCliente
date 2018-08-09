@@ -145,6 +145,7 @@ public class Adapter_transaccion extends BaseAdapter {
         return strAdd;
     }
 
+
     private Boolean get_estado(int valor){
         switch (valor) {
             case 6:
