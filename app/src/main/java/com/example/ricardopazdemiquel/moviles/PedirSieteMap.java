@@ -29,11 +29,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -95,6 +97,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private AutoCompleteTextView mAutocompleteTextView2;
     private AutoCompleteTextView selected;
     private TextView monto;
+    private ListView lista_productos;
+    private TextView tv_cantidad;
     private Button btn_confirmar;
     private ImageView iv_marker;
     private LinearLayout ll_ubic;
@@ -133,6 +137,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_pedir_siete_map);
 
         ll_ubic=findViewById(R.id.linearLayoutPedir);
+        lista_productos=findViewById(R.id.lista_productos);
+        tv_cantidad=findViewById(R.id.tv_cantidad);
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
         linearLayoutTogo = findViewById(R.id.linearLayoutTogo);
         layoutButon=findViewById(R.id.ll_boton);
@@ -147,13 +153,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState){
+
                     case BottomSheetBehavior.STATE_HIDDEN:
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         break;
+
                 }
             }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
 
@@ -696,11 +705,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case 4:
                 btn_pedir_togo.setVisibility(View.VISIBLE);
                 linearLayoutPedir.setVisibility(View.GONE);
+                cargartogo();
                 linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
+    private void cargartogo(){
+        JSONArray arr = getProductosPendientes();
+        if(arr!=null){
+            Adapter_producto_togo adapter = new Adapter_producto_togo(PedirSieteMap.this,arr);
+            lista_productos.setAdapter(adapter);
+            tv_cantidad.setText("Productos ("+arr.length()+")");
+        }
+
+    }
     public void calculando_ruta(View view , int tipo){
         selected=null;
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
@@ -834,6 +853,22 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 }
             }
 
+        }
+    }
+
+    public JSONArray getProductosPendientes() {
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+        String productos = preferencias.getString("productos_pendientes", "");
+        if (productos.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray productosObj = new JSONArray(productos);
+                return productosObj;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 }
