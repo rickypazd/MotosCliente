@@ -3,6 +3,7 @@ package com.example.ricardopazdemiquel.moviles;
 import android.Manifest;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -328,7 +330,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         MapsInitializer.initialize(this.getApplicationContext());
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap mMap) {
+            public void onMapReady(final GoogleMap mMap) {
                 googleMap = mMap;
                 CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeGPS, longitudeGPS), 14);
                 googleMap.animateCamera(cu);
@@ -352,11 +354,23 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
                     @Override
                     public void onCameraIdle() {
-                        if(selected!=null){
-                            LatLng center=googleMap.getCameraPosition().target;
-                            selected.setText(getCompleteAddressString(center.latitude,center.longitude));
+                        if (selected != null && entroLocation) {
+                            LatLng center = googleMap.getCameraPosition().target;
                             selected.setTag(center);
+                            mMap.clear();
+                            if (mAutocompleteTextView.getTag() != null) {
+                                LatLng latlng1 = (LatLng) mAutocompleteTextView.getTag();
+                                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                            }
+                            if (mAutocompleteTextView2.getTag() != null) {
+                                LatLng latlng2 = (LatLng) mAutocompleteTextView2.getTag();
+                                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                            }
+
+                            selected.setText(getCompleteAddressString(center.latitude, center.longitude));
+
                         }
+
 
                     }
                 });
@@ -375,6 +389,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
 
         }
+        mMapView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                        INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                return true;
+            }
+        });
+
     }
 
     @Override
