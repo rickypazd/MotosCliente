@@ -725,7 +725,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     public void confirmar(){
         new Confirmar_cancelacion().execute();
-
     }
 
     public class Confirmar_cancelacion extends AsyncTask<Void, String, String> {

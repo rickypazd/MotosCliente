@@ -114,6 +114,9 @@
         <activity android:name=".Crear_CuentaActivity"
             android:theme="@style/AppThemeone"/>
 
+        <activity android:name=".Producto_togo_Activity"
+            android:theme="@style/AppThemeone"/>
+
     </application>
 
 </manifest>

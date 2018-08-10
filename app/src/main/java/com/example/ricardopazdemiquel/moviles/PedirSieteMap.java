@@ -92,15 +92,14 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView mAutocompleteTextView;
     private AutoCompleteTextView mAutocompleteTextView2;
-    private EditText location1;
-    private EditText location2;
-    private Button btn_listo;
     private AutoCompleteTextView selected;
     private TextView monto;
     private Button btn_confirmar;
     private ImageView iv_marker;
     private LinearLayout ll_ubic;
     private LinearLayout linear_confirm;
+    private LinearLayout linearLayoutPedir;
+    private LinearLayout linearLayoutTogo;
     private ConstraintLayout layoutButon;
     private ConstraintLayout btn_estandar_recicler;
     private LatLng inicio;
@@ -120,7 +119,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     // inicializamos los iconos de confirmar carrera
     private TextView icono1, icono2 ,icono3 , icono4 ,icono5, icono6,icono7;
     double mont;
-
+    private AutoCompleteTextView text_direccion_togo;
+    private Button btn_agregar_producto;
 
     public PedirSieteMap() {
     }
@@ -131,9 +131,14 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_pedir_siete_map);
 
         ll_ubic=findViewById(R.id.linearLayoutPedir);
+        linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
+        linearLayoutTogo = findViewById(R.id.linearLayoutTogo);
         layoutButon=findViewById(R.id.ll_boton);
         iv_marker=findViewById(R.id.ivmarker);
-        monto=findViewById(R.id.tv_monto);
+        monto = findViewById(R.id.tv_monto);
+        text_direccion_togo = findViewById(R.id.text_direccion_togo);
+        btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
+        btn_agregar_producto.setOnClickListener(this);
 
         final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
         final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
@@ -216,6 +221,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mAutocompleteTextView2.setThreshold(3);
         mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
         mAutocompleteTextView2.setAdapter(mPlaceArrayAdapter);
+
+        text_direccion_togo = (AutoCompleteTextView) findViewById(R.id
+                .text_direccion_togo);
+        text_direccion_togo.setOnFocusChangeListener(this);
+        text_direccion_togo.setThreshold(3);
+        text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
+        text_direccion_togo.setAdapter(mPlaceArrayAdapter);
 
         usr_log = getUsr_log();
 
@@ -363,6 +375,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_pedir_togo:
                 calculando_ruta(view , tipo_carrera);
+                break;
+            case R.id.btn_agregar_producto:
+                Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -662,6 +678,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 break;
             case 4:
                 btn_pedir_togo.setVisibility(View.VISIBLE);
+                linearLayoutPedir.setVisibility(View.GONE);
+                linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
         }
     }
