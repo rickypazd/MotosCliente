@@ -138,6 +138,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         monto = findViewById(R.id.tv_monto);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
+        btn_agregar_producto.setOnClickListener(this);
 
         final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
         final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
@@ -220,6 +221,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mAutocompleteTextView2.setThreshold(3);
         mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
         mAutocompleteTextView2.setAdapter(mPlaceArrayAdapter);
+
+        text_direccion_togo = (AutoCompleteTextView) findViewById(R.id
+                .text_direccion_togo);
+        text_direccion_togo.setOnFocusChangeListener(this);
+        text_direccion_togo.setThreshold(3);
+        text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
+        text_direccion_togo.setAdapter(mPlaceArrayAdapter);
 
         usr_log = getUsr_log();
 

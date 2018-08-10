@@ -22,8 +22,9 @@ public class AdaptadorSieteEstandar extends RecyclerView.Adapter<viewHolder> {
     private Context contexto;
     private PedirSieteMap pm;
 
+
     public AdaptadorSieteEstandar(JSONArray listaCanchas, Context contexto, PedirSieteMap pm) {
-            this.listaCanchas = listaCanchas;
+        this.listaCanchas = listaCanchas;
         this.contexto = contexto;
         this.pm =pm;
     }
@@ -42,7 +43,7 @@ public class AdaptadorSieteEstandar extends RecyclerView.Adapter<viewHolder> {
     @Override
     public void onBindViewHolder(final viewHolder holder, int position) {
         try {
-
+            //holder.itemView.setOnLongClickListener(this);
             JSONObject obj =listaCanchas.getJSONObject(position);
             holder.btn_reservar.setText(obj.getString("nombre"));
             holder.btn_reservar.setTag(obj.getInt("id"));
