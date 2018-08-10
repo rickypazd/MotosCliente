@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,6 +109,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private RecyclerView recyclerView;
     private int tipo_pago;
+    private BottomSheetBehavior bottomSheetBehavior;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.9720));
 
@@ -139,6 +141,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
         btn_agregar_producto.setOnClickListener(this);
+        View view =findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior= BottomSheetBehavior.from(view);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState){
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        break;
+                }
+            }
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
 
         final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
         final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
