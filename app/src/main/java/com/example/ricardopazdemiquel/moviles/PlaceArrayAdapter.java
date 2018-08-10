@@ -84,11 +84,14 @@ public class PlaceArrayAdapter
             Log.i(TAG, "Query completed. Received " + autocompletePredictions.getCount()
                     + " predictions.");
             Iterator<AutocompletePrediction> iterator = autocompletePredictions.iterator();
-            ArrayList resultList = new ArrayList<>(autocompletePredictions.getCount());
+            ArrayList resultList = new ArrayList<>();
             while (iterator.hasNext()) {
                 AutocompletePrediction prediction = iterator.next();
-                resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),
-                        prediction.getFullText(null)));
+                if(String.valueOf(prediction.getFullText(null)).contains("Bolivia")){
+                    resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),
+                            prediction.getFullText(null)));
+                }
+
             }
             // Buffer release
             autocompletePredictions.release();
@@ -134,6 +137,7 @@ public class PlaceArrayAdapter
 
         public CharSequence placeId;
         public CharSequence description;
+
 
         PlaceAutocomplete(CharSequence placeId, CharSequence description) {
             this.placeId = placeId;

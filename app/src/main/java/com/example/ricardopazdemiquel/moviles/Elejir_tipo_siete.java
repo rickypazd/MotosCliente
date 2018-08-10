@@ -59,7 +59,7 @@ public class Elejir_tipo_siete extends AppCompatActivity implements View.OnClick
 
                     intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 2);
+                    intent.putExtra("tipo", 4);
 
                 break;
             case R.id.btn_sieteMaravilla:
@@ -72,7 +72,7 @@ public class Elejir_tipo_siete extends AppCompatActivity implements View.OnClick
             case R.id.btn_togo:
                   intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 4);
+                    intent.putExtra("tipo", 2);
 
                 break;
         }

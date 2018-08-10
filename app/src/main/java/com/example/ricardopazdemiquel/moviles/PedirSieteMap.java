@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -83,6 +84,7 @@ import java.util.concurrent.ExecutionException;
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
+import utiles.BehaviorCuston;
 import utiles.Contexto;
 import utiles.DirectionsJSONParser;
 import utiles.Token;
@@ -150,20 +152,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_agregar_producto.setOnClickListener(this);
         View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setHideable(false);
+        lista_productos.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                switch (newState){
-
-                    case BottomSheetBehavior.STATE_HIDDEN:
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        break;
-
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    if (bottomSheetBehavior instanceof BehaviorCuston) {
+                        ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
+                    }
+                }else if(event.getAction()==MotionEvent.ACTION_UP){
+                    if (bottomSheetBehavior instanceof BehaviorCuston) {
+                        ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
+                    }
                 }
-            }
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
+                return false;
             }
         });
 
@@ -374,6 +377,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(tipo_carrera==2){
+            cargartogo();
+        }
+
+    }
+
     public void ok_predir_viaje() throws JSONException {
         Intent inte = new Intent(PedirSieteMap.this, PidiendoSiete.class);
         inte.putExtra("latInicio", inicio.latitude + "");
@@ -449,13 +461,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                //StringBuilder strReturnedAddress = new StringBuilder("");
 
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-                Log.w("My Current loction addr", strReturnedAddress.toString());
+                strAdd=returnedAddress.getThoroughfare();
+                if(strAdd==null )
+                strAdd=returnedAddress.getFeatureName();
+
+                //  Log.w("My Current loction addr", strReturnedAddress.toString());
             } else {
                 Log.w("My Current loction addr", "No Address returned!");
             }
@@ -698,16 +710,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 recyclerView.setVisibility(View.VISIBLE);
                 break;
             case 2:
-                btn_pedir_super.setVisibility(View.VISIBLE);
+                btn_pedir_togo.setVisibility(View.VISIBLE);
+                linearLayoutPedir.setVisibility(View.GONE);
+                cargartogo();
+                linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);
                 break;
             case 4:
-                btn_pedir_togo.setVisibility(View.VISIBLE);
-                linearLayoutPedir.setVisibility(View.GONE);
-                cargartogo();
-                linearLayoutTogo.setVisibility(View.VISIBLE);
+                btn_pedir_super.setVisibility(View.VISIBLE);
                 break;
         }
     }
