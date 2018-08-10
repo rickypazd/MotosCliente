@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -714,7 +715,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private void cargartogo(){
         JSONArray arr = getProductosPendientes();
         if(arr!=null){
-            Adapter_producto_togo adapter = new Adapter_producto_togo(PedirSieteMap.this,arr);
+            Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(PedirSieteMap.this,arr);
             lista_productos.setAdapter(adapter);
             tv_cantidad.setText("Productos ("+arr.length()+")");
         }
