@@ -114,7 +114,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     private TextView icono2 ;
     double mont;
     private AutoCompleteTextView text_direccion_togo;
-    private Button btn_agregar_producto;
+    private ImageView btn_agregar_producto;
 
     public PedirSieteTogo() {
     }
@@ -329,6 +329,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     }
 
     public void ok_predir_viaje() throws JSONException {
+        JSONArray arr = getProductosPendientes();
         Intent inte = new Intent(PedirSieteTogo.this, PidiendoSiete.class);
         inte.putExtra("latInicio", inicio.latitude + "");
         inte.putExtra("lngInicio", inicio.longitude + "");
@@ -338,6 +339,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         inte.putExtra("id_usr", usr_log.getInt("id") + "");
         inte.putExtra("tipo", tipo_carrera + "");
         inte.putExtra("tipo_pago", tipo_pago + "");
+        inte.putExtra("productos", arr + "");
         startActivity(inte);
     }
 

@@ -50,7 +50,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center|start"
-                            android:text="23]d23*2"
+                            android:text="23-12-18"
                             android:textColor="#626262"
                             android:textSize="15sp" />
 

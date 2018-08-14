@@ -37,9 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorBlack"
-                android:text="Cancelar Siete"
+                android:text="Cancelar viaje"
+                android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="18dp"/>
+                android:textSize="22dp"/>
 
         </LinearLayout>
 

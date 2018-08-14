@@ -129,17 +129,19 @@
                             android:layout_height="match_parent"
                             android:text="Productos (0)"
                             android:textColor="@color/cardview_light_background"
+                            android:drawableStart="@drawable/ic_down_arrow"
+                            android:drawablePadding="20dp"
                             android:padding="16dp"
                             android:textSize="18dp"/>
                     </LinearLayout>
 
-                    <Button
+                    <ImageView
                         android:id="@+id/btn_agregar_producto"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/colorAccent"
                         android:hint="agregar producto"
+                        android:src="@drawable/ic_plus"
                         android:textSize="15dp"
                         android:padding="5dp"
                         android:layout_gravity="center"

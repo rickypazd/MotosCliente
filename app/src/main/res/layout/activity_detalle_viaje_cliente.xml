@@ -224,11 +224,10 @@
                     android:id="@+id/text_html_montos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:text=""
-                    android:textColor="@color/colorGris"/>
+                    android:gravity="right"
+                    android:textColor="@color/colorGris"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
