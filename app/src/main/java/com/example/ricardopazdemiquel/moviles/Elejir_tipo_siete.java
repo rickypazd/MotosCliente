@@ -48,36 +48,35 @@ public class Elejir_tipo_siete extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(Elejir_tipo_siete.this, PedirSieteMap.class);
+        Intent intent_togo = new Intent(Elejir_tipo_siete.this, PedirSieteTogo.class);
         switch (view.getId()) {
             case R.id.btn_siete:
                     intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
                     intent.putExtra("tipo", 1);
-
+                    startActivity(intent);
                 break;
             case R.id.btn_superSiete:
-
                     intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
                     intent.putExtra("tipo", 4);
+                    startActivity(intent);
 
                 break;
             case R.id.btn_sieteMaravilla:
-
                     intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
                     intent.putExtra("tipo", 3);
+                    startActivity(intent);
 
                 break;
             case R.id.btn_togo:
-                  intent.putExtra("lng", longitudeGPS);
-                    intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 2);
-
+                    intent_togo.putExtra("lng", longitudeGPS);
+                    intent_togo.putExtra("lat", latitudeGPS);
+                    intent_togo.putExtra("tipo", 2);
+                    startActivity(intent_togo);
                 break;
         }
-        startActivity(intent);
-
     }
 
 

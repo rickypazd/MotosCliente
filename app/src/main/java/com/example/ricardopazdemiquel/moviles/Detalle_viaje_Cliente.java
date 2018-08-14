@@ -150,15 +150,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         fecha.setText(obj.getString("fecha_pedido"));
                         marca_auto.setText(obj.getString("marca"));
 
-                        if(get_estado(estado)){
-                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                            direccion_final.setText(getCompleteAddressString(lat_final_real,lng_final_real));
-                            monto_total.setText("bs. "+costo);
-                        }else if(!get_estado(estado)){
-                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                            direccion_final.setText(getCompleteAddressString(latfinal,lngfinal));
-                            monto_total.setText("bs. 0");
-                        }
+
                         switch (tipo){
                             case(EFECTIVO):
                                 tipo_pago.setText("Efectivo");
@@ -176,10 +168,22 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                             object = array.getJSONObject(i);
                             auxCosto = Double.parseDouble(object.getString("costo"));
                             html_detalle += "<p>"+object.getString("nombre")+"</p>";
-                            html_costo += "<p>"+String.format("%.2f", auxCosto) +"</p>";
+                            html_costo += "<p>"+String.format("%.2f", auxCosto) +" Bs.</p>";
                         }
-                        html_tipos.setText("bs. "+Html.fromHtml(html_detalle),TextView.BufferType.SPANNABLE);
-                        html_costos.setText("bs. "+Html.fromHtml(html_costo),TextView.BufferType.SPANNABLE);
+                        html_detalle += "<p>Total></p>";
+
+                        if(get_estado(estado)){
+                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
+                            direccion_final.setText(getCompleteAddressString(lat_final_real,lng_final_real));
+                            html_costo += "<p>"+costo+" Bs.</p>";
+                        }else if(!get_estado(estado)){
+                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
+                            direccion_final.setText(getCompleteAddressString(latfinal,lngfinal));
+                            html_costo += "<p>0 Bs.</p>";
+                        }
+
+                        html_tipos.setText(Html.fromHtml(html_detalle),TextView.BufferType.SPANNABLE);
+                        html_costos.setText(Html.fromHtml(html_costo),TextView.BufferType.SPANNABLE);
                     }else{
                         return;
                     }
