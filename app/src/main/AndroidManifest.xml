@@ -58,6 +58,12 @@
             android:name=".PedirSieteMap"
             android:theme="@style/AppThemeone"
             android:windowSoftInputMode="adjustNothing"/>
+
+        <activity
+            android:name=".PedirSieteTogo"
+            android:theme="@style/AppThemeone"
+            android:windowSoftInputMode="adjustNothing"/>
+
         <activity
             android:name=".Carga"
             android:theme="@style/AppThemeone">

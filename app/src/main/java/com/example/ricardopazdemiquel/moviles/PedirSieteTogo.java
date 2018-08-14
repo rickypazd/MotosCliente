@@ -86,8 +86,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     private boolean entroLocation=false;
     private static final String LOG_TAG = "MainActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    private AutoCompleteTextView mAutocompleteTextView;
-    private AutoCompleteTextView mAutocompleteTextView2;
     private AutoCompleteTextView selected;
     private TextView monto;
     private ListView lista_productos;
@@ -96,7 +94,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     private ImageView iv_marker;
     private LinearLayout ll_ubic;
     private LinearLayout linear_confirm;
-    private LinearLayout linearLayoutPedir;
     private LinearLayout linearLayoutTogo;
     private ConstraintLayout layoutButon;
     private LatLng inicio;
@@ -127,10 +124,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedir_siete_togo);
 
-        ll_ubic=findViewById(R.id.linearLayoutPedir);
         lista_productos=findViewById(R.id.lista_productos);
         tv_cantidad=findViewById(R.id.tv_cantidad);
-        linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
         linearLayoutTogo = findViewById(R.id.linearLayoutTogo);
         layoutButon=findViewById(R.id.ll_boton);
         iv_marker=findViewById(R.id.ivmarker);
@@ -183,23 +178,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
         mostar_button(tipo_carrera);
 
-        mAutocompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
-        mAutocompleteTextView.setOnFocusChangeListener(this);
-        mAutocompleteTextView.setThreshold(3);
-        mAutocompleteTextView.setOnItemClickListener(mAutocompleteClickListener);
-        mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
-        mAutocompleteTextView.setAdapter(mPlaceArrayAdapter);
-
-        mAutocompleteTextView2 = (AutoCompleteTextView) findViewById(R.id
-                .autoCompleteTextView2);
-        mAutocompleteTextView2.setOnFocusChangeListener(this);
-        mAutocompleteTextView2.setThreshold(3);
-        mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
-        mAutocompleteTextView2.setAdapter(mPlaceArrayAdapter);
-
-        text_direccion_togo = (AutoCompleteTextView) findViewById(R.id
-                .text_direccion_togo);
+        text_direccion_togo = findViewById(R.id.text_direccion_togo);
         text_direccion_togo.setOnFocusChangeListener(this);
         text_direccion_togo.setThreshold(3);
         text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
@@ -302,15 +281,10 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                             LatLng center = googleMap.getCameraPosition().target;
                             selected.setTag(center);
                             mMap.clear();
-                            if (mAutocompleteTextView.getTag() != null) {
-                                LatLng latlng1 = (LatLng) mAutocompleteTextView.getTag();
-                                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
-                            }
-                            if (mAutocompleteTextView2.getTag() != null) {
-                                LatLng latlng2 = (LatLng) mAutocompleteTextView2.getTag();
+                            if (text_direccion_togo.getTag() != null) {
+                                LatLng latlng2 = (LatLng) text_direccion_togo.getTag();
                                 googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
                             }
-
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
 
                         }
@@ -372,7 +346,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_pedir_togo:
-                calculando_ruta(view , tipo_carrera);
+                //calculando_ruta(view , tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteTogo.this, Producto_togo_Activity.class);
@@ -667,7 +641,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             switch (tipo) {
             case 2:
                 btn_pedir_togo.setVisibility(View.VISIBLE);
-                linearLayoutPedir.setVisibility(View.GONE);
                 cargartogo();
                 linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
@@ -683,9 +656,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void calculando_ruta(View view , int tipo){
+   /* public void calculando_ruta(View view , int tipo){
         selected=null;
-        if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
+        if(text_direccion_togo.getTag()!= null && text_direccion_togo.getTag()!=null){
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
             inicio=latlng1;
@@ -711,7 +684,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             //aspdjapsd
             mostraConfirmar(tipo);
         }
-    }
+    }*/
 
     private void mostraConfirmar(int valor){
         switch (valor){
