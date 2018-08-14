@@ -28,7 +28,7 @@ public class NetworkStateChangeReceiver extends BroadcastReceiver {
             if(intent!=null){
 
             }
-        }
+        } 
     }
 
     private boolean isConnectedToInternet(Context context) {
