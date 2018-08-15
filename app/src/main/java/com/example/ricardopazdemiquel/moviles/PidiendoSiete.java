@@ -44,8 +44,6 @@ public class PidiendoSiete extends AppCompatActivity {
         setContentView(R.layout.activity_pidiendo_siete);
 
         Intent intent= getIntent();
-        latInicio=intent.getStringExtra("latInicio");
-        lngInicio=intent.getStringExtra("lngInicio");
         latFin=intent.getStringExtra("latFin");
         lngFin=intent.getStringExtra("lngFin");
         token=intent.getStringExtra("token");
@@ -64,15 +62,12 @@ public class PidiendoSiete extends AppCompatActivity {
         }
         tipo_pago = intent.getStringExtra("tipo_pago");
         new Get_ActualizarToken(id_usr).execute();
-
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
     }
-
 
     public class Get_ActualizarToken extends AsyncTask<Void, String, String>{
         private String id;
@@ -174,8 +169,6 @@ public class PidiendoSiete extends AppCompatActivity {
 
             Hashtable<String,String> param = new Hashtable<>();
             param.put("evento","buscar_carrera_togo");
-            param.put("latInicio",latInicio);
-            param.put("lngInicio",lngInicio);
             param.put("latFin",latFin);
             param.put("lngFin",lngFin);
             param.put("token", token);

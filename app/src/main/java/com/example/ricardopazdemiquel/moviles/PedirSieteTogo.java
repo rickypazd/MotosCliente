@@ -109,7 +109,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     //inicializamos los botones para pedir siete togo y el tipo de carrera
     private Button btn_pedir_togo ;
     private int tipo_carrera;
-
+    private RadioButton radio_efectivo;
+    private RadioButton radio_credito;
     // inicializamos los iconos de confirmar carrera
     private TextView icono2 ;
     double mont;
@@ -166,8 +167,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
         btn_pedir_togo = findViewById(R.id.btn_pedir_togo);
 
-        final RadioButton radio_efectivo = findViewById(R.id.radio_efectivo);
-        final RadioButton radio_credito = findViewById(R.id.radio_credito);
+        radio_efectivo = findViewById(R.id.radio_efectivo);
+        radio_credito = findViewById(R.id.radio_credito);
         radio_efectivo.setOnClickListener(this);
         radio_credito.setOnClickListener(this);
 
@@ -182,6 +183,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         text_direccion_togo.setOnFocusChangeListener(this);
         text_direccion_togo.setThreshold(3);
         text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
+        mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
         text_direccion_togo.setAdapter(mPlaceArrayAdapter);
 
         usr_log = getUsr_log();
@@ -194,57 +197,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
 
         btn_confirmar= findViewById(R.id.btn_confirmar);
-        btn_confirmar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    String id = usr_log.getString("id");
-                    String resp =new User_getPerfil(id).execute().get();
-                    if(resp==null){
-                        Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-                    }else{
-                        android.app.FragmentManager fragmentManager = getFragmentManager();
-                        if (!resp.isEmpty()){
-                            JSONObject usr = new JSONObject(resp);
-                            if(usr.getString("exito").equals("si")){
-                                double credito = usr.getDouble("creditos");
-                                boolean acept = true;
-                                if(radio_credito.isChecked() == true){
-                                    tipo_pago=2;
-                                    if(credito < mont){
-                                        new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
-                                        acept=false;
-                                    }
-                                }
-                                else {
-                                    tipo_pago=1;
-                                    if(credito < 0){
-                                        new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
-                                        //esta en deuda , aler se cobrara el monto + viej
-                                        acept=false;
-                                    }
-                                }
-                                if(acept){
-                                    ok_predir_viaje();
-                                }
-
-                            }
-                        }
-
-                    }
-
-
-                } catch (JSONException e) {
-                        e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
+        btn_confirmar.setOnClickListener(this);
 
         mMapView = findViewById(R.id.mapviewPedirSiete);
         mMapView.onCreate(savedInstanceState);
@@ -283,6 +236,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                             mMap.clear();
                             if (text_direccion_togo.getTag() != null) {
                                 LatLng latlng2 = (LatLng) text_direccion_togo.getTag();
+                                fin=latlng2;
                                 googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
                             }
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
@@ -328,11 +282,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void ok_predir_viaje() throws JSONException {
+    public void ok_pedir_viaje() throws JSONException {
         JSONArray arr = getProductosPendientes();
         Intent inte = new Intent(PedirSieteTogo.this, PidiendoSiete.class);
-        inte.putExtra("latInicio", inicio.latitude + "");
-        inte.putExtra("lngInicio", inicio.longitude + "");
         inte.putExtra("latFin", fin.latitude + "");
         inte.putExtra("lngFin", fin.longitude + "");
         inte.putExtra("token", Token.currentToken);
@@ -349,10 +301,14 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.btn_pedir_togo:
                 //calculando_ruta(view , tipo_carrera);
+                mostraConfirmar(tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteTogo.this, Producto_togo_Activity.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_confirmar:
+                Confimar_viaje();
                 break;
         }
     }
@@ -600,7 +556,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -646,6 +601,49 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 cargartogo();
                 linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
+        }
+    }
+
+    private void Confimar_viaje() {
+        try {
+            String id = usr_log.getString("id");
+            String resp =new User_getPerfil(id).execute().get();
+            if(resp==null){
+                Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                if (!resp.isEmpty()){
+                    JSONObject usr = new JSONObject(resp);
+                    if(usr.getString("exito").equals("si")){
+                        double credito = usr.getDouble("creditos");
+                        boolean acept = true;
+                        if(radio_credito.isChecked() == true){
+                            tipo_pago=2;
+                            if(credito < mont){
+                                new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
+                                acept=false;
+                            }
+                        }
+                        else {
+                            tipo_pago=1;
+                            if(credito < 0){
+                                new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
+                                //esta en deuda , aler se cobrara el monto + viej
+                                acept=false;
+                            }
+                        }
+                        if(acept){
+                            ok_pedir_viaje();
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
@@ -723,7 +721,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         }
 
     }
-
 
     public class User_getPerfil extends AsyncTask<Void, String, String> {
 
