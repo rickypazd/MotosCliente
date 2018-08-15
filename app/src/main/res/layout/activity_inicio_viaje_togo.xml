@@ -20,13 +20,8 @@
             android:id="@+id/Container_cancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
             android:orientation="vertical"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
-            android:paddingBottom="10dp"
+            android:paddingBottom="55dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorBlack"
-                android:text="Cancelar viaje"
+                android:text="Cancelar pedido"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="22dp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -62,39 +57,39 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:rotation="180">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:stackFromBottom="true"
                         android:transcriptMode="alwaysScroll">
 
                         <ListView
                             android:id="@+id/lista_productos"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="400dp"
                             android:background="@color/colorWhite"
                             android:clickable="true"
                             android:divider="#929292"
                             android:dividerHeight="1px"
                             android:stackFromBottom="true"
                             android:transcriptMode="alwaysScroll"
-                            tools:listitem="@layout/layout_item_pedidos_togo"></ListView>
-
+                            tools:listitem="@layout/layout_item_pedidos_togo">
+                        </ListView>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:orientation="horizontal">
                             <TextView
                                 android:id="@+id/tv_cantidad"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="55dp"
                                 android:drawablePadding="20dp"
                                 android:drawableStart="@drawable/ic_down_arrow"
                                 android:padding="16dp"
@@ -112,7 +107,7 @@
                 android:id="@+id/Container_verPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/button_sheet"
@@ -386,9 +381,7 @@
                                     android:text="nombre"
                                     android:textColor="#fff" />
 
-
                             </LinearLayout>
-
                         </LinearLayout>
 
                     </LinearLayout>

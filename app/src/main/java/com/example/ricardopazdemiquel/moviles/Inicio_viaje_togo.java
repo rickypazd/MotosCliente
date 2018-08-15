@@ -18,14 +18,17 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Dialog.Cancelar_viaje_Dialog;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,6 +43,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,6 +61,7 @@ import java.util.List;
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
+import utiles.BehaviorCuston;
 import utiles.Contexto;
 import utiles.DirectionsJSONParser;
 
@@ -74,6 +79,8 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
     JSONObject Json_cancelarViaje;
+    private ListView lista_productos;
+    private TextView tv_cantidad;
 //    private LinearLayout perfil_condutor;
 
     //añadiendo los broadcaast
@@ -89,7 +96,7 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_esperando_conductor);
+        setContentView(R.layout.activity_inicio_viaje_togo);
 
         text_nombreConductor = findViewById(R.id.text_nombreConductor);
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
@@ -99,6 +106,34 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
         btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
         btn_cancelar_viaje.setOnClickListener(this);
+        lista_productos=findViewById(R.id.lista_productos);
+        tv_cantidad=findViewById(R.id.tv_cantidad);
+        View v =findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior= BottomSheetBehavior.from(v);
+        bottomSheetBehavior.setHideable(false);
+        lista_productos.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    if (bottomSheetBehavior instanceof BehaviorCuston) {
+                        ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
+                    }
+                }else if(event.getAction()==MotionEvent.ACTION_UP){
+                    if (bottomSheetBehavior instanceof BehaviorCuston) {
+                        ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        JSONArray arr = getProductosPendientes();
+        if(arr!=null){
+            Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(Inicio_viaje_togo.this,arr);
+            lista_productos.setAdapter(adapter);
+            tv_cantidad.setText("Productos ("+arr.length()+")");
+        }
 
         try {
             json_carrera = new JSONObject(getIntent().getStringExtra("obj_carrera"));
@@ -110,6 +145,11 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
             e.printStackTrace();
         }
 
+        try {
+            new Get_ObtenerPerfilConductor(json_carrera.getString("id")).execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         View view =findViewById(R.id.button_sheet);
         bottomSheetBehavior=BottomSheetBehavior.from(view);
@@ -222,9 +262,7 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
             };
         }
         registerReceiver(broadcastReceiverCanceloCarrera,new IntentFilter("cancelo_carrera"));
-
     }
-
 
     private boolean hilo;
     private void hilo(){
@@ -251,17 +289,15 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     }
 
     private void conductor_llego(Intent intent){
-
-        Container_cancelar.setVisibility(View.GONE);
-        try {
+        /*try {
             new Get_ObtenerPerfilConductor(json_carrera.getString("id")).execute();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-
+        }*/
     }
 
     private void Inicio_Carrera(Intent intent){
+        Container_cancelar.setVisibility(View.GONE);
         Toast.makeText(Inicio_viaje_togo.this,"Su viaje ha comenzado, Que tenga buen viaje.",
                 Toast.LENGTH_SHORT).show();
         new buscar_carrera().execute();
@@ -278,6 +314,7 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
 
     private void Cancelo_carrera(Intent intenta){
         Intent intent = new Intent( Inicio_viaje_togo.this, CanceloViaje_Cliente.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("id_carrera",intenta.getStringExtra("id_carrera"));
         startActivity(intent);
         finish();
@@ -479,12 +516,8 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
                         JSONObject obj=new JSONObject(resp);
                         LatLng ll1 = new LatLng(obj.getDouble("lat"),obj.getDouble("lng"));
                         LatLng ll2;
-                        if(json_carrera.getInt("estado")==4){
-                            ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
-                            //cfdfgd
-                        }else{
-                            ll2=new LatLng(json_carrera.getDouble("latinicial"),json_carrera.getDouble("lnginicial"));
-                        }
+
+                        ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
 
                         String url = obtenerDireccionesURL(ll1,ll2);
                         float[] results = new float[1];
@@ -777,6 +810,22 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             progreso.setMessage(values[0]);
+        }
+    }
+
+    public JSONArray getProductosPendientes() {
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+        String productos = preferencias.getString("productos_pendientes", "");
+        if (productos.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray productosObj = new JSONArray(productos);
+                return productosObj;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 

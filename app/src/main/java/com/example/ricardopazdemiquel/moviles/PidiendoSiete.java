@@ -44,23 +44,30 @@ public class PidiendoSiete extends AppCompatActivity {
         setContentView(R.layout.activity_pidiendo_siete);
 
         Intent intent= getIntent();
-        latFin=intent.getStringExtra("latFin");
-        lngFin=intent.getStringExtra("lngFin");
-        token=intent.getStringExtra("token");
-        id_usr=intent.getStringExtra("id_usr");
+
         tipoCarrera = intent.getStringExtra("tipo");
         tipo = Integer.valueOf(tipoCarrera);
-        switch (tipo){
-            case TIPO_TOGO:
-                productos = intent.getStringExtra("productos");
-                try {
-                    array = new JSONArray(productos);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
+        if(tipo == TIPO_TOGO){
+            latFin=intent.getStringExtra("latFin");
+            lngFin=intent.getStringExtra("lngFin");
+            token=intent.getStringExtra("token");
+            id_usr=intent.getStringExtra("id_usr");
+            productos = intent.getStringExtra("productos");
+            tipo_pago = intent.getStringExtra("tipo_pago");
+            try {
+                array = new JSONArray(productos);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else{
+            latInicio=intent.getStringExtra("latInicio");
+            lngInicio=intent.getStringExtra("lngInicio");
+            latFin=intent.getStringExtra("latFin");
+            lngFin=intent.getStringExtra("lngFin");
+            token=intent.getStringExtra("token");
+            id_usr=intent.getStringExtra("id_usr");
+            tipo_pago = intent.getStringExtra("tipo_pago");
         }
-        tipo_pago = intent.getStringExtra("tipo_pago");
         new Get_ActualizarToken(id_usr).execute();
     }
 
@@ -189,7 +196,7 @@ public class PidiendoSiete extends AppCompatActivity {
             }else{
                 try {
                     JSONObject obj = new JSONObject(pacientes);
-                    Intent inte = new Intent(PidiendoSiete.this,EsperandoConductor.class);
+                    Intent inte = new Intent(PidiendoSiete.this,Inicio_viaje_togo.class);
                     inte.putExtra("obj_carrera",obj.toString());
                     startActivity(inte);
 

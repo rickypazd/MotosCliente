@@ -101,6 +101,9 @@
         <activity android:name=".EsperandoConductor"
             android:theme="@style/AppThemeone"/>
 
+        <activity android:name=".Inicio_viaje_togo"
+            android:theme="@style/AppThemeone"/>
+
         <activity
             android:name=".Sin_conexion"
             android:theme="@style/AppTheme.NoActionBar"/>
