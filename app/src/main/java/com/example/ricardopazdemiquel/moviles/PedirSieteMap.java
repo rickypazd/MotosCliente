@@ -490,7 +490,24 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 strAdd=returnedAddress.getThoroughfare();
                 if(strAdd==null )
                 strAdd=returnedAddress.getFeatureName();
-
+                System.out.println("*****************************");
+                System.out.println("Admin Area: ->> " + returnedAddress.getAdminArea());
+                System.out.println("Country Code: ->> " + returnedAddress.getCountryCode());
+                System.out.println("Country Name: ->> " + returnedAddress.getCountryName());
+                System.out.println("Feature Name: ->> " + returnedAddress.getFeatureName());
+                System.out.println("Admin Area: ->> " + returnedAddress.getLatitude());
+                System.out.println("Latitude: ->> " + returnedAddress.getLocality());
+                System.out.println("Longitude: ->> " + returnedAddress.getLongitude());
+                System.out.println("Max Address Line Index: ->> " + returnedAddress.getMaxAddressLineIndex());
+                System.out.println("Phone: ->> " + returnedAddress.getPhone());
+                System.out.println("PostalCode: ->> " + returnedAddress.getPostalCode());
+                System.out.println("Premises: ->> " + returnedAddress.getPremises());
+                System.out.println("SubAdminArea: ->> " + returnedAddress.getSubAdminArea());
+                System.out.println("SubLocality: ->> " + returnedAddress.getSubLocality());
+                System.out.println("SubThoroughfare: ->> " + returnedAddress.getSubThoroughfare());
+                System.out.println("Thoroughfare: ->> " + returnedAddress.getThoroughfare());
+                System.out.println("Url: ->> " + returnedAddress.getUrl());
+                System.out.println("*****************************");
                 //  Log.w("My Current loction addr", strReturnedAddress.toString());
             } else {
                 Log.w("My Current loction addr", "No Address returned!");

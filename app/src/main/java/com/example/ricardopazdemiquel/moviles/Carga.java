@@ -28,6 +28,7 @@ public class Carga extends AppCompatActivity {
 
     private Intent intenError;
     private boolean isfirst;
+    private JSONObject usr_log = getUsr_log();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,36 +37,47 @@ public class Carga extends AppCompatActivity {
         if (isConnectedToInternet(this)) {
               //  Intent intent= new Intent(Carga.this,Sin_conexion.class);
                // startActivity(intent);
-            final JSONObject usr_log = getUsr_log();
+            /////
+            /// if ress{cant:8
+            ///         arr:[{
+            ///                 },
+            ///              {
+            ///                 }]
+            ///             }
+            ///cant == 0 sigue
+            // cant >0 && menor que 11 actualiza del arr
+            //camt >10  pregunta para actualizar y carga la ventana
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (usr_log != null) {
-                        try {
-                            if (usr_log.getInt("id_rol") == 4) {
-                                Intent intent = new Intent(Carga.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else {
-                        Intent intent = new Intent(Carga.this, Iniciar_Sesion_Activity.class);
+        }
+    }
+public void ejecutar(){
+    new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            if (usr_log != null) {
+                try {
+                    if (usr_log.getInt("id_rol") == 4) {
+                        Intent intent = new Intent(Carga.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                     }
-
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, 1000);
-        }
-    }
 
+            } else {
+                Intent intent = new Intent(Carga.this, Iniciar_Sesion_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+
+        }
+    }, 1000);
+
+}
     @Override
     protected void onRestart() {
         super.onRestart();
