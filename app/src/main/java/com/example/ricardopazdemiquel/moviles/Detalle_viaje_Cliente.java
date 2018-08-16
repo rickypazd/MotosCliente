@@ -227,9 +227,9 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
 
     private Boolean get_estado(int valor){
         switch (valor) {
-            case 6:
-                return true;
             case 7:
+                return true;
+            case 10:
                 return false;
         }
         return null;

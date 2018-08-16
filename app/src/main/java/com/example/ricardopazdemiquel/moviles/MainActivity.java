@@ -297,10 +297,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      try {
                          JSONObject obj = new JSONObject(resp);
                          if(obj.getBoolean("exito")) {
-                             Intent intent = new Intent(MainActivity.this, EsperandoConductor.class);
-                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                             intent.putExtra("obj_carrera", obj.toString());
-                             startActivity(intent);
+                             if(obj.getInt("id_tipo")==2){//togo
+                                 Intent intent = new Intent(MainActivity.this, Inicio_viaje_togo.class);
+                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                 intent.putExtra("obj_carrera", obj.toString());
+                                 startActivity(intent);
+                             }else{
+                                 Intent intent = new Intent(MainActivity.this, EsperandoConductor.class);
+                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                 intent.putExtra("obj_carrera", obj.toString());
+                                 startActivity(intent);
+                             }
+
                          }
                      } catch (JSONException e) {
                          e.printStackTrace();

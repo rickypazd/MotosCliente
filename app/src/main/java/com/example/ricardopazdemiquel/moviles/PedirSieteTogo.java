@@ -627,7 +627,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                         else {
                             tipo_pago=1;
                             if(credito < 0){
-                                new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
+                                new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
                                 //esta en deuda , aler se cobrara el monto + viej
                                 acept=false;
                             }

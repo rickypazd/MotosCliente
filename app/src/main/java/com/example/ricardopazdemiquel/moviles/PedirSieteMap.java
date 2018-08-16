@@ -152,7 +152,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
         btn_agregar_producto.setOnClickListener(this);
-        View view =findViewById(R.id.bottom_sheet);
+        View view = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
         lista_productos.setOnTouchListener(new View.OnTouchListener() {
@@ -296,7 +296,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                                 else {
                                     tipo_pago=1;
                                     if(credito < 0){
-                                        new Confirmar_viaje_Dialog().show(fragmentManager, "Dialog");
+                                        new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
                                         //esta en deuda , aler se cobrara el monto + viej
                                         acept=false;
                                     }
