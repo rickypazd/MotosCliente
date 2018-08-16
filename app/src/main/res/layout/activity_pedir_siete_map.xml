@@ -11,21 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/ivmarker"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/asetmar" />
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivmarker"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayoutPedir"
-            app:srcCompat="@drawable/asetmar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayoutPedir"
@@ -41,41 +41,107 @@
 
             <TextView
                 android:id="@+id/text_atras"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_flecha_hacia_atras" />
+                android:background="@drawable/ic_left_arrow" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/botonwhite"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_button_border_gris"
                 android:drawableStart="@drawable/ic_map_marker"
                 android:hint="Direccion Inicial"
                 android:inputType="text"
-                android:padding="10dp" />
+                android:textSize="12sp"
+                android:padding="5dp"
+                />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView2"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="0dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/botonwhite"
+                android:background="@drawable/ic_button_border_gris"
                 android:drawableStart="@drawable/ic_map_marker"
                 android:hint="Direccion Final"
-                android:paddingLeft="15dp" />
+                android:textSize="12sp"
+                android:padding="5dp" />
         </LinearLayout>
 
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/Container_verPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/button_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="500dp"
+                app:layout_behavior="@string/bottom_sheet_behavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryDark"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="favoritos"
+                            android:background="@drawable/backgroundcolor2"
+                            android:textColor="@color/colorWhite"
+                            android:layout_weight="1"/>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.97"
+                            android:background="@color/colorWhite">
+                        </View>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Historial"
+                            android:background="@drawable/backgroundcolor"
+                            android:textColor="@color/colorWhite"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/contenedorFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6">
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.design.widget.CoordinatorLayout>
+        </LinearLayout>
 
 <LinearLayout
     android:id="@+id/linearLayoutTogo"

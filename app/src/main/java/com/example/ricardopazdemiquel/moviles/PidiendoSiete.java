@@ -108,7 +108,6 @@ public class PidiendoSiete extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
         }
     }
 

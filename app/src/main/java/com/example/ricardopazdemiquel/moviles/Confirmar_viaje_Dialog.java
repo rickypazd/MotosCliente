@@ -1,5 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -17,16 +18,21 @@ import utiles.Token;
  * Created by Edson on 02/12/2017.
  */
 
+@SuppressLint("ValidFragment")
 public class Confirmar_viaje_Dialog extends DialogFragment implements View.OnClickListener {
 
     private Button btn_cancelar;
     private Button btn_confirmar;
+    private int tipo;
 
+    private static final int TIPO_TOGO = 2;
     public static String APP_TAG = "registro";
 
     private static final String TAG = Confirmar_viaje_Dialog.class.getSimpleName();
 
-    public Confirmar_viaje_Dialog() {
+    @SuppressLint("ValidFragment")
+    public Confirmar_viaje_Dialog(int tipo) {
+        this.tipo = tipo;
     }
 
     @Override
@@ -56,8 +62,13 @@ public class Confirmar_viaje_Dialog extends DialogFragment implements View.OnCli
         switch (v.getId()) {
             case R.id.btn_confirmarD:
                 try {
-                    ((PedirSieteMap)getActivity()).ok_predir_viaje();
-                    dismiss();
+                    if(tipo == TIPO_TOGO){
+                        ((PedirSieteTogo)getActivity()).ok_pedir_viaje();
+                        dismiss();
+                    }else {
+                        ((PedirSieteMap) getActivity()).ok_predir_viaje();
+                        dismiss();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

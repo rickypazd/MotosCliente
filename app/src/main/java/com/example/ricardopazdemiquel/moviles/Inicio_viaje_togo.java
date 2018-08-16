@@ -128,19 +128,17 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
             }
         });
 
-        JSONArray arr = getProductosPendientes();
-        if(arr!=null){
+       // JSONArray arr = getProductosPendientes();
+       /* if(arr!=null){
             Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(Inicio_viaje_togo.this,arr);
             lista_productos.setAdapter(adapter);
             tv_cantidad.setText("Productos ("+arr.length()+")");
-        }
+        }*/
+
 
         try {
             json_carrera = new JSONObject(getIntent().getStringExtra("obj_carrera"));
-            if(json_carrera.getInt("estado")>=3){
-                    conductor_llego(getIntent());
-            }
-
+            new Pedir_producto().execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -804,6 +802,67 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
             }else{
                 Toast.makeText(Inicio_viaje_togo.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+            progreso.setMessage(values[0]);
+        }
+    }
+
+    public class Pedir_producto extends AsyncTask<Void, String, String> {
+
+        String id_usr;
+        {
+            try {
+                id_usr = getUsr_log().getString("id");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        private ProgressDialog progreso;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progreso = new ProgressDialog(Inicio_viaje_togo.this);
+            progreso.setIndeterminate(true);
+            progreso.setTitle("Esperando Respuesta");
+            progreso.setCancelable(false);
+            progreso.show();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            publishProgress("por favor espere...");
+            Hashtable<String,String> param = new Hashtable<>();
+            param.put("evento","get_productos_x_id_carrera");
+            try {
+                param.put("id",json_carrera.getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String respuesta ="";
+            try {
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
+            } catch (Exception e) {
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            progreso.dismiss();
+            if(resp.isEmpty()){
+                Toast.makeText(Inicio_viaje_togo.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+            }else {
+                try {
+                    JSONArray arr = new JSONArray(resp);
+                    Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(Inicio_viaje_togo.this,arr);
+                    lista_productos.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         @Override
