@@ -32,8 +32,8 @@ public class List_historial_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_historial, container, false);
         lv = view.findViewById(R.id.lista_historial);
 
-        carrera=((finalizar_viajeCliente)getActivity()).get_carrera();
-        cargar();
+        //carrera=((finalizar_viajeCliente)getActivity()).get_carrera();
+        //cargar();
         return view;
     }
 

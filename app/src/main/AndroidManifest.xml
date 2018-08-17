@@ -65,6 +65,10 @@
             android:windowSoftInputMode="adjustNothing"/>
 
         <activity
+            android:name=".favoritos_pruba"
+            android:theme="@style/AppThemeone" />
+
+        <activity
             android:name=".Carga"
             android:theme="@style/AppThemeone">
             <intent-filter>
@@ -113,7 +117,10 @@
         <activity
             android:name=".CanceloViaje_Cliente"
             android:theme="@style/AppThemeone" />
-        <activity android:name=".Favoritos_Clientes" />
+
+        <activity
+            android:name=".Favoritos_Clientes"
+            android:theme="@style/AppThemeone"/>
 
         <activity android:name=".Detalle_viaje_Cliente"
             android:theme="@style/AppThemeone" />

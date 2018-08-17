@@ -17,10 +17,19 @@
             android:id="@+id/lista_historial"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             tools:listitem="@layout/layout_item_historial">
         </ListView>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_elegir_destino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Elegir destino en el mapa"
+            android:background="#EEEEEE"
+            android:textColor="@color/colorBlack"
+            android:layout_gravity="bottom"/>
 
+    </LinearLayout>
 
 </FrameLayout>

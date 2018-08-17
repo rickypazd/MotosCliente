@@ -1,7 +1,7 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +40,8 @@ import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
+import com.example.ricardopazdemiquel.moviles.Fragment.List_favoritos_fragment;
+import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -132,6 +134,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     double mont;
     private AutoCompleteTextView text_direccion_togo;
     private Button btn_agregar_producto;
+
+    private Button btn_favoritos;
+    private Button btn_historial;
+    Fragment fragment_favoritos = null;
+    Fragment fragment_historial  = null;
 
     public PedirSieteMap() {
     }
@@ -236,6 +243,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_pedir_togo.setOnClickListener(this);
 
         linear_confirm=findViewById(R.id.linear_confirm);
+
+        btn_favoritos = findViewById(R.id.btn_favoritos);
+        btn_historial = findViewById(R.id.btn_historial);
+
+        btn_favoritos.setOnClickListener(this);
+        btn_historial.setOnClickListener(this);
+        fragment_favoritos = new List_favoritos_fragment();
+        fragment_historial = new List_historial_fragment();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_favoritos).commit();
 
         mostar_button(tipo_carrera);
 
@@ -368,12 +385,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             }
 
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
-
                         }
-
-
                     }
-                });
+            });
 
             }
         });
@@ -442,6 +456,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_favoritos:
+                getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_favoritos).commit();
+                break;
+            case R.id.btn_historial:
+                getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
                 break;
         }
     }

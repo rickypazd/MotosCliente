@@ -28,15 +28,16 @@ public class Carga extends AppCompatActivity {
 
     private Intent intenError;
     private boolean isfirst;
-    private JSONObject usr_log = getUsr_log();
+    private JSONObject usr_log;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga);
         Token.currentToken = FirebaseInstanceId.getInstance().getToken();
         if (isConnectedToInternet(this)) {
-              //  Intent intent= new Intent(Carga.this,Sin_conexion.class);
-               // startActivity(intent);
+
+                Intent intent= new Intent(Carga.this,Sin_conexion.class);
+                startActivity(intent);
             /////
             /// if ress{cant:8
             ///         arr:[{
@@ -49,31 +50,30 @@ public class Carga extends AppCompatActivity {
             //camt >10  pregunta para actualizar y carga la ventana
 
         }
+        usr_log=getUsr_log();
+        ejecutar();
     }
-public void ejecutar(){
-    new Handler().postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            if (usr_log != null) {
-                try {
-                    if (usr_log.getInt("id_rol") == 4) {
-                        Intent intent = new Intent(Carga.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+    public void ejecutar(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (usr_log != null) {
+                    try {
+                        if (usr_log.getInt("id_rol") == 4) {
+                            Intent intent = new Intent(Carga.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
             } else {
                 Intent intent = new Intent(Carga.this, Iniciar_Sesion_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }
-
-
         }
     }, 1000);
 
