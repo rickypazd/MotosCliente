@@ -89,7 +89,7 @@ public class List_historial_ubicacion_fragment extends Fragment implements View.
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_elegir_destino:
-                ((favoritos_pruba)getActivity()).ocultar_Frame();
+
                 break;
         }
     }

@@ -7,26 +7,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
 
 public class Favoritos_Clientes extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn_agregar_ubicacion;
-    Fragment fragment_historial  = null;
+    private Button btn_elegir_destino;
+    private LinearLayout container_frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos_clientes);
 
-        btn_agregar_ubicacion = findViewById(R.id.btn_agregar_ubicacion);
+        container_frame = findViewById(R.id.container_frame);
+        btn_elegir_destino = findViewById(R.id.btn_elegir_destino);
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        fragment_historial = new List_historial_fragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
 
     }
 
@@ -49,9 +48,10 @@ public class Favoritos_Clientes extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_agregar_ubicacion:
-
+            case R.id.btn_elegir_destino:
+                container_frame.setVisibility(View.GONE);
                 break;
         }
     }
+
 }

@@ -103,9 +103,9 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     JSONObject usr_log;
     double mont;
 
-    private FrameLayout contenedor_frame;
+    private LinearLayout container_frame;
     private AutoCompleteTextView text_direccion_togo;
-    private Button btn_agregar_ubicacion;
+    private Button btn_elegir_destino;
     Fragment fragment_historial  = null;
 
     public favoritos_pruba() {
@@ -118,15 +118,13 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
 
         iv_marker=findViewById(R.id.ivmarker);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
-        contenedor_frame = findViewById(R.id.contenedor_frame);
+        container_frame = findViewById(R.id.container_frame);
+        btn_elegir_destino = findViewById(R.id.btn_elegir_destino);
+        btn_elegir_destino.setOnClickListener(this);
 
-        btn_agregar_ubicacion = findViewById(R.id.btn_agregar_ubicacion);
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        fragment_historial = new List_historial_ubicacion_fragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
 
        /* View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
@@ -274,11 +272,12 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_agregar_ubicacion:
-
+            case R.id.btn_elegir_destino:
+                container_frame.setVisibility(View.GONE);
                 break;
         }
     }
+
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
@@ -542,11 +541,6 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-
-    public void ocultar_Frame() {
-        contenedor_frame.setVisibility(View.GONE);
-    }
-
 
     private void cargartogo(){
         JSONArray arr = getProductosPendientes();
