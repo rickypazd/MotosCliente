@@ -23,13 +23,13 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_alert_mark"
+                android:background="@drawable/ic_favoritos_map"
                 android:textAlignment="center"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,12 +98,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_agregar_ubicacion"
+                android:id="@+id/btn_agregar_favorito"
                 android:layout_width="match_parent"
                 android:layout_height="52sp"
                 android:background="@color/colorWhite"
                 android:layout_margin="5dp"
-                android:text="Aceptar"
+                android:text="Listo"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15sp" />
 

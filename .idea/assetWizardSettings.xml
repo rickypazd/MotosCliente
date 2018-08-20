@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_left_arrow" />
-                            <entry key="sourceFile" value="C:\Users\ricky\Documents\left-arrow.svg" />
+                            <entry key="outputName" value="ic_star_favoritos" />
+                            <entry key="sourceFile" value="C:\Users\ricky\Downloads\star.svg" />
                           </map>
                         </option>
                       </PersistentState>

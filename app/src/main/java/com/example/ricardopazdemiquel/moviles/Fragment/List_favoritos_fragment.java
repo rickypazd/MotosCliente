@@ -1,6 +1,8 @@
 package com.example.ricardopazdemiquel.moviles.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -11,13 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Favoritos_Clientes;
+import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.favoritos_pruba;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +37,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     private JSONObject carrera;
     private Button btn_agregar_favoritos;
     private Button btn_elegir_destino;
+    private ListView lista_favoritos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,59 +45,36 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
 
         btn_elegir_destino = view.findViewById(R.id.btn_elegir_destino);
         btn_agregar_favoritos = view.findViewById(R.id.btn_agregar_favoritos);
+        lista_favoritos = view.findViewById(R.id.lista_favoritos);
 
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar_favoritos.setOnClickListener(this);
-
-        //carrera=((finalizar_viajeCliente)getActivity()).get_carrera();
-        //cargar();
+        cargar();
         return view;
     }
 
-
     private void cargar(){
-        try {
-            String nombre  = carrera.getString("nombre");
-            String apellidoP  = carrera.getString("apellido_pa");
-            String apellidoM  = carrera.getString("apellido_ma");
-            String placa  = carrera.getString("placa");
-            String telefono  = carrera.getString("telefono");
-            double lat_i= carrera.getDouble("latinicial");
-            double lat_f  = carrera.getDouble("latfinal");
-            double lng_i = carrera.getDouble("lnginicial");
-            double lng_f = carrera.getDouble("lngfinal");
-            String inicial = get_localizacion(lat_i , lng_i);
-            String finales =  get_localizacion(lat_f , lng_f);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        JSONArray arr = get_list_Favoritos();
+        Adapter_favoritos adapter = new Adapter_favoritos(getActivity(),arr);
+        lista_favoritos.setAdapter(adapter);
     }
 
-
-    private String get_localizacion(double LATITUDE, double LONGITUDE) {
-        String strAdd = "";
-        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
-
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-                Log.w("My Current loction addr", strReturnedAddress.toString());
-            } else {
-                Log.w("My Current loction addr", "No Address returned!");
+    public JSONArray get_list_Favoritos() {
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        String productos = preferencias.getString("lista_favoritos", "");
+        if (productos.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray productosObj = new JSONArray(productos);
+                return productosObj;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.w("My Current loction addr", "Canont get Address!");
         }
-        return strAdd;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -103,4 +88,9 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                 break;
         }
     }
+
+
+
+
+
 }

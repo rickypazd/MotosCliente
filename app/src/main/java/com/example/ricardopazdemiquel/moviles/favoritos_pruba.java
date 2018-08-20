@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Dialog.Add_ubicacion_favoritos_Dialog;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_ubicacion_fragment;
 import com.google.android.gms.common.ConnectionResult;
@@ -106,6 +107,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     private LinearLayout container_frame;
     private AutoCompleteTextView text_direccion_togo;
     private Button btn_elegir_destino;
+    private Button btn_agregar;
     Fragment fragment_historial  = null;
 
     public favoritos_pruba() {
@@ -120,8 +122,9 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         container_frame = findViewById(R.id.container_frame);
         btn_elegir_destino = findViewById(R.id.btn_elegir_destino);
+        btn_agregar = findViewById(R.id.btn_agregar);
         btn_elegir_destino.setOnClickListener(this);
-
+        btn_agregar.setOnClickListener(this);
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -271,9 +274,24 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
+        android.app.FragmentManager fragmentManager = getFragmentManager();
         switch (view.getId()) {
             case R.id.btn_elegir_destino:
                 container_frame.setVisibility(View.GONE);
+                btn_agregar.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btn_agregar:
+                JSONObject obj = new JSONObject();
+                Double latFin = fin.latitude;
+                Double lngFin = fin.longitude;
+                try {
+                    obj.put("user_id",getUsr_log().getInt("id"));
+                    obj.put("latFin",latFin);
+                    obj.put("lngFin",lngFin);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new Add_ubicacion_favoritos_Dialog(obj).show(fragmentManager, "Dialog");
                 break;
         }
     }

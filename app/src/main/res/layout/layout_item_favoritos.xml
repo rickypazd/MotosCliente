@@ -28,6 +28,8 @@
                 android:layout_weight="1"
                 android:gravity="center|start"
                 android:text="Casa"
+                android:drawableLeft="@drawable/ic_star_favoritos"
+                android:drawablePadding="10dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp" />
