@@ -89,6 +89,7 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     private BroadcastReceiver broadcastReceiverInicioCarrera;
     private BroadcastReceiver broadcastReceiverFinalizoCarrera;
     private BroadcastReceiver broadcastReceiverCanceloCarrera;
+    private BroadcastReceiver broadcastReceiverConfirmoCompra;
 
     private final static int TIPO_CANCELACION = 2;
     private final static int ID_TIPO = 0;
@@ -260,6 +261,18 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
             };
         }
         registerReceiver(broadcastReceiverCanceloCarrera,new IntentFilter("cancelo_carrera"));
+
+        //dsfsd
+        if(broadcastReceiverConfirmoCompra == null){
+            broadcastReceiverConfirmoCompra = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    Confirmo_compra(intent);
+                }
+            };
+        }
+        registerReceiver(broadcastReceiverConfirmoCompra,new IntentFilter("confirmo_compra"));
+
     }
 
     private boolean hilo;
@@ -316,6 +329,10 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
         intent.putExtra("id_carrera",intenta.getStringExtra("id_carrera"));
         startActivity(intent);
         finish();
+    }
+
+    private void Confirmo_compra(Intent intenta){
+
     }
 
 

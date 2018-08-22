@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.example.ricardopazdemiquel.moviles.CanceloViaje_Cliente;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
+import com.example.ricardopazdemiquel.moviles.Inicio_viaje_togo;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -35,7 +36,11 @@ public class FirebaseMessagin extends FirebaseMessagingService
                 mensaje(remoteMessage);
                 break;
             case "conductor_cerca":
-                conductor_cerca(remoteMessage);
+                try {
+                    conductor_cerca(remoteMessage);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "conductor_llego":
                 conductor_llego(remoteMessage);
@@ -49,9 +54,14 @@ public class FirebaseMessagin extends FirebaseMessagingService
             case "Carrera_Cancelada":
                 Cancelo_carrera(remoteMessage);
                 break;
+            case "confirmo_compra":
+                confirmo_compra(remoteMessage);
+                break;
         }
         return;
     }
+
+
 
     private void Finalizo_Carrera(RemoteMessage remoteMessage) {
         Intent notificationIntent = new Intent(this, finalizar_viajeCliente.class);
@@ -108,8 +118,16 @@ public class FirebaseMessagin extends FirebaseMessagingService
         sendBroadcast(intent);
     }
 
-    private void conductor_cerca(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, EsperandoConductor.class);
+    private void conductor_cerca(RemoteMessage remoteMessage) throws JSONException {
+        String s  = remoteMessage.getData().get("json");
+        Intent notificationIntent;
+            JSONObject object = new JSONObject(s);
+            int valor = (int) object.get("id_tipo");
+            if(valor == 2){
+                notificationIntent= new Intent(this, EsperandoConductor.class);
+            }else{
+                notificationIntent = new Intent(this, Inicio_viaje_togo.class);
+            }
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
@@ -158,6 +176,23 @@ public class FirebaseMessagin extends FirebaseMessagingService
         Intent intent = new Intent();
         intent.putExtra("obj_carrera",remoteMessage.getData().get("json"));
         intent.setAction("cancelo_carrera");
+        sendBroadcast(intent);
+    }
+
+    private void confirmo_compra(RemoteMessage remoteMessage) {
+        Intent notificationIntent = new Intent(this, Inicio_viaje_togo.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+        Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
+                .setContentTitle("Siete")
+                .setContentText("Su pedidos fue comprado.")
+                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setContentIntent(pendingIntent)
+                .build();
+        NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(2,notification);
+        Intent intent = new Intent();
+        intent.putExtra("obj_carrera",remoteMessage.getData().get("json"));
+        intent.setAction("Confirmo_compra");
         sendBroadcast(intent);
     }
 

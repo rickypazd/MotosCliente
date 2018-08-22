@@ -49,7 +49,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
 
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar_favoritos.setOnClickListener(this);
-        cargar();
+        //cargar();
         return view;
     }
 

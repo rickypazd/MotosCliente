@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
@@ -31,7 +32,7 @@ import utiles.Token;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Perfil_ClienteFragment extends AppCompatActivity {
+public class Perfil_ClienteFragment extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG ="fragment_explorar";
 
@@ -41,6 +42,12 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
     private TextView textEmail;
     private TextView textcredito;
     private TextView Contraseña;
+
+    private LinearLayout Liner_nombre;
+    private LinearLayout Liner_apellido;
+    private LinearLayout Liner_telefono;
+    private LinearLayout Liner_correo;
+    private LinearLayout Liner_contraseña;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -59,6 +66,18 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
         Contraseña = findViewById(R.id.text_contraseñaCliente);
         textcredito = findViewById(R.id.creditos);
 
+        Liner_nombre = findViewById(R.id.Liner_nombre);
+        Liner_apellido = findViewById(R.id.Liner_apellido);
+        Liner_telefono = findViewById(R.id.Liner_telefono);
+        Liner_correo = findViewById(R.id.Liner_correo);
+        Liner_contraseña = findViewById(R.id.Liner_contraseña);
+
+        Liner_nombre.setOnClickListener(this);
+        Liner_apellido.setOnClickListener(this);
+        Liner_telefono.setOnClickListener(this);
+        Liner_correo.setOnClickListener(this);
+        Liner_contraseña.setOnClickListener(this);
+
         final JSONObject usr_log = getUsr_log();
         if (usr_log != null) {
             try {
@@ -66,7 +85,6 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -86,6 +104,79 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(Perfil_ClienteFragment.this , Editar_perfil_Activity.class);
+        final JSONObject usr_log = getUsr_log();
+        switch (view.getId()){
+            case R.id.Liner_nombre:
+                if (usr_log != null) {
+                    try {
+                        String nombre = usr_log.getString("nombre");
+                        intent.putExtra("nombre", nombre);
+                        intent.putExtra("tipo", "nombre_usuario");
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    finish();
+                }
+                break;
+            case R.id.Liner_apellido:
+                if (usr_log != null) {
+                    try {
+                        String apellido_pa = usr_log.getString("apellido_pa");
+                        String apellido_ma = usr_log.getString("apellido_ma");
+                        intent.putExtra("apellido_pa", apellido_pa);
+                        intent.putExtra("apellido_ma", apellido_ma);
+                        intent.putExtra("tipo", "apellido_usuario");
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    finish();
+                }
+                break;
+            case R.id.Liner_telefono:
+                if (usr_log != null) {
+                    try {
+                        String telefono = usr_log.getString("telefono");
+                        intent.putExtra("telefono", telefono);
+                        intent.putExtra("tipo", "telefono_usuario");
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    finish();
+                }
+                break;
+            case R.id.Liner_correo:
+                if (usr_log != null) {
+                    try {
+                        String correo = usr_log.getString("correo");
+                        intent.putExtra("correo", correo);
+                        intent.putExtra("tipo", "correo_usuario");
+                        startActivity(intent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    finish();
+                }
+                break;
+            case R.id.Liner_contraseña:
+                if (usr_log != null) {
+                    intent.putExtra("tipo", "contraseña_usuario");
+                    startActivity(intent);
+                }else{
+                    finish();
+                }
+                break;
+        }
+    }
 
     private void cargarUsuario(){
         final JSONObject usr_log = getUsr_log();
@@ -125,6 +216,8 @@ public class Perfil_ClienteFragment extends AppCompatActivity {
             }
         }
     }
+
+
 
     public class User_getPerfil extends AsyncTask<Void, String, String> {
 

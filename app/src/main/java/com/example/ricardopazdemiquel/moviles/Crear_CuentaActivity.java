@@ -275,7 +275,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
             }
             return "";
         }
-
         @Override
         protected void onPostExecute(String pacientes) {
             super.onPostExecute(pacientes);
@@ -290,18 +289,12 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
                     startActivity(inte);
                     finish();
                 }
-
             }
-
-
         }
-
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
         }
-
     }
 
 }

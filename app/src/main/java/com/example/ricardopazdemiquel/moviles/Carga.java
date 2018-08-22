@@ -36,8 +36,8 @@ public class Carga extends AppCompatActivity {
         Token.currentToken = FirebaseInstanceId.getInstance().getToken();
         if (isConnectedToInternet(this)) {
 
-                Intent intent= new Intent(Carga.this,Sin_conexion.class);
-                startActivity(intent);
+                //Intent intent= new Intent(Carga.this,Sin_conexion.class);
+                //startActivity(intent);
             /////
             /// if ress{cant:8
             ///         arr:[{

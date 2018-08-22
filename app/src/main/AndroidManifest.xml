@@ -90,6 +90,9 @@
         <activity android:name=".Perfil_ClienteFragment"
             android:theme="@style/AppThemeone"/>
 
+        <activity android:name=".Editar_perfil_Activity"
+            android:theme="@style/AppThemeone"/>
+
         <activity android:name=".MisViajes_Cliente_Activity"
             android:theme="@style/AppThemeone"/>
 
