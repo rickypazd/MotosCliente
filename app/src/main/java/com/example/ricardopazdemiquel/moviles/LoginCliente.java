@@ -33,7 +33,9 @@ import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
 import utiles.Token;
 
-public class LoginCliente extends AppCompatActivity {
+public class
+
+LoginCliente extends AppCompatActivity {
     /**
      * Id to identity READ_CONTACTS permission request.
      */

@@ -63,13 +63,10 @@ public class Adapter_historial extends BaseAdapter {
                 return false;
             }
         });*/
-
-        TextView text_producto = view.findViewById(R.id.text_producto);
-        TextView text_cantidad = view.findViewById(R.id.text_cantidad);
+        TextView text_nombre = view.findViewById(R.id.text_nombre);
         try {
             JSONObject obj =  array.getJSONObject(i);
-            text_producto.setText(obj.getString("producto"));
-            text_cantidad.setText(obj.getString("cantidad"));
+            text_nombre.setText(obj.getString("producto"));
             view.setTag(obj.toString());
         } catch (JSONException e) {
             e.printStackTrace();
