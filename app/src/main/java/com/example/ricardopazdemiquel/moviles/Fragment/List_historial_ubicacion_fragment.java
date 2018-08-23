@@ -1,7 +1,10 @@
 package com.example.ricardopazdemiquel.moviles.Fragment;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,15 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Dialog.Cancelar_viaje_Dialog;
+import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
+import com.example.ricardopazdemiquel.moviles.MainActivity;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.favoritos_pruba;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
+
+import clienteHTTP.HttpConnection;
+import clienteHTTP.MethodType;
+import clienteHTTP.StandarRequestConfiguration;
+import utiles.Contexto;
 
 public class List_historial_ubicacion_fragment extends Fragment implements View.OnClickListener {
 
@@ -93,4 +106,7 @@ public class List_historial_ubicacion_fragment extends Fragment implements View.
                 break;
         }
     }
+
+
+
 }

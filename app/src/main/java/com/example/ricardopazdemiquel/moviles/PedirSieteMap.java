@@ -1,6 +1,7 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -232,12 +233,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_historial.setOnClickListener(this);
         View view = findViewById(R.id.button_sheetss);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
-        bottomSheetBehavior.setHideable(false);
+        //bottomSheetBehavior.setHideable(false);
+        bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
         fragment_favoritos = new List_favoritos_fragment();
         fragment_historial = new List_historial_fragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_favoritos).commit();
-
+        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
 
         mostar_button(tipo_carrera);
 
