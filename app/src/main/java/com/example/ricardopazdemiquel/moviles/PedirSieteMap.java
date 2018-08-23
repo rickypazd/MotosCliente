@@ -162,6 +162,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         View view = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         lista_productos.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -882,7 +883,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
         }
-
     }
 
 

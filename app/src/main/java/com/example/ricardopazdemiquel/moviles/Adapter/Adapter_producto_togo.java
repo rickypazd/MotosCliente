@@ -42,6 +42,7 @@ public class Adapter_producto_togo extends BaseAdapter {
     public JSONArray getArray(){
         return array;
     }
+
     @Override
     public int getCount() {
         return array.length();
@@ -61,7 +62,6 @@ public class Adapter_producto_togo extends BaseAdapter {
     public long getItemId(int i) {
         return 0;
     }
-
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {

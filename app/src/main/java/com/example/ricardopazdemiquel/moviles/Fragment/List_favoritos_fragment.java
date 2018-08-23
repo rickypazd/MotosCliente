@@ -18,8 +18,10 @@ import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
 import com.example.ricardopazdemiquel.moviles.Favoritos_Clientes;
 import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
+import com.example.ricardopazdemiquel.moviles.Producto_togo_Activity;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.favoritos_pruba;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
@@ -38,6 +40,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     private Button btn_agregar_favoritos;
     private Button btn_elegir_destino;
     private ListView lista_favoritos;
+    private Adapter_favoritos adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,14 +52,26 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
 
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar_favoritos.setOnClickListener(this);
-        //cargar();
+
+        cargar();
+
         return view;
     }
 
     private void cargar(){
-        JSONArray arr = get_list_Favoritos();
-        Adapter_favoritos adapter = new Adapter_favoritos(getActivity(),arr);
+        //carga un SharedPreferences de favoritos o crea uno vacio
+        JSONArray productos = get_list_Favoritos();
+        if(productos==null)
+        {
+            SharedPreferences preferencias = getActivity().getSharedPreferences("myPref",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencias.edit();
+            productos=new JSONArray();
+            editor.putString("lista_favoritos", productos.toString());
+            editor.commit();
+        }
+        adapter = new Adapter_favoritos(getActivity(),productos);
         lista_favoritos.setAdapter(adapter);
+        JSONObject obj = new JSONObject();
     }
 
     public JSONArray get_list_Favoritos() {
@@ -74,7 +89,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
             }
         }
     }
-
 
     @Override
     public void onClick(View view) {

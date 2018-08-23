@@ -3,6 +3,7 @@ package com.example.ricardopazdemiquel.moviles.Dialog;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,8 +17,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Detalle_viaje_Cliente;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
+import com.example.ricardopazdemiquel.moviles.Fragment.List_favoritos_fragment;
 import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONArray;
@@ -42,6 +45,7 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
     private EditText edit_nombre_ubicacion;
 
     public static String APP_TAG = "registro";
+    private Adapter_favoritos adapter;
 
     private static final String TAG = Add_ubicacion_favoritos_Dialog.class.getSimpleName();
     private JSONObject obj;
@@ -96,14 +100,10 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         }
         try {
             obj.put("nombre_favorito", nombre);
-            array = new JSONArray(obj);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("lista_favoritos",array.toString());
-        editor.commit();
+        InsertList(obj);
     }
 
     @Override
@@ -117,6 +117,56 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
                 dismiss();
                 break;
         }
+    }
+
+    public void InsertList(JSONObject object){
+       // adapter.addItem(object);
+      //  adapter.notifyDataSetChanged();
+       // JSONArray arr = adapter.getArray();
+        JSONArray arr=get_list_Favoritos();
+        if(arr==null){
+            arr=new JSONArray();
+        }
+        arr.put(obj);
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("lista_favoritos", arr.toString());
+        editor.commit();
+    }
+
+    public JSONArray get_list_Favoritos() {
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        String productos = preferencias.getString("lista_favoritos", "");
+        if (productos.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray productosObj = new JSONArray(productos);
+                return productosObj;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+    public void UpdateList(JSONObject object , int pos){
+        adapter.updateItem(object,pos);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("lista_favoritos", arr.toString());
+        editor.commit();
+    }
+
+    public void removeItem(int pos){
+        adapter.removeiten(pos);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("lista_favoritos", arr.toString());
+        editor.commit();
     }
 
 

@@ -110,6 +110,26 @@ public class Adapter_favoritos extends BaseAdapter {
         return strAdd;
     }
 
+    public void addItem(JSONObject obj){
+        if(array!=null){
+            array.put(obj);
+        }
+    }
 
+    public void removeiten(int pos){
+        if(array!=null){
+            array.remove(pos);
+        }
+    }
+
+    public void updateItem(JSONObject obj ,int pos){
+        if(array!=null){
+            try {
+                array.put(pos,obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

@@ -39,7 +39,6 @@ public class Producto_togo_Activity extends AppCompatActivity implements View.On
     private Adapter_producto_togo adapter;
 
 
-
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -52,18 +51,18 @@ public class Producto_togo_Activity extends AppCompatActivity implements View.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lv = findViewById(R.id.list_producto_togo);
         lv.setOnItemClickListener(this);
-        //crea
-        JSONArray prosductos=getProductosPendientes();
-        if(prosductos==null)
+
+        //crea un sharedpreferen de productos
+        JSONArray productos=getProductosPendientes();
+        if(productos==null)
         {
             SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencias.edit();
-            prosductos=new JSONArray();
-            editor.putString("productos_pendientes", prosductos.toString());
+            productos=new JSONArray();
+            editor.putString("productos_pendientes", productos.toString());
             editor.commit();
         }
-
-        adapter = new Adapter_producto_togo(Producto_togo_Activity.this,prosductos);
+        adapter = new Adapter_producto_togo(Producto_togo_Activity.this,productos);
         lv.setAdapter(adapter);
         JSONObject obj = new JSONObject();
         /*try {
@@ -75,8 +74,6 @@ public class Producto_togo_Activity extends AppCompatActivity implements View.On
         } catch (JSONException e) {
             e.printStackTrace();
         }*/
-
-
     }
 
     public JSONArray getProductosPendientes() {
@@ -114,7 +111,6 @@ public class Producto_togo_Activity extends AppCompatActivity implements View.On
         View view = info.targetView;
         int pos = info.position;
         JSONObject obj = null;
-
         try {
             obj = new JSONObject(view.getTag().toString());
         } catch (JSONException e) {
