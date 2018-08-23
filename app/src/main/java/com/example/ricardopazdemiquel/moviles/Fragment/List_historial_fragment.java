@@ -134,7 +134,7 @@ public class List_historial_fragment extends Fragment {
             param.put("id", id_usr);
             String respuesta ="";
             try {
-                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
             } catch (Exception e) {
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }
@@ -144,9 +144,9 @@ public class List_historial_fragment extends Fragment {
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty() || resp != null){
+            if(resp.isEmpty() || resp == null){
                 Toast.makeText(getActivity(),"Error al obtener Datos", Toast.LENGTH_SHORT).show();
-            }else if (resp.contains("exito")) {
+            }else  {
                 try {
                     JSONArray array  = new JSONArray(resp);
                     Adapter_historial adapter = new Adapter_historial(getActivity(),array);
@@ -154,8 +154,6 @@ public class List_historial_fragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }else{
-                Toast.makeText(getActivity(),"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }
         }
         @Override
