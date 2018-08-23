@@ -228,7 +228,6 @@ LoginCliente extends AppCompatActivity {
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }
             return respuesta;
-
         }
 
         @Override
@@ -262,8 +261,6 @@ LoginCliente extends AppCompatActivity {
                     }
                 }
             }
-
-
         }
 
         @Override

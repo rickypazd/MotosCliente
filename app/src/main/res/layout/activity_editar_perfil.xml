@@ -54,6 +54,40 @@
                 android:inputType="textMultiLine"
                 android:textSize="20sp" />
 
+            <LinearLayout
+                android:id="@+id/Liner_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:autoSizeTextType="uniform"
+                android:paddingLeft="20dp"
+                android:text="Apellido materno"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorGris"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/text_apellido_ma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:inputType="textMultiLine"
+                android:textSize="20sp" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_guardar"
                 android:layout_width="match_parent"

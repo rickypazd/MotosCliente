@@ -128,7 +128,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (success!="falso"){
+            if (success!= null){
                 try {
                     if(!success.isEmpty()){
                         JSONObject obj = new JSONObject(success);

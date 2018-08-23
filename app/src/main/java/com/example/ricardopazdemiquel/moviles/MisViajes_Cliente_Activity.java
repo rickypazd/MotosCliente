@@ -132,7 +132,7 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (!success.isEmpty()){
+            if (success != null || !success.isEmpty()){
                 try {
                     JSONArray jsonArray = new JSONArray(success);
                     Adaptador_mis_viajes mis_viajes= new Adaptador_mis_viajes(MisViajes_Cliente_Activity.this,jsonArray);

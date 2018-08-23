@@ -570,7 +570,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp == null) {
+            if (resp == null || resp.isEmpty()) {
                 Toast.makeText(EsperandoConductor.this,"Error al optener Datos",
                         Toast.LENGTH_SHORT).show();
             }else{
@@ -614,20 +614,24 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             try {
-                JSONObject object = new JSONObject(resp);
-                if(object != null){
-                    String nombreConductor = object.getString("nombre").toString();
-                    String apellido_pa = object.getString("apellido_pa").toString();
-                    String apellido_ma = object.getString("apellido_ma").toString();
-                    String modelo = object.getString("modelo").toString();
-                    String marca =  object.getString("marca").toString();
-                    int viajes = object.getInt("cant_car");
-                    String placa = object.getString("placa");
-                    text_nombreConductor.setText(nombreConductor +" "+apellido_pa+ " " +apellido_ma);
-                    text_nombreAuto.setText(marca + "-" +modelo);
-                    text_numeroPlaca.setText(placa);
-                    text_Viajes.setText("ha completado: " + viajes);
-                    Container_verPerfil.setVisibility(View.VISIBLE);
+                if(resp != null || !resp.isEmpty()) {
+                    JSONObject object = new JSONObject(resp);
+                    if (object != null) {
+                        String nombreConductor = object.getString("nombre").toString();
+                        String apellido_pa = object.getString("apellido_pa").toString();
+                        String apellido_ma = object.getString("apellido_ma").toString();
+                        String modelo = object.getString("modelo").toString();
+                        String marca = object.getString("marca").toString();
+                        int viajes = object.getInt("cant_car");
+                        String placa = object.getString("placa");
+                        text_nombreConductor.setText(nombreConductor + " " + apellido_pa + " " + apellido_ma);
+                        text_nombreAuto.setText(marca + "-" + modelo);
+                        text_numeroPlaca.setText(placa);
+                        text_Viajes.setText("ha completado: " + viajes);
+                        Container_verPerfil.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -637,7 +641,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
         }
     }
 
@@ -704,7 +707,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp.isEmpty()) {
+            if (resp.isEmpty() || resp != null) {
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
@@ -766,7 +769,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty()){
+            if(resp.isEmpty() || resp != null){
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else if (resp.contains("exito")) {
                 Toast.makeText(EsperandoConductor.this,"viaje cancelado", Toast.LENGTH_SHORT).show();

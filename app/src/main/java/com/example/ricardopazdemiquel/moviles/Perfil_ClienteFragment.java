@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -254,7 +255,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (!success.isEmpty()){
+            if ( success != null || !success.isEmpty()){
                 try {
                     JSONObject usr = new JSONObject(success);
                     if(usr.getString("exito").equals("si")){
@@ -269,6 +270,8 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }else{
+                Toast.makeText(Perfil_ClienteFragment.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }
         }
         @Override

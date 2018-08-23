@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_transaccion;
 
@@ -125,7 +126,7 @@ public class Transaccion_cliente_Activity extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (!success.isEmpty()){
+            if (success != null || !success.isEmpty()){
                 try {
                     JSONArray jsonArray = new JSONArray(success);
                     Adapter_transaccion adaptador_mis_viajes = new Adapter_transaccion(Transaccion_cliente_Activity.this,jsonArray);
@@ -134,7 +135,7 @@ public class Transaccion_cliente_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }else {
-                return;
+                Toast.makeText(Transaccion_cliente_Activity.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }
         }
         @Override
