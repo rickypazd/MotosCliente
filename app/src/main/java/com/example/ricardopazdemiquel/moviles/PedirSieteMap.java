@@ -149,36 +149,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_pedir_siete_map);
 
         ll_ubic=findViewById(R.id.linearLayoutPedir);
-        lista_productos=findViewById(R.id.lista_productos);
+
         tv_cantidad=findViewById(R.id.tv_cantidad);
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
-        linearLayoutTogo = findViewById(R.id.linearLayoutTogo);
+
         layoutButon=findViewById(R.id.ll_boton);
         iv_marker=findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
-        btn_agregar_producto = findViewById(R.id.btn_agregar_producto);
-        btn_agregar_producto.setOnClickListener(this);
-        View view = findViewById(R.id.bottom_sheet);
-        bottomSheetBehavior= BottomSheetBehavior.from(view);
-        bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        lista_productos.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    if (bottomSheetBehavior instanceof BehaviorCuston) {
-                        ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
-                    }
-                }else if(event.getAction()==MotionEvent.ACTION_UP){
-                    if (bottomSheetBehavior instanceof BehaviorCuston) {
-                        ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
-                    }
-                }
 
-                return false;
-            }
-        });
+
 
         final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
         final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
@@ -250,10 +230,14 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         btn_favoritos.setOnClickListener(this);
         btn_historial.setOnClickListener(this);
+        View view = findViewById(R.id.button_sheetss);
+        bottomSheetBehavior= BottomSheetBehavior.from(view);
+        bottomSheetBehavior.setHideable(false);
         fragment_favoritos = new List_favoritos_fragment();
         fragment_historial = new List_historial_fragment();
 
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_favoritos).commit();
+
 
         mostar_button(tipo_carrera);
 
@@ -272,12 +256,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
         mAutocompleteTextView2.setAdapter(mPlaceArrayAdapter);
 
-        text_direccion_togo = (AutoCompleteTextView) findViewById(R.id
-                .text_direccion_togo);
-        text_direccion_togo.setOnFocusChangeListener(this);
-        text_direccion_togo.setThreshold(3);
-        text_direccion_togo.setOnItemClickListener(mAutocompleteClickListener);
-        text_direccion_togo.setAdapter(mPlaceArrayAdapter);
 
         usr_log = getUsr_log();
 
@@ -415,7 +393,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         });
 
     }
-
+    public void close(){
+        if (bottomSheetBehavior instanceof BehaviorCuston) {
+            ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
+        }
+    }
+    public void open(){
+        if (bottomSheetBehavior instanceof BehaviorCuston) {
+            ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();

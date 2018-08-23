@@ -23,255 +23,126 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:translationZ="999dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutPedir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/backgroundcolor2"
             android:orientation="vertical"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text_atras"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_left_arrow" />
-
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_button_border_gris"
-                android:drawableStart="@drawable/ic_map_marker"
-                android:hint="Direccion Inicial"
-                android:inputType="text"
-                android:textSize="12sp"
-                android:padding="5dp"
-                />
-
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="0dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_button_border_gris"
-                android:drawableStart="@drawable/ic_map_marker"
-                android:hint="Direccion Final"
-                android:textSize="12sp"
-                android:padding="5dp" />
-        </LinearLayout>
-
-        <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/Container_verPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:translationZ="999dp"
             android:visibility="visible">
 
             <LinearLayout
-                android:id="@+id/button_sheet"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:behavior_hideable="true"
-                app:behavior_peekHeight="50dp"
-                app:layout_behavior="@string/bottom_sheet_behavior">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/btn_favoritos"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="favoritos"
-                            android:background="@drawable/backgroundcolor2"
-                            android:textColor="@color/colorWhite"
-                            android:layout_weight="1"/>
-
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1.97"
-                            android:background="@color/colorWhite">
-                        </View>
-
-                        <Button
-                            android:id="@+id/btn_historial"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="Historial"
-                            android:background="@drawable/backgroundcolor"
-                            android:textColor="@color/colorWhite"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:id="@+id/contenedorFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.6">
-                    </FrameLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </android.support.design.widget.CoordinatorLayout>
-        </LinearLayout>
-
-<LinearLayout
-    android:id="@+id/linearLayoutTogo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:visibility="gone"
-    android:orientation="vertical">
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backgroundcolor2"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/text_atras_togo"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_flecha_hacia_atras" />
-
-        <AutoCompleteTextView
-            android:id="@+id/text_direccion_togo"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_button_border_gris"
-            android:drawableStart="@drawable/ic_map_marker"
-            android:hint="A donde vas"
-            android:inputType="text"
-            android:padding="10dp" />
-    </LinearLayout>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/main_content"
-        android:rotation="180"
-        >
-        <LinearLayout
-            android:id="@+id/bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:clipToPadding="true"
-            android:layout_gravity="top"
-            app:behavior_peekHeight="55dp"
-            app:layout_behavior="utiles.BehaviorCuston">
-
-            <LinearLayout
+                android:id="@+id/linearLayoutPedir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/backgroundcolor2"
                 android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                android:rotation="180">
+                <TextView
+                    android:id="@+id/text_atras"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_left_arrow" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="350sp"
-                    android:stackFromBottom="true"
-                    android:transcriptMode="alwaysScroll"
-                    >
-
-                    <ListView
-                        android:id="@+id/lista_productos"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="true"
-                        android:divider="#929292"
-                        android:dividerHeight="1px"
-                        android:stackFromBottom="true"
-                        android:transcriptMode="alwaysScroll"
-                        tools:listitem="@layout/layout_item_pedidos_togo">
-                    </ListView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="bottom"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <TextView
-                            android:id="@+id/tv_cantidad"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Productos (0)"
-                            android:textColor="@color/cardview_light_background"
-                            android:padding="16dp"
-                            android:textSize="18dp"/>
-                    </LinearLayout>
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_button_border_gris"
+                    android:drawableStart="@drawable/ic_map_marker"
+                    android:hint="Direccion Inicial"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textSize="12sp" />
 
-                    <Button
-                        android:id="@+id/btn_agregar_producto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/ic_redondo1_finalizar"
-                        android:hint="agregar producto"
-                        android:textSize="15dp"
-                        android:padding="5dp"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="3"/>
-                </LinearLayout>
-
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_button_border_gris"
+                    android:drawableStart="@drawable/ic_map_marker"
+                    android:hint="Direccion Final"
+                    android:padding="5dp"
+                    android:textSize="12sp" />
             </LinearLayout>
 
+            <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/Container_verPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
 
+                <LinearLayout
+                    android:id="@+id/button_sheetss"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:behavior_hideable="true"
+                    app:behavior_peekHeight="50dp"
+                    app:layout_behavior="utiles.BehaviorCuston">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btn_favoritos"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundcolor2"
+                                android:text="favoritos"
+                                android:textColor="@color/colorWhite" />
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.97"
+                                android:background="@color/colorWhite"></View>
+
+                            <Button
+                                android:id="@+id/btn_historial"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundcolor"
+                                android:text="Historial"
+                                android:textColor="@color/colorWhite" />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/contenedorFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"></FrameLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.design.widget.CoordinatorLayout>
         </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
-</LinearLayout>
 
         <Button
             android:id="@+id/btn_pedir_estandar"

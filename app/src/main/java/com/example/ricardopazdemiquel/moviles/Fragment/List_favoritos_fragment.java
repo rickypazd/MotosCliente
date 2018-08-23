@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
 import com.example.ricardopazdemiquel.moviles.Favoritos_Clientes;
+import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
 import com.example.ricardopazdemiquel.moviles.Producto_togo_Activity;
 import com.example.ricardopazdemiquel.moviles.R;
@@ -33,6 +36,8 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Locale;
 
+import utiles.BehaviorCuston;
+
 public class List_favoritos_fragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG ="fragment_explorar";
@@ -41,6 +46,8 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     private Button btn_elegir_destino;
     private ListView lista_favoritos;
     private Adapter_favoritos adapter;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +60,17 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar_favoritos.setOnClickListener(this);
 
+        lista_favoritos.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    ((PedirSieteMap)getActivity()).close();
+                }else if(event.getAction()==MotionEvent.ACTION_UP){
+                    ((PedirSieteMap)getActivity()).open();
+                }
+                return false;
+            }
+        });
         cargar();
 
         return view;
