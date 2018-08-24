@@ -24,10 +24,29 @@
         android:roundIcon="@mipmap/ic_p_supersiete_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAxdWoqiMpucK4ZOf5M8JzQii8m1x9WrR4" />
@@ -57,17 +76,14 @@
         <activity
             android:name=".PedirSieteMap"
             android:theme="@style/AppThemeone"
-            android:windowSoftInputMode="adjustNothing"/>
-
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".PedirSieteTogo"
             android:theme="@style/AppThemeone"
-            android:windowSoftInputMode="adjustNothing"/>
-
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".favoritos_pruba"
             android:theme="@style/AppThemeone" />
-
         <activity
             android:name=".Carga"
             android:theme="@style/AppThemeone">
@@ -79,64 +95,59 @@
         </activity>
         <activity
             android:name=".LoginCliente"
-            android:theme="@style/AppThemeone"/>
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".PidiendoSiete"
             android:theme="@style/AppThemeone" />
-
-        <activity android:name=".IniciarCuentaActivity"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Perfil_ClienteFragment"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Editar_perfil_Activity"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".MisViajes_Cliente_Activity"
-            android:theme="@style/AppThemeone"/>
-
+        <activity
+            android:name=".IniciarCuentaActivity"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Perfil_ClienteFragment"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Editar_perfil_Activity"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".MisViajes_Cliente_Activity"
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".finalizar_viajeCliente"
             android:theme="@style/AppThemeone" />
         <activity
             android:name=".Elejir_tipo_siete"
-            android:theme="@style/AppThemeone"/>
-
+            android:theme="@style/AppThemeone" />
         <activity android:name=".Calificar_viaje" />
-
-        <activity android:name=".EsperandoConductor"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Inicio_viaje_togo"
-            android:theme="@style/AppThemeone"/>
-
+        <activity
+            android:name=".EsperandoConductor"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Inicio_viaje_togo"
+            android:theme="@style/AppThemeone" />
         <activity
             android:name=".Sin_conexion"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Metodo_de_pagoCliente" />
-
         <activity
             android:name=".CanceloViaje_Cliente"
             android:theme="@style/AppThemeone" />
-
         <activity
             android:name=".Favoritos_Clientes"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Detalle_viaje_Cliente"
             android:theme="@style/AppThemeone" />
-
-        <activity android:name=".Iniciar_Sesion_Activity"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Crear_CuentaActivity"
-            android:theme="@style/AppThemeone"/>
-
-        <activity android:name=".Producto_togo_Activity"
-            android:theme="@style/AppThemeone"/>
-
+        <activity
+            android:name=".Detalle_viaje_Cliente"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Iniciar_Sesion_Activity"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Crear_CuentaActivity"
+            android:theme="@style/AppThemeone" />
+        <activity
+            android:name=".Producto_togo_Activity"
+            android:theme="@style/AppThemeone" />
+        <activity android:name=".LoginSocial"
+            android:theme="@style/AppThemeone"></activity>
     </application>
 
 </manifest>

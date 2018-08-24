@@ -12,7 +12,10 @@
     <string name="apikey">AIzaSyAxdWoqiMpucK4ZOf5M8JzQii8m1x9WrR4</string>
     <string name="url_servlet_admin">http://192.168.0.12:8080/siete/admin/adminController</string>
     <string name="url_servlet_index">http://192.168.0.12:8080/siete/indexController</string>
-    <string name="style_map">[
+  <string name="facebook_app_id">320327828699267</string>
+  <string name="fb_login_protocol_scheme">fb320327828699267</string>
+
+  <string name="style_map">[
   {
     "elementType": "geometry",
     "stylers": [
