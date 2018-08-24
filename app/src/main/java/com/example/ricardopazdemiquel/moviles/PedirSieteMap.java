@@ -362,6 +362,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             }
 
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
+                            selected.dismissDropDown();
                         }
                     }
                 });
