@@ -1,9 +1,7 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,7 +11,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -23,14 +20,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -39,33 +37,28 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.AdaptadorSieteEstandar;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
-import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
-import com.example.ricardopazdemiquel.moviles.Fragment.List_favoritos_fragment;
-import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
+import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog;
+import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog2;
+import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
+import com.example.ricardopazdemiquel.moviles.Fragment.SetupViewPager_fragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -98,7 +91,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     MapView mMapView;
     private GoogleMap googleMap;
-    private boolean entroLocation=false;
+    private boolean entroLocation = false;
     private static final String LOG_TAG = "MainActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView mAutocompleteTextView;
@@ -127,11 +120,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete y el tipo de carrera
-    private Button btn_pedir_super , btn_pedir_maravilla ,btn_pedir_togo , btn_pedir_estandar;
+    private Button btn_pedir_super, btn_pedir_maravilla, btn_pedir_togo, btn_pedir_estandar;
     private int tipo_carrera;
 
     // inicializamos los iconos de confirmar carrera
-    private TextView icono1, icono2 ,icono3 , icono4 ,icono5, icono6,icono7;
+    private TextView icono1, icono2, icono3, icono4, icono5, icono6, icono7;
     double mont;
     private AutoCompleteTextView text_direccion_togo;
     private Button btn_agregar_producto;
@@ -139,7 +132,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private Button btn_favoritos;
     private Button btn_historial;
     Fragment fragment_favoritos = null;
-    Fragment fragment_historial  = null;
+    Fragment fragment_historial = null;
+    android.support.v4.app.Fragment SetupViewPager_fragment = null;
 
     public PedirSieteMap() {
     }
@@ -149,22 +143,25 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedir_siete_map);
 
-        ll_ubic=findViewById(R.id.linearLayoutPedir);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tv_cantidad=findViewById(R.id.tv_cantidad);
+        ll_ubic = findViewById(R.id.linearLayoutPedir);
+
+        tv_cantidad = findViewById(R.id.tv_cantidad);
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
 
-        layoutButon=findViewById(R.id.ll_boton);
-        iv_marker=findViewById(R.id.ivmarker);
+        layoutButon = findViewById(R.id.ll_boton);
+        iv_marker = findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
 
 
+        final double longitudeGPS = getIntent().getDoubleExtra("lng", 0);
+        final double latitudeGPS = getIntent().getDoubleExtra("lat", 0);
 
-        final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
-        final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
-
-        tipo_carrera = getIntent().getIntExtra("tipo",0);
+        tipo_carrera = getIntent().getIntExtra("tipo", 0);
 
 
         mGoogleApiClient = new GoogleApiClient.Builder(PedirSieteMap.this)
@@ -183,24 +180,24 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mylinear.setOrientation(LinearLayoutManager.HORIZONTAL);
         try {
             JSONArray arr = new JSONArray();
-            JSONObject obj1= new JSONObject();
-            obj1.put("id",1);
-            obj1.put("nombre","Estandar");
+            JSONObject obj1 = new JSONObject();
+            obj1.put("id", 1);
+            obj1.put("nombre", "Estandar");
             arr.put(obj1);
-            JSONObject obj2= new JSONObject();
-            obj2.put("id",5);
-            obj2.put("nombre","4X4");
+            JSONObject obj2 = new JSONObject();
+            obj2.put("id", 5);
+            obj2.put("nombre", "4X4");
             arr.put(obj2);
-            JSONObject obj3= new JSONObject();
-            obj3.put("id",6);
-            obj3.put("nombre","Camioneta");
+            JSONObject obj3 = new JSONObject();
+            obj3.put("id", 6);
+            obj3.put("nombre", "Camioneta");
             arr.put(obj3);
-            JSONObject obj4= new JSONObject();
-            obj4.put("id",7);
-            obj4.put("nombre","6 pasajeros");
+            JSONObject obj4 = new JSONObject();
+            obj4.put("id", 7);
+            obj4.put("nombre", "6 pasajeros");
             arr.put(obj4);
-            AdaptadorSieteEstandar ada = new AdaptadorSieteEstandar(arr,this,PedirSieteMap.this);
-           recyclerView.setAdapter(ada);
+            AdaptadorSieteEstandar ada = new AdaptadorSieteEstandar(arr, this, PedirSieteMap.this);
+            recyclerView.setAdapter(ada);
             recyclerView.setLayoutManager(mylinear);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -224,21 +221,22 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_pedir_maravilla.setOnClickListener(this);
         btn_pedir_togo.setOnClickListener(this);
 
-        linear_confirm=findViewById(R.id.linear_confirm);
+        linear_confirm = findViewById(R.id.linear_confirm);
 
-        btn_favoritos = findViewById(R.id.btn_favoritos);
-        btn_historial = findViewById(R.id.btn_historial);
+        //btn_favoritos = findViewById(R.id.btn_favoritos);
+        //btn_historial = findViewById(R.id.btn_historial);
 
-        btn_favoritos.setOnClickListener(this);
-        btn_historial.setOnClickListener(this);
+        //btn_favoritos.setOnClickListener(this);
+        //btn_historial.setOnClickListener(this);
         View view = findViewById(R.id.button_sheetss);
-        bottomSheetBehavior= BottomSheetBehavior.from(view);
+        bottomSheetBehavior = BottomSheetBehavior.from(view);
         //bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
-        fragment_favoritos = new List_favoritos_fragment();
-        fragment_historial = new List_historial_fragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
+        SetupViewPager_fragment = new SetupViewPager_fragment();
+        //fragment_historial = new List_historial_fragment();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment, SetupViewPager_fragment).commit();
 
         mostar_button(tipo_carrera);
 
@@ -267,38 +265,37 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             finish();
         }
 
-        btn_confirmar= findViewById(R.id.btn_confirmar);
+        btn_confirmar = findViewById(R.id.btn_confirmar);
         btn_confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     String id = usr_log.getString("id");
-                    String resp =new User_getPerfil(id).execute().get();
-                    if(resp==null){
-                        Toast.makeText(PedirSieteMap.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-                    }else{
+                    String resp = new User_getPerfil(id).execute().get();
+                    if (resp == null) {
+                        Toast.makeText(PedirSieteMap.this, "Error al conectarse con el servidor.", Toast.LENGTH_SHORT).show();
+                    } else {
                         android.app.FragmentManager fragmentManager = getFragmentManager();
-                        if (!resp.isEmpty()){
+                        if (!resp.isEmpty()) {
                             JSONObject usr = new JSONObject(resp);
-                            if(usr.getString("exito").equals("si")){
+                            if (usr.getString("exito").equals("si")) {
                                 double credito = usr.getDouble("creditos");
                                 boolean acept = true;
-                                if(radio_credito.isChecked() == true){
-                                    tipo_pago=2;
-                                    if(credito < mont){
+                                if (radio_credito.isChecked() == true) {
+                                    tipo_pago = 2;
+                                    if (credito < mont) {
                                         new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
-                                        acept=false;
+                                        acept = false;
                                     }
-                                }
-                                else {
-                                    tipo_pago=1;
-                                    if(credito < 0){
+                                } else {
+                                    tipo_pago = 1;
+                                    if (credito < 0) {
                                         new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
                                         //esta en deuda , aler se cobrara el monto + viej
-                                        acept=false;
+                                        acept = false;
                                     }
                                 }
-                                if(acept){
+                                if (acept) {
                                     ok_predir_viaje();
                                 }
 
@@ -309,7 +306,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
 
                 } catch (JSONException e) {
-                        e.printStackTrace();
+                    e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -340,8 +337,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
                     public void onMyLocationChange(Location location) {
-                        if (!entroLocation){
-                            entroLocation=true;
+                        if (!entroLocation) {
+                            entroLocation = true;
                             CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14);
                             googleMap.animateCamera(cu);
                         }
@@ -357,17 +354,17 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             mMap.clear();
                             if (mAutocompleteTextView.getTag() != null) {
                                 LatLng latlng1 = (LatLng) mAutocompleteTextView.getTag();
-                                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
                             }
                             if (mAutocompleteTextView2.getTag() != null) {
                                 LatLng latlng2 = (LatLng) mAutocompleteTextView2.getTag();
-                                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
                             }
 
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
                         }
                     }
-            });
+                });
 
             }
         });
@@ -386,7 +383,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.
                         INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 return true;
@@ -394,23 +391,43 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         });
 
     }
-    public void close(){
+
+    public void close() {
         if (bottomSheetBehavior instanceof BehaviorCuston) {
             ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
         }
     }
-    public void open(){
+
+    public void open() {
         if (bottomSheetBehavior instanceof BehaviorCuston) {
             ((BehaviorCuston) bottomSheetBehavior).setLocked(false);
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(tipo_carrera==2){
+        if (tipo_carrera == 2) {
             cargartogo();
         }
 
+    }
+
+    // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     public void ok_predir_viaje() throws JSONException {
@@ -446,12 +463,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_favoritos:
-                getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_favoritos).commit();
-                break;
-            case R.id.btn_historial:
-                getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment,fragment_historial).commit();
-                break;
         }
     }
 
@@ -486,6 +497,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         }
     };
+
+
+
+    public void addpositionFavorito(Double lat ,Double lng){
+        LatLng latlng = new LatLng(lat,lng);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latlng, 18);
+        googleMap.animateCamera(cu);
+    }
+
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";

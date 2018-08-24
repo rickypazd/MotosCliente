@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PedirSieteMap">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/backgroundcolor2"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+        </android.support.v7.widget.Toolbar>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapviewPedirSiete"
@@ -27,7 +48,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:translationZ="999dp"
-            android:visibility="visible">
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/linearLayoutPedir"
@@ -41,14 +66,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/text_atras"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_left_arrow" />
-
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextView"
                     android:layout_width="match_parent"
@@ -56,7 +73,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="35dp"
                     android:layout_marginRight="35dp"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/ic_button_border_gris"
                     android:drawableStart="@drawable/ic_map_marker"
                     android:hint="Direccion Inicial"
@@ -94,53 +110,14 @@
                     app:behavior_peekHeight="50dp"
                     app:layout_behavior="utiles.BehaviorCuston">
 
-                    <LinearLayout
+                    <FrameLayout
+                        android:id="@+id/contenedorFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/colorPrimaryDark"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/btn_favoritos"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/backgroundcolor2"
-                                android:text="favoritos"
-                                android:textColor="@color/colorWhite" />
-
-                            <View
-                                android:layout_width="wrap_content"
-                                android:layout_height="35dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1.97"
-                                android:background="@color/colorWhite"></View>
-
-                            <Button
-                                android:id="@+id/btn_historial"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/backgroundcolor"
-                                android:text="Historial"
-                                android:textColor="@color/colorWhite" />
-
-                        </LinearLayout>
-
-                        <FrameLayout
-                            android:id="@+id/contenedorFragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.6"></FrameLayout>
-
-                    </LinearLayout>
+                        android:layout_height="match_parent">
+                    </FrameLayout>
 
                 </LinearLayout>
+
             </android.support.design.widget.CoordinatorLayout>
         </LinearLayout>
 
@@ -391,4 +368,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-</FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

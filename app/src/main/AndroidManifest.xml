@@ -134,6 +134,7 @@
         <activity
             android:name=".Favoritos_Clientes"
             android:theme="@style/AppThemeone" />
+<<<<<<< HEAD
         <activity
             android:name=".Detalle_viaje_Cliente"
             android:theme="@style/AppThemeone" />
@@ -148,6 +149,18 @@
             android:theme="@style/AppThemeone" />
         <activity android:name=".LoginSocial"
             android:theme="@style/AppThemeone"></activity>
+=======
+
+        <activity android:name=".Iniciar_Sesion_Activity"
+            android:theme="@style/AppThemeone"/>
+
+        <activity android:name=".Crear_CuentaActivity"
+            android:theme="@style/AppThemeone"/>
+
+        <activity android:name=".Fragment.Producto_togo_Activity"
+            android:theme="@style/AppThemeone"/>
+
+>>>>>>> 28a64c7c5335880265987b0b027f932a06d1f718
     </application>
 
 </manifest>

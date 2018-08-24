@@ -1,29 +1,22 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.ricardopazdemiquel.moviles.Adapter.Adaptador_mis_viajes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.PublicKey;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Locale;
 
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;

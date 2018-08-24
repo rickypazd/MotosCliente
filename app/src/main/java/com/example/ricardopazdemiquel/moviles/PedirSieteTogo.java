@@ -17,8 +17,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,6 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog;
+import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog2;
+import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;

@@ -11,11 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
-import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
 import com.example.ricardopazdemiquel.moviles.Model.Producto_togo;
-import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
-import com.example.ricardopazdemiquel.moviles.Producto_togo_Activity;
+import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
 import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONException;

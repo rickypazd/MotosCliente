@@ -1,4 +1,4 @@
-package com.example.ricardopazdemiquel.moviles;
+package com.example.ricardopazdemiquel.moviles.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
+import com.example.ricardopazdemiquel.moviles.R;
+import com.example.ricardopazdemiquel.moviles.viewHolder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +61,6 @@ public class AdaptadorSieteEstandar extends RecyclerView.Adapter<viewHolder> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
