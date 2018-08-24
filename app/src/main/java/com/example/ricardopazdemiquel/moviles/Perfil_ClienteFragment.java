@@ -42,16 +42,15 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
     private TextView textTelefono;
     private TextView textEmail;
     private TextView textcredito;
-    private TextView Contraseña;
+
 
     private LinearLayout Liner_nombre;
     private LinearLayout Liner_apellido;
     private LinearLayout Liner_telefono;
     private LinearLayout Liner_correo;
-    private LinearLayout Liner_contraseña;
 
     @Override
-    protected void onCreate(Bundle onSaveInstanceState) {
+    protected void onCreate(Bundle onSaveInwWstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.fragment_perfil_cliente);
 
@@ -64,20 +63,20 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         textApellido = findViewById(R.id.text_apellidoCliente);
         textTelefono = findViewById(R.id.text_numero_telefono);
         textEmail = findViewById(R.id.text_email_cliente);
-        Contraseña = findViewById(R.id.text_contraseñaCliente);
+
         textcredito = findViewById(R.id.creditos);
 
         Liner_nombre = findViewById(R.id.Liner_nombre);
         Liner_apellido = findViewById(R.id.Liner_apellido);
         Liner_telefono = findViewById(R.id.Liner_telefono);
         Liner_correo = findViewById(R.id.Liner_correo);
-        Liner_contraseña = findViewById(R.id.Liner_contraseña);
+
 
         Liner_nombre.setOnClickListener(this);
         Liner_apellido.setOnClickListener(this);
         Liner_telefono.setOnClickListener(this);
         Liner_correo.setOnClickListener(this);
-        Liner_contraseña.setOnClickListener(this);
+
 
         final JSONObject usr_log = getUsr_log();
         if (usr_log != null) {
@@ -109,7 +108,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
     public void onClick(View view) {
         Intent intent = new Intent(Perfil_ClienteFragment.this , Editar_perfil_Activity.class);
         final JSONObject usr_log = getUsr_log();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.Liner_nombre:
                 if (usr_log != null) {
                     try {
@@ -120,7 +119,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     finish();
                 }
                 break;
@@ -136,7 +135,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     finish();
                 }
                 break;
@@ -150,7 +149,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     finish();
                 }
                 break;
@@ -164,18 +163,11 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     finish();
                 }
                 break;
-            case R.id.Liner_contraseña:
-                if (usr_log != null) {
-                    intent.putExtra("tipo", "contraseña_usuario");
-                    startActivity(intent);
-                }else{
-                    finish();
-                }
-                break;
+
         }
     }
 
