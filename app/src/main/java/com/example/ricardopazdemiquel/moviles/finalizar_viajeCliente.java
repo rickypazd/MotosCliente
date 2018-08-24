@@ -65,7 +65,6 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
                 }
             }
         });
-
     }
 
     public JSONObject get_carrera(){

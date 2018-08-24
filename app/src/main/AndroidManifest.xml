@@ -134,7 +134,7 @@
         <activity android:name=".Crear_CuentaActivity"
             android:theme="@style/AppThemeone"/>
 
-        <activity android:name=".Producto_togo_Activity"
+        <activity android:name=".Fragment.Producto_togo_Activity"
             android:theme="@style/AppThemeone"/>
 
     </application>

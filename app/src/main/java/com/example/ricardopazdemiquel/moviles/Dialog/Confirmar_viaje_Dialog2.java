@@ -1,4 +1,4 @@
-package com.example.ricardopazdemiquel.moviles;
+package com.example.ricardopazdemiquel.moviles.Dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.ricardopazdemiquel.moviles.R;
 
 /**
  * Created by Edson on 02/12/2017.

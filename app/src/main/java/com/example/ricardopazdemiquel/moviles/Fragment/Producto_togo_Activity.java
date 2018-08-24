@@ -1,36 +1,24 @@
-package com.example.ricardopazdemiquel.moviles;
+package com.example.ricardopazdemiquel.moviles.Fragment;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
-import com.example.ricardopazdemiquel.moviles.Dialog.Cancelar_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Producto_togo_Dialog;
+import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Hashtable;
-
-import clienteHTTP.HttpConnection;
-import clienteHTTP.MethodType;
-import clienteHTTP.StandarRequestConfiguration;
-import utiles.Contexto;
 
 public class Producto_togo_Activity extends AppCompatActivity implements View.OnClickListener ,AdapterView.OnItemClickListener{
 

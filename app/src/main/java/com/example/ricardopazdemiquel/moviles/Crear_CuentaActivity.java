@@ -47,7 +47,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         edit_fecha = findViewById(R.id.edit_fecha);
         edit_username= findViewById(R.id.edit_username);
         edit_pass = findViewById(R.id.edit_pass);
@@ -65,7 +64,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
                 e.printStackTrace();
             }
         }
-
 
        /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

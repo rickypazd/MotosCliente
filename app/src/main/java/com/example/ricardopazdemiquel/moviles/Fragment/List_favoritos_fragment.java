@@ -3,12 +3,8 @@ package com.example.ricardopazdemiquel.moviles.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,27 +12,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
-import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
-import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
-import com.example.ricardopazdemiquel.moviles.Favoritos_Clientes;
 import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
-import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
-import com.example.ricardopazdemiquel.moviles.Producto_togo_Activity;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.favoritos_pruba;
-import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Locale;
-
-import utiles.BehaviorCuston;
 
 public class List_favoritos_fragment extends Fragment implements View.OnClickListener {
 
@@ -67,14 +51,30 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                     ((PedirSieteMap)getActivity()).close();
                 }else if(event.getAction()==MotionEvent.ACTION_UP){
                     ((PedirSieteMap)getActivity()).open();
+                }else if(event.getAction()==MotionEvent.ACTION_CANCEL){
+                    ((PedirSieteMap)getActivity()).open();
                 }
                 return false;
             }
         });
         cargar();
 
+        lista_favoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    JSONObject obj = new JSONObject(view.getTag().toString());
+                    Double latFin = obj.getDouble("latFin");
+                    Double lngFin = obj.getDouble("lngFin");
+                    ((PedirSieteMap)getActivity()).addpositionFavorito(latFin, lngFin);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return view;
     }
+
 
     private void cargar(){
         //carga un SharedPreferences de favoritos o crea uno vacio
@@ -91,6 +91,10 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
         lista_favoritos.setAdapter(adapter);
         JSONObject obj = new JSONObject();
     }
+
+
+
+
 
     public JSONArray get_list_Favoritos() {
         SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);

@@ -1,4 +1,4 @@
-package com.example.ricardopazdemiquel.moviles;
+package com.example.ricardopazdemiquel.moviles.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.ricardopazdemiquel.moviles.Detalle_viaje_Cliente;
+import com.example.ricardopazdemiquel.moviles.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

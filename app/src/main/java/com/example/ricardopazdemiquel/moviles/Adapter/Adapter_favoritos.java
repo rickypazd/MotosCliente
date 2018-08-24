@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONArray;
@@ -24,6 +25,8 @@ public class Adapter_favoritos extends BaseAdapter {
 
     private Context contexto;
     private JSONArray array = new JSONArray();
+    Double latFin ;
+    Double lngFin ;
     MenuItem item;
 
     public Adapter_favoritos(Context contexto, JSONArray array) {
@@ -72,10 +75,11 @@ public class Adapter_favoritos extends BaseAdapter {
 
         TextView text_nombre = view.findViewById(R.id.text_nombre);
         TextView text_ubicacion = view.findViewById(R.id.text_ubicacion);
+
         try {
             JSONObject obj =  array.getJSONObject(i);
-            Double latFin = obj.getDouble("latFin");
-            Double lngFin = obj.getDouble("lngFin");
+            latFin = obj.getDouble("latFin");
+            lngFin = obj.getDouble("lngFin");
             String ubicacion = get_localizacion(latFin,lngFin);
             text_nombre.setText(obj.getString("nombre_favorito"));
             text_ubicacion.setText(ubicacion);
@@ -83,6 +87,22 @@ public class Adapter_favoritos extends BaseAdapter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        /*view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.getTag().toString();
+                try {
+                    JSONObject obj = new JSONObject(view.getTag().toString());
+                    latFin = obj.getDouble("latFin");
+                    lngFin = obj.getDouble("lngFin");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ((PedirSieteMap)contexto).addpositionFavorito(latFin, lngFin);
+            }
+        });*/
+
         return view;
     }
 
