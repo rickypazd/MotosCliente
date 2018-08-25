@@ -79,8 +79,8 @@ public class Adaptador_mis_viajes extends BaseAdapter {
             int costo = viajes.getInt("costo_final");
             int tipo = viajes.getInt("tipo_pago");
 
-            text_fecha.setText(viajes.getString("fecha_pedido"));
-            text_auto.setText(viajes.getString("marca"));
+            text_fecha.setText(viajes.getString("fecha_pedido").substring(0,16));
+            text_auto.setText(viajes.getString("marca")+" "+viajes.getString("modelo"));
             if(get_estado(estado)){
                 text_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
                 text_fin.setText(getCompleteAddressString(lat_final_real,lng_final_real));
@@ -127,13 +127,12 @@ public class Adaptador_mis_viajes extends BaseAdapter {
             List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                //StringBuilder strReturnedAddress = new StringBuilder("");
 
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-                Log.w("My Current loction addr", strReturnedAddress.toString());
+                strAdd=returnedAddress.getThoroughfare();
+                if(strAdd==null )
+                    strAdd=returnedAddress.getFeatureName();
+                //  Log.w("My Current loction addr", strReturnedAddress.toString());
             } else {
                 Log.w("My Current loction addr", "No Address returned!");
             }

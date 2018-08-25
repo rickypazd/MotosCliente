@@ -40,7 +40,6 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
     private TextView tipo_pago;
     private TextView html_tipos;
     private TextView html_costos;
-    private TextView monto_total;
 
     private static final int EFECTIVO = 1;
     private static final int CREDITO = 2;
@@ -65,7 +64,6 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         tipo_pago = findViewById(R.id.text_tipo_pago);
         html_tipos = findViewById(R.id.text_html_tipos);
         html_costos = findViewById(R.id.text_html_montos);
-        monto_total = findViewById(R.id.text_total_viaje);
 
         Intent intent = getIntent();
         if(intent != null){
@@ -147,8 +145,8 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
 
                         nombre.setText(obj.getString("nombre"));
                         placa_numerotelefono.setText(placa+" ° "+telefono);
-                        fecha.setText(obj.getString("fecha_pedido"));
-                        marca_auto.setText(obj.getString("marca"));
+                        fecha.setText(obj.getString("fecha_pedido").substring(0,16));
+                        marca_auto.setText(obj.getString("marca")+" "+obj.getString("modelo"));
 
 
                         switch (tipo){
@@ -170,7 +168,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                             html_detalle += "<p>"+object.getString("nombre")+"</p>";
                             html_costo += "<p>"+String.format("%.2f", auxCosto) +" Bs.</p>";
                         }
-                        html_detalle += "<p>Total></p>";
+                        html_detalle += "<p>Total</p>";
 
                         if(get_estado(estado)){
                             direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));

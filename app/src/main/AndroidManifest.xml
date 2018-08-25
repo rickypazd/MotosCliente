@@ -47,7 +47,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -78,17 +79,24 @@
         <activity
             android:name=".PedirSieteMap"
             android:theme="@style/AppThemeone"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PedirSieteTogo"
             android:theme="@style/AppThemeone"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".favoritos_pruba"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Carga"
-            android:theme="@style/AppThemeone">
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -97,61 +105,95 @@
         </activity>
         <activity
             android:name=".LoginCliente"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".PidiendoSiete"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".IniciarCuentaActivity"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Perfil_ClienteFragment"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Editar_perfil_Activity"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".MisViajes_Cliente_Activity"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".finalizar_viajeCliente"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Elejir_tipo_siete"
-            android:theme="@style/AppThemeone" />
-        <activity android:name=".Calificar_viaje" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Calificar_viaje"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".EsperandoConductor"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Inicio_viaje_togo"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Sin_conexion"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".Metodo_de_pagoCliente" />
         <activity
             android:name=".CanceloViaje_Cliente"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Favoritos_Clientes"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Detalle_viaje_Cliente"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Iniciar_Sesion_Activity"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Crear_CuentaActivity"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginSocial"
-            android:theme="@style/AppThemeone" />
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Fragment.Producto_togo_Activity"
-            android:theme="@style/AppThemeone" />
-        <activity android:name=".Preferencias"></activity>
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Preferencias"
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>

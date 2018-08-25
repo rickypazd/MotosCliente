@@ -212,7 +212,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
                             if (text_direccion_togo.getTag() != null) {
                                 LatLng latlng2 = (LatLng) text_direccion_togo.getTag();
                                 fin=latlng2;
-                                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
+                           //     googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f,0.5f));
                             }
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
 

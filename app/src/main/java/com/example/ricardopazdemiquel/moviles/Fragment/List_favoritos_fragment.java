@@ -27,7 +27,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     private static final String TAG ="fragment_explorar";
     private JSONObject carrera;
     private Button btn_agregar_favoritos;
-    private Button btn_elegir_destino;
     private ListView lista_favoritos;
     private Adapter_favoritos adapter;
 
@@ -37,11 +36,9 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
 
-        btn_elegir_destino = view.findViewById(R.id.btn_elegir_destino);
         btn_agregar_favoritos = view.findViewById(R.id.btn_agregar_favoritos);
         lista_favoritos = view.findViewById(R.id.lista_favoritos);
 
-        btn_elegir_destino.setOnClickListener(this);
         btn_agregar_favoritos.setOnClickListener(this);
 
         lista_favoritos.setOnTouchListener(new View.OnTouchListener() {
@@ -57,7 +54,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                 return false;
             }
         });
-        cargar();
 
         lista_favoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,6 +71,11 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargar();
+    }
 
     private void cargar(){
         //carga un SharedPreferences de favoritos o crea uno vacio
@@ -115,9 +116,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_elegir_destino:
-
-                break;
             case R.id.btn_agregar_favoritos:
                 Intent  intent = new Intent(getActivity() ,favoritos_pruba.class);
                 startActivity(intent);

@@ -33,14 +33,8 @@
                 tools:listitem="@layout/layout_item_favoritos">
             </ListView>
 
-    </LinearLayout>
-        <Button
-            android:id="@+id/btn_elegir_destino"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Elegir destino en el mapa"
-            android:background="#EEEEEE"
-            android:textColor="@color/colorBlack" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

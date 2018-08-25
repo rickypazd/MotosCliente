@@ -127,10 +127,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private TextView icono1, icono2, icono3, icono4, icono5, icono6, icono7;
     double mont;
     private AutoCompleteTextView text_direccion_togo;
-    private Button btn_agregar_producto;
 
-    private Button btn_favoritos;
-    private Button btn_historial;
+    private Button btn_elegir_destino;
     Fragment fragment_favoritos = null;
     Fragment fragment_historial = null;
     android.support.v4.app.Fragment SetupViewPager_fragment = null;
@@ -174,6 +172,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_pedir_maravilla = findViewById(R.id.btn_pedir_maravilla);
         btn_pedir_togo = findViewById(R.id.btn_pedir_togo);
         btn_pedir_estandar = findViewById(R.id.btn_pedir_estandar);
+        btn_elegir_destino= findViewById(R.id.btn_elegir_destino);
         recyclerView = findViewById(R.id.reciclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mylinear = new LinearLayoutManager(this);
@@ -220,22 +219,16 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_pedir_super.setOnClickListener(this);
         btn_pedir_maravilla.setOnClickListener(this);
         btn_pedir_togo.setOnClickListener(this);
+        btn_elegir_destino.setOnClickListener(this);
 
         linear_confirm = findViewById(R.id.linear_confirm);
 
-        //btn_favoritos = findViewById(R.id.btn_favoritos);
-        //btn_historial = findViewById(R.id.btn_historial);
-
-        //btn_favoritos.setOnClickListener(this);
-        //btn_historial.setOnClickListener(this);
         View view = findViewById(R.id.button_sheetss);
         bottomSheetBehavior = BottomSheetBehavior.from(view);
         //bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
 
         SetupViewPager_fragment = new SetupViewPager_fragment();
-        //fragment_historial = new List_historial_fragment();
-
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment, SetupViewPager_fragment).commit();
 
         mostar_button(tipo_carrera);
@@ -354,11 +347,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             mMap.clear();
                             if (mAutocompleteTextView.getTag() != null) {
                                 LatLng latlng1 = (LatLng) mAutocompleteTextView.getTag();
-                                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
+                                //googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
                             }
                             if (mAutocompleteTextView2.getTag() != null) {
                                 LatLng latlng2 = (LatLng) mAutocompleteTextView2.getTag();
-                                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
+                              //  googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)).anchor(0.5f, 0.5f));
                             }
 
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
@@ -405,13 +398,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         if (tipo_carrera == 2) {
-            cargartogo();
+            //cargartogo();
         }
-
     }
 
     // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
@@ -463,6 +456,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_elegir_destino:
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
         }
     }
@@ -520,24 +516,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 strAdd=returnedAddress.getThoroughfare();
                 if(strAdd==null )
                 strAdd=returnedAddress.getFeatureName();
-                System.out.println("*****************************");
-                System.out.println("Admin Area: ->> " + returnedAddress.getAdminArea());
-                System.out.println("Country Code: ->> " + returnedAddress.getCountryCode());
-                System.out.println("Country Name: ->> " + returnedAddress.getCountryName());
-                System.out.println("Feature Name: ->> " + returnedAddress.getFeatureName());
-                System.out.println("Admin Area: ->> " + returnedAddress.getLatitude());
-                System.out.println("Latitude: ->> " + returnedAddress.getLocality());
-                System.out.println("Longitude: ->> " + returnedAddress.getLongitude());
-                System.out.println("Max Address Line Index: ->> " + returnedAddress.getMaxAddressLineIndex());
-                System.out.println("Phone: ->> " + returnedAddress.getPhone());
-                System.out.println("PostalCode: ->> " + returnedAddress.getPostalCode());
-                System.out.println("Premises: ->> " + returnedAddress.getPremises());
-                System.out.println("SubAdminArea: ->> " + returnedAddress.getSubAdminArea());
-                System.out.println("SubLocality: ->> " + returnedAddress.getSubLocality());
-                System.out.println("SubThoroughfare: ->> " + returnedAddress.getSubThoroughfare());
-                System.out.println("Thoroughfare: ->> " + returnedAddress.getThoroughfare());
-                System.out.println("Url: ->> " + returnedAddress.getUrl());
-                System.out.println("*****************************");
                 //  Log.w("My Current loction addr", strReturnedAddress.toString());
             } else {
                 Log.w("My Current loction addr", "No Address returned!");
@@ -548,11 +526,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
         return strAdd;
     }
+
+
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(hasFocus){
             selected=(AutoCompleteTextView) v;
-
+            bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
         }
     }
 
@@ -802,8 +782,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             lista_productos.setAdapter(adapter);
             tv_cantidad.setText("Productos ("+arr.length()+")");
         }
-
     }
+
+
     public void calculando_ruta(View view , int tipo){
         selected=null;
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){

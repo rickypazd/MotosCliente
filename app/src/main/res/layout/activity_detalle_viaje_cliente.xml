@@ -31,6 +31,14 @@
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:id="@+id/linearLayout9"
         android:layout_width="match_parent"
@@ -231,34 +239,8 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30sp"
-                android:layout_marginEnd="30sp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Total"
-                    android:textSize="20sp"
-                    android:layout_weight="1"
-                    android:textColor="@color/colorBlack"/>
-
-                <TextView
-                    android:id="@+id/text_total_viaje"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="Bs. 0"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorGris"/>
-
-            </LinearLayout>
-
             </LinearLayout>
         </FrameLayout>
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

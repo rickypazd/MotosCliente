@@ -12,26 +12,38 @@
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradientbackground"
+        android:background="@color/colorPrimary"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
     </android.support.v7.widget.Toolbar>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_height="wrap_content">
+
         <LinearLayout
-            android:background="@drawable/gradientbackground"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="200dp"
             android:orientation="vertical">
-            <ImageView
-                android:layout_marginTop="45dp"
+
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_gravity="center_horizontal"
                 android:layout_width="140dp"
                 android:layout_height="120dp"
-                android:src="@mipmap/ic_miperfil"/>
+                android:src="@mipmap/ic_miperfil">
+            </com.mikhaellopez.circularimageview.CircularImageView>
 
         </LinearLayout>
 
@@ -41,8 +53,12 @@
             app:cardCornerRadius="10dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="150dp"
+            app:cardElevation="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="175dp">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,6 +71,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,7 +86,7 @@
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:paddingTop="10dp"
-                        android:textColor="#0ccae3"/>
+                        android:textColor="@color/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -80,7 +97,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="320dp"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_weight="0.8"
@@ -104,8 +121,8 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textAlignment="textStart"
-                android:textColor="#0ccae3"
-                android:textSize="15sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/text_nombreCliente"
@@ -118,9 +135,11 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
+                android:drawableEnd="@drawable/ic_pencil_edit"
+                android:paddingEnd="20dp"
                 android:text=""
                 android:textColor="#626262"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -142,8 +161,8 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textAlignment="textStart"
-                android:textColor="#0ccae3"
-                android:textSize="15sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/text_apellidoCliente"
@@ -157,7 +176,9 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textColor="#626262"
-                android:textSize="20sp" />
+                android:drawableEnd="@drawable/ic_pencil_edit"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -179,8 +200,8 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textAlignment="textStart"
-                android:textColor="#0ccae3"
-                android:textSize="15sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/text_numero_telefono"
@@ -198,7 +219,9 @@
                 android:gravity="center|start"
                 android:paddingStart="20dp"
                 android:textColor="#626262"
-                android:textSize="20sp" />
+                android:drawableEnd="@drawable/ic_pencil_edit"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -219,8 +242,8 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textAlignment="textStart"
-                android:textColor="#0ccae3"
-                android:textSize="15sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/text_email_cliente"
@@ -234,9 +257,15 @@
                 android:autoSizeStepGranularity="2sp"
                 android:autoSizeTextType="uniform"
                 android:textColor="#626262"
-                android:textSize="20sp" />
+                android:drawableEnd="@drawable/ic_pencil_edit"
+                android:paddingEnd="20dp"
+                android:textSize="15sp" />
         </LinearLayout>
+
 
     </LinearLayout>
 
+
+</LinearLayout>
+    </ScrollView>
 </LinearLayout>

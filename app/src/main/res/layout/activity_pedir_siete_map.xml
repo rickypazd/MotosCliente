@@ -107,15 +107,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:behavior_hideable="true"
+                    android:orientation="vertical"
+                    android:background="@color/colorWhite"
                     app:behavior_peekHeight="50dp"
                     app:layout_behavior="utiles.BehaviorCuston">
 
                     <FrameLayout
                         android:id="@+id/contenedorFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
                     </FrameLayout>
 
+                    <Button
+                        android:id="@+id/btn_elegir_destino"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Elegir destino en el mapa"
+                        android:textAllCaps="false"
+                        android:background="#EEEEEE"
+                        android:layout_margin="0dp"
+                        android:padding="0dp"
+                        android:textColor="@color/colorBlack"/>
                 </LinearLayout>
 
             </android.support.design.widget.CoordinatorLayout>

@@ -123,11 +123,11 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp == null || resp.isEmpty()) {
+            if(resp != null) {
                 if (resp.equals("falso")) {
                     Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
                     return;
-                } else if (resp.equals("exito")) {
+                } else {
                     //new MapCarrera.buscar_carrera().execute();
                     Intent intent = new Intent(finalizar_viajeCliente.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

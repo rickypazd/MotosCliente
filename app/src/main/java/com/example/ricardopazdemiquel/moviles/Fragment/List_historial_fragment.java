@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,8 @@ public class List_historial_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_historial, container, false);
         lv = view.findViewById(R.id.lista_historial);
 
+        new get_historial().execute();
+
         lv.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -62,10 +65,24 @@ public class List_historial_fragment extends Fragment {
             }
         });
 
-        new get_historial().execute();
 
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    JSONObject obj = new JSONObject(view.getTag().toString());
+                    Double latFin = obj.getDouble("latfinal");
+                    Double lngFin = obj.getDouble("lngfinal");
+                    ((PedirSieteMap)getActivity()).addpositionFavorito(latFin, lngFin);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return view;
     }
+
 
     public JSONObject getUsr_log() {
         SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
