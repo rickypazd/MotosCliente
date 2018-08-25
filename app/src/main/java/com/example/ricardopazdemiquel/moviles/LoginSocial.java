@@ -2,11 +2,14 @@ package com.example.ricardopazdemiquel.moviles;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -26,8 +30,16 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.util.Arrays;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.Hashtable;
+
+import clienteHTTP.HttpConnection;
+import clienteHTTP.MethodType;
+import clienteHTTP.StandarRequestConfiguration;
+import utiles.Contexto;
 import utils.Tools;
 
 public class LoginSocial extends AppCompatActivity {
@@ -128,9 +140,28 @@ public class LoginSocial extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(LoginSocial.this,Crear_CuentaActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                // Application code
+                                try {
+                                    String id=object.getString("id");
+                                    new get_usr_face(id).execute();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,first_name,middle_name,last_name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+
             }
 
             @Override
@@ -260,6 +291,65 @@ public class LoginSocial extends AppCompatActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             View view = (View) object;
             container.removeView(view);
+        }
+    }
+
+    public class get_usr_face extends AsyncTask<Void, String, String> {
+        private String id;
+        public get_usr_face(String id){
+            this.id=id;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_usuario_face");
+            parametros.put("id_usr",id+"");
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            if(resp==null){
+                Toast.makeText(LoginSocial.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                if (resp.contains("falso")) {
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                } else {
+                    try {
+                        JSONObject obj = new JSONObject(resp);
+                        if(obj.getString("exito").equals("si")) {
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("usr_log", obj.toString());
+                            editor.commit();
+                            Intent intent = new Intent(LoginSocial.this,MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(LoginSocial.this,IniciarCuentaActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
         }
     }
 }

@@ -55,6 +55,8 @@ public class List_historial_fragment extends Fragment {
                     ((PedirSieteMap)getActivity()).close();
                 }else if(event.getAction()==MotionEvent.ACTION_UP){
                     ((PedirSieteMap)getActivity()).open();
+                }else if(event.getAction()==MotionEvent.ACTION_CANCEL){
+                    ((PedirSieteMap)getActivity()).open();
                 }
                 return false;
             }

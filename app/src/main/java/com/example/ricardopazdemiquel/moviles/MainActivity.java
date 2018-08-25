@@ -242,6 +242,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      startActivity(intent);
                      break;
                  case R.id.btn_nav_preferencias:
+                     intent =  new Intent(MainActivity.this , Preferencias.class);
+                     startActivity(intent);
                      break;
              }
 
