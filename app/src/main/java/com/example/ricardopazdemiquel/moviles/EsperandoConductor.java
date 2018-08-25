@@ -707,7 +707,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp.isEmpty() || resp != null) {
+            if (resp.isEmpty() || resp == null) {
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
