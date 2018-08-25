@@ -72,6 +72,10 @@ public class PidiendoSiete extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
