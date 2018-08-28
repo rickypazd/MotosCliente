@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/btn_cancelar"
+                android:id="@+id/btn_confirmar_cancelacion"
                 android:layout_width="26dp"
                 android:layout_height="29dp"
                 android:layout_gravity="fill_horizontal"
@@ -56,37 +56,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/edit_nombre_ubicacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:paddingLeft="10dp"
-                android:hint="ej. casa de edsoncito"
-                android:background="@drawable/ic_button_border_gris"
-                android:inputType="text"
-                android:textSize="15sp"
-                android:padding="5dp"/>
-
             <TextView
-                android:id="@+id/text_direccion"
+                android:id="@+id/text_mensaje"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:text="avbrasil calle 12"
-                android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/ic_map_marker"
-                android:drawablePadding="10dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:text="Es posible que se cobre un monto por cancelacion."
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="15sp"
-                android:padding="5dp"/>
+                android:textSize="17sp" />
 
         </LinearLayout>
 
