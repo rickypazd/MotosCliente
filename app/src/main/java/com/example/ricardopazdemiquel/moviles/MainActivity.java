@@ -178,18 +178,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              }
          }
 
-
     private void seleccionarFragmento(String fragmento) {
         Fragment fragmentoGenerico = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
         Object obj = -1;
         switch (fragmento) {
             case "Mapa":
-                fragmentoGenerico= new fr_map();
+                fragmentoGenerico= new Elejir_tipo_siete();
                 break;
         }
             fragmentManager.beginTransaction().replace(R.id.contenmain, fragmentoGenerico).commit();
         if (fragmentoGenerico != null) {
+
         }
     }
 

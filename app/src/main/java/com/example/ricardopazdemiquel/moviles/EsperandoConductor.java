@@ -150,7 +150,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 if(json_carrera!=null){
                     hilo();
                 }
-
             }
         });
 
