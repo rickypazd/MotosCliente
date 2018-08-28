@@ -95,7 +95,7 @@
 
         <activity
             android:name=".Carga"
-            android:theme="@style/AppThemeone"
+            android:theme="@style/AppThemetwo"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -135,11 +135,6 @@
 
         <activity
             android:name=".finalizar_viajeCliente"
-            android:theme="@style/AppThemeone"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".Elejir_tipo_siete"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
 

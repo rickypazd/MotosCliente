@@ -8,12 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="AppThemeone" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
     </style>
 
+    <style name="AppThemetwo" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowBackground">@drawable/backgroundcolor</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
