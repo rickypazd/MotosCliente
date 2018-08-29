@@ -256,21 +256,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              drawer.closeDrawer(GravityCompat.START);
          }
 
-        public void selectWaze(){
-            try
-            {
-                // Launch Waze to look for Hawaii:
-                String url = "https://waze.com/ul?ll=45.6906304,-120.810983&navigate=yes";
-                Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
-                startActivity( intent );
-            }
-            catch ( ActivityNotFoundException ex  )
-            {
-                // If Waze is not installed, open it in Google Play:
-                Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
-                startActivity(intent);
-            }
-        }
 
 
     public class Get_validarCarrera extends AsyncTask<Void, String, String>{

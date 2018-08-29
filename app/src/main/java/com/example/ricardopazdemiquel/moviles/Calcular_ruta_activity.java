@@ -202,10 +202,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                 return true;
             }
         });
-
-
-
-
     }
 
     // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo

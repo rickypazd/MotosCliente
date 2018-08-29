@@ -481,6 +481,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             intent.putExtra("latfinal", latlng2.latitude);
             intent.putExtra("lngfinal", latlng2.longitude);
             startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
             return;
