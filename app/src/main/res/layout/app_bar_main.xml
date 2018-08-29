@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_iconmenu_foreground"
-        app:backgroundTint="@android:color/background_light"
-        app:elevation="2dp" />
+        android:translationZ="999dp"
+        android:src="@drawable/ic_bar_menu"
+        />
 
     <RelativeLayout
         android:id="@+id/contenmain"

@@ -88,6 +88,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".Calcular_ruta_activity"
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".favoritos_pruba"
             android:theme="@style/AppThemeone"
             android:windowSoftInputMode="adjustNothing"

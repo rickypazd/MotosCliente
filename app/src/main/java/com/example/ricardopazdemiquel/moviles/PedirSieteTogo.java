@@ -131,6 +131,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         lista_productos=findViewById(R.id.lista_productos);
         tv_cantidad=findViewById(R.id.tv_cantidad);

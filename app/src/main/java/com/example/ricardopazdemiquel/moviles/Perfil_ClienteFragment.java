@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         textNombre = findViewById(R.id.text_nombreCliente);
         textApellido = findViewById(R.id.text_apellidoCliente);

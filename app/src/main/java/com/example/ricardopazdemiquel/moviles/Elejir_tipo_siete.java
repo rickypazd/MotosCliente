@@ -1,6 +1,8 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,17 +25,20 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@SuppressLint("ValidFragment")
 public class Elejir_tipo_siete extends Fragment implements View.OnClickListener {
 
     private Button siete;
     private Button siete_maravilla;
     private Button siete_super;
     private Button siete_togo;
-
+    private Activity activity;
     double longitudeGPS, latitudeGPS;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
