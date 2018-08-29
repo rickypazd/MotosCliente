@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.example.ricardopazdemiquel.moviles.CanceloViaje_Cliente;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
 import com.example.ricardopazdemiquel.moviles.Inicio_viaje_togo;
+import com.example.ricardopazdemiquel.moviles.MainActivity;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -56,6 +57,12 @@ public class FirebaseMessagin extends FirebaseMessagingService
                 break;
             case "confirmo_compra":
                 confirmo_compra(remoteMessage);
+                break;
+            case "agrego_costo_extra":
+                agrego_costo_extra(remoteMessage);
+                break;
+            case "elimino_costo_extra":
+                elimino_costo_extra(remoteMessage);
                 break;
         }
         return;
@@ -196,6 +203,42 @@ public class FirebaseMessagin extends FirebaseMessagingService
         sendBroadcast(intent);
     }
 
+    private void agrego_costo_extra(RemoteMessage remoteMessage) {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+        try {
+            JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
+            Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
+                    .setContentTitle("Siete")
+                    .setContentText("Se agrego "+obj.getString("nombre")+" como costo extra, con un valor de "+obj.getString("costo")+" Bs.")
+                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setContentIntent(pendingIntent)
+                    .build();
+            NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(2,notification);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void elimino_costo_extra(RemoteMessage remoteMessage) {
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+        try {
+            JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
+            Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
+                    .setContentTitle("Siete")
+                    .setContentText("Se elimino "+obj.getString("nombre")+" de sus costo extras.")
+                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setContentIntent(pendingIntent)
+                    .build();
+            NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(2,notification);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void mensaje(RemoteMessage remoteMessage){
         Intent intent = new Intent();
