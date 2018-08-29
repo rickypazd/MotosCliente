@@ -597,7 +597,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
         googleMap.moveCamera(cu);
         //linear_confirm.setVisibility(View.VISIBLE);
-        //aspdjapsd
         //mostraConfirmar(tipo);
     }
 
