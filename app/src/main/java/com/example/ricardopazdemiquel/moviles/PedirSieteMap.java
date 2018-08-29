@@ -446,17 +446,14 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_pedir_estandar:
-                calculando_ruta(view , tipo_carrera);
+                Cal(tipo_carrera);
                 break;
             case R.id.btn_pedir_super:
-                calculando_ruta(view , tipo_carrera);
+                Cal(tipo_carrera);
                 break;
             case R.id.btn_pedir_maravilla:
                 //calculando_ruta(view , tipo_carrera);
                 Cal(tipo_carrera);
-                break;
-            case R.id.btn_pedir_togo:
-                calculando_ruta(view , tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
