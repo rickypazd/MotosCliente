@@ -3,6 +3,8 @@ package com.example.ricardopazdemiquel.moviles;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -19,6 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +36,7 @@ import utiles.Contexto;
 public class Detalle_viaje_Cliente extends AppCompatActivity {
 
     private TextView nombre;
-    private ImageView fotoConductor;
+    private com.mikhaellopez.circularimageview.CircularImageView fotoConductor;
     private TextView placa_numerotelefono;
     private TextView direccion_inicio;
     private TextView direccion_final;
@@ -142,12 +147,14 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         int estado= obj.getInt("estado");
                         int costo = obj.getInt("costo_final");
                         int tipo = obj.getInt("tipo_pago");
-
                         nombre.setText(obj.getString("nombre"));
                         placa_numerotelefono.setText(placa+" ° "+telefono);
                         fecha.setText(obj.getString("fecha_pedido").substring(0,16));
                         marca_auto.setText(obj.getString("marca")+" "+obj.getString("modelo"));
 
+                        if(obj.getString("foto_perfil").length()>0){
+                            new AsyncTaskLoadImage(fotoConductor).execute(getString(R.string.url_foto)+obj.getString("foto_perfil"));
+                        }
 
                         switch (tipo){
                             case(EFECTIVO):
@@ -231,6 +238,29 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                 return false;
         }
         return null;
+    }
+
+    public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return bitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
     }
 
 }

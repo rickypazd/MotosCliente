@@ -7,15 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
@@ -49,6 +57,7 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
     private int id_emisor;
     private int id_receptor;
     private String nombre_receptor;
+    private com.mikhaellopez.circularimageview.CircularImageView foto_img;
     private BroadcastReceiver broadcastReceiverMessage;
 
     protected void onCreate(Bundle onSaveInstanceState){
@@ -62,11 +71,17 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
         tv_nombre_receptor=findViewById(R.id.nombre_receptor);
         btn_enviar = findViewById(R.id.btn_enviar);
+        foto_img = findViewById(R.id.foto_img);
         text_mensaje = findViewById(R.id.text_mensaje);
         lv = findViewById(R.id.list_chat);
         id_emisor=Integer.parseInt(getIntent().getStringExtra("id_emisor"));
         id_receptor=Integer.parseInt(getIntent().getStringExtra("id_receptor"));
         nombre_receptor=getIntent().getStringExtra("nombre_receptor");
+        nombre_receptor=getIntent().getStringExtra("nombre_receptor");
+        String img = getIntent().getStringExtra("foto_perfil");
+        if(img.length()>0){
+            new AsyncTaskLoadImage(foto_img).execute(getString(R.string.url_foto)+img);
+        }
         tv_nombre_receptor.setText(nombre_receptor);
         btn_enviar.setOnClickListener(this);
 
@@ -79,6 +94,29 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         lv.setAdapter(adapter_chat);
         lv.setSelection(chats.length());
 
+    }
+
+    public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return bitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
     }
 
 

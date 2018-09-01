@@ -22,9 +22,10 @@
             android:orientation="horizontal">
 
             <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/foto_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:src="@mipmap/ic_miperfil_round" />
 
             <TextView
@@ -35,7 +36,7 @@
                 android:text="Ricardo Paz Demiquel"
                 android:textAlignment="center"
                 android:textColor="@color/mdtp_white"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>

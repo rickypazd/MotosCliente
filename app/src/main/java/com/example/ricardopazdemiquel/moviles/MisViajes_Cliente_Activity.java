@@ -37,6 +37,7 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         lv = findViewById(R.id.list_misViajes);
 

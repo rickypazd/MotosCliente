@@ -40,7 +40,7 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="140dp"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:src="@mipmap/ic_miperfil">
             </com.mikhaellopez.circularimageview.CircularImageView>

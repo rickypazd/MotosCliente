@@ -437,10 +437,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_pedir_super:
-                Cal(tipo_carrera);
+                CalcularRuta(tipo_carrera);
                 break;
             case R.id.btn_pedir_maravilla:
-                Cal(tipo_carrera);
+                CalcularRuta(tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
                 Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
@@ -452,7 +452,32 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void Cal(int tipo_carrera){
+    public void Verificar_tipo_siete(Double lat ,Double lng){
+        switch (tipo_carrera) {
+            case 3:
+                addpositionFavorito(lat ,lng);
+                CalcularRuta(tipo_carrera);
+                break;
+            case 4:
+                addpositionFavorito(lat ,lng);
+                CalcularRuta(tipo_carrera);
+                break;
+            case 1:
+                addpositionFavorito(lat ,lng);
+                break;
+            case 5:
+                addpositionFavorito(lat ,lng);
+                break;
+            case 6:
+                addpositionFavorito(lat ,lng);
+                break;
+            case 7:
+                addpositionFavorito(lat ,lng);
+                break;
+        }
+    }
+
+    public void CalcularRuta(int tipo_carrera){
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
@@ -504,15 +529,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     };
 
-
-
     public void addpositionFavorito(Double lat ,Double lng){
         LatLng latlng = new LatLng(lat,lng);
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latlng, 18);
         googleMap.animateCamera(cu);
         bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
     }
-
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
@@ -799,7 +821,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             String url = obtenerDireccionesURL(latlng1,latlng2);
             DownloadTask downloadTask= new DownloadTask();
             downloadTask.execute(url);
-
             tipo_carrera = tipo;
             //ocultado
             ll_ubic.setVisibility(View.GONE);

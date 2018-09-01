@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -55,6 +57,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Timer;
+import java.util.concurrent.ExecutionException;
 
 
 import clienteHTTP.HttpConnection;
@@ -74,6 +77,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private CoordinatorLayout Container_verPerfil;
     private BottomSheetBehavior bottomSheetBehavior;
     private TextView text_nombreConductor;
+    private ImageView img_foto;
     private TextView text_nombreAuto;
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
@@ -104,6 +108,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
         text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
         text_Viajes= findViewById(R.id.text_Viajes);
+        img_foto = findViewById(R.id.img_foto);
         Container_cancelar = findViewById(R.id.Container_cancelar);
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
         btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
@@ -259,14 +264,12 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     }
 
     private void conductor_llego(Intent intent){
-
         Container_cancelar.setVisibility(View.GONE);
         try {
             new Get_ObtenerPerfilConductor(json_carrera.getString("id")).execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     private void Inicio_Carrera(Intent intent){
@@ -632,6 +635,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
                         text_Viajes.setText("ha completado: " + viajes);
+                        if(object.getString("foto_perfil").length()>0){
+                            new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
+                        }
                         Container_verPerfil.setVisibility(View.VISIBLE);
                         btn_abrir_chat.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -639,8 +645,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                                 Intent intent = new Intent(EsperandoConductor.this,Chat_Activity.class);
                                 try {
                                     intent.putExtra("id_receptor",object.getString("id"));
-                                        intent.putExtra("nombre_receptor",nombreConductor+" "+apellido_pa+" "+apellido_ma);
+                                    intent.putExtra("nombre_receptor",nombreConductor+" "+apellido_pa+" "+apellido_ma);
                                     intent.putExtra("id_emisor",usr_log.getString("id"));
+                                    intent.putExtra("foto_perfil", object.getString("foto_perfil"));
                                     startActivity(intent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -804,5 +811,30 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             progreso.setMessage(values[0]);
         }
     }
+
+    public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return bitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
+
 
 }

@@ -30,8 +30,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     private ListView lista_favoritos;
     private Adapter_favoritos adapter;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
@@ -62,7 +60,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                     JSONObject obj = new JSONObject(view.getTag().toString());
                     Double latFin = obj.getDouble("latFin");
                     Double lngFin = obj.getDouble("lngFin");
-                    ((PedirSieteMap)getActivity()).addpositionFavorito(latFin, lngFin);
+                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(latFin, lngFin);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -94,9 +92,6 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
     }
 
 
-
-
-
     public JSONArray get_list_Favoritos() {
         SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
         String productos = preferencias.getString("lista_favoritos", "");
@@ -122,9 +117,5 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                 break;
         }
     }
-
-
-
-
 
 }
