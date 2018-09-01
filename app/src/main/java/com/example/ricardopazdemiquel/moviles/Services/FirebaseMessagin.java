@@ -279,6 +279,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
     private void mensaje_recibido(RemoteMessage remoteMessage) {
         try {
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
+            setMensaje(obj);
             Intent notificationIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
@@ -293,7 +294,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             intent.putExtra("obj",obj.toString());
             intent.setAction("nuevo_mensaje");
             sendBroadcast(intent);
-            setMensaje(obj);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
