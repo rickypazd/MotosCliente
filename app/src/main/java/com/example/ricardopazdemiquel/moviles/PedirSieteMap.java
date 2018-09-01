@@ -159,7 +159,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         monto = findViewById(R.id.tv_monto);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
 
-
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
         latitudeGPS = getIntent().getDoubleExtra("lat", 0);
 
@@ -511,6 +510,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         LatLng latlng = new LatLng(lat,lng);
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latlng, 18);
         googleMap.animateCamera(cu);
+        bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
     }
 
 
