@@ -146,7 +146,18 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+    public void setMensaje(JSONObject mensaje){
+        JSONArray mensajes= getChat();
+        if(mensajes==null){
+            mensajes=new JSONArray();
+        }
+        mensajes.put(mensaje);
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("chat_carrera", mensajes.toString());
+        editor.commit();
 
+    }
     public JSONArray getChat() {
         SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
         String usr = preferencias.getString("chat_carrera", "");
@@ -184,6 +195,7 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
             adapter_chat.notifyDataSetChanged();
             lv.setSelection(chats.length());
             text_mensaje.setText("");
+            setMensaje(obj);
             new enviarMensaje(id_emisor,id_receptor,mensaje).execute();
         } catch (JSONException e) {
             e.printStackTrace();
