@@ -56,6 +56,7 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_list_chat);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        //nuevo comentario
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
