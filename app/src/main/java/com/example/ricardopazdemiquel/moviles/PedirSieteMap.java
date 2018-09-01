@@ -511,6 +511,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         LatLng latlng = new LatLng(lat,lng);
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latlng, 18);
         googleMap.animateCamera(cu);
+        Cal(tipo_carrera);
     }
 
 

@@ -51,12 +51,10 @@ public class Adapter_chat extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-
         try {
             JSONObject obj =  array.getJSONObject(i);
             if(obj.getInt("tipo")==1){
-                    view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat_e, viewGroup, false);
+                view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat_e, viewGroup, false);
             }else{
                 view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat, viewGroup, false);
             }
