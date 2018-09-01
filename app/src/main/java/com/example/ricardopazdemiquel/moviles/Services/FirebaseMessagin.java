@@ -5,9 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.ricardopazdemiquel.moviles.CanceloViaje_Cliente;
+import com.example.ricardopazdemiquel.moviles.Chat_Activity;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
 import com.example.ricardopazdemiquel.moviles.Inicio_viaje_togo;
 import com.example.ricardopazdemiquel.moviles.MainActivity;
@@ -16,6 +18,7 @@ import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,6 +66,9 @@ public class FirebaseMessagin extends FirebaseMessagingService
                 break;
             case "elimino_costo_extra":
                 elimino_costo_extra(remoteMessage);
+                break;
+            case "mensaje_recibido":
+                mensaje_recibido(remoteMessage);
                 break;
         }
         return;
@@ -270,5 +276,54 @@ public class FirebaseMessagin extends FirebaseMessagingService
         intent.setAction("Message");
         sendBroadcast(intent);
     }
+    private void mensaje_recibido(RemoteMessage remoteMessage) {
+        try {
+            JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
+            Intent notificationIntent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+            Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
+                    .setContentTitle("Siete: Nuevo mensaje")
+                    .setContentText(obj.getString("mensaje"))
+                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setContentIntent(pendingIntent)
+                    .build();
+            NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(3,notification);
+            Intent intent = new Intent();
+            intent.putExtra("obj",obj.toString());
+            intent.setAction("nuevo_mensaje");
+            sendBroadcast(intent);
+            setMensaje(obj);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+    }
+    public void setMensaje(JSONObject mensaje){
+        JSONArray mensajes= getChat();
+        if(mensajes==null){
+            mensajes=new JSONArray();
+        }
+        mensajes.put(mensaje);
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("chat_carrera", mensajes.toString());
+        editor.commit();
+
+    }
+    public JSONArray getChat() {
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+        String usr = preferencias.getString("chat_carrera", "");
+        if (usr.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray chat = new JSONArray(usr);
+                return chat;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
 }

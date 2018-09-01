@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -303,6 +304,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                  startActivity(intent);
                              }
 
+                         }else{
+
+                             SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                             SharedPreferences.Editor editor = preferencias.edit();
+                             editor.putString("chat_carrera", new JSONArray().toString());
+                             editor.commit();
                          }
                      } catch (JSONException e) {
                          e.printStackTrace();
