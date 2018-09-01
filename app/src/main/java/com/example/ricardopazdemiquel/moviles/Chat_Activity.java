@@ -2,7 +2,10 @@ package com.example.ricardopazdemiquel.moviles;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +49,7 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
     private int id_emisor;
     private int id_receptor;
     private String nombre_receptor;
+    private BroadcastReceiver broadcastReceiverMessage;
 
     protected void onCreate(Bundle onSaveInstanceState){
         super.onCreate(onSaveInstanceState);
@@ -66,28 +70,40 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         btn_enviar.setOnClickListener(this);
 
         // creo el chat
-        chats=new JSONArray();
-        adapter_chat = new Adapter_chat(this,chats);
+        chats=getChat();
+        if(chats==null){
+            chats=new JSONArray();
+        }
+        adapter_chat = new Adapter_chat(this,chats,id_emisor);
         lv.setAdapter(adapter_chat);
         lv.setSelection(chats.length());
-        crearreci();
-
-
 
     }
 
-    public void crearreci(){
-        JSONObject obj = new JSONObject();
-        try {
-            obj.put("mensaje","hola hola hola");
-            obj.put("tipo",2);
-            chats.put(obj);
-            adapter_chat.notifyDataSetChanged();
-            lv.setSelection(chats.length());
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(broadcastReceiverMessage == null){
+            broadcastReceiverMessage = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    notificacionReciber(intent);
+                }
+            };
         }
+        registerReceiver(broadcastReceiverMessage,new IntentFilter("nuevo_mensaje"));
     }
+
+    private void notificacionReciber(Intent intent){
+        chats=getChat();
+        if(chats==null){
+            chats=new JSONArray();
+        }
+        adapter_chat.notifyDataSetChanged();
+        lv.setSelection(chats.length());
+    }
+
     // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -130,6 +146,22 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public JSONArray getChat() {
+        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
+        String usr = preferencias.getString("chat_carrera", "");
+        if (usr.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray chat = new JSONArray(usr);
+                return chat;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
     private void enviar_mensaje() {
 
         String mensaje = text_mensaje.getText().toString().trim();
@@ -145,7 +177,8 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         JSONObject obj = new JSONObject();
         try {
             obj.put("mensaje",mensaje);
-            obj.put("tipo",1);
+            obj.put("id_emisor",id_emisor);
+            obj.put("id_receptor",id_receptor);
             chats.put(obj);
             adapter_chat.notifyDataSetChanged();
             lv.setSelection(chats.length());
@@ -203,6 +236,5 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
             super.onProgressUpdate(values);
         }
     }
-
 }
 

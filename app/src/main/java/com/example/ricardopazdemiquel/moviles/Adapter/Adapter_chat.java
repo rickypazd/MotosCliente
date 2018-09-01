@@ -18,11 +18,13 @@ public class Adapter_chat extends BaseAdapter {
 
     private Context contexto;
     private JSONArray array = new JSONArray();
+    private int miId;
     MenuItem item;
 
-    public Adapter_chat(Context contexto, JSONArray array) {
+    public Adapter_chat(Context contexto, JSONArray array, int miId) {
         this.contexto = contexto;
         this.array = array;
+        this.miId=miId;
     }
 
     public JSONArray getArray(){
@@ -55,8 +57,8 @@ public class Adapter_chat extends BaseAdapter {
 
         try {
             JSONObject obj =  array.getJSONObject(i);
-            if(obj.getInt("tipo")==1){
-                    view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat_e, viewGroup, false);
+            if(obj.getInt("id_emisor")==miId){
+                view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat_e, viewGroup, false);
             }else{
                 view = LayoutInflater.from(contexto).inflate(R.layout.layout_item_chat, viewGroup, false);
             }
@@ -90,5 +92,6 @@ public class Adapter_chat extends BaseAdapter {
             }
         }
     }
+
 
 }
