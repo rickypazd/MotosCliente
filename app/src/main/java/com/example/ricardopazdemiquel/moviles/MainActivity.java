@@ -237,6 +237,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                      startActivity(intent);
                      break;
                  case R.id.btn_nav_formaspago:
+                     intent = new Intent(MainActivity.this , Chat_Activity.class);
+                     startActivity(intent);
                      break;
                  case R.id.btn_nav_miperfil:
                      intent =  new Intent(MainActivity.this , Perfil_ClienteFragment.class);

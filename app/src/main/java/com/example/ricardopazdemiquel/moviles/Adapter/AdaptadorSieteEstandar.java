@@ -59,7 +59,7 @@ public class AdaptadorSieteEstandar extends RecyclerView.Adapter<viewHolder> {
                 @Override
                 public void onClick(View view) {
                         int id = (int) view.getTag();
-                        pm.calculando_ruta(view ,id);
+                        pm.Cal(id);
                 }
             });
         } catch (JSONException e) {

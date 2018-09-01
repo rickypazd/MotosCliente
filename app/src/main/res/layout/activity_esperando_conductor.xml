@@ -121,7 +121,7 @@
                                     android:gravity="center">
 
                                     <Button
-                                        android:id="@+id/button2"
+                                        android:id="@+id/btn_abrir_chat"
                                         android:layout_width="60dp"
                                         android:layout_height="60dp"
                                         android:layout_gravity="center"

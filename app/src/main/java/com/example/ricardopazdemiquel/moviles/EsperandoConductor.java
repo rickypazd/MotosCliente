@@ -69,6 +69,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     MapView mMapView;
     private GoogleMap googleMap;
     JSONObject json_carrera;
+    private JSONObject usr_log;
     private LinearLayout Container_cancelar;
     private CoordinatorLayout Container_verPerfil;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -77,6 +78,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private TextView text_numeroPlaca;
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
+
+    private Button btn_abrir_chat;
+
     JSONObject Json_cancelarViaje;
 //    private LinearLayout perfil_condutor;
 
@@ -96,6 +100,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_esperando_conductor);
 
         text_nombreConductor = findViewById(R.id.text_nombreConductor);
+        btn_abrir_chat=findViewById(R.id.btn_abrir_chat);
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
         text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
         text_Viajes= findViewById(R.id.text_Viajes);
@@ -113,7 +118,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        usr_log=getUsr_log();
 
         View view =findViewById(R.id.button_sheet);
         bottomSheetBehavior=BottomSheetBehavior.from(view);
@@ -614,11 +619,11 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             super.onPostExecute(resp);
             try {
                 if(resp != null || !resp.isEmpty()) {
-                    JSONObject object = new JSONObject(resp);
+                    final JSONObject object = new JSONObject(resp);
                     if (object != null) {
-                        String nombreConductor = object.getString("nombre").toString();
-                        String apellido_pa = object.getString("apellido_pa").toString();
-                        String apellido_ma = object.getString("apellido_ma").toString();
+                        final String nombreConductor = object.getString("nombre").toString();
+                        final String apellido_pa = object.getString("apellido_pa").toString();
+                        final String apellido_ma = object.getString("apellido_ma").toString();
                         String modelo = object.getString("modelo").toString();
                         String marca = object.getString("marca").toString();
                         int viajes = object.getInt("cant_car");
@@ -628,6 +633,20 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_numeroPlaca.setText(placa);
                         text_Viajes.setText("ha completado: " + viajes);
                         Container_verPerfil.setVisibility(View.VISIBLE);
+                        btn_abrir_chat.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(EsperandoConductor.this,Chat_Activity.class);
+                                try {
+                                    intent.putExtra("id_receptor",object.getString("id"));
+                                        intent.putExtra("nombre_receptor",nombreConductor+" "+apellido_pa+" "+apellido_ma);
+                                    intent.putExtra("id_emisor",usr_log.getString("id"));
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 }else{
                     Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
@@ -661,16 +680,14 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     private class Cancelar_viaje extends AsyncTask<Void, String, String> {
 
-        String id_usr;
-        {
-            try {
-                id_usr = getUsr_log().getString("id");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        private String id_usr;
 
         private ProgressDialog progreso;
+
+        public Cancelar_viaje() {
+
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -685,7 +702,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             publishProgress("por favor espere...");
             Hashtable<String,String> param = new Hashtable<>();
             param.put("evento","cancelar_carrera");
+
             try {
+                id_usr = getUsr_log().getString("id");
                 param.put("id_carrera",json_carrera.getInt("id")+"");
                 param.put("id_usr",id_usr);
                 param.put("tipo_cancelacion",TIPO_CANCELACION+"");

@@ -191,7 +191,10 @@
 
         <activity android:name=".Preferencias"
             android:screenOrientation="portrait">
-
+        </activity>
+        <activity android:name=".Chat_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeone">
         </activity>
 
     </application>

@@ -113,7 +113,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     private RadioButton radio_efectivo;
     private RadioButton radio_credito;
     // inicializamos los iconos de confirmar carrera
-    private TextView icono2 ;
+    private ImageView icono2 ;
     double mont;
 
     public Calcular_ruta_activity() {
@@ -576,13 +576,10 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
 
     public void calculando_ruta(int tipo , LatLng latlng1 , LatLng latlng2 ){
         selected=null;
-        //LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
-        ///LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
         inicio=latlng1;
         fin=latlng2;
         String url = obtenerDireccionesURL(latlng1,latlng2);
-        Calcular_ruta_activity.DownloadTask downloadTask= new Calcular_ruta_activity.DownloadTask();
-        downloadTask.execute(url);
+
         iv_marker.setVisibility(View.GONE);
         googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
         googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
@@ -590,8 +587,12 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         builder.include(latlng1);
         builder.include(latlng2);
         LatLngBounds bounds=builder.build();
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,width,height,100);
         googleMap.moveCamera(cu);
+        Calcular_ruta_activity.DownloadTask downloadTask= new Calcular_ruta_activity.DownloadTask();
+        downloadTask.execute(url);
         //linear_confirm.setVisibility(View.VISIBLE);
         //mostraConfirmar(tipo);
     }
@@ -599,7 +600,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     private void mostraConfirmar(int valor){
         switch (valor){
             case 2:
-                layoutButon.setVisibility(View.VISIBLE);
                 icono2.setVisibility(View.VISIBLE);
                 break;
         }
