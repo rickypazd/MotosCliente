@@ -75,9 +75,9 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
 
     }
 
-    public void finalizo(String mensaje){
+    public void finalizo(String mensaje ,  boolean amable, boolean auto_limpio, boolean buena_ruta){
         try {
-            new Finalizo(carrera.getInt("id"), ratings, mensaje).execute();
+            new Finalizo(carrera.getInt("id"), ratings, mensaje, amable ,auto_limpio,buena_ruta).execute();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -90,10 +90,16 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
         private int id_carrera;
         private float calificacion;
         private String mensaje;
+        boolean amable;
+        boolean auto_limpio;
+        boolean buena_ruta;
 
-        public Finalizo(int id_carrera , float finalizo , String mensaje) {
+        public Finalizo(int id_carrera , float finalizo , String mensaje , boolean amable , boolean auto_limpio , boolean buena_ruta) {
             this.id_carrera = id_carrera;
             this.calificacion = finalizo;
+            this.amable = amable;
+            this.auto_limpio = auto_limpio;
+            this.buena_ruta = buena_ruta;
             this.mensaje = mensaje;
         }
 
@@ -114,6 +120,9 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
             parametros.put("evento", "finalizo_carrera_cliente");
             parametros.put("id_carrera",id_carrera+"");
             parametros.put("calificacion",calificacion+"");
+            parametros.put("amable",amable+"");
+            parametros.put("auto_limpio",auto_limpio+"");
+            parametros.put("buena_ruta",buena_ruta+"");
             parametros.put("mensaje",mensaje+"");
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
             return respuesta;
