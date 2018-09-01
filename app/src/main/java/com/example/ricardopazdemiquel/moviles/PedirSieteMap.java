@@ -120,7 +120,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete y el tipo de carrera
-    private Button btn_pedir_super, btn_pedir_maravilla, btn_pedir_togo, btn_pedir_estandar;
+    private Button btn_pedir_super, btn_pedir_maravilla;
     private int tipo_carrera;
 
     // inicializamos los iconos de confirmar carrera
@@ -174,8 +174,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         btn_pedir_super = findViewById(R.id.btn_pedir_super);
         btn_pedir_maravilla = findViewById(R.id.btn_pedir_maravilla);
-        btn_pedir_togo = findViewById(R.id.btn_pedir_togo);
-        btn_pedir_estandar = findViewById(R.id.btn_pedir_estandar);
         btn_elegir_destino= findViewById(R.id.btn_elegir_destino);
         recyclerView = findViewById(R.id.reciclerView);
         recyclerView.setHasFixedSize(true);
@@ -185,19 +183,19 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             JSONArray arr = new JSONArray();
             JSONObject obj1 = new JSONObject();
             obj1.put("id", 1);
-            obj1.put("nombre", "Estandar");
+            obj1.put("nombre", R.drawable.background_siete_estadar);
             arr.put(obj1);
             JSONObject obj2 = new JSONObject();
             obj2.put("id", 5);
-            obj2.put("nombre", "4X4");
+            obj2.put("nombre", R.drawable.background_siete_4x4);
             arr.put(obj2);
             JSONObject obj3 = new JSONObject();
             obj3.put("id", 6);
-            obj3.put("nombre", "Camioneta");
+            obj3.put("nombre", R.drawable.background_siete_camioneta);
             arr.put(obj3);
             JSONObject obj4 = new JSONObject();
             obj4.put("id", 7);
-            obj4.put("nombre", "6 pasajeros");
+            obj4.put("nombre", R.drawable.backgroud_tres_filas);
             arr.put(obj4);
             AdaptadorSieteEstandar ada = new AdaptadorSieteEstandar(arr, this, PedirSieteMap.this);
             recyclerView.setAdapter(ada);
@@ -219,10 +217,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         icono6 = findViewById(R.id.icono6);
         icono7 = findViewById(R.id.icono7);
 
-        btn_pedir_estandar.setOnClickListener(this);
         btn_pedir_super.setOnClickListener(this);
         btn_pedir_maravilla.setOnClickListener(this);
-        btn_pedir_togo.setOnClickListener(this);
         btn_elegir_destino.setOnClickListener(this);
 
         linear_confirm = findViewById(R.id.linear_confirm);
@@ -295,13 +291,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                                 if (acept) {
                                     ok_predir_viaje();
                                 }
-
                             }
                         }
-
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -445,14 +437,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_pedir_estandar:
-                Cal(tipo_carrera);
-                break;
             case R.id.btn_pedir_super:
                 Cal(tipo_carrera);
                 break;
             case R.id.btn_pedir_maravilla:
-                //calculando_ruta(view , tipo_carrera);
                 Cal(tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
@@ -465,7 +453,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void Cal(int tipo_carrera){
+    public void Cal(int tipo_carrera){
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
@@ -478,7 +466,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             intent.putExtra("latfinal", latlng2.latitude);
             intent.putExtra("lngfinal", latlng2.longitude);
             startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
             return;
@@ -781,12 +769,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             switch (tipo) {
             case 1:
                 recyclerView.setVisibility(View.VISIBLE);
-                break;
-            case 2:
-                btn_pedir_togo.setVisibility(View.VISIBLE);
-                linearLayoutPedir.setVisibility(View.GONE);
-                cargartogo();
-                linearLayoutTogo.setVisibility(View.VISIBLE);
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);

@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.model.ImageVideoWrapperEncoder;
 import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.viewHolder;
@@ -49,13 +51,15 @@ public class AdaptadorSieteEstandar extends RecyclerView.Adapter<viewHolder> {
         try {
             //holder.itemView.setOnLongClickListener(this);
             JSONObject obj =listaCanchas.getJSONObject(position);
-            holder.btn_reservar.setText(obj.getString("nombre"));
+            //holder.btn_reservar.setImageResource(R.drawable.background_siete_camioneta);
+            //String a = obj.getString("nombre");
+            holder.btn_reservar.setImageResource(Integer.parseInt(obj.getString("nombre")));
             holder.btn_reservar.setTag(obj.getInt("id"));
             holder.btn_reservar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                         int id = (int) view.getTag();
-                        pm.calculando_ruta(view ,id);
+                        pm.Cal(id);
                 }
             });
         } catch (JSONException e) {

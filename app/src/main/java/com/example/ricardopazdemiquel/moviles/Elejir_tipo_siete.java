@@ -81,30 +81,32 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(getActivity(), PedirSieteMap.class);
-        Intent intent_togo = new Intent(getActivity(), PedirSieteTogo.class);
         switch (view.getId()) {
             case R.id.btn_siete:
+                    Intent intent = new Intent(getActivity(), PedirSieteMap.class);
                     intent.putExtra("lng", longitudeGPS);
                     intent.putExtra("lat", latitudeGPS);
                     intent.putExtra("tipo", 1);
                     startActivity(intent);
                 break;
             case R.id.btn_superSiete:
-                    intent.putExtra("lng", longitudeGPS);
-                    intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 4);
-                    startActivity(intent);
+                Intent intent1 = new Intent(getActivity(), PedirSieteMap.class);
+                    intent1.putExtra("lng", longitudeGPS);
+                    intent1.putExtra("lat", latitudeGPS);
+                    intent1.putExtra("tipo", 4);
+                    startActivity(intent1);
 
                 break;
             case R.id.btn_sieteMaravilla:
-                    intent.putExtra("lng", longitudeGPS);
-                    intent.putExtra("lat", latitudeGPS);
-                    intent.putExtra("tipo", 3);
-                    startActivity(intent);
+                Intent intent2 = new Intent(getActivity(), PedirSieteMap.class);
+                    intent2.putExtra("lng", longitudeGPS);
+                    intent2.putExtra("lat", latitudeGPS);
+                    intent2.putExtra("tipo", 3);
+                    startActivity(intent2);
 
                 break;
             case R.id.btn_togo:
+                Intent intent_togo = new Intent(getActivity(), PedirSieteTogo.class);
                     intent_togo.putExtra("lng", longitudeGPS);
                     intent_togo.putExtra("lat", latitudeGPS);
                     intent_togo.putExtra("tipo", 2);
