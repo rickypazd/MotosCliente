@@ -101,7 +101,8 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         if(chats==null){
             chats=new JSONArray();
         }
-        adapter_chat.notifyDataSetChanged();
+        adapter_chat = new Adapter_chat(this,chats,id_emisor);
+        lv.setAdapter(adapter_chat);
         lv.setSelection(chats.length());
     }
 
