@@ -74,7 +74,8 @@ public class List_historial_fragment extends Fragment {
                     JSONObject obj = new JSONObject(view.getTag().toString());
                     Double latFin = obj.getDouble("latfinal");
                     Double lngFin = obj.getDouble("lngfinal");
-                    ((PedirSieteMap)getActivity()).addpositionFavorito(latFin, lngFin);
+                    String nombre="asdasda PRUEBA PRUEBA";
+                    ((PedirSieteMap)getActivity()).addpositionFavorito(nombre,latFin, lngFin);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
