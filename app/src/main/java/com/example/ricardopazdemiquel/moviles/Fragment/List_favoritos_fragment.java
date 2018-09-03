@@ -58,9 +58,10 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
                     JSONObject obj = new JSONObject(view.getTag().toString());
+                    String nombre = obj.getString("nombre_favorito");
                     Double latFin = obj.getDouble("latFin");
                     Double lngFin = obj.getDouble("lngFin");
-                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(latFin, lngFin);
+                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(nombre , latFin, lngFin);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

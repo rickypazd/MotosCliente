@@ -314,7 +314,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onMapReady(final GoogleMap mMap) {
                 googleMap = mMap;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeGPS, longitudeGPS), 14);
+                CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(latitudeGPS, longitudeGPS), 18);
                 googleMap.animateCamera(cu);
                 //mMap.setMapStyle(new MapStyleOptions(getResources().getString(R.string.style_map)));
                 if (ActivityCompat.checkSelfPermission(PedirSieteMap.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(PedirSieteMap.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -432,7 +432,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         startActivity(inte);
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -442,37 +441,38 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case R.id.btn_pedir_maravilla:
                 CalcularRuta(tipo_carrera);
                 break;
-            case R.id.btn_agregar_producto:
-                Intent intent =  new Intent(PedirSieteMap.this, Producto_togo_Activity.class);
-                startActivity(intent);
-                break;
             case R.id.btn_elegir_destino:
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
         }
     }
 
-    public void Verificar_tipo_siete(Double lat ,Double lng){
-        switch (tipo_carrera) {
+    public void Verificar_tipo_siete(String nombre , Double lat ,Double lng ){
+        switch (tipo_carrera){
+            case 1:
+                calculando_ruta(tipo_carrera ,nombre,lat,lng);
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
+                break;
+            case 2:
+                break;
             case 3:
-                addpositionFavorito(lat ,lng);
-                CalcularRuta(tipo_carrera);
+                Aux_CalcularRuta(tipo_carrera ,lat,lng);
                 break;
             case 4:
-                addpositionFavorito(lat ,lng);
-                CalcularRuta(tipo_carrera);
-                break;
-            case 1:
-                addpositionFavorito(lat ,lng);
+                Aux_CalcularRuta(tipo_carrera, lat,lng);
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
             case 5:
-                addpositionFavorito(lat ,lng);
+                calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
             case 6:
-                addpositionFavorito(lat ,lng);
+                calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
             case 7:
-                addpositionFavorito(lat ,lng);
+                calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
         }
     }
@@ -495,6 +495,86 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         else{
             return;
         }
+    }
+
+    public void Aux_CalcularRuta(int tipo_carrera, Double lat ,Double lng ){
+        if(mAutocompleteTextView.getTag()!= null){
+            Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
+            LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
+            intent.putExtra("tipo", tipo_carrera);
+            intent.putExtra("lng", longitudeGPS);
+            intent.putExtra("lat", latitudeGPS);
+            intent.putExtra("latinicio", latlng1.latitude);
+            intent.putExtra("lnginicio", latlng1.longitude);
+            intent.putExtra("latfinal", lat);
+            intent.putExtra("lngfinal", lng);
+            startActivity(intent);
+            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+        else{
+            return;
+        }
+    }
+
+    public void calculando_ruta(int tipo, String nombre , Double lat ,Double lng){
+        selected=null;
+        if(mAutocompleteTextView.getTag()!= null){
+            LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
+            LatLng latlng2= new LatLng(lat , lng);
+            inicio=latlng1;
+            fin=latlng2;
+            String url = obtenerDireccionesURL(latlng1,latlng2);
+            DownloadTask downloadTask= new DownloadTask();
+            downloadTask.execute(url);
+            tipo_carrera = tipo;
+            googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+            googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(latlng1);
+            builder.include(latlng2);
+            LatLngBounds bounds=builder.build();
+            int width = getResources().getDisplayMetrics().widthPixels;
+            int height = getResources().getDisplayMetrics().heightPixels;
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,width,height,0);
+            googleMap.setPadding(200,200,200,200);
+            googleMap.moveCamera(cu);
+            bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
+            addpositionFavorito(nombre , lat , lng);
+        }
+    }
+
+
+    private String get_localizacion(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(PedirSieteMap.this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                Log.w("My Current loction addr", strReturnedAddress.toString());
+            } else {
+                Log.w("My Current loction addr", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction addr", "Canont get Address!");
+        }
+        return strAdd;
+    }
+
+
+    public void addpositionFavorito( String nombre , Double lat ,Double lng){
+        LatLng lat1 = new LatLng(lat ,lng);
+        //String nombre  = get_localizacion(lat ,lng);
+
+        selected.setText(nombre,false);
+        selected.setTag(lat);
     }
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
@@ -523,18 +603,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             // Selecting the first object buffer.
             final Place place = places.get(0);
             CharSequence attributions = places.getAttributions();
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 18);
-            googleMap.animateCamera(cu);
+            //String nombre=place.getAddress().toString();
+            LatLng lat=place.getLatLng();
+            selected.setText(place.getAddress(),false);
+            selected.setTag(lat);
+            //CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 18);
+            //googleMap.animateCamera(cu);
 
         }
     };
-
-    public void addpositionFavorito(Double lat ,Double lng){
-        LatLng latlng = new LatLng(lat,lng);
-        CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(latlng, 18);
-        googleMap.animateCamera(cu);
-        bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-    }
 
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
@@ -807,37 +884,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(PedirSieteMap.this,arr);
             lista_productos.setAdapter(adapter);
             tv_cantidad.setText("Productos ("+arr.length()+")");
-        }
-    }
-
-
-    public void calculando_ruta(View view , int tipo){
-        selected=null;
-        if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
-            LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
-            LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
-            inicio=latlng1;
-            fin=latlng2;
-            String url = obtenerDireccionesURL(latlng1,latlng2);
-            DownloadTask downloadTask= new DownloadTask();
-            downloadTask.execute(url);
-            tipo_carrera = tipo;
-            //ocultado
-            ll_ubic.setVisibility(View.GONE);
-            iv_marker.setVisibility(View.GONE);
-            recyclerView.setVisibility(view.GONE);
-            view.setVisibility(View.GONE);
-            googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-            googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(latlng1);
-            builder.include(latlng2);
-            LatLngBounds bounds=builder.build();
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,100);
-            googleMap.moveCamera(cu);
-            linear_confirm.setVisibility(View.VISIBLE);
-            //aspdjapsd
-            mostraConfirmar(tipo);
         }
     }
 
