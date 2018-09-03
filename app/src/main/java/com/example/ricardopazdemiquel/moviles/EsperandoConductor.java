@@ -538,7 +538,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                     }
                 }
             }
-
         }
         @Override
         protected void onProgressUpdate(String... values) {
@@ -661,7 +660,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         @Override
         protected void onProgressUpdate(String... values) {
