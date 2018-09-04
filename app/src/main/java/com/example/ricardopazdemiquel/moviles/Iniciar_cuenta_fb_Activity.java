@@ -62,6 +62,15 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
         Radio();
 
+        Intent it = getIntent();
+        if (it != null) {
+            try {
+                JSONObject  obj =new JSONObject(it.getStringExtra("usr_face"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         /*Intent it = getIntent();
         if (it != null) {
             Bundle params = it.getExtras();
