@@ -78,8 +78,6 @@ public class Carga extends AppCompatActivity {
         }*/
 
         ejecutar();
-
-
     }
     public void ejecutar(){
         new Handler().postDelayed(new Runnable() {
