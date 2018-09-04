@@ -2,29 +2,29 @@ package com.example.ricardopazdemiquel.moviles;
 
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class IniciarCuentaActivity extends AppCompatActivity implements View.OnClickListener{
+public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements View.OnClickListener{
 
 
     private EditText edit_nombre;
     private EditText edit_apellidoP;
     private EditText edit_apellidoM;
     private EditText edit_telefono;
+    private EditText edit_correo;
+    private com.mikhaellopez.circularimageview.CircularImageView img_photo;
+
 
     private RadioButton radio_hombre;
     private RadioButton radio_mujer;
@@ -54,12 +54,13 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
         edit_telefono = findViewById(R.id.edit_telefono);
         radio_hombre = findViewById(R.id.radioHombre);
         radio_mujer = findViewById(R.id.radioMujer);
+        edit_correo = findViewById(R.id.edit_correo);
+        img_photo= findViewById(R.id.img_photo);
         btn_siguiente = findViewById(R.id.btn_siguiente);
 
         btn_siguiente.setOnClickListener(this);
 
         Radio();
-
 
         /*Intent it = getIntent();
         if (it != null) {
