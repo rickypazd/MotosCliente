@@ -60,23 +60,6 @@ public class IniciarCuentaActivity extends AppCompatActivity implements View.OnC
 
         Radio();
 
-
-        Intent it = getIntent();
-        if (it != null) {
-            try {
-                JSONObject  obj =new JSONObject(it.getStringExtra("usr_face"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
-                int solicitud_id = (int)id;
-                createSimpleDialog(solicitud_id).show();
-            }
-        });*/
     }
 
     private void Radio() {

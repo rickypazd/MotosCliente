@@ -41,6 +41,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
     private RadioButton radio_mujer;
     private Button btn_siguiente;
     private String sexo;
+    private String id;
 
     public String getSexo() {
         return sexo;
@@ -75,6 +76,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (it != null) {
             try {
                 JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
+                String id = obj.getString("id");
                 String nombre1 = obj.getString("first_name");
                 String nombre2 = obj.getString("middle_mane");
                 edit_nombre.setText(nombre1 +" "+ nombre2);
@@ -196,13 +198,14 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (!isValid) {
             return;
         }
-        new Registrar(nombreV , apellidoV , correoV ,telefonoV , getSexo()).execute();
+        new Registrar(id , nombreV , apellidoV , correoV ,telefonoV , getSexo()).execute();
     }
 
     private class Registrar extends AsyncTask<Void, String, String> {
         private ProgressDialog progreso;
-        private String  nombre ,  apellidos, correo , telefono ,  sexo;
-        public Registrar( String nombre ,String apellidos , String correo , String telefono , String sexo) {
+        private String  id , nombre ,  apellidos, correo , telefono ,  sexo ;
+        public Registrar(String id ,String nombre ,String apellidos , String correo , String telefono , String sexo) {
+            this.id= id;
             this.nombre= nombre;
             this.apellidos = apellidos;
             this.correo = correo;
@@ -222,7 +225,8 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         @Override
         protected String doInBackground(Void... params) {
             Hashtable<String,String> param = new Hashtable<>();
-            param.put("evento","registrar_usuario_face_cliente");
+            param.put("evento","registrar_usuario_face");
+            param.put("id",id);
             param.put("nombre",nombre);
             param.put("apellidos",apellidos);
             param.put("correo",correo);
