@@ -78,7 +78,7 @@
                         android:id="@+id/edit_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Ingrese su nombre"
+                        android:hint="Nombres"
                         android:inputType="textPersonName" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -138,7 +138,7 @@
                         android:id="@+id/edit_correo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Correo electronico"
+                        android:hint="Correo electrónico"
                         android:inputType="textPersonName" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -192,6 +192,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:text="Hombre"
+                android:checked="true"
+                android:buttonTint="@color/colorPrimary"
                 android:textSize="18dp" />
 
             <RadioButton

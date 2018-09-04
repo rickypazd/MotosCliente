@@ -76,7 +76,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (it != null) {
             try {
                 JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
-                String id = obj.getString("id");
+                id = obj.getString("id");
                 String nombre1 = obj.getString("first_name");
                 String nombre2 = obj.getString("middle_mane");
                 edit_nombre.setText(nombre1 +" "+ nombre2);
@@ -184,10 +184,6 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             edit_apellidoP.setError("campo obligatorio");
             isValid = false;
         }
-        if (telefonoV.isEmpty()) {
-            edit_telefono.setError("campo obligarotio");
-            isValid = false;
-        }
         if (correoV.isEmpty()) {
             edit_correo.setError("campo obligatorio");
             isValid = false;
@@ -247,6 +243,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                     return;
                 }else{
                     Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(inte);
                     finish();
                 }
