@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -337,6 +338,38 @@ private Button btn_enviar_mensaje;
 
     private void Confirmo_compra(Intent intenta){
 
+    }
+    private String number;
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 255: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    callPhone();
+                } else {
+                    System.out.println("El usuario ha rechazado el permiso");
+                }
+                return;
+            }
+        }
+    }
+
+    public void callPhone() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        startActivity(intent);
     }
 
 
@@ -695,21 +728,17 @@ private Button btn_enviar_mensaje;
                         @Override
                         public void onClick(View v) {
                             try {
-                                String telefono=object.getString("telefono");
+                                String telefono = object.getString("telefono");
+                                number=telefono;
 
-                                Intent i = new Intent(Intent.ACTION_CALL);
-                                i.setData(Uri.parse("tel:"+telefono));
-                                if (ActivityCompat.checkSelfPermission(Inicio_viaje_togo.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                    // TODO: Consider calling
-                                    //    ActivityCompat#requestPermissions
-                                    // here to request the missing permissions, and then overriding
-                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                    //                                          int[] grantResults)
-                                    // to handle the case where the user grants the permission. See the documentation
-                                    // for ActivityCompat#requestPermissions for more details.
-                                    return;
+                                int permissionCheck = ContextCompat.checkSelfPermission(
+                                        Inicio_viaje_togo.this, Manifest.permission.CALL_PHONE);
+                                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                                    Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
+                                    ActivityCompat.requestPermissions(Inicio_viaje_togo.this, new String[]{Manifest.permission.CALL_PHONE}, 225);
+                                } else {
+                                    callPhone();
                                 }
-                                startActivity(i);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

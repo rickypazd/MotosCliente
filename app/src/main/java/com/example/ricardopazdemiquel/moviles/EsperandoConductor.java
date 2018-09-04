@@ -280,7 +280,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     public void callPhone() {
         Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setPackage("com.android.phone");
         intent.setData(Uri.parse("tel:" + number));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -671,9 +670,12 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
                         text_Viajes.setText("ha completado: " + viajes);
-                        if(object.getString("foto_perfil").length()>0){
-                            new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
+                        if(object.has("foto_perfil")){
+                            if(object.getString("foto_perfil").length()>0){
+                                new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
+                            }
                         }
+
                         Container_verPerfil.setVisibility(View.VISIBLE);
                         btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
                             @Override
