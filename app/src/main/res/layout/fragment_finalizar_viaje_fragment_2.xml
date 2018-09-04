@@ -44,7 +44,7 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/intentar_conexion"
+                android:background="@drawable/ic_icon_amable"
                 android:text="Forma de pago"
                 android:textAlignment="center"
                 android:textSize="15dp" />
@@ -53,7 +53,7 @@
                 android:id="@+id/btn_buena_ruta"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
-                android:background="@drawable/intentar_conexion"
+                android:background="@drawable/ic_icon_buena_ruta"
                 android:textAlignment="center"
                 android:textSize="15dp" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/intentar_conexion"
+                android:background="@drawable/ic_icon_auto_limpio"
                 android:textAlignment="center"
                 android:textSize="15dp" />
 

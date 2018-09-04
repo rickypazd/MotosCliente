@@ -234,11 +234,12 @@
                                     android:gravity="center"
                                     android:layout_weight="1">
 
-                                    <Button
+                                    <ImageView
                                         android:id="@+id/button6"
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
-                                        android:background="@drawable/round_foreground" />
+                                        android:background="@drawable/ic_icon_auto_limpio"
+                                        />
 
                                     <TextView
                                         android:id="@+id/textView12"
@@ -258,11 +259,12 @@
                                     android:gravity="center"
                                     android:layout_weight="1">
 
-                                    <Button
+                                    <ImageView
                                         android:id="@+id/button3"
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
-                                        android:background="@drawable/round_foreground" />
+                                        android:background="@drawable/ic_icon_buena_ruta"
+                                         />
 
                                     <TextView
                                         android:id="@+id/textView11"
@@ -283,11 +285,12 @@
                                     android:gravity="center"
                                     android:layout_weight="1">
 
-                                    <Button
+                                    <ImageView
                                         android:id="@+id/button7"
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
-                                        android:background="@drawable/round_foreground" />
+                                        android:background="@drawable/ic_icon_auto_limpio"
+                                        />
 
                                     <TextView
                                         android:id="@+id/textView13"
