@@ -119,6 +119,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private RecyclerView recyclerView;
     private int tipo_pago;
     private BottomSheetBehavior bottomSheetBehavior;
+
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.9720));
 
@@ -163,6 +164,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         layoutButon = findViewById(R.id.ll_boton);
         iv_marker = findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
+
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
 
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
