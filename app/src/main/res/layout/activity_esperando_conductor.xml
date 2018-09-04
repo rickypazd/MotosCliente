@@ -83,17 +83,17 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1"
+                                    android:gravity="center">
 
-                                    <EditText
-                                        android:id="@+id/button"
+                                    <Button
+                                        android:id="@+id/btn_llamar"
                                         android:layout_width="60dp"
                                         android:layout_height="60dp"
-                                        android:background="@drawable/ic_logo_phone"
                                         android:layout_gravity="center"
-                                        android:padding="17dp"
-                                        android:drawableStart="@drawable/ic_telefono"/>
+                                        android:background="@drawable/ic_logo_phone"
+                                        android:drawableStart="@drawable/ic_telefono"
+                                        android:padding="17dp" />
 
                                 </LinearLayout>
 
@@ -108,9 +108,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_gravity="center"
-                                        android:src="@mipmap/ic_miperfil_round"
                                         android:drawableStart="@drawable/ic_sobre"
-                                        android:padding="17dp" />
+                                        android:padding="17dp"
+                                        android:src="@mipmap/ic_miperfil_round" />
 
                                 </LinearLayout>
 
@@ -121,7 +121,7 @@
                                     android:gravity="center">
 
                                     <Button
-                                        android:id="@+id/btn_abrir_chat"
+                                        android:id="@+id/btn_enviar_mensaje"
                                         android:layout_width="60dp"
                                         android:layout_height="60dp"
                                         android:layout_gravity="center"

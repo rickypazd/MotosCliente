@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -82,7 +83,8 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
     private ListView lista_productos;
     private TextView tv_cantidad;
 //    private LinearLayout perfil_condutor;
-
+private Button btn_enviar_mensaje;
+    private Button btn_llamar;
     //añadiendo los broadcaast
     private BroadcastReceiver broadcastReceiverMessage;
     private BroadcastReceiver broadcastReceiverMessageconductor;
@@ -103,6 +105,8 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
         text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
         text_Viajes= findViewById(R.id.text_Viajes);
+        btn_llamar = findViewById(R.id.btn_llamar);
+        btn_enviar_mensaje = findViewById(R.id.btn_enviar_mensaje);
         Container_cancelar = findViewById(R.id.Container_cancelar);
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
         btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
@@ -658,11 +662,11 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             try {
-                JSONObject object = new JSONObject(resp);
+                final JSONObject object = new JSONObject(resp);
                 if(object != null){
-                    String nombreConductor = object.getString("nombre").toString();
-                    String apellido_pa = object.getString("apellido_pa").toString();
-                    String apellido_ma = object.getString("apellido_ma").toString();
+                    final String nombreConductor = object.getString("nombre").toString();
+                    final String apellido_pa = object.getString("apellido_pa").toString();
+                    final String apellido_ma = object.getString("apellido_ma").toString();
                     String modelo = object.getString("modelo").toString();
                     String marca =  object.getString("marca").toString();
                     int viajes = object.getInt("cant_car");
@@ -672,6 +676,46 @@ public class Inicio_viaje_togo extends AppCompatActivity implements View.OnClick
                     text_numeroPlaca.setText(placa);
                     text_Viajes.setText("ha completado: " + viajes);
                     Container_verPerfil.setVisibility(View.VISIBLE);
+                    btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Inicio_viaje_togo.this,Chat_Activity.class);
+                            try {
+                                intent.putExtra("id_receptor",object.getString("id"));
+                                intent.putExtra("nombre_receptor",nombreConductor+" "+apellido_pa+" "+apellido_ma);
+                                intent.putExtra("id_emisor",getUsr_log().getString("id"));
+                                intent.putExtra("foto_perfil", object.getString("foto_perfil"));
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    btn_llamar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                String telefono=object.getString("telefono");
+
+                                Intent i = new Intent(Intent.ACTION_CALL);
+                                i.setData(Uri.parse("tel:"+telefono));
+                                if (ActivityCompat.checkSelfPermission(Inicio_viaje_togo.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                startActivity(i);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

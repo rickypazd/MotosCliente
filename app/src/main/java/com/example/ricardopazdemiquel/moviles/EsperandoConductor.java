@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -83,8 +84,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
 
-    private Button btn_abrir_chat;
 
+    private Button btn_enviar_mensaje;
+    private Button btn_llamar;
     JSONObject Json_cancelarViaje;
 //    private LinearLayout perfil_condutor;
 
@@ -104,7 +106,8 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_esperando_conductor);
 
         text_nombreConductor = findViewById(R.id.text_nombreConductor);
-        btn_abrir_chat=findViewById(R.id.btn_abrir_chat);
+        btn_llamar = findViewById(R.id.btn_llamar);
+        btn_enviar_mensaje = findViewById(R.id.btn_enviar_mensaje);
         text_nombreAuto = findViewById(R.id.text_nombreAuto);
         text_numeroPlaca = findViewById(R.id.text_numeroPlaca);
         text_Viajes= findViewById(R.id.text_Viajes);
@@ -638,7 +641,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                             new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
                         }
                         Container_verPerfil.setVisibility(View.VISIBLE);
-                        btn_abrir_chat.setOnClickListener(new View.OnClickListener() {
+                        btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(EsperandoConductor.this,Chat_Activity.class);
@@ -648,6 +651,31 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                                     intent.putExtra("id_emisor",usr_log.getString("id"));
                                     intent.putExtra("foto_perfil", object.getString("foto_perfil"));
                                     startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        btn_llamar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    String telefono=object.getString("telefono");
+
+                                    Intent i = new Intent(Intent.ACTION_CALL);
+                                    i.setData(Uri.parse("tel:"+telefono));
+                                    if (ActivityCompat.checkSelfPermission(EsperandoConductor.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                        // TODO: Consider calling
+                                        //    ActivityCompat#requestPermissions
+                                        // here to request the missing permissions, and then overriding
+                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                        //                                          int[] grantResults)
+                                        // to handle the case where the user grants the permission. See the documentation
+                                        // for ActivityCompat#requestPermissions for more details.
+                                        return;
+                                    }
+                                    startActivity(i);
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
