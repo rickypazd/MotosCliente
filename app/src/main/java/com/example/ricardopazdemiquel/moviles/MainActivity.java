@@ -116,11 +116,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 seleccionarFragmento("Mapa");
             }
         }
-        /*try {
+        try {
             new Get_validarCarrera(usr_log.getInt("id")).execute();
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
         //  showDirections(-17.89,-63.1408,-17.6,-63.1408);
     }
 

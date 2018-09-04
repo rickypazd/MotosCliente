@@ -71,11 +71,13 @@ public class Carga extends AppCompatActivity {
 
         }
         usr_log=getUsr_log();
-        try {
+        /*try {
             new Get_validarCarrera(usr_log.getInt("id")).execute();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        ejecutar();
 
 
     }
@@ -190,7 +192,7 @@ public class Carga extends AppCompatActivity {
                             SharedPreferences.Editor editor = preferencias.edit();
                             editor.putString("chat_carrera", new JSONArray().toString());
                             editor.commit();
-                            ejecutar();
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
