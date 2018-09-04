@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.concurrent.ExecutionException;
 
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
@@ -150,7 +151,43 @@ public class LoginSocial extends AppCompatActivity {
                                 // Application code
                                 try {
                                     String id=object.getString("id");
-                                    new get_usr_face(id).execute();
+                                        try {
+                                        String resp= new get_usr_face(id).execute().get();
+                                        if(resp==null){
+                                            Toast.makeText(LoginSocial.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            if (resp.contains("falso")) {
+                                                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                                            } else {
+                                                try {
+                                                    JSONObject obj = new JSONObject(resp);
+                                                    if(obj.getString("exito").equals("si")) {
+                                                        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                                                        SharedPreferences.Editor editor = preferencias.edit();
+                                                        editor.putString("usr_log", obj.toString());
+                                                        editor.commit();
+                                                        Intent intent = new Intent(LoginSocial.this,MainActivity.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                        startActivity(intent);
+                                                        LoginManager.getInstance().logOut();
+                                                    }else{
+                                                        Intent intent = new Intent(LoginSocial.this,IniciarCuentaActivity.class);
+                                                        intent.putExtra("usr_face",obj.toString());
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                        startActivity(intent);
+                                                    }
+
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -316,34 +353,7 @@ public class LoginSocial extends AppCompatActivity {
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
-            if(resp==null){
-                Toast.makeText(LoginSocial.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
-            }else{
-                if (resp.contains("falso")) {
-                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-                } else {
-                    try {
-                        JSONObject obj = new JSONObject(resp);
-                        if(obj.getString("exito").equals("si")) {
-                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferencias.edit();
-                            editor.putString("usr_log", obj.toString());
-                            editor.commit();
-                            Intent intent = new Intent(LoginSocial.this,MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        }else{
-                            Intent intent = new Intent(LoginSocial.this,IniciarCuentaActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        }
 
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
 
         }
         @Override
