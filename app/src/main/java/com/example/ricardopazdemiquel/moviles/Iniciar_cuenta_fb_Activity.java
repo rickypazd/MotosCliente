@@ -175,11 +175,11 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         boolean isValid = true;
 
         if (nombreV.isEmpty()) {
-            edit_nombre.setError("debe ingresar su nombre");
+            edit_nombre.setError("campo obligatorio");
             isValid = false;
         }
         if (apellidoV.isEmpty()) {
-            edit_apellidoP.setError("Campo Obligatorio");
+            edit_apellidoP.setError("campo obligatorio");
             isValid = false;
         }
         if (telefonoV.isEmpty()) {
@@ -187,7 +187,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             isValid = false;
         }
         if (correoV.isEmpty()) {
-            edit_correo.setError("campo obligarotio");
+            edit_correo.setError("campo obligatorio");
             isValid = false;
         }else if (validarEmailSimple(correoV) == false) {
             edit_correo.setError("email no valido");
@@ -196,8 +196,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (!isValid) {
             return;
         }
-        
-
+        new Registrar(nombreV , apellidoV , correoV ,telefonoV , getSexo()).execute();
     }
 
     private class Registrar extends AsyncTask<Void, String, String> {
