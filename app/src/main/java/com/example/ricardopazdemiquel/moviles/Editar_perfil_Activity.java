@@ -46,9 +46,11 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_editar_perfil);
+
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         textNombre = findViewById(R.id.text_nombreCliente);
         text_titulo = findViewById(R.id.text_titulo);

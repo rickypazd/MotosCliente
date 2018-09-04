@@ -127,8 +127,6 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-
-
     private void ShowDatapinckerDialog(){
         final java.util.Calendar c = java.util.Calendar.getInstance();
         c.set(Calendar.YEAR , 1900);

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +25,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +49,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
     private TextView textTelefono;
     private TextView textEmail;
     private TextView textcredito;
+    private com.mikhaellopez.circularimageview.CircularImageView img_photo;
 
 
     private LinearLayout Liner_nombre;
@@ -65,6 +72,7 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         textApellido = findViewById(R.id.text_apellidoCliente);
         textTelefono = findViewById(R.id.text_numero_telefono);
         textEmail = findViewById(R.id.text_email_cliente);
+        img_photo = findViewById(R.id.img_photo);
 
         textcredito = findViewById(R.id.creditos);
 
@@ -72,7 +80,6 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         Liner_apellido = findViewById(R.id.Liner_apellido);
         Liner_telefono = findViewById(R.id.Liner_telefono);
         Liner_correo = findViewById(R.id.Liner_correo);
-
 
         Liner_nombre.setOnClickListener(this);
         Liner_apellido.setOnClickListener(this);
@@ -188,6 +195,9 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                 textTelefono.setText("+591 "+telefono);
                 textEmail.setText(correo);
                 textcredito.setText(credito);
+                if(usr_log.getString("foto_perfil").length()>0){
+                    new AsyncTaskLoadImage(img_photo).execute(getString(R.string.url_foto)+usr_log.getString("foto_perfil"));
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -211,7 +221,6 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
             }
         }
     }
-
 
 
     public class User_getPerfil extends AsyncTask<Void, String, String> {
@@ -274,5 +283,29 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
 
         }
     }
+
+    public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
+        private final static String TAG = "AsyncTaskLoadImage";
+        private ImageView imageView;
+        public AsyncTaskLoadImage(ImageView imageView) {
+            this.imageView = imageView;
+        }
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            try {
+                URL url = new URL(params[0]);
+                bitmap = BitmapFactory.decodeStream((InputStream)url.getContent());
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return bitmap;
+        }
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
 
 }

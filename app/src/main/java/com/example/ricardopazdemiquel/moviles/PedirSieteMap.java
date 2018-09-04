@@ -233,9 +233,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         //bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
 
-
-
-
         SetupViewPager_fragment = new SetupViewPager_fragment();
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragment, SetupViewPager_fragment).commit();
 
