@@ -173,7 +173,7 @@ public class LoginSocial extends AppCompatActivity {
                                                     }else{
 
                                                         ////esteeee <=-------
-                                                        Intent intent = new Intent(LoginSocial.this,IniciarCuentaActivity.class);
+                                                        Intent intent = new Intent(LoginSocial.this,Iniciar_cuenta_fb_Activity.class);
                                                         intent.putExtra("usr_face",obj.toString());
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);
