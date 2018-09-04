@@ -112,8 +112,6 @@ public class Adapter_transaccion extends BaseAdapter {
                     }
                 }
             });
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
