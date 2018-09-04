@@ -669,18 +669,8 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_nombreConductor.setText(nombreConductor + " " + apellido_pa + " " + apellido_ma);
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
-<<<<<<< HEAD
                         text_Viajes.setText("ha completado: " + viajes);
-                        if(object.has("foto_perfil")){
-                            if(object.getString("foto_perfil").length()>0){
-                                new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
-                            }
-=======
-                        text_Viajes.setText("ha completado: " + viajes + " viajes");
-                        if(object.getString("foto_perfil").length()>0){
-                            new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
->>>>>>> dbcb3ff0e69855f11920fcafe5f36b32514cdf0b
-                        }
+
 
                         Container_verPerfil.setVisibility(View.VISIBLE);
                         btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
@@ -721,6 +711,12 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                                 }
                             }
                         });
+                    }
+                    if(object.has("foto_perfil")){
+                        if(object.getString("foto_perfil").length()>0){
+                            new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
+                        }
+
                     }
                 }else{
                     Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
