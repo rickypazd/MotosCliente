@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,345 +9,394 @@
     tools:context=".PedirSieteMap">
 
     <LinearLayout
+        android:id="@+id/cargando"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroundcolor2"
+        android:orientation="vertical"
+        android:translationZ="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/backgroundcolor2"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp">
-        </android.support.v7.widget.Toolbar>
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapviewPedirSiete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <ImageView
-        android:id="@+id/ivmarker"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/asetmar" />
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:translationZ="999dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:id="@+id/linearLayoutPedir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/backgroundcolor2"
-                android:orientation="vertical"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
-                    android:background="@drawable/ic_button_border_gris"
-                    android:drawableStart="@drawable/ic_map_marker"
-                    android:hint="Direccion Inicial"
-                    android:inputType="text"
-                    android:padding="5dp"
-                    android:textSize="12sp" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_button_border_gris"
-                    android:drawableStart="@drawable/ic_map_marker"
-                    android:hint="Direccion Final"
-                    android:padding="5dp"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <android.support.design.widget.CoordinatorLayout
-                android:id="@+id/Container_verPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible">
-
-                <LinearLayout
-                    android:id="@+id/button_sheetss"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:behavior_hideable="true"
-                    android:orientation="vertical"
-                    android:background="@color/colorWhite"
-                    app:behavior_peekHeight="50dp"
-                    app:layout_behavior="utiles.BehaviorCuston">
-
-                    <FrameLayout
-                        android:id="@+id/contenedorFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-                    </FrameLayout>
-
-                    <Button
-                        android:id="@+id/btn_elegir_destino"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:text="Elegir destino en el mapa"
-                        android:textAllCaps="false"
-                        android:background="#EEEEEE"
-                        android:layout_margin="0dp"
-                        android:padding="0dp"
-                        android:textColor="@color/colorBlack"/>
-                </LinearLayout>
-
-            </android.support.design.widget.CoordinatorLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_pedir_super"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginStart="70dp"
-            android:background="@drawable/ic_redondo1_finalizar"
-            android:drawableLeft="@drawable/logoestandar"
-            android:text="Pedir super siete"
-            android:textColor="#fff"
-            android:textSize="20dp"
-            android:textAllCaps="false"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_pedir_maravilla"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginStart="70dp"
-            android:background="@drawable/ic_redondo1_finalizar"
-            android:drawableLeft="@drawable/logoestandar"
-            android:text="Pedir siete maravilla"
-            android:textColor="#fff"
-            android:textSize="20dp"
-            android:textAllCaps="false"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.v7.widget.RecyclerView
-
-            android:id="@+id/reciclerView"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_boton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/linear_confirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/icono1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Siete estandar"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Siete togo"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Maravilla"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="super siete"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="4x4"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="camioneta"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/icono7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="6 pasajeros"
-                android:textColor="@color/colorBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_efectivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Efectivo" />
-
-                <RadioButton
-                    android:id="@+id/radio_credito"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Credito" />
-
-            </RadioGroup>
-
-            <View
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="40dp"
-                android:background="#626262"></View>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Siete estandar rapido y economico"
-                android:textColor="#000000"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/tv_monto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Monto Aproximado:  0-0 Bs."
-                android:textColor="#000000"
-                android:textSize="15dp" />
-
-            <Button
-                android:id="@+id/btn_confirmar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="45dp"
                 android:background="@drawable/backgroundcolor2"
-                android:elevation="0dp"
-                android:text="Confirmar"
-                android:textColor="#fff" />
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="0dp"></android.support.v7.widget.Toolbar>
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
 
-</LinearLayout>
+            <FrameLayout
+                android:id="@+id/mapaLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapviewPedirSiete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/ivmarker"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/asetmar" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:translationZ="999dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutPedir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/backgroundcolor2"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:drawableStart="@drawable/ic_map_marker"
+                            android:hint="Direccion Inicial"
+                            android:inputType="text"
+                            android:padding="5dp"
+                            android:textSize="12sp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteTextView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="35dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:drawableStart="@drawable/ic_map_marker"
+                            android:hint="Direccion Final"
+                            android:padding="5dp"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <android.support.design.widget.CoordinatorLayout
+                        android:id="@+id/Container_verPerfil"
+                        android:translationZ="99999dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/button_sheetss"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorWhite"
+                            android:orientation="vertical"
+                            app:behavior_hideable="true"
+                            app:behavior_peekHeight="50dp"
+                            app:layout_behavior="utiles.BehaviorCuston">
+
+                            <FrameLayout
+                                android:id="@+id/contenedorFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"></FrameLayout>
+
+                            <Button
+                                android:id="@+id/btn_elegir_destino"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_margin="0dp"
+                                android:background="#EEEEEE"
+                                android:padding="0dp"
+                                android:text="Elegir destino en el mapa"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorBlack" />
+                        </LinearLayout>
+
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/verlisto"
+                    android:layout_width="0dp"
+                    android:layout_height="29dp"
+                    android:layout_marginBottom="152dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/ic_redondo1_finalizar"
+                    android:drawableLeft="@drawable/ic_pointer_map"
+                    android:text="Listo"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/btn_pedir_super"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/ic_redondo1_finalizar"
+                    android:drawableLeft="@drawable/logoestandar"
+                    android:text="Pedir super siete"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_pedir_maravilla"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/ic_redondo1_finalizar"
+                    android:drawableLeft="@drawable/logoestandar"
+                    android:text="Pedir siete maravilla"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/reciclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ll_boton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/linear_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/icono1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="Siete estandar"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="Siete togo"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="Maravilla"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="super siete"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="4x4"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="camioneta"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/icono7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="6 pasajeros"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_efectivo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Efectivo" />
+
+                        <RadioButton
+                            android:id="@+id/radio_credito"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Credito" />
+
+                    </RadioGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:background="#626262"></View>
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Siete estandar rapido y economico"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tv_monto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Monto Aproximado:  0-0 Bs."
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/btn_confirmar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/backgroundcolor2"
+                        android:elevation="0dp"
+                        android:text="Confirmar"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

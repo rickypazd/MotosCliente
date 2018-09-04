@@ -104,6 +104,7 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
             e.printStackTrace();
         }
         InsertList(obj);
+
     }
 
     @Override
@@ -112,6 +113,7 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
             case R.id.btn_agregar_favorito:
                 agregar_ubicacion();
                 dismiss();
+                getActivity().finish();
                 break;
             case R.id.btn_cancelar:
                 dismiss();

@@ -61,7 +61,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
                     String nombre = obj.getString("nombre_favorito");
                     Double latFin = obj.getDouble("latFin");
                     Double lngFin = obj.getDouble("lngFin");
-                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(nombre , latFin, lngFin);
+                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(10,nombre , latFin, lngFin);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -75,6 +75,8 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
         super.onResume();
         cargar();
     }
+
+
 
     private void cargar(){
         //carga un SharedPreferences de favoritos o crea uno vacio

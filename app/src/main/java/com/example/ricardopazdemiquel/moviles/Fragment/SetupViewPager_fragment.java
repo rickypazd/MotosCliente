@@ -22,6 +22,7 @@ public class SetupViewPager_fragment extends android.support.v4.app.Fragment {
     private SectionsPageAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
+
     /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

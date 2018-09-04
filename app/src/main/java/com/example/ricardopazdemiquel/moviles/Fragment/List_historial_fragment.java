@@ -49,6 +49,20 @@ public class List_historial_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_historial, container, false);
         lv = view.findViewById(R.id.lista_historial);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    JSONObject obj = new JSONObject(view.getTag().toString());
+                    Double latFin = obj.getDouble("latfinal");
+                    Double lngFin = obj.getDouble("lngfinal");
+                    ((PedirSieteMap)getActivity()).Verificar_tipo_siete(10,getCompleteAddressString(latFin,lngFin),latFin, lngFin);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         new get_historial().execute();
 
         lv.setOnTouchListener(new View.OnTouchListener() {
@@ -67,23 +81,33 @@ public class List_historial_fragment extends Fragment {
 
 
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                try {
-                    JSONObject obj = new JSONObject(view.getTag().toString());
-                    Double latFin = obj.getDouble("latfinal");
-                    Double lngFin = obj.getDouble("lngfinal");
-                    String nombre="asdasda PRUEBA PRUEBA";
-                    ((PedirSieteMap)getActivity()).addpositionFavorito(nombre,latFin, lngFin);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
         return view;
     }
 
+
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                //StringBuilder strReturnedAddress = new StringBuilder("");
+
+                strAdd=returnedAddress.getThoroughfare();
+                if(strAdd==null )
+                    strAdd=returnedAddress.getFeatureName();
+                //  Log.w("My Current loction addr", strReturnedAddress.toString());
+            } else {
+                Log.w("My Current loction addr", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction addr", "Canont get Address!");
+        }
+        return strAdd;
+    }
 
     public JSONObject getUsr_log() {
         SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);

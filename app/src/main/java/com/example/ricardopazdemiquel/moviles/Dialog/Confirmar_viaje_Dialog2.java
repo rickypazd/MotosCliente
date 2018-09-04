@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.example.ricardopazdemiquel.moviles.R;
@@ -21,7 +22,7 @@ public class Confirmar_viaje_Dialog2 extends DialogFragment implements View.OnCl
     public static String APP_TAG = "registro";
 
     private static final String TAG = Confirmar_viaje_Dialog2.class.getSimpleName();
-
+    private AutoCompleteTextView autocomplete;
     public Confirmar_viaje_Dialog2() {
     }
 
