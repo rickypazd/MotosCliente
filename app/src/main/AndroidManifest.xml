@@ -196,7 +196,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeone">
         </activity>
-
+        <activity
+            android:name=".Iniciar_cuenta_fb_Activity"
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

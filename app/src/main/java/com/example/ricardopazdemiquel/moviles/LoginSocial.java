@@ -136,7 +136,7 @@ public class LoginSocial extends AppCompatActivity {
 
         loginButton= findViewById(R.id.loginFacebook);
         loginButton.setReadPermissions("email");
-        loginButton.setReadPermissions("user_gender");
+
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -169,14 +169,14 @@ public class LoginSocial extends AppCompatActivity {
                                                         Intent intent = new Intent(LoginSocial.this,MainActivity.class);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);
-                                                        LoginManager.getInstance().logOut();
                                                     }else{
 
                                                         ////esteeee <=-------
                                                         Intent intent = new Intent(LoginSocial.this,Iniciar_cuenta_fb_Activity.class);
-                                                        intent.putExtra("usr_face",obj.toString());
+                                                        intent.putExtra("usr_face",object.toString());
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);
+                                                        LoginManager.getInstance().logOut();
                                                     }
 
 
