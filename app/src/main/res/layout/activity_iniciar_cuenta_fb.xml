@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="650dp"
     tools:context=".IniciarCuentaActivity"
-    android:fillViewport="true"
-    >
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"

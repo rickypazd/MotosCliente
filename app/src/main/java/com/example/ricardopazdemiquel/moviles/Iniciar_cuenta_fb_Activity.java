@@ -1,7 +1,9 @@
 package com.example.ricardopazdemiquel.moviles;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,9 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Hashtable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import clienteHTTP.HttpConnection;
+import clienteHTTP.MethodType;
+import clienteHTTP.StandarRequestConfiguration;
 
 
 public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements View.OnClickListener{
@@ -20,15 +33,12 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
     private EditText edit_nombre;
     private EditText edit_apellidoP;
-    private EditText edit_apellidoM;
     private EditText edit_telefono;
     private EditText edit_correo;
     private com.mikhaellopez.circularimageview.CircularImageView img_photo;
 
-
     private RadioButton radio_hombre;
     private RadioButton radio_mujer;
-
     private Button btn_siguiente;
     private String sexo;
 
@@ -41,7 +51,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
     protected void onCreate(Bundle onSaveInstanceState){
         super.onCreate(onSaveInstanceState);
-        setContentView(R.layout.activity_solicitud);
+        setContentView(R.layout.activity_iniciar_cuenta_fb);
 
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
@@ -50,7 +60,6 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
         edit_nombre = findViewById(R.id.edit_nombre);
         edit_apellidoP= findViewById(R.id.edit_apellidoP);
-        edit_apellidoM = findViewById(R.id.edit_apellidoM);
         edit_telefono = findViewById(R.id.edit_telefono);
         radio_hombre = findViewById(R.id.radioHombre);
         radio_mujer = findViewById(R.id.radioMujer);
@@ -65,28 +74,17 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         Intent it = getIntent();
         if (it != null) {
             try {
-                JSONObject  obj =new JSONObject(it.getStringExtra("usr_face"));
+                JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
+                String nombre1 = obj.getString("first_name");
+                String nombre2 = obj.getString("middle_mane");
+                edit_nombre.setText(nombre1 +" "+ nombre2);
+                edit_apellidoP.setText(obj.getString("last_name"));
+                edit_correo.setText(obj.getString("email"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
-        /*Intent it = getIntent();
-        if (it != null) {
-            Bundle params = it.getExtras();
-            if (params != null) {
-                id_proyecto = params.getString("id");
-                ObtenerSolicitud(id_proyecto);
-            }
-        }
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
-                int solicitud_id = (int)id;
-                createSimpleDialog(solicitud_id).show();
-            }
-        });*/
     }
 
     private void Radio() {
@@ -160,11 +158,18 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         }
     }
 
+    public static boolean validarEmailSimple(String email) {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
 
     private void Guardar() {
         String nombreV = edit_nombre.getText().toString().trim();
-        String apellidoPV = edit_apellidoP.getText().toString().trim();
-        String apellidoMV = edit_apellidoM.getText().toString().trim();
+        String apellidoV = edit_apellidoP.getText().toString().trim();
+        String correoV = edit_correo.getText().toString().trim();
         String telefonoV = edit_telefono.getText().toString().trim();
 
         boolean isValid = true;
@@ -173,7 +178,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             edit_nombre.setError("debe ingresar su nombre");
             isValid = false;
         }
-        if (apellidoPV.isEmpty()) {
+        if (apellidoV.isEmpty()) {
             edit_apellidoP.setError("Campo Obligatorio");
             isValid = false;
         }
@@ -181,24 +186,76 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             edit_telefono.setError("campo obligarotio");
             isValid = false;
         }
+        if (correoV.isEmpty()) {
+            edit_correo.setError("campo obligarotio");
+            isValid = false;
+        }else if (validarEmailSimple(correoV) == false) {
+            edit_correo.setError("email no valido");
+            isValid = false;
+        }
         if (!isValid) {
             return;
         }
+        
 
-        JSONObject obj = new JSONObject();
-        try {
-            Intent intent = new Intent(this,Crear_CuentaActivity.class);
-            obj.put("nombre",nombreV);
-            obj.put("apellido_pa",apellidoPV);
-            obj.put("apellido_ma",apellidoMV);
-            obj.put("telefono",telefonoV);
-            obj.put("sexo",getSexo());
-            intent.putExtra("obj_cliente", obj.toString());
-            startActivity(intent);
-        } catch (JSONException e) {
-            e.printStackTrace();
+    }
+
+    private class Registrar extends AsyncTask<Void, String, String> {
+        private ProgressDialog progreso;
+        private String  nombre ,  apellidos, correo , telefono ,  sexo;
+        public Registrar( String nombre ,String apellidos , String correo , String telefono , String sexo) {
+            this.nombre= nombre;
+            this.apellidos = apellidos;
+            this.correo = correo;
+            this.telefono = telefono;
+            this.sexo = sexo;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progreso = new ProgressDialog(Iniciar_cuenta_fb_Activity.this);
+            progreso.setIndeterminate(true);
+            progreso.setTitle("Esperando Respuesta");
+            progreso.setCancelable(false);
+            progreso.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String,String> param = new Hashtable<>();
+            param.put("evento","registrar_usuario_face_cliente");
+            param.put("nombre",nombre);
+            param.put("apellidos",apellidos);
+            param.put("correo",correo);
+            param.put("telefono", telefono);
+            param.put("sexo",sexo);
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
+            return respuesta;
+        }
+
+        @Override
+        protected void onPostExecute(String pacientes) {
+            super.onPostExecute(pacientes);
+            progreso.dismiss();
+            if(pacientes==null){
+                Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                if (pacientes.equals("falso")) {
+                    return;
+                }else{
+                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                    startActivity(inte);
+                    finish();
+                }
+            }
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
         }
     }
+
+
 
 }
 
