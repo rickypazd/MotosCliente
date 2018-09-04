@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
@@ -18,15 +19,22 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Hashtable;
 
+import clienteHTTP.HttpConnection;
+import clienteHTTP.MethodType;
+import clienteHTTP.StandarRequestConfiguration;
+import utiles.Contexto;
 import utiles.NetworkStateChangeReceiver;
 import utiles.Token;
 
@@ -63,7 +71,13 @@ public class Carga extends AppCompatActivity {
 
         }
         usr_log=getUsr_log();
-        ejecutar();
+        try {
+            new Get_validarCarrera(usr_log.getInt("id")).execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
     public void ejecutar(){
         new Handler().postDelayed(new Runnable() {
@@ -126,4 +140,70 @@ public class Carga extends AppCompatActivity {
             return false;
         }
     }
+
+
+    public class Get_validarCarrera extends AsyncTask<Void, String, String> {
+        private int id;
+        public Get_validarCarrera(int id){
+            this.id=id;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_carrera_cliente");
+            parametros.put("id_usr",id+"");
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            if(resp==null){
+                Toast.makeText(Carga.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            }else{
+                if (resp.contains("falso")) {
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                } else {
+                    try {
+                        JSONObject obj = new JSONObject(resp);
+                        if(obj.getBoolean("exito")) {
+                            if(obj.getInt("id_tipo")==2){//togo
+                                Intent intent = new Intent(Carga.this, Inicio_viaje_togo.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }else{
+                                Intent intent = new Intent(Carga.this, EsperandoConductor.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }
+
+                        }else{
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("chat_carrera", new JSONArray().toString());
+                            editor.commit();
+                            ejecutar();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
+    }
+
 }

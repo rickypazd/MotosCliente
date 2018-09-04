@@ -670,7 +670,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_nombreConductor.setText(nombreConductor + " " + apellido_pa + " " + apellido_ma);
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
-                        text_Viajes.setText("ha completado: " + viajes);
+                        text_Viajes.setText("ha completado: " + viajes + " viajes");
                         if(object.getString("foto_perfil").length()>0){
                             new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
                         }
