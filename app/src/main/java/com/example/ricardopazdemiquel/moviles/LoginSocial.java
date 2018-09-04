@@ -171,6 +171,8 @@ public class LoginSocial extends AppCompatActivity {
                                                         startActivity(intent);
                                                         LoginManager.getInstance().logOut();
                                                     }else{
+
+                                                        ////esteeee <=-------
                                                         Intent intent = new Intent(LoginSocial.this,IniciarCuentaActivity.class);
                                                         intent.putExtra("usr_face",obj.toString());
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
