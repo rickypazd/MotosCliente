@@ -248,6 +248,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
                 selected=(AutoCompleteTextView) v;
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+                AutoCompleteTextView auto =(AutoCompleteTextView)v;
+                auto.setText("");
             }
         });
         mAutocompleteTextView.setThreshold(3);
@@ -265,6 +267,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             public void onClick(View v) {
                 selected=(AutoCompleteTextView) v;
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+                AutoCompleteTextView auto =(AutoCompleteTextView)v;
+                auto.setText("");
             }
         });
         mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
@@ -685,6 +689,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                     .getPlaceById(mGoogleApiClient, placeId);
             placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
             Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+
         }
     };
 
@@ -704,6 +709,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             LatLng lat=place.getLatLng();
             selected.setText(place.getAddress(),false);
             selected.setTag(lat);
+            calculando_ruta(0,place.getAddress()+"",lat.latitude,lat.longitude);
             //CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 18);
             //googleMap.animateCamera(cu);
 
@@ -737,7 +743,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if(hasFocus){
-
             selected=(AutoCompleteTextView) v;
             bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
             iv_marker.setVisibility(View.VISIBLE);
