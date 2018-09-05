@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icon_siete_togo" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../SVG/Asset 6.svg" />
+                            <entry key="outputName" value="ic_sign_out" />
+                            <entry key="sourceFile" value="C:\Users\ricky\Documents\sign_out.svg" />
                           </map>
                         </option>
                       </PersistentState>

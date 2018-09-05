@@ -132,6 +132,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
+        setTitle("Siete Togo");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         lista_productos=findViewById(R.id.lista_productos);
         tv_cantidad=findViewById(R.id.tv_cantidad);

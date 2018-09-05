@@ -54,7 +54,6 @@ public class Adapter_chat extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-
         try {
             JSONObject obj =  array.getJSONObject(i);
             if(obj.getInt("id_emisor")==miId){
