@@ -53,7 +53,7 @@ public class SetupViewPager_fragment extends android.support.v4.app.Fragment {
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
         adapter.addFragment(new List_favoritos_fragment(),"Favoritos");
-        adapter.addFragment(new List_historial_fragment(),"Hitorial");
+        adapter.addFragment(new List_historial_fragment(),"Historial");
         viewPager.setAdapter(adapter);
     }
 

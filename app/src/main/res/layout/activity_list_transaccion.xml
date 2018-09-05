@@ -23,6 +23,9 @@
         android:id="@+id/list_transaccion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
+        android:background="#EEEEEE"
+        android:dividerHeight="5dp"
         tools:listitem="@layout/layout_item_transaccion" />
 
     </LinearLayout>
