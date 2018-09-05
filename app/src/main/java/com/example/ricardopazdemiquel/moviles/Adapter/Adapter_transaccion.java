@@ -22,12 +22,10 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Locale;
 
-public class Adapter_transaccion extends BaseAdapter {
+public class  Adapter_transaccion extends BaseAdapter {
 
     private JSONArray array;
     private Context contexto;
-    private static final int EFECTIVO = 1;
-    private static final int CREDITO = 2;
 
     public Adapter_transaccion(Context contexto, JSONArray lista) {
         this.contexto = contexto;
@@ -53,65 +51,30 @@ public class Adapter_transaccion extends BaseAdapter {
     public long getItemId(int i) { return 0;
     }
 
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             view = LayoutInflater.from(contexto)
-                    .inflate(R.layout.layout_item_ultimos_viajes, viewGroup, false);
+                    .inflate(R.layout.layout_item_transaccion, viewGroup, false);
         }
         TextView text_fecha = view.findViewById(R.id.text_fecha);
-        TextView text_auto = view.findViewById(R.id.text_auto);
-        TextView text_inicio = view.findViewById(R.id.text_inicioViaje);
-        TextView text_fin = view.findViewById(R.id.text_FinViaje);
-        TextView text_tipo_pago = view.findViewById(R.id.text_tipoPago);
-        TextView text_monto= view.findViewById(R.id.text_monto);
-        ImageView btn_next = view.findViewById(R.id.btn_next);
+        TextView text_cantidad = view.findViewById(R.id.text_cantidad);
+        TextView text_tipo = view.findViewById(R.id.text_tipo);
 
         try {
-            final JSONObject viajes = array.getJSONObject(i);
-            double latinicial = viajes.getDouble("latinicial");
-            double latfinal = viajes.getDouble("latfinal");
-            double lnginicial = viajes.getDouble("lnginicial");
-            double lngfinal = viajes.getDouble("lngfinal");
-            double lat_final_real = viajes.getDouble("latfinalreal");
-            double lng_final_real = viajes.getDouble("lngfinalreal");
-            String id_carrera = viajes.getString("id_carrera");
-            int estado= viajes.getInt("estado");
-            int costo = viajes.getInt("costo_final");
-            int tipo = viajes.getInt("tipo_pago");
+            final JSONObject trans = array.getJSONObject(i);
+            int id = trans.getInt("id");
+            String fecha = trans.getString("fecha");
+            String tipo_nombre = trans.getString("tipo_nombre");
+            String cantidad = trans.getString("cantidad");
+            String id_usuario = trans.getString("id_usuario");
+            String id_carrera = trans.getString("id_carrera");
 
-            text_fecha.setText(viajes.getString("fecha_pedido"));
-            text_auto.setText(viajes.getString("marca"));
-            if(get_estado(estado)){
-                text_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                text_fin.setText(getCompleteAddressString(lat_final_real,lng_final_real));
-                text_monto.setText("bs. "+costo);
-            }else if(!get_estado(estado)){
-                text_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                text_fin.setText(getCompleteAddressString(latfinal,lngfinal));
-                text_monto.setText("cancelado");
-            }
-            switch (tipo){
-                case(EFECTIVO):
-                    text_tipo_pago.setText("Efectivo");
-                    break;
-                case(CREDITO):
-                    text_tipo_pago.setText("Credito");
-                    break;
-            }
-            //text_tipo_pago.setText(viajes.getString(""));
-            btn_next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(contexto,Detalle_viaje_Cliente.class);
-                    try {
-                        intent.putExtra("id_carrera", viajes.getString("id_carrera"));
-                        contexto.startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+            text_fecha.setText(fecha);
+            text_cantidad.setText(cantidad);
+            text_tipo.setText(tipo_nombre);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -143,15 +106,5 @@ public class Adapter_transaccion extends BaseAdapter {
         return strAdd;
     }
 
-
-    private Boolean get_estado(int valor){
-        switch (valor) {
-            case 6:
-                return true;
-            case 7:
-                return false;
-        }
-        return null;
-    }
 
 }

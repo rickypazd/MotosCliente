@@ -142,6 +142,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     double longitudeGPS;
     double latitudeGPS;
     private Button btn_ver_listo;
+    Toolbar toolbar;
 
     public PedirSieteMap() {
     }
@@ -151,7 +152,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedir_siete_map);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
@@ -415,10 +416,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             layoutParams.setMargins(0, 0, 30, 600);
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
-
         }
-
-
     }
 
     private void centrar(){
@@ -968,12 +966,18 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             switch (tipo) {
             case 1:
                 recyclerView.setVisibility(View.VISIBLE);
+                setTitle("Siete Estándar");
+                toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);
+                setTitle("Siete Maravilla");
+                toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 4:
                 btn_pedir_super.setVisibility(View.VISIBLE);
+                setTitle("Super Siete");
+                toolbar.setTitleTextColor(Color.WHITE);
                 break;
         }
     }

@@ -36,7 +36,6 @@ public class Transaccion_cliente_Activity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lv = findViewById(R.id.list_transaccion);
@@ -111,11 +110,11 @@ public class Transaccion_cliente_Activity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Hashtable<String, String> parametros = new Hashtable<>();
-            parametros.put("evento", "get_mis_transacciones");
+            parametros.put("evento", "get_transacciones_id");
             parametros.put("id",id);
             String respuesta ="";
             try {
-                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+                respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, parametros));
             } catch (Exception ex) {
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }

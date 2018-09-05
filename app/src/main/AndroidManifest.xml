@@ -190,8 +190,15 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".Preferencias"
+            android:theme="@style/AppThemeone"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name=".Transaccion_cliente_Activity"
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".Chat_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeone">
