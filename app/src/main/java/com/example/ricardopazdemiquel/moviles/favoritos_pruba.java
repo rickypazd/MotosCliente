@@ -118,6 +118,11 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritos_clientes);
 
+        Toolbar toolbar = findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
+
         iv_marker=findViewById(R.id.ivmarker);
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
         container_frame = findViewById(R.id.container_frame);
@@ -125,9 +130,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         btn_agregar = findViewById(R.id.btn_agregar);
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar.setOnClickListener(this);
-        Toolbar toolbar = findViewById(R.id.toolbar3);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
        /* View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);

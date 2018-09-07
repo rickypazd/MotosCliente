@@ -12,7 +12,7 @@
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/backgroundcolor2"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
     </android.support.v7.widget.Toolbar>
@@ -27,7 +27,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -35,7 +34,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/backgroundcolor2"
                     android:orientation="vertical">
 
                     <RelativeLayout
@@ -55,7 +54,6 @@
                                 android:src="@drawable/edit_pencil" />
                         </LinearLayout>
 
-
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/img_photo"
                             android:layout_width="match_parent"
@@ -65,7 +63,6 @@
                         </com.mikhaellopez.circularimageview.CircularImageView>
 
                     </RelativeLayout>
-
 
                 </LinearLayout>
 
@@ -118,23 +115,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:paddingBottom="2dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/Liner_nombre"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="35sp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="2sp"
@@ -143,32 +136,39 @@
                         android:text="Nombre"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/text_nombreCliente"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:autoSizeMaxTextSize="30sp"
-                        android:autoSizeMinTextSize="10sp"
-                        android:autoSizeStepGranularity="2sp"
-                        android:autoSizeTextType="uniform"
-                        android:drawableEnd="@drawable/ic_pencil_edit"
-                        android:paddingEnd="20dp"
-                        android:paddingLeft="20dp"
-                        android:text=""
-                        android:textColor="#626262"
                         android:textSize="15sp" />
 
+                        <TextView
+                            android:id="@+id/text_nombreCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autoSizeMaxTextSize="30sp"
+                            android:autoSizeMinTextSize="16sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:autoSizeTextType="uniform"
+                            android:drawableEnd="@drawable/ic_pencil_edit"
+                            android:paddingEnd="20dp"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="5dp"
+                            android:text=""
+                            android:textColor="#626262"
+                            android:textSize="18sp" />
+
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/grey_10" />
 
                 <LinearLayout
                     android:id="@+id/Liner_apellido"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
@@ -183,37 +183,44 @@
                         android:text="Apellido"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_apellidoCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="30sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
+                        android:paddingTop="5dp"
                         android:drawableEnd="@drawable/ic_pencil_edit"
                         android:paddingEnd="20dp"
                         android:paddingLeft="20dp"
                         android:textColor="#626262"
-                        android:textSize="15sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/grey_10" />
 
                 <LinearLayout
                     android:id="@+id/Liner_telefono"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="35sp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="2sp"
@@ -222,40 +229,46 @@
                         android:text="Numero de teléfono"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_numero_telefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="30sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
                         android:drawableEnd="@drawable/ic_pencil_edit"
                         android:drawableLeft="@drawable/ic_banderabolivia_siete"
                         android:drawablePadding="6dp"
                         android:gravity="center|start"
+                        android:paddingTop="5dp"
                         android:paddingEnd="20dp"
-                        android:paddingLeft="20dp"
                         android:paddingStart="20dp"
                         android:textColor="#626262"
-                        android:textSize="15sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/grey_10" />
 
                 <LinearLayout
                     android:id="@+id/Liner_correo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="35sp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="2sp"
@@ -264,29 +277,25 @@
                         android:text="E-mail"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_email_cliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
                         android:autoSizeMaxTextSize="30sp"
-                        android:autoSizeMinTextSize="10sp"
+                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
+                        android:paddingTop="5dp"
                         android:drawableEnd="@drawable/ic_pencil_edit"
                         android:paddingEnd="20dp"
                         android:paddingLeft="20dp"
                         android:textColor="#626262"
-                        android:textSize="15sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

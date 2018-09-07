@@ -58,6 +58,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_detalle_viaje);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         nombre = findViewById(R.id.text_nombre);
         fotoConductor = findViewById(R.id.img_perfil_conductor);

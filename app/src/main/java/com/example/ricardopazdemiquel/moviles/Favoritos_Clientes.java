@@ -26,6 +26,7 @@ public class Favoritos_Clientes extends AppCompatActivity implements View.OnClic
         Toolbar toolbar = findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
     }
 

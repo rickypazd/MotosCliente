@@ -46,6 +46,7 @@ public class Crear_CuentaActivity extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
         edit_fecha = findViewById(R.id.edit_fecha);
         edit_username= findViewById(R.id.edit_username);

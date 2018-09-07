@@ -69,6 +69,7 @@ public class Chat_Activity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
+
         tv_nombre_receptor=findViewById(R.id.nombre_receptor);
         btn_enviar = findViewById(R.id.btn_enviar);
         foto_img = findViewById(R.id.foto_img);

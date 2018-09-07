@@ -2,6 +2,7 @@ package com.example.ricardopazdemiquel.moviles;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
+        setTitle("Mis viajes");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         lv = findViewById(R.id.list_misViajes);
 
