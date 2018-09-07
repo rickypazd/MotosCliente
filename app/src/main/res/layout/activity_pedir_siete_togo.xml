@@ -16,9 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/backgroundcolor2"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp">
-        </android.support.v7.widget.Toolbar>
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp"></android.support.v7.widget.Toolbar>
 
     </LinearLayout>
 
@@ -59,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/backgroundcolor2"
                 android:orientation="vertical"
+                android:paddingBottom="10dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

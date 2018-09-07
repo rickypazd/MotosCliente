@@ -26,6 +26,8 @@ import org.json.JSONObject;
 public class Producto_togo_Dialog extends DialogFragment implements View.OnClickListener {
 
     private ImageView btn_cancelar;
+    private ImageView btn_menos;
+    private ImageView btn_mas;
     private Button btn_confirmar_togo;
     private Button btn_editar_togo;
     private TextView text_pedido;
@@ -81,6 +83,28 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
             case AGREGAR:
                 break;
         }
+
+        btn_menos=v.findViewById(R.id.btn_menos);
+        btn_menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int cant =Integer.parseInt(text_cantidad.getText()+"");
+                if(cant>0){
+                    cant--;
+                    text_cantidad.setText(cant+"");
+                }
+
+            }
+        });
+        btn_mas=v.findViewById(R.id.btn_mas);
+        btn_mas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int cant =Integer.parseInt(text_cantidad.getText()+"");
+                    cant++;
+                    text_cantidad.setText(cant+"");
+            }
+        });
 
         return builder.create();
     }

@@ -155,6 +155,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         final double latfinal = getIntent().getDoubleExtra("latfinal",0);
         final double lngfinal = getIntent().getDoubleExtra("lngfinal",0);
 
+        cargarTipo();
         mGoogleApiClient = new GoogleApiClient.Builder(Calcular_ruta_activity.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -313,6 +314,31 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         }
     }
 
+    public void cargarTipo(){
+        switch (tipo_carrera){
+            case 1:
+                setTitle("Siete Estandar");
+                break;
+            case 2:
+                setTitle("Siete Togo");
+                break;
+            case 3:
+                setTitle("Siete Maravilla");
+                break;
+            case 4:
+                setTitle("Super Siete");
+                break;
+            case 5:
+                setTitle("Siete 4x4");
+                break;
+            case 6:
+                setTitle("Siete Camioneta");
+                break;
+            case 7:
+                setTitle("Siete 6 Pasajeros");
+                break;
+        }
+    }
     private String obtenerDireccionesURL(LatLng origin,LatLng dest){
 
         String str_origin = "origin="+origin.latitude+","+origin.longitude;
@@ -579,7 +605,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         inicio=latlng1;
         fin=latlng2;
         String url = obtenerDireccionesURL(latlng1,latlng2);
-
         iv_marker.setVisibility(View.GONE);
         googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
         googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));

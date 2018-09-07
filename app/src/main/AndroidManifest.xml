@@ -125,16 +125,19 @@
 
         <activity
             android:name=".Perfil_ClienteFragment"
+            android:label="Mi perfil"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".Editar_perfil_Activity"
+            android:label="Mi perfil"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".MisViajes_Cliente_Activity"
+            android:label="Mis viajes"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
 
@@ -166,11 +169,13 @@
         <activity
             android:name=".Favoritos_Clientes"
             android:theme="@style/AppThemeone"
+            android:label="Favoritos"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Detalle_viaje_Cliente"
             android:theme="@style/AppThemeone"
+            android:label="Detale del viaje"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Iniciar_Sesion_Activity"
@@ -182,20 +187,24 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginSocial"
+            android:label="Login"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Fragment.Producto_togo_Activity"
             android:theme="@style/AppThemeone"
+            android:label="Productos"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".Preferencias"
             android:theme="@style/AppThemeone"
+            android:label="Preferencias"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Transaccion_cliente_Activity"
+            android:label="Creditos"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
 

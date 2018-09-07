@@ -53,8 +53,8 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
         View v = inflater.inflate(R.layout.dialog_cancelar_viaje, null);
         builder.setView(v);
 
-        btn_confirmar_cancelacion = v.findViewById(R.id.btn_confirmar_cancelacion);
-        btn_cancelar = v.findViewById(R.id.btn_cancelar);
+        btn_confirmar_cancelacion = v.findViewById(R.id.btn_cancelar);
+        btn_cancelar = v.findViewById(R.id.btn_confirmar_cancelacion);
         text_mesaje = v.findViewById(R.id.text_mensaje);
 
         btn_cancelar.setOnClickListener(this);

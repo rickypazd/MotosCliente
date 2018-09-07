@@ -116,10 +116,12 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
+                break;
             case R.id.liner_ver_perfil:
                 Intent intent2 = new Intent(Preferencias.this, Perfil_ClienteFragment.class);
                 startActivity(intent2);
                 finish();
+                break;
         }
     }
 

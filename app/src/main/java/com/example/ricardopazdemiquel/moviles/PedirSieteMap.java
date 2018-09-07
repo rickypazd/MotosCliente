@@ -247,9 +247,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 selected=(AutoCompleteTextView) v;
-                bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+
                 AutoCompleteTextView auto =(AutoCompleteTextView)v;
-                auto.setText("");
+                selected.setText("");
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
             }
         });
         mAutocompleteTextView.setThreshold(3);
@@ -268,7 +269,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 selected=(AutoCompleteTextView) v;
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
                 AutoCompleteTextView auto =(AutoCompleteTextView)v;
-                auto.setText("");
+                selected.setText("");
             }
         });
         mAutocompleteTextView2.setOnItemClickListener(mAutocompleteClickListener);
@@ -494,10 +495,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_pedir_super:
-                CalcularRuta(tipo_carrera);
+                CalcularRuta(4);
                 break;
             case R.id.btn_pedir_maravilla:
-                CalcularRuta(tipo_carrera);
+                CalcularRuta(3);
                 break;
             case R.id.btn_elegir_destino:
                 iv_marker.setVisibility(View.VISIBLE);
@@ -580,7 +581,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     }
 
     public void calculando_ruta(int tipo, String nombre , Double lat ,Double lng){
-        addpositionFavorito(nombre , lat , lng);
+            addpositionFavorito(nombre , lat , lng);
         closeSoftKeyBoard();
         btn_ver_listo.setVisibility(View.GONE);
         if(selected!=mAutocompleteTextView){
@@ -746,6 +747,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             selected=(AutoCompleteTextView) v;
             bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
             iv_marker.setVisibility(View.VISIBLE);
+            selected.setText("");
+
         }
     }
     public void closeSoftKeyBoard() {

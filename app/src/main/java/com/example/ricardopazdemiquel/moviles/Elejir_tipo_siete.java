@@ -29,7 +29,6 @@ import android.widget.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@SuppressLint("ValidFragment")
 public class Elejir_tipo_siete extends Fragment implements View.OnClickListener {
 
     private Button siete;
