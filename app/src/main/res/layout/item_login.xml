@@ -81,7 +81,8 @@
                         android:id="@+id/logestandar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Estandar" />
+                        android:background="@drawable/button_border"
+                        android:text="SIETE" />
                 </LinearLayout>
             </LinearLayout>
 

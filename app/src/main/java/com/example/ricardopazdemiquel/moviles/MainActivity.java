@@ -234,8 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int id=v.getId();
             switch (id){
                  case R.id.btn_nav_pidesiete:
-                     intent = new Intent(MainActivity.this , Elejir_tipo_siete.class);
-                     startActivity(intent);
+                    seleccionarFragmento("Mapa");
                      break;
                  case R.id.btn_nav_formaspago:
                      intent = new Intent(MainActivity.this , Transaccion_cliente_Activity.class);
