@@ -20,7 +20,7 @@
     <application
         android:name="utiles.Contexto"
         android:icon="@mipmap/ic_p_siete"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_p_supersiete_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

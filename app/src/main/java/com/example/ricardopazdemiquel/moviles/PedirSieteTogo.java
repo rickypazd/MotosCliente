@@ -35,8 +35,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_producto_togo;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog2;
+import com.example.ricardopazdemiquel.moviles.Dialog.Producto_togo_Dialog;
 import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -119,6 +121,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     double mont;
     private AutoCompleteTextView text_direccion_togo;
     private ImageView btn_agregar_producto;
+    private Adapter_pedidos_togo adapter;
 
     public PedirSieteTogo() {
     }
@@ -176,7 +179,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 .build();
 
         btn_pedir_togo = findViewById(R.id.btn_pedir_togo);
-
         radio_efectivo = findViewById(R.id.radio_efectivo);
         radio_credito = findViewById(R.id.radio_credito);
         radio_efectivo.setOnClickListener(this);
@@ -204,6 +206,13 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
+        }
+
+        JSONArray arr = getProductosPendientes();
+        if(arr!=null){
+            adapter = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+            lista_productos.setAdapter(adapter);
+            tv_cantidad.setText("Productos ("+arr.length()+")");
         }
 
         btn_confirmar= findViewById(R.id.btn_confirmar);
@@ -303,9 +312,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        if(tipo_carrera==2){
+        /*if(tipo_carrera==2){
             cargartogo();
-        }
+        }*/
 
     }
 
@@ -331,13 +340,45 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 mostraConfirmar(tipo_carrera);
                 break;
             case R.id.btn_agregar_producto:
-                Intent intent =  new Intent(PedirSieteTogo.this, Producto_togo_Activity.class);
-                startActivity(intent);
+                //Intent intent =  new Intent(PedirSieteTogo.this, Producto_togo_Activity.class);
+                //startActivity(intent);
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                new Producto_togo_Dialog(new JSONObject() , 0 , 2).show(fragmentManager, "Dialog");
                 break;
             case R.id.btn_confirmar:
                 Confimar_viaje();
                 break;
         }
+    }
+
+    public void InsertList(JSONObject object){
+        adapter.addItem(object);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("productos_pendientes", arr.toString());
+        editor.commit();
+    }
+
+    public void UpdateList(JSONObject object , int pos){
+        adapter.updateItem(object,pos);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("productos_pendientes", arr.toString());
+        editor.commit();
+    }
+
+    public void removeItem(int pos){
+        adapter.removeiten(pos);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("productos_pendientes", arr.toString());
+        editor.commit();
     }
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener

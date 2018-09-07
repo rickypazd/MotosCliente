@@ -11,6 +11,7 @@
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        app:title=""
         android:background="@drawable/backgroundcolor2"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">

@@ -77,5 +77,27 @@ public class Adapter_pedidos_togo extends BaseAdapter {
         return view;
     }
 
+    public void addItem(JSONObject obj){
+        if(array!=null){
+            array.put(obj);
+        }
+    }
+
+    public void removeiten(int pos){
+        if(array!=null){
+            array.remove(pos);
+        }
+    }
+
+    public void updateItem(JSONObject obj ,int pos){
+        if(array!=null){
+            try {
+                array.put(pos,obj);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 }

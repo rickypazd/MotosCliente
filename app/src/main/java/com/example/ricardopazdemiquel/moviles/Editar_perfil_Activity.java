@@ -133,6 +133,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         switch (view.getId()){
             case R.id.btn_guardar:
                 isValue();
+                finish();
             break;
         }
     }

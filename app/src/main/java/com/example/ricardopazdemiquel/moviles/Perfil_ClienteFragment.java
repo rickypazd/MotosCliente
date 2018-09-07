@@ -67,8 +67,6 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-        setTitle("Perfil");
-        toolbar.setTitleTextColor(Color.WHITE);
 
         textNombre = findViewById(R.id.text_nombreCliente);
         textApellido = findViewById(R.id.text_apellidoCliente);
@@ -113,6 +111,19 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final JSONObject usr_log = getUsr_log();
+        if (usr_log != null) {
+            try {
+                new User_getPerfil(usr_log.getString("id")).execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.Model.Producto_togo;
 import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
+import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
 import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONException;
@@ -125,7 +126,7 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_confirmar_togo:
-                  agregar_pedido(tipo);
+                agregar_pedido(tipo);
                 break;
             case R.id.btn_editar_togo:
                 agregar_pedido(tipo);
@@ -152,7 +153,6 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
         if(!acept){
             return;
         }
-        Producto_togo producto_togo = new Producto_togo();
 
         JSONObject object =  new JSONObject();
         try {
@@ -160,10 +160,10 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
             object.put("descripcion" ,descricipn);
             object.put("cantidad" ,cantidad);
             if(tipo == AGREGAR){
-                ((Producto_togo_Activity)getActivity()).InsertList(object);
+                ((PedirSieteTogo)getActivity()).InsertList(object);
                 dismiss();
             }else if(tipo == EDITAR){
-                ((Producto_togo_Activity)getActivity()).UpdateList(object,pos);
+                ((PedirSieteTogo)getActivity()).UpdateList(object,pos);
                 dismiss();
             }
         } catch (JSONException e) {

@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/backgroundcolor2"
+        app:title="Perfil"
+        app:titleTextColor="@color/colorWhite"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
     </android.support.v7.widget.Toolbar>
@@ -70,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="150dp"
@@ -189,7 +191,6 @@
                         android:id="@+id/text_apellidoCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:autoSizeMaxTextSize="30sp"
                         android:autoSizeMinTextSize="12sp"
                         android:autoSizeStepGranularity="2sp"
@@ -231,24 +232,39 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/text_numero_telefono"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:autoSizeMaxTextSize="30sp"
-                        android:autoSizeMinTextSize="12sp"
-                        android:autoSizeStepGranularity="2sp"
-                        android:autoSizeTextType="uniform"
-                        android:drawableEnd="@drawable/ic_pencil_edit"
-                        android:drawableLeft="@drawable/ic_banderabolivia_siete"
-                        android:drawablePadding="6dp"
-                        android:gravity="center|start"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="20dp"
-                        android:paddingStart="20dp"
-                        android:textColor="#626262"
-                        android:textSize="18sp" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_numero_telefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:autoSizeMaxTextSize="30sp"
+                            android:autoSizeMinTextSize="12sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:autoSizeTextType="uniform"
+                            android:drawableLeft="@drawable/ic_banderabolivia_siete"
+                            android:drawablePadding="6dp"
+                            android:gravity="center|start"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:textColor="#626262"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/ic_pencil_edit"
+                             />
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <View
@@ -283,7 +299,7 @@
                         android:id="@+id/text_email_cliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         android:autoSizeMaxTextSize="30sp"
                         android:autoSizeMinTextSize="12sp"
                         android:autoSizeStepGranularity="2sp"

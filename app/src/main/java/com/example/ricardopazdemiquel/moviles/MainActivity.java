@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          protected void onPostExecute(String resp) {
              super.onPostExecute(resp);
              if(resp==null){
-                 Toast.makeText(MainActivity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
              }else{
                  if (resp.contains("falso")) {
                      Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
