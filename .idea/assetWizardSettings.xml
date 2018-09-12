@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icon_preferencia" />
-                            <entry key="sourceFile" value="C:\Users\ricky\Creative Cloud Files\SVG\icono_preRecurso 8.svg" />
+                            <entry key="outputName" value="ic_icon_up_arrow" />
+                            <entry key="sourceFile" value="C:\Users\ricky\Documents\icon_up-arrow.svg" />
                           </map>
                         </option>
                       </PersistentState>
