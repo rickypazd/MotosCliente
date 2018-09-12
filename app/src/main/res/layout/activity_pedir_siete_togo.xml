@@ -73,10 +73,11 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:background="@drawable/ic_button_border_gris"
-                    android:drawableStart="@drawable/ic_map_marker"
-                    android:hint="A donde vas"
+                    android:drawableStart="@drawable/ic_icon_pointer_map2"
+                    android:drawablePadding="10dp"
+                    android:hint="A dónde"
                     android:inputType="text"
-                    android:padding="10dp" />
+                    android:padding="8dp" />
             </LinearLayout>
 
             <android.support.design.widget.CoordinatorLayout
@@ -90,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:background="@color/colorPrimary2"
+                    android:background="#673994"
                     android:clipToPadding="true"
                     app:behavior_peekHeight="55dp"
                     app:layout_behavior="utiles.BehaviorCuston">
@@ -148,7 +149,7 @@
                             <ImageView
                                 android:id="@+id/btn_agregar_producto"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="40dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_gravity="center"
                                 android:layout_weight="3"
@@ -170,7 +171,7 @@
             android:id="@+id/btn_pedir_togo"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="51dp"
             android:layout_marginEnd="70dp"
             android:layout_marginStart="70dp"
             android:background="@drawable/ic_icon_siete_togo"

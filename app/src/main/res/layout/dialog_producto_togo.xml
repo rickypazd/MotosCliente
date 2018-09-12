@@ -10,28 +10,30 @@
         android:id="@+id/email_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp"
-        android:background="#fdfdfd"
+        android:background="#5D3892"
         android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/ic_online_shop"
+                android:background="@drawable/boton_lila"
                 android:textAlignment="center"
-                android:textSize="25sp"
+                android:gravity="center"
+                android:text="Añadir producto"
+                android:textSize="17sp"
+                android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,9 +43,7 @@
                 android:layout_width="26dp"
                 android:layout_height="29dp"
                 android:layout_gravity="fill_horizontal"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginEnd="0dp"
                 android:src="@drawable/ic_cancel_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -57,41 +57,35 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGris"
-                android:layout_marginBottom="10dp">
-
-            </View>
-
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
 
             <EditText
                 android:id="@+id/text_pedido"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="escriba el pedido"
+                android:hint="¿Que te llevamos?"
                 android:inputType="textMultiLine"
+                android:textColorHint="@color/colorBlack"
                 android:textColor="@color/colorBlack"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/ic_button_border_gris"
-                android:padding="5dp"
-                android:textSize="17sp" />
+                android:padding="10dp"
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/text_descripcion"
+                android:textColorHint="@color/colorBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_button_border_gris"
                 android:gravity="fill_horizontal"
-                android:hint="Descripcion.."
+                android:hint="Descripción del producto, indicaciones importantes"
                 android:inputType="textMultiLine"
-                android:minHeight="70dp"
+                android:minHeight="90dp"
                 android:padding="5dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -108,7 +102,7 @@
                 android:id="@+id/btn_menos"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_minus_rest"
+                android:background="@drawable/ic_icon_menos"
                 android:layout_margin="5dp"
                 android:text="Aceptar"
                 android:textColor="@color/colorPrimaryDark"
@@ -123,14 +117,14 @@
                 android:minHeight="50dp"
                 android:text="0"
                 android:textAlignment="center"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/btn_mas"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_add_sum"
+                android:background="@drawable/ic_icon_mas"
                 android:layout_margin="5dp"
                 android:text="Aceptar"
                 android:textColor="@color/colorPrimaryDark"
@@ -142,27 +136,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_confirmar_togo"
                 android:layout_width="match_parent"
-                android:layout_height="52sp"
-                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/ic_button_favoritos"
+                android:textAllCaps="false"
                 android:text="Agregar"
-                android:textColor="@color/colorPrimaryDark"
+                android:visibility="visible"
+                android:backgroundTint="#9A50EF"
+                android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_editar_togo"
                 android:layout_width="match_parent"
-                android:layout_height="52sp"
-                android:layout_margin="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/ic_button_favoritos"
                 android:visibility="gone"
                 android:text="Editar"
-                android:textColor="@color/colorPrimaryDark"
+                android:textAllCaps="false"
+                android:backgroundTint="#9A50EF"
+                android:textColor="#fff"
                 android:textSize="18sp" />
 
         </LinearLayout>
