@@ -19,8 +19,8 @@
 
     <application
         android:name="utiles.Contexto"
-        android:icon="@mipmap/ic_p_siete"
-        android:label=""
+        android:icon="@drawable/ic_icono_siete"
+        android:label="Siete"
         android:roundIcon="@mipmap/ic_p_supersiete_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

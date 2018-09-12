@@ -181,14 +181,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
-                <Button
+
+                <ImageView
                     android:id="@+id/btn_pedir_super"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="51dp"
                     android:layout_marginEnd="70dp"
                     android:layout_marginStart="70dp"
-                    android:background="@drawable/ic_redondo1_finalizar"
+                    android:background="@drawable/ic_icon_super_siete"
                     android:drawableLeft="@drawable/logoestandar"
                     android:text="Pedir super siete"
                     android:textAllCaps="false"
@@ -199,14 +200,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
+                <ImageView
                     android:id="@+id/btn_pedir_maravilla"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="51dp"
                     android:layout_marginEnd="70dp"
                     android:layout_marginStart="70dp"
-                    android:background="@drawable/ic_redondo1_finalizar"
+                    android:background="@drawable/ic_icon_siete_maravilla"
                     android:drawableLeft="@drawable/logoestandar"
                     android:text="Pedir siete maravilla"
                     android:textAllCaps="false"

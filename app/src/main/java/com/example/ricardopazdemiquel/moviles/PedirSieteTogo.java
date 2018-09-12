@@ -112,7 +112,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete togo y el tipo de carrera
-    private Button btn_pedir_togo ;
+    private ImageView btn_pedir_togo ;
     private int tipo_carrera;
     private RadioButton radio_efectivo;
     private RadioButton radio_credito;

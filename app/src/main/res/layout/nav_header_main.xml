@@ -4,148 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:gravity="center"
+    android:layout_height="600sp"
+    android:paddingTop="20dp"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_nav_pidesiete"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@mipmap/ic_pedirsiete_round" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inicio"
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-
-            <Button
-                android:id="@+id/btn_nav_formaspago"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_formarpago_round" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Créditos"
-                android:textAlignment="center"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
+            <ImageView
                 android:id="@+id/btn_nav_miperfil"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_miperfil_round" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/ic_icon_perfil"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mi perfil"
                 android:textAlignment="center"
-                android:textColor="@android:color/background_light"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
+            <ImageView
+                android:id="@+id/btn_nav_formaspago"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/ic_icon_credito" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Créditos"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
                 android:id="@+id/btn_nav_preferencias"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_preferencias_round" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/ic_icon_preferencia" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Preferencias"
                 android:textAlignment="center"
-                android:textColor="@android:color/background_light"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout7"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
+            <ImageView
                 android:id="@+id/btn_nav_misviajes"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_misviajes_round" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/ic_icon_mis_viajes" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mis viajes"
                 android:textAlignment="center"
-                android:textColor="@android:color/background_light"
+                android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

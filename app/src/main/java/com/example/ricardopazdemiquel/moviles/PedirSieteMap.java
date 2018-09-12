@@ -125,7 +125,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete y el tipo de carrera
-    private Button btn_pedir_super, btn_pedir_maravilla;
+    private ImageView btn_pedir_super, btn_pedir_maravilla;
+
     private int tipo_carrera;
 
     // inicializamos los iconos de confirmar carrera

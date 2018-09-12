@@ -62,11 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BroadcastReceiver broadcastReceiver;
     private  BroadcastReceiver broadcastReceiverMessage;
 
-    private Button btn_nav_pidesiete;
-    private Button btn_nav_formaspago;
-    private Button btn_nav_miperfil;
-    private Button btn_nav_misviajes;
-    private Button btn_nav_preferencias;
+    private ImageView btn_nav_formaspago;
+    private ImageView btn_nav_miperfil;
+    private ImageView btn_nav_misviajes;
+    private ImageView btn_nav_preferencias;
     private JSONObject usr_log;
 
     @Override
@@ -99,13 +98,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
-        btn_nav_pidesiete=header.findViewById(R.id.btn_nav_pidesiete);
         btn_nav_formaspago=header.findViewById(R.id.btn_nav_formaspago);
         btn_nav_miperfil=header.findViewById(R.id.btn_nav_miperfil);
         btn_nav_misviajes=header.findViewById(R.id.btn_nav_misviajes);
         btn_nav_preferencias=header.findViewById(R.id.btn_nav_preferencias);
 
-        btn_nav_pidesiete.setOnClickListener(this);
         btn_nav_formaspago.setOnClickListener(this);
         btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes.setOnClickListener(this);
@@ -233,9 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent;
             int id=v.getId();
             switch (id){
-                 case R.id.btn_nav_pidesiete:
-                    seleccionarFragmento("Mapa");
-                     break;
                  case R.id.btn_nav_formaspago:
                      intent = new Intent(MainActivity.this , Transaccion_cliente_Activity.class);
                      startActivity(intent);
