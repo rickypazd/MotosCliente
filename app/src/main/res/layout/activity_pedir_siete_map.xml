@@ -107,7 +107,9 @@
                             android:drawablePadding="10dp"
                             android:hint="Direccion Inicial"
                             android:inputType="text"
-                            android:padding="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
                             android:textSize="12sp" />
 
                         <AutoCompleteTextView
@@ -123,7 +125,9 @@
                             android:drawableStart="@drawable/ic_icon_pointer_map2"
                             android:drawablePadding="10dp"
                             android:hint="Direccion Final"
-                            android:padding="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
                             android:textSize="12sp" />
                     </LinearLayout>
 
