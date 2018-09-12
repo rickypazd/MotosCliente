@@ -167,6 +167,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         iv_marker = findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
 
+//esto es pruba
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
 
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
