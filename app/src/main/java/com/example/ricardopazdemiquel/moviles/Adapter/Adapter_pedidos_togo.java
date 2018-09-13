@@ -1,5 +1,6 @@
 package com.example.ricardopazdemiquel.moviles.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class Adapter_pedidos_togo extends BaseAdapter {
     private Context contexto;
     private JSONArray array = new JSONArray();
     MenuItem item;
+    JSONObject obj ;
 
     public Adapter_pedidos_togo(Context contexto, JSONArray array) {
         this.contexto = contexto;
@@ -74,7 +76,7 @@ public class Adapter_pedidos_togo extends BaseAdapter {
         ImageView Editar = view.findViewById(R.id.editar);
         ImageView Elminar = view.findViewById(R.id.eliminar);
         try {
-            JSONObject obj =  array.getJSONObject(i);
+            obj =  array.getJSONObject(i);
             text_producto.setText(obj.getString("producto"));
             text_cantidad.setText(obj.getString("cantidad"));
             view.setTag(obj.toString());
@@ -89,9 +91,24 @@ public class Adapter_pedidos_togo extends BaseAdapter {
                     case R.id.eliminar:
                         ((PedirSieteTogo) contexto).removeItem(i);
                         break;
-                    case R.id.action_update_producto:
+                }
+            }
 
-                        break;
+        });
+        Editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.editar:
+                        JSONObject obj2 = null;
+                        try {
+                            obj2 = array.getJSONObject(i);
+                            android.app.FragmentManager fragmentManager = ((Activity) contexto).getFragmentManager();
+                            new Producto_togo_Dialog(obj2,i,1).show(fragmentManager, "Dialog");
+                            break;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                 }
             }
 
