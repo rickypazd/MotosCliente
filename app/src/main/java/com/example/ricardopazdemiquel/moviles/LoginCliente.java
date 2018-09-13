@@ -33,9 +33,7 @@ import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
 import utiles.Token;
 
-public class
-
-LoginCliente extends AppCompatActivity {
+public class LoginCliente extends AppCompatActivity {
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -235,7 +233,7 @@ LoginCliente extends AppCompatActivity {
             super.onPostExecute(success);
             mAuthTask = null;
             showProgress(false);
-            if(success==null){
+            if(success  ==null){
                 Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
                 if(success.equals("falso")){

@@ -62,16 +62,16 @@
         <AutoCompleteTextView
             android:id="@+id/text_direccion_togo"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
             android:paddingLeft="10dp"
             android:hint="¿A dónde vamos?"
             android:background="@drawable/ic_button_border_gris"
-            android:drawableStart="@drawable/ic_map_marker"
+            android:drawableStart="@drawable/ic_icon_pointer_map2"
             android:inputType="text"
             android:textSize="15sp"
-            android:padding="5dp"/>
+            android:drawablePadding="5dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorWhite"
                     android:layout_weight="1"
-                    tools:listitem="@layout/layout_item_historial">
+                    tools:listitem="@layout/layout_item_favoritos">
                 </ListView>
 
                 <Button
@@ -104,10 +104,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Elegir destino en el mapa"
-                    android:background="#EEEEEE"
+                    android:background="#9A50EF"
                     android:textAllCaps="false"
                     android:textSize="15dp"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorWhite"
                     android:layout_gravity="bottom"/>
 
 

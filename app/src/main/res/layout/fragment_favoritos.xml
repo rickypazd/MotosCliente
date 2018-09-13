@@ -22,9 +22,10 @@
                 android:id="@+id/btn_agregar_favoritos"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Agregar favoritos"
-                android:background="@color/colorWhite"
-                android:textColor="@color/colorBlack" />
+                android:text="Agregar a favoritos"
+                android:textAllCaps="false"
+                android:background="#5D3892"
+                android:textColor="@color/colorWhite" />
 
             <ListView
                 android:id="@+id/lista_favoritos"

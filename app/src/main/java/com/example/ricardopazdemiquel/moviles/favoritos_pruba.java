@@ -36,6 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Dialog.Add_ubicacion_favoritos_Dialog;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
@@ -93,7 +94,6 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private AutoCompleteTextView selected;
     private TextView monto;
-    private ListView lista_productos;
     private ImageView iv_marker;
     private LatLng fin;
     private GoogleApiClient mGoogleApiClient;
@@ -109,6 +109,8 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     private Button btn_elegir_destino;
     private Button btn_agregar;
     Fragment fragment_historial  = null;
+    private ListView lv_List_favoritos;
+    private Adapter_favoritos adapter;
 
     public favoritos_pruba() {
     }
@@ -130,6 +132,11 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         btn_agregar = findViewById(R.id.btn_agregar);
         btn_elegir_destino.setOnClickListener(this);
         btn_agregar.setOnClickListener(this);
+
+        lv_List_favoritos = findViewById(R.id.lv_List_favoritos);
+
+        cargar();
+
 
 
        /* View view =findViewById(R.id.bottom_sheet);
@@ -255,6 +262,38 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         //cargartogo();
+
+    }
+    private void cargar(){
+        //carga un SharedPreferences de favoritos o crea uno vacio
+        JSONArray productos = get_list_Favoritos();
+        if(productos==null)
+        {
+            SharedPreferences preferencias = favoritos_pruba.this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencias.edit();
+            productos=new JSONArray();
+            editor.putString("lista_favoritos", productos.toString());
+            editor.commit();
+        }
+        adapter = new Adapter_favoritos(favoritos_pruba.this,productos);
+        lv_List_favoritos.setAdapter(adapter);
+        JSONObject obj = new JSONObject();
+    }
+
+    public JSONArray get_list_Favoritos() {
+        SharedPreferences preferencias = favoritos_pruba.this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        String productos = preferencias.getString("lista_favoritos", "");
+        if (productos.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONArray productosObj = new JSONArray(productos);
+                return productosObj;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 
 
@@ -567,7 +606,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         JSONArray arr = getProductosPendientes();
         if(arr!=null){
             Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(favoritos_pruba.this,arr);
-            lista_productos.setAdapter(adapter);
+            //lista_productos.setAdapter(adapter);
         }
     }
 

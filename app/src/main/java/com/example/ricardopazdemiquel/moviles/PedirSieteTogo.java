@@ -1,11 +1,14 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -150,12 +153,30 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState == BottomSheetBehavior.STATE_EXPANDED){
+                   Drawable image = getResources().getDrawable(R.drawable.ic_icon_up_arrow);
+                   tv_cantidad.setCompoundDrawablesRelative(image,null,null,null);
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    Drawable image = getResources().getDrawable( R.drawable.ic_icon_down_arrow);
+                    tv_cantidad.setCompoundDrawablesRelative(image,null,null,null);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
         lista_productos.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction()==MotionEvent.ACTION_DOWN){
                     if (bottomSheetBehavior instanceof BehaviorCuston) {
                         ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
+
                     }
                 }else if(event.getAction()==MotionEvent.ACTION_UP){
                     if (bottomSheetBehavior instanceof BehaviorCuston) {
@@ -352,34 +373,58 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     }
 
     public void InsertList(JSONObject object){
-        adapter.addItem(object);
-        adapter.notifyDataSetChanged();
-        JSONArray arr = adapter.getArray();
+        JSONArray arr = getProductosPendientes();
+        if(arr==null){
+            arr= new JSONArray();
+        }
+        arr.put(object);
         SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("productos_pendientes", arr.toString());
         editor.commit();
+        Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+        lista_productos.setAdapter(adapters);
+        tv_cantidad.setText("Productos ("+arr.length()+")");
+
     }
 
-    public void UpdateList(JSONObject object , int pos){
-        adapter.updateItem(object,pos);
-        adapter.notifyDataSetChanged();
-        JSONArray arr = adapter.getArray();
-        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("productos_pendientes", arr.toString());
-        editor.commit();
+    public void UpdateList(JSONObject object , int pos) throws JSONException {
+        JSONArray arr = getProductosPendientes();
+        if(arr==null){
+            arr= new JSONArray();
+        }else{
+            arr.put(pos,object);
+            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencias.edit();
+            editor.putString("productos_pendientes", arr.toString());
+            editor.commit();
+            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+            lista_productos.setAdapter(adapters);
+            tv_cantidad.setText("Productos ("+arr.length()+")");
+        }
+
     }
 
     public void removeItem(int pos){
-        adapter.removeiten(pos);
-        adapter.notifyDataSetChanged();
-        JSONArray arr = adapter.getArray();
-        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("productos_pendientes", arr.toString());
-        editor.commit();
+
+        JSONArray arr = getProductosPendientes();
+        if(arr==null){
+            arr= new JSONArray();
+        }else{
+            arr.remove(pos);
+            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencias.edit();
+            editor.putString("productos_pendientes", arr.toString());
+            editor.commit();
+            Adapter_pedidos_togo adapters = new Adapter_pedidos_togo(PedirSieteTogo.this,arr);
+            lista_productos.setAdapter(adapters);
+            tv_cantidad.setText("Productos ("+arr.length()+")");
+        }
+
     }
+
+
+
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
