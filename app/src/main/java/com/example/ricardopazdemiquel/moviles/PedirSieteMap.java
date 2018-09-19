@@ -166,17 +166,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         layoutButon = findViewById(R.id.ll_boton);
         iv_marker = findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
-
         //esto es prueba
-
         text_direccion_togo = findViewById(R.id.text_direccion_togo);
-
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
         latitudeGPS = getIntent().getDoubleExtra("lat", 0);
-
         tipo_carrera = getIntent().getIntExtra("tipo", 0);
-
-
         mGoogleApiClient = new GoogleApiClient.Builder(PedirSieteMap.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
@@ -544,6 +538,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    ///AL SELECCIONAR EL TIPO DEL SIETE EN EL MAPA
     public void CalcularRuta(int tipo_carrera){
         if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
@@ -682,6 +677,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         selected.setTag(lat1);
     }
 
+    //ESTE AUTO COMPLETA
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -696,7 +692,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         }
     };
-
+//ESTE COLOCA EL TEXTO AL TEXTVIEW
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
         @Override

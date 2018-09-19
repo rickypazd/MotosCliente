@@ -506,6 +506,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 int id=json_carrera.getInt("id");
                 param.put("evento","get_pos_conductor_x_id_carrera");
                 param.put("id",id+"");
+                param.put("id",id+"");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
