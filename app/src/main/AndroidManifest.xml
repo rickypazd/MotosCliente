@@ -95,6 +95,7 @@
         <activity
             android:name=".favoritos_pruba"
             android:theme="@style/AppThemeone"
+            android:label="@string/app_nameNull"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"/>
 

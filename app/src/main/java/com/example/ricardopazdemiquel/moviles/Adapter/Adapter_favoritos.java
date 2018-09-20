@@ -130,6 +130,30 @@ public class Adapter_favoritos extends BaseAdapter {
         return strAdd;
     }
 
+
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(contexto, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                //StringBuilder strReturnedAddress = new StringBuilder("");
+
+                strAdd=returnedAddress.getThoroughfare();
+                if(strAdd==null )
+                    strAdd=returnedAddress.getFeatureName();
+                //  Log.w("My Current loction addr", strReturnedAddress.toString());
+            } else {
+                Log.w("My Current loction addr", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction addr", "Canont get Address!");
+        }
+        return strAdd;
+    }
+
     public void addItem(JSONObject obj){
         if(array!=null){
             array.put(obj);

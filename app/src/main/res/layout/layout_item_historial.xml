@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:orientation="horizontal"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:paddingBottom="5dp"
         android:layout_weight="1">
 
         <LinearLayout
@@ -24,7 +23,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_pointer_map"/>
+                android:src="@drawable/ic_icon_pointer_map2"/>
 
         </LinearLayout>
 
@@ -42,11 +41,10 @@
                 android:layout_weight="1"
                 android:gravity="center|start"
                 android:text="Casa"
-                android:paddingBottom="2dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/text_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +52,7 @@
                 android:gravity="center|start"
                 android:text=""
                 android:textColor="@color/colorGris"
-                android:textSize="13sp" />
+                android:textSize="13sp" /> -->
 
             </LinearLayout>
         </LinearLayout>

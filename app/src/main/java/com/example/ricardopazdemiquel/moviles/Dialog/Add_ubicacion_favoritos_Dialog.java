@@ -93,18 +93,19 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         boolean acept = true;
         String nombre = edit_nombre_ubicacion.getText().toString().trim();
         if(nombre.isEmpty()){
+            edit_nombre_ubicacion.setError("Campo obligatorio");
             acept = false;
         }
-        if(!acept){
-            return;
+        if(acept){
+            try {
+                obj.put("nombre_favorito", nombre);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            InsertList(obj);
+            dismiss();
+            getActivity().finish();
         }
-        try {
-            obj.put("nombre_favorito", nombre);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        InsertList(obj);
-
     }
 
     @Override
@@ -112,8 +113,6 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         switch (v.getId()) {
             case R.id.btn_agregar_favorito:
                 agregar_ubicacion();
-                dismiss();
-                getActivity().finish();
                 break;
             case R.id.btn_cancelar:
                 dismiss();

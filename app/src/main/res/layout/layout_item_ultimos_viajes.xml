@@ -27,7 +27,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorPrimaryDark2"
                     android:layout_weight="50">
                 </LinearLayout>
 
@@ -51,7 +51,7 @@
                             android:layout_weight="1"
                             android:gravity="center|start"
                             android:text="23-12-18"
-                            android:textColor="#626262"
+                            android:textColor="@color/colorGris"
                             android:textSize="15sp" />
 
                         <TextView
@@ -61,7 +61,7 @@
                             android:layout_weight="1"
                             android:gravity="center|end"
                             android:text="kia celerio"
-                            android:textColor="#626262"
+                            android:textColor="@color/colorGris"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -78,7 +78,7 @@
                             android:layout_marginEnd="30dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:background="#626262">
+                            android:background="@color/colorBlack">
 
                         </View>
 
@@ -87,10 +87,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:drawableLeft="@drawable/ic_pointer_map2"
+                            android:drawableLeft="@drawable/ic_icon_pointer_map"
                             android:drawablePadding="10dp"
                             android:layout_marginBottom="10dp"
                             android:textSize="15sp"
+                            android:textColor="@color/colorGris"
                             tools:text="callea capitan velarde" />
 
                         <TextView
@@ -98,9 +99,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:drawableLeft="@drawable/ic_pointer_map"
+                            android:drawableLeft="@drawable/ic_icon_pointer_map2"
                             android:drawablePadding="5dp"
                             android:textSize="15sp"
+                            android:textColor="@color/colorGris"
                             tools:text="ave tres passos al f" />
 
                         <View
@@ -109,7 +111,7 @@
                             android:layout_marginEnd="30dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:background="#626262">
+                            android:background="@color/colorBlack">
                         </View>
 
                     </LinearLayout>
@@ -132,6 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorGris"
                                 tools:text="Efectivo" />
 
                             <TextView
@@ -139,6 +142,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorGris"
                                 tools:text="55 bs" />
 
                         </LinearLayout>
