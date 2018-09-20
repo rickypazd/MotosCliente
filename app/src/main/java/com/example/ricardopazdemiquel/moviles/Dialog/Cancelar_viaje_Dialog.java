@@ -25,7 +25,7 @@ import org.json.JSONObject;
 @SuppressLint("ValidFragment")
 public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClickListener {
 
-    private ImageView btn_cancelar;
+    private Button btn_cancelar;
     private Button btn_confirmar_cancelacion;
     private TextView text_mesaje;
 
@@ -79,11 +79,11 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_confirmar_cancelacion:
+            case R.id.btn_cancelar:
                     ((EsperandoConductor)getActivity()).confirmar();
                     dismiss();
                 break;
-            case R.id.btn_cancelar:
+            case R.id.btn_confirmar_cancelacion:
                 dismiss();
                 break;
         }

@@ -820,14 +820,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
     public class Confirmar_cancelacion extends AsyncTask<Void, String, String> {
 
-        String id_usr;
-        {
-            try {
-                id_usr = getUsr_log().getString("id");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+
 
         private ProgressDialog progreso;
         @Override
@@ -857,7 +850,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty() || resp != null){
+            if(resp.isEmpty() || resp == null){
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else if (resp.contains("exito")) {
                 Toast.makeText(EsperandoConductor.this,"viaje cancelado", Toast.LENGTH_SHORT).show();

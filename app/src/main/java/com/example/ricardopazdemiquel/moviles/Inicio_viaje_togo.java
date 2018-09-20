@@ -948,6 +948,7 @@ private Button btn_enviar_mensaje;
             }else {
                 try {
                     JSONArray arr = new JSONArray(resp);
+                    tv_cantidad.setText("Productos ("+arr.length()+")");
                     Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(Inicio_viaje_togo.this,arr);
                     lista_productos.setAdapter(adapter);
                 } catch (JSONException e) {
