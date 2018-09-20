@@ -803,7 +803,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         switch (valor){
             case 2:
                 layoutButon.setVisibility(View.VISIBLE);
-                icono2.setVisibility(View.VISIBLE);
                 break;
         }
     }
