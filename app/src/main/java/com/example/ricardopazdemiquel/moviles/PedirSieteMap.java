@@ -377,8 +377,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
                                 LatLng center = googleMap.getCameraPosition().target;
                                 if(listo){
-
-                                        latlngtemp=center;
+                                    latlngtemp=center;
                                     String addres=getCompleteAddressString(latlngtemp.latitude, latlngtemp.longitude);
                                     selected.setText(addres);
                                     selected.dismissDropDown();

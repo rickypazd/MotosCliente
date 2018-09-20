@@ -82,7 +82,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su Carrera finalizo.")
+                .setContentText("Tu viaje ha finalizado.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -101,7 +101,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su Carrera esta en curso." +
+                .setContentText("Su viaje esta en curso." +
                         "Que tenga un buen viaje.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
@@ -119,7 +119,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su Conductor Llego.")
+                .setContentText("Tu Siete ya llegó.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -144,7 +144,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su Conductor esta serca.")
+                .setContentText("Tu Siete está cerca.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -180,7 +180,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("El conductor canceló el viaje. disculpe las molestias")
+                .setContentText("El conductor canceló el viaje. Disculpe las molestias.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -283,7 +283,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             Intent notificationIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                    .setContentTitle("Siete: Nuevo mensaje")
+                    .setContentTitle("Siete: Nuevo mensaje.")
                     .setContentText(obj.getString("mensaje"))
                     .setSmallIcon(R.drawable.ic_logosiete_background)
                     .setContentIntent(pendingIntent)
