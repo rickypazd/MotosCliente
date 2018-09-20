@@ -149,6 +149,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     double longitudeGPS;
     double latitudeGPS;
     private Button btn_ver_listo;
+    private LatLng latlngtemp;
     Toolbar toolbar;
 
     public PedirSieteMap() {
@@ -376,10 +377,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
                                 LatLng center = googleMap.getCameraPosition().target;
                                 if(listo){
-                                        selected.setTag(center);
-                                        String addres=getCompleteAddressString(center.latitude, center.longitude);
-                                        selected.setText(addres);
-                                        selected.dismissDropDown();
+
+                                        latlngtemp=center;
+                                    String addres=getCompleteAddressString(latlngtemp.latitude, latlngtemp.longitude);
+                                    selected.setText(addres);
+                                    selected.dismissDropDown();
                                     }
 
 
@@ -397,6 +399,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         if(i== GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE){
                             listo=true;
                             btn_ver_listo.setVisibility(View.VISIBLE);
+
                         }
                     }
                 });
@@ -410,6 +413,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 centrar();
                 listo=false;
                 btn_ver_listo.setVisibility(View.GONE);
+                selected.setTag(latlngtemp);
+                String addres=getCompleteAddressString(latlngtemp.latitude, latlngtemp.longitude);
+                selected.setText(addres);
+                selected.dismissDropDown();
 
             }
         });
@@ -608,11 +615,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 LatLngBounds bounds=builder.build();
                 int width = getResources().getDisplayMetrics().widthPixels;
                 int height = getResources().getDisplayMetrics().heightPixels;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,width,height,0);
-                googleMap.setPadding(200,200,200,200);
-                if(tipo!=10){
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,(int)(width*0.6),(int)(height*0.6),100);
+               // googleMap.setPadding(200,200,200,200);
+
                     googleMap.moveCamera(cu);
-                }
+
 
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 listo=true;
@@ -637,11 +644,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 LatLngBounds bounds=builder.build();
                 int width = getResources().getDisplayMetrics().widthPixels;
                 int height = getResources().getDisplayMetrics().heightPixels;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,width,height,0);
-                googleMap.setPadding(200,200,200,200);
-                if(tipo!=10){
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,(int)(width*0.6),(int)(height*0.6),100);
+             //   googleMap.setPadding(200,200,200,200);
+
                     googleMap.moveCamera(cu);
-                }
+
 
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 listo=true;
