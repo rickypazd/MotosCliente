@@ -5,17 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -51,11 +56,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.wdullaer.materialdatetimepicker.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -607,8 +614,8 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         fin=latlng2;
         String url = obtenerDireccionesURL(latlng1,latlng2);
         iv_marker.setVisibility(View.GONE);
-        googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-        googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+        googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(Inicio_bitmapDescriptorFromVector(this , R.drawable.asetmar)));
+        googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(Fin_bitmapDescriptorFromVector(this, R.drawable.asetmar)));
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(latlng1);
         builder.include(latlng2);
@@ -620,13 +627,52 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         Calcular_ruta_activity.DownloadTask downloadTask= new Calcular_ruta_activity.DownloadTask();
         downloadTask.execute(url);
         //linear_confirm.setVisibility(View.VISIBLE);
-        //mostraConfirmar(tipo);
+        mostraConfirmar_icon(tipo);
     }
 
-    private void mostraConfirmar(int valor){
+    private BitmapDescriptor Inicio_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_icon_pointer_map);
+        background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    private BitmapDescriptor Fin_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_icon_pointer_map2);
+        background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    private void mostraConfirmar_icon(int valor){
         switch (valor){
-            case 2:
-                icono2.setVisibility(View.VISIBLE);
+            case 1:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                break;
+            case 3:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_siete_maravilla));
+                break;
+            case 4:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                break;
+            case 5:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                break;case 2:
+            case 6:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                break;
+            case 7:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
                 break;
         }
     }
@@ -654,7 +700,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
         }
-
     }
 
     public class User_getPerfil extends AsyncTask<Void, String, String> {
