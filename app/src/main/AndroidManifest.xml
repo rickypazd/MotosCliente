@@ -82,6 +82,11 @@
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".PerfilCarrera"
+            android:theme="@style/AppThemeone"
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".PedirSieteTogo"
             android:theme="@style/AppThemeone"
             android:windowSoftInputMode="adjustNothing"

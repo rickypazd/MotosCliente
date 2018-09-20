@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +47,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
     private TextView tipo_pago;
     private TextView html_tipos;
     private TextView html_costos;
+    private Button btn_ver_recorrido;
 
     private static final int EFECTIVO = 1;
     private static final int CREDITO = 2;
@@ -59,7 +62,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-
+        btn_ver_recorrido=findViewById(R.id.btn_ver_recorrido);
         nombre = findViewById(R.id.text_nombre);
         fotoConductor = findViewById(R.id.img_perfil_conductor);
         placa_numerotelefono = findViewById(R.id.text_placa_telefono);
@@ -76,6 +79,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
             String id_carrera = intent.getStringExtra("id_carrera");
             new get_viaje_detalle(id_carrera).execute();
         }
+
     }
 
     // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
@@ -142,7 +146,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         double lngfinal = obj.getDouble("lngfinal");
                         double lat_final_real = obj.getDouble("latfinalreal");
                         double lng_final_real = obj.getDouble("lngfinalreal");
-                        String id_carrera = obj.getString("id_carrera");
+                        final String id_carrera = obj.getString("id_carrera");
                         String placa = obj.getString("placa");
                         String telefono = obj.getString("telefono");
                         int estado= obj.getInt("estado");
@@ -152,6 +156,12 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         placa_numerotelefono.setText(placa+" ° "+telefono);
                         fecha.setText(obj.getString("fecha_pedido").substring(0,16));
                         marca_auto.setText(obj.getString("marca")+" "+obj.getString("modelo"));
+                        btn_ver_recorrido.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                verViaje(Integer.parseInt(id_carrera));
+                            }
+                        });
 
                         if(obj.getString("foto_perfil").length()>0){
                             new AsyncTaskLoadImage(fotoConductor).execute(getString(R.string.url_foto)+obj.getString("foto_perfil"));
@@ -206,7 +216,11 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
 
         }
     }
-
+    private void verViaje(int id){
+        Intent intent = new Intent(Detalle_viaje_Cliente.this,PerfilCarrera.class);
+        intent.putExtra("id_carrera",id);
+        startActivity(intent);
+    }
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(Detalle_viaje_Cliente.this, Locale.getDefault());
