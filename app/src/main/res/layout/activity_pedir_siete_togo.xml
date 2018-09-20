@@ -159,10 +159,7 @@
                                 android:src="@drawable/ic_plus"
                                 android:textSize="15dp" />
                         </LinearLayout>
-
                     </LinearLayout>
-
-
                 </LinearLayout>
             </android.support.design.widget.CoordinatorLayout>
 
@@ -173,8 +170,8 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginBottom="51dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginStart="80dp"
             android:background="@drawable/ic_icon_siete_togo"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
