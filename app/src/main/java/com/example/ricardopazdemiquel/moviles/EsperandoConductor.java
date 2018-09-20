@@ -11,10 +11,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
@@ -38,6 +41,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -422,10 +426,10 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
                     points.add(position);
                 }
-
+                //polylineOption
                 lineOptions.addAll(points);
-                lineOptions.width(8);
-                lineOptions.color(Color.rgb(0,0,255));
+                lineOptions.width(5);
+                lineOptions.color(Color.rgb(93,56,146));
             }
             if(lineOptions!=null) {
 
@@ -557,14 +561,14 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                             downloadTask.execute(url);
                         }
                         if(mardest==null){
-                            mardest=googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+                            googleMap.addMarker(new MarkerOptions().position(ll2).title("FIN").icon(Fin_bitmapDescriptorFromVector(getApplication(), R.drawable.asetmar)));
                         }else{
                             mardest.setPosition(ll2);
                         }
                         float degre = Float.parseFloat(obj.getString("bearing"));
                         if(marauto==null){
 
-                            marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").rotation(degre).icon(BitmapDescriptorFactory.fromResource(R.drawable.auto)).anchor(0.5f,0.5f));
+                            marauto=googleMap.addMarker(new MarkerOptions().position(ll1).title("AUTO").rotation(degre).icon(Auto_bitmapDescriptorFromVector(getApplication(), R.drawable.auto)).anchor(0.5f,0.5f));
                         }else{
                             marauto.setPosition(ll1);
                             marauto.setRotation(degre);
@@ -581,6 +585,34 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             super.onProgressUpdate(values);
         }
     }
+
+
+    private BitmapDescriptor Fin_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_pointer_map2);
+        background.setBounds(20, 20, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+
+    private BitmapDescriptor Auto_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_map_auto_plomo);
+        background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+
 
     private class buscar_carrera extends AsyncTask<Void, String, String> {
 
