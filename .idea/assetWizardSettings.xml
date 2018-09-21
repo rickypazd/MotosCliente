@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_map_auto_negro" />
-                            <entry key="sourceFile" value="C:\Users\ricky\Desktop\cnachas_icon\SVG\ic_map_auto_negroRecurso 2.svg" />
+                            <entry key="outputName" value="ic_icono_market" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../SVG/ic_icono_estandarAsset 6.svg" />
                           </map>
                         </option>
                       </PersistentState>

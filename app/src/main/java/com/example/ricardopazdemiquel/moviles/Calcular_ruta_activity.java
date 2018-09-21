@@ -658,7 +658,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     private void mostraConfirmar_icon(int valor){
         switch (valor){
             case 1:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_estandar));
                 break;
             case 3:
                 icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_siete_maravilla));
@@ -667,13 +667,13 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                 icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
                 break;
             case 5:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_4x4));
                 break;case 2:
             case 6:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_camioneta));
                 break;
             case 7:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_3_filas));
                 break;
         }
     }

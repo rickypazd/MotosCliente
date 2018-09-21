@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
@@ -23,15 +24,20 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -107,7 +113,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private AutoCompleteTextView mAutocompleteTextView2;
     private AutoCompleteTextView selected;
     private TextView monto;
-    private ListView lista_productos;
     private TextView tv_cantidad;
     private Button btn_confirmar;
     private ImageView iv_marker;
@@ -122,7 +127,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private LatLng fin;
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
-    private RecyclerView recyclerView;
+    private LinearLayout recyclerView;
     private int tipo_pago;
     private BottomSheetBehavior bottomSheetBehavior;
 
@@ -133,12 +138,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     //inicializamos los botones para pedir siete y el tipo de carrera
     private ImageView btn_pedir_super, btn_pedir_maravilla;
 
+    //iniciamos los buton del view pager
+    private static final int MAX_STEP = 4;
+
+    private ViewPager viewPager;
+    private MyViewPagerAdapter myViewPagerAdapter;
+    private int logo_array[] = {
+            R.drawable.background_siete_estadar,
+            R.drawable.background_siete_4x4,
+            R.drawable.background_siete_camioneta,
+            R.drawable.backgroud_tres_filas
+    };
+
     private int tipo_carrera;
 
-    // inicializamos los iconos de confirmar carrera
-    private TextView icono1, icono2, icono3, icono4, icono5, icono6, icono7;
     double mont;
-    private AutoCompleteTextView text_direccion_togo;
 
     private Button btn_elegir_destino;
     private Boolean listo=false;
@@ -167,14 +181,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         ll_ubic = findViewById(R.id.linearLayoutPedir);
 
-        tv_cantidad = findViewById(R.id.tv_cantidad);
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
         linearLayoutcarga=findViewById(R.id.cargando);
-        layoutButon = findViewById(R.id.ll_boton);
         iv_marker = findViewById(R.id.ivmarker);
-        monto = findViewById(R.id.tv_monto);
         //esto es prueba
-        text_direccion_togo = findViewById(R.id.text_direccion_togo);
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
         latitudeGPS = getIntent().getDoubleExtra("lat", 0);
         tipo_carrera = getIntent().getIntExtra("tipo", 0);
@@ -187,8 +197,18 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_pedir_super = findViewById(R.id.btn_pedir_super);
         btn_pedir_maravilla = findViewById(R.id.btn_pedir_maravilla);
         btn_elegir_destino= findViewById(R.id.btn_elegir_destino);
+
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        // adding bottom dots
+        bottomProgressDots(0);
+        myViewPagerAdapter = new MyViewPagerAdapter();
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+        viewPager.setPageMargin(getResources().getDimensionPixelOffset(R.dimen.viewpager_margin_overlap_payment));
+        viewPager.setOffscreenPageLimit(MAX_STEP);
+
         recyclerView = findViewById(R.id.reciclerView);
-        recyclerView.setHasFixedSize(true);
+        /*recyclerView.setHasFixedSize(true);
         LinearLayoutManager mylinear = new LinearLayoutManager(this);
         mylinear.setOrientation(LinearLayoutManager.HORIZONTAL);
         try {
@@ -214,26 +234,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             recyclerView.setLayoutManager(mylinear);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        final RadioButton radio_efectivo = findViewById(R.id.radio_efectivo);
-        final RadioButton radio_credito = findViewById(R.id.radio_credito);
-        radio_efectivo.setOnClickListener(this);
-        radio_credito.setOnClickListener(this);
-
-        icono1 = findViewById(R.id.icono1);
-        icono2 = findViewById(R.id.icono2);
-        icono3 = findViewById(R.id.icono3);
-        icono4 = findViewById(R.id.icono4);
-        icono5 = findViewById(R.id.icono5);
-        icono6 = findViewById(R.id.icono6);
-        icono7 = findViewById(R.id.icono7);
 
         btn_pedir_super.setOnClickListener(this);
         btn_pedir_maravilla.setOnClickListener(this);
         btn_elegir_destino.setOnClickListener(this);
-
-        linear_confirm = findViewById(R.id.linear_confirm);
 
         View view = findViewById(R.id.button_sheetss);
         bottomSheetBehavior = BottomSheetBehavior.from(view);
@@ -288,52 +294,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             finish();
         }
 
-        btn_confirmar = findViewById(R.id.btn_confirmar);
-        btn_confirmar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    String id = usr_log.getString("id");
-                    String resp = new User_getPerfil(id).execute().get();
-                    if (resp == null) {
-                        Toast.makeText(PedirSieteMap.this, "Error al conectarse con el servidor.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        android.app.FragmentManager fragmentManager = getFragmentManager();
-                        if (!resp.isEmpty()) {
-                            JSONObject usr = new JSONObject(resp);
-                            if (usr.getString("exito").equals("si")) {
-                                double credito = usr.getDouble("creditos");
-                                boolean acept = true;
-                                if (radio_credito.isChecked() == true) {
-                                    tipo_pago = 2;
-                                    if (credito < mont) {
-                                        new Confirmar_viaje_Dialog2().show(fragmentManager, "Dialog");
-                                        acept = false;
-                                    }
-                                } else {
-                                    tipo_pago = 1;
-                                    if (credito < 0) {
-                                        new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
-                                        //esta en deuda , aler se cobrara el monto + viej
-                                        acept = false;
-                                    }
-                                }
-                                if (acept) {
-                                    ok_predir_viaje();
-                                }
-                            }
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
         active=false;
 
         mMapView = findViewById(R.id.mapviewPedirSiete);
@@ -383,9 +343,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                                     selected.dismissDropDown();
                                     }
 
-
-
-
                             }
                         });
                     }
@@ -433,6 +390,105 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
+    //  viewpager change listener
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(final int position) {
+            bottomProgressDots(position);
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
+    private void bottomProgressDots(int current_index) {
+        LinearLayout dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        ImageView[] dots = new ImageView[MAX_STEP];
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new ImageView(this);
+            int width_height = 15;
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(width_height, width_height));
+            params.setMargins(10, 10, 10, 10);
+            dots[i].setLayoutParams(params);
+            dots[i].setImageResource(R.drawable.shape_circle);
+            dots[i].setColorFilter(getResources().getColor(R.color.grey_20), PorterDuff.Mode.SRC_IN);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0) {
+            dots[current_index].setImageResource(R.drawable.shape_circle);
+            dots[current_index].setColorFilter(getResources().getColor(R.color.colorPrimaryDark2), PorterDuff.Mode.SRC_IN);
+        }
+    }
+
+    public class MyViewPagerAdapter extends PagerAdapter {
+        private LayoutInflater layoutInflater;
+
+        public MyViewPagerAdapter() {
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = layoutInflater.inflate(R.layout.item_card_payment, container, false);
+             ImageView ima = ((ImageView) view.findViewById(R.id.card_logo));
+            ima.setImageResource(logo_array[position]);
+            ima.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (position){
+                        case 0:
+                            CalcularRuta(1);
+                            break;
+                        case 1:
+                            CalcularRuta(5);
+                            break;
+                        case 2:
+                            CalcularRuta(6);
+                            break;
+                        case 3:
+                            CalcularRuta(7);
+                            break;
+                    }
+                }
+            });
+
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return MAX_STEP;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
+    }
+
+
+
     private void centrar(){
         LatLng center = googleMap.getCameraPosition().target;
         selected.setTag(center);
@@ -458,8 +514,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
     private void notificacionReciber(Intent intent) {
 
     }
@@ -478,7 +532,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-
         if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }else{
@@ -1027,48 +1080,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void cargartogo(){
-        JSONArray arr = getProductosPendientes();
-        if(arr!=null){
-            Adapter_pedidos_togo adapter = new Adapter_pedidos_togo(PedirSieteMap.this,arr);
-            lista_productos.setAdapter(adapter);
-            tv_cantidad.setText("Productos ("+arr.length()+")");
-        }
-    }
-
-    private void mostraConfirmar(int valor){
-        switch (valor){
-            case 1:
-                icono1.setVisibility(View.VISIBLE);
-                break;
-            case 2:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono2.setVisibility(View.VISIBLE);
-                break;
-            case 3:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono3.setVisibility(View.VISIBLE);
-                break;
-            case 4:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono4.setVisibility(View.VISIBLE);
-                break;
-            case 5:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono5.setVisibility(View.VISIBLE);
-                break;
-            case 6:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono6.setVisibility(View.VISIBLE);
-                break;
-            case 7:
-                layoutButon.setVisibility(View.VISIBLE);
-                icono7.setVisibility(View.VISIBLE);
-                break;
-        }
-    }
-
-
     public class validar_precio extends AsyncTask<Void, String, String> {
         private int id;
         public validar_precio(int id ){
@@ -1139,19 +1150,4 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public JSONArray getProductosPendientes() {
-        SharedPreferences preferencias = getSharedPreferences("myPref", MODE_PRIVATE);
-        String productos = preferencias.getString("productos_pendientes", "");
-        if (productos.length() <= 0) {
-            return null;
-        } else {
-            try {
-                JSONArray productosObj = new JSONArray(productos);
-                return productosObj;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
 }
