@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.ricardopazdemiquel.moviles.Calcular_ruta_activity;
 import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
 import com.example.ricardopazdemiquel.moviles.R;
@@ -67,7 +68,7 @@ public class Confirmar_viaje_Dialog extends DialogFragment implements View.OnCli
                         ((PedirSieteTogo)getActivity()).ok_pedir_viaje();
                         dismiss();
                     }else {
-                        ((PedirSieteMap) getActivity()).ok_predir_viaje();
+                        ((Calcular_ruta_activity)getActivity()).ok_pedir_viaje();
                         dismiss();
                     }
                 } catch (JSONException e) {

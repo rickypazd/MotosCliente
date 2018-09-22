@@ -258,6 +258,19 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         }
     }
 
+    public void ok_predir_viaje() throws JSONException {
+        Intent inte = new Intent(Calcular_ruta_activity.this, PidiendoSiete.class);
+        inte.putExtra("latInicio", inicio.latitude + "");
+        inte.putExtra("lngInicio", inicio.longitude + "");
+        inte.putExtra("latFin", fin.latitude + "");
+        inte.putExtra("lngFin", fin.longitude + "");
+        inte.putExtra("token", Token.currentToken);
+        inte.putExtra("id_usr", usr_log.getInt("id") + "");
+        inte.putExtra("tipo", tipo_carrera + "");
+        inte.putExtra("tipo_pago", tipo_pago + "");
+        startActivity(inte);
+    }
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
         @Override

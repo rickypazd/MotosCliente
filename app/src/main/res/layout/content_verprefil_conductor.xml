@@ -144,7 +144,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="1.04">
+            android:layout_weight="1.01">
 
             <TextView
                 android:id="@+id/text_Viajes"
@@ -193,7 +193,7 @@
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:textAlignment="center"
                     android:text="Amable"
                     android:textColor="#fff" />
@@ -206,18 +206,41 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button3"
+                <RelativeLayout
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@drawable/round_foreground" />
+                    android:layout_gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top|end"
+                        android:translationZ="3dp">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="3"
+                            android:textSize="20dp"
+                            android:gravity="end|bottom"
+                            android:textColor="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/button3"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/ic_buena_ruta2"
+                        />
+
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:textAlignment="center"
                     android:text="Buena Ruta"
                     android:textColor="#fff" />
@@ -244,7 +267,7 @@
                     android:layout_height="wrap_content"
                     android:text="Auto limpio"
                     android:textAlignment="center"
-                    android:paddingTop="10dp"
+                    android:paddingTop="0dp"
                     android:textColor="#fff" />
 
             </LinearLayout>

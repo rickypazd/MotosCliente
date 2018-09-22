@@ -153,7 +153,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        /*bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if(newState == BottomSheetBehavior.STATE_EXPANDED){
@@ -169,7 +169,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
             }
-        });
+        });*/
         lista_productos.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

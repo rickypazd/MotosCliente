@@ -61,7 +61,7 @@
                             android:id="@+id/img_photo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@mipmap/ic_miperfil">
+                            android:src="@mipmap/ic_miperfil_round">
 
                         </com.mikhaellopez.circularimageview.CircularImageView>
 

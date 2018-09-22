@@ -140,7 +140,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:drawablePadding="20dp"
-                                    android:drawableStart="@drawable/ic_icon_down_arrow"
+                                    android:drawableStart="@drawable/ic_arrow_and_up"
                                     android:padding="16dp"
                                     android:text="Productos (0)"
                                     android:textColor="@color/cardview_light_background"

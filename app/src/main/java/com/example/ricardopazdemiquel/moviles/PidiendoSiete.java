@@ -150,6 +150,7 @@ public class PidiendoSiete extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(pacientes);
                     Intent inte = new Intent(PidiendoSiete.this,EsperandoConductor.class);
+                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     inte.putExtra("obj_carrera",obj.toString());
                     startActivity(inte);
 

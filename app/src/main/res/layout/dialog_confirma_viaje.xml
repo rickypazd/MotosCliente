@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="#f7f7f7"
     >
 
     <LinearLayout
         android:id="@+id/email_login_form"
-        android:layout_width="280sp"
-        android:layout_height="230dp"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="#EEEEEE"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,11 +20,12 @@
             android:layout_weight="1.1"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:text="Alerta"
                 android:textAlignment="center"
+                android:background="@drawable/ic_alert_mark"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
         </LinearLayout>
@@ -56,7 +57,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="bottom"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal">
 
             <Button
@@ -65,7 +68,7 @@
                 android:layout_height="52sp"
                 android:layout_weight="1"
                 android:text="cancelar"
-                android:background="@color/colorPrimary2"
+                android:background="@color/colorAccent"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 

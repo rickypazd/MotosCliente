@@ -542,20 +542,25 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     }
 
+    public  void ok(){
+        try {
+            ok_predir_viaje();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void ok_predir_viaje() throws JSONException {
         Intent inte = new Intent(PedirSieteMap.this, PidiendoSiete.class);
         inte.putExtra("latInicio", inicio.latitude + "");
         inte.putExtra("lngInicio", inicio.longitude + "");
         inte.putExtra("latFin", fin.latitude + "");
         inte.putExtra("lngFin", fin.longitude + "");
-
         inte.putExtra("token", Token.currentToken);
         inte.putExtra("id_usr", usr_log.getInt("id") + "");
         inte.putExtra("tipo", tipo_carrera + "");
         inte.putExtra("tipo_pago", tipo_pago + "");
-
-            startActivity(inte);
-
+        startActivity(inte);
     }
 
     @Override
