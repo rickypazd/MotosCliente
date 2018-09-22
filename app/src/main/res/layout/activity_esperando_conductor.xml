@@ -36,7 +36,7 @@
                 android:id="@+id/btn_cancelar_viaje"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorBlack"
+                android:background="@color/colorPrimaryButton_lila"
                 android:text="Cancelar viaje"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -263,7 +263,7 @@
                                         android:id="@+id/button3"
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
-                                        android:background="@drawable/ic_icon_buena_ruta"
+                                        android:background="@drawable/ic_buena_ruta2"
                                          />
 
                                     <TextView
@@ -322,8 +322,8 @@
                                     android:background="@drawable/rounded_corner"
                                     android:padding="10dp"
                                     android:inputType="textMultiLine"
-                                    android:text="nombre"
-                                    android:textColor="#fff" />
+                                    android:text="Tuve un excelente servicio"
+                                    android:textColor="@color/colorBlack" />
 
 
                             </LinearLayout>

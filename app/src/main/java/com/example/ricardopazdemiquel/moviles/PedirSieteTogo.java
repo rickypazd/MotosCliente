@@ -282,11 +282,8 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                             selected.setText(getCompleteAddressString(center.latitude, center.longitude));
 
                         }
-
-
                     }
                 });
-
             }
         });
 
@@ -298,7 +295,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 190, 10, 0);
+            layoutParams.setMargins(0, 200, 10, 0);
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
@@ -722,6 +719,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         try {
             String id = usr_log.getString("id");
             String resp =new User_getPerfil(id).execute().get();
+            if(text_direccion_togo.getText().toString().length() != 0){
             if(resp==null){
                 Toast.makeText(PedirSieteTogo.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
@@ -751,6 +749,9 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                         }
                     }
                 }
+            }
+            }else{
+                Toast.makeText(PedirSieteTogo.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

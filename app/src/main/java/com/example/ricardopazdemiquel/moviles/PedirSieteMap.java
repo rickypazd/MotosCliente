@@ -610,7 +610,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     ///AL SELECCIONAR EL TIPO DEL SIETE EN EL MAPA
     public void CalcularRuta(int tipo_carrera){
-        if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
+        if(mAutocompleteTextView.getText().toString().length() != 0 && mAutocompleteTextView2.getText().toString().length() != 0){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
@@ -637,17 +637,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             }else{
                 startActivity(intent);
             }
-
-
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
-            return;
+            Toast.makeText(PedirSieteMap.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
         }
     }
 
     public void Aux_CalcularRuta(int tipo_carrera, Double lat ,Double lng ){
-        if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
+        if(mAutocompleteTextView.getText().toString().length() != 0 && mAutocompleteTextView2.getText().toString().length() != 0){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             intent.putExtra("tipo", tipo_carrera);
@@ -659,7 +657,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             intent.putExtra("lngfinal", lng);
             float[] results = new float[1];
             float sum = 0;
-
             Location.distanceBetween(
                     inicio.latitude,
                     inicio.longitude,
@@ -675,7 +672,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
-            return;
+            Toast.makeText(PedirSieteMap.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
         }
     }
 

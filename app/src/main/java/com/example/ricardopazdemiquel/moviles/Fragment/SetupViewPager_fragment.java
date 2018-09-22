@@ -15,6 +15,7 @@ import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 
 import utiles.SectionsPageAdapter;
+import utils.Tools;
 
 public class SetupViewPager_fragment extends android.support.v4.app.Fragment {
 
@@ -56,5 +57,6 @@ public class SetupViewPager_fragment extends android.support.v4.app.Fragment {
         adapter.addFragment(new List_historial_fragment(),"Historial");
         viewPager.setAdapter(adapter);
     }
+
 
 }

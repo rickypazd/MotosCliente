@@ -53,7 +53,7 @@
                 android:id="@+id/btn_buena_ruta"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
-                android:background="@drawable/ic_icon_buena_ruta"
+                android:background="@drawable/ic_buena_ruta2"
                 android:textAlignment="center"
                 android:textSize="15dp" />
 

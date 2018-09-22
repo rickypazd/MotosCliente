@@ -39,8 +39,10 @@
             android:layout_height="50dp"
             android:layout_margin="20dp"
             android:text="Agregar"
-            android:background="@color/colorBlack"
+            android:textSize="18dp"
+            android:background="@color/colorPrimaryButton_lila"
             android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
             android:visibility="gone"
             android:layout_gravity="bottom"/>
 

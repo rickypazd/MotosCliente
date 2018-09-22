@@ -241,8 +241,8 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 0, 30, 600);
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 0, 150, 0);
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
 
         }

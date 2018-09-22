@@ -8,16 +8,17 @@
     android:background="#fafafa"
     tools:context=".Perfil_ClienteFragment">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/backgroundcolor2"
-        app:title="Perfil"
-        app:titleTextColor="@color/colorWhite"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
-    </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundcolor2"
+            app:title="Perfil"
+            app:titleTextColor="@color/colorWhite"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+        </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,13 +36,13 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="160dp"
                     android:background="@drawable/backgroundcolor2"
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center_horizontal">
 
                         <LinearLayout
@@ -66,6 +67,7 @@
 
                     </RelativeLayout>
 
+
                 </LinearLayout>
 
                 <android.support.v7.widget.CardView
@@ -73,9 +75,9 @@
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="110dp"
                     android:background="@color/colorWhite"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
@@ -96,6 +98,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="creditos"
+                                android:textColor="@color/colorPrimaryButton_lila"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -104,7 +107,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="360"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorGris"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
@@ -137,7 +140,7 @@
                         android:paddingLeft="20dp"
                         android:text="Nombre"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryButton_lila"
                         android:textSize="15sp" />
 
                         <TextView
@@ -184,7 +187,7 @@
                         android:paddingLeft="20dp"
                         android:text="Apellido"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryButton_lila"
                         android:textSize="15sp" />
 
                     <TextView
@@ -229,7 +232,7 @@
                         android:paddingLeft="20dp"
                         android:text="Numero de teléfono"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryButton_lila"
                         android:textSize="15sp" />
 
                     <LinearLayout
@@ -292,7 +295,7 @@
                         android:paddingLeft="20dp"
                         android:text="E-mail"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimaryButton_lila"
                         android:textSize="15sp" />
 
                     <TextView
