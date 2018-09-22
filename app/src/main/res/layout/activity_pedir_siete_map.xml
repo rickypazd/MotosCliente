@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/asetmar" />
+                app:srcCompat="@drawable/ic_icono_market" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"

@@ -296,10 +296,11 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 0, 30, 600);
-            locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 190, 10, 0);
 
+            locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
         mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override

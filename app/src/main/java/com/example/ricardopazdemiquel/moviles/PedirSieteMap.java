@@ -160,8 +160,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     Fragment fragment_historial = null;
     android.support.v4.app.Fragment SetupViewPager_fragment = null;
 
-    double longitudeGPS;
-    double latitudeGPS;
+    double longitudeGPS= -63.182033;
+    double latitudeGPS=-17.783274;
     private Button btn_ver_listo;
     private LatLng latlngtemp;
     Toolbar toolbar;
@@ -384,8 +384,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 0, 30, 600);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+            layoutParams.setMargins(0, 150, 10, 0);
+
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
     }
@@ -546,11 +548,14 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         inte.putExtra("lngInicio", inicio.longitude + "");
         inte.putExtra("latFin", fin.latitude + "");
         inte.putExtra("lngFin", fin.longitude + "");
+
         inte.putExtra("token", Token.currentToken);
         inte.putExtra("id_usr", usr_log.getInt("id") + "");
         inte.putExtra("tipo", tipo_carrera + "");
         inte.putExtra("tipo_pago", tipo_pago + "");
-        startActivity(inte);
+
+            startActivity(inte);
+
     }
 
     @Override
@@ -616,7 +621,24 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             intent.putExtra("lnginicio", latlng1.longitude);
             intent.putExtra("latfinal", latlng2.latitude);
             intent.putExtra("lngfinal", latlng2.longitude);
-            startActivity(intent);
+
+            float[] results = new float[1];
+            float sum = 0;
+
+            Location.distanceBetween(
+                    inicio.latitude,
+                    inicio.longitude,
+                    fin.latitude,
+                    fin.longitude,
+                    results);
+            if(results[0]>Float.valueOf(getString(R.string.maxima_km_busqueda))){
+                Toast.makeText(PedirSieteMap.this,"Por favor marque dentro de Santa Cruz.",Toast.LENGTH_LONG).show();
+                return;
+            }else{
+                startActivity(intent);
+            }
+
+
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
@@ -625,7 +647,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     }
 
     public void Aux_CalcularRuta(int tipo_carrera, Double lat ,Double lng ){
-        if(mAutocompleteTextView.getTag()!= null){
+        if(mAutocompleteTextView.getTag()!= null && mAutocompleteTextView2.getTag()!=null){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             intent.putExtra("tipo", tipo_carrera);
@@ -635,7 +657,21 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             intent.putExtra("lnginicio", latlng1.longitude);
             intent.putExtra("latfinal", lat);
             intent.putExtra("lngfinal", lng);
-            startActivity(intent);
+            float[] results = new float[1];
+            float sum = 0;
+
+            Location.distanceBetween(
+                    inicio.latitude,
+                    inicio.longitude,
+                    fin.latitude,
+                    fin.longitude,
+                    results);
+            if(results[0]>  Float.valueOf(getString(R.string.maxima_km_busqueda))){
+                Toast.makeText(PedirSieteMap.this,"Por favor marque dentro de Santa Cruz.",Toast.LENGTH_LONG).show();
+                return;
+            }else{
+                startActivity(intent);
+            }
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         else{
@@ -981,7 +1017,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 float sum = 0;
 
                 for(int i = 0; i < size; i++){
-                    Location.distanceBetween(
+                   Location.distanceBetween(
                             points.get(i).latitude,
                             points.get(i).longitude,
                             points.get(i+1).latitude,
