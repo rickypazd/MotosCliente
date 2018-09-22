@@ -295,7 +295,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 200, 10, 0);
+            layoutParams.setMargins(0, 290, 10, 0);
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }

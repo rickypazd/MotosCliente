@@ -386,7 +386,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 150, 10, 0);
+            layoutParams.setMargins(0, 220, 10, 0);
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
@@ -726,8 +726,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 DownloadTask downloadTask= new DownloadTask();
                 downloadTask.execute(url);
                 tipo_carrera = tipo;
-                googleMap.addMarker(new MarkerOptions().position(latlng2).title("INICIO").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
-                googleMap.addMarker(new MarkerOptions().position(latlng1).title("FIN").icon(BitmapDescriptorFactory.fromResource(R.drawable.asetmar)));
+                googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(Inicio_bitmapDescriptorFromVector(this , R.drawable.asetmar)));
+                googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(Fin_bitmapDescriptorFromVector(this, R.drawable.asetmar)));
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 builder.include(latlng1);
                 builder.include(latlng2);

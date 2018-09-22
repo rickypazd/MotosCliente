@@ -92,7 +92,6 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 btn_guardar.setText("Actualizar Contraseña");
                 break;
         }
-
     }
 
     // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
