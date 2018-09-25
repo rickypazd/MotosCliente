@@ -256,7 +256,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 while(hilo){
                     try {
                         new posicion_conductor().execute();
-                        Thread.sleep(1500);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -509,7 +509,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             try {
                 int id=json_carrera.getInt("id");
                 param.put("evento","get_pos_conductor_x_id_carrera");
-                param.put("id",id+"");
                 param.put("id",id+"");
             } catch (JSONException e) {
                 e.printStackTrace();
