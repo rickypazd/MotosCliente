@@ -50,10 +50,16 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
     private static final String TAG = Add_ubicacion_favoritos_Dialog.class.getSimpleName();
     private JSONObject obj;
     JSONArray array = new JSONArray();
+    private static final int EDITAR = 1;
+    private static final int AGREGAR = 2;
+    private int pos;
+    private int tipo;
 
     @SuppressLint("ValidFragment")
-    public Add_ubicacion_favoritos_Dialog(JSONObject json_agregar_favoritos) {
+    public Add_ubicacion_favoritos_Dialog(JSONObject json_agregar_favoritos , int pos , int tipo) {
         this.obj = json_agregar_favoritos;
+        this.pos = pos;
+        this.tipo = tipo;
     }
 
 
@@ -77,16 +83,37 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         btn_cancelar.setOnClickListener(this);
         btn_agregar_favorito.setOnClickListener(this);
 
+
+        switch (tipo){
+            case EDITAR:
+                cargar(obj);
+                break;
+            case AGREGAR:
+                try {
+                    Double latFin = obj.getDouble("latFin");
+                    Double lngFin = obj.getDouble("lngFin");
+                    String ubicacion = getCompleteAddressString(latFin,lngFin);
+                    text_direccion.setText(ubicacion);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+
+        return builder.create();
+    }
+
+
+    public  void cargar(JSONObject obj){
         try {
             Double latFin = obj.getDouble("latFin");
             Double lngFin = obj.getDouble("lngFin");
             String ubicacion = getCompleteAddressString(latFin,lngFin);
             text_direccion.setText(ubicacion);
+            edit_nombre_ubicacion.setText(obj.getString("nombre_favorito"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return builder.create();
     }
 
     private void agregar_ubicacion(){

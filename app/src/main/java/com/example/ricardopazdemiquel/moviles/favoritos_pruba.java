@@ -20,6 +20,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +41,7 @@ import android.widget.Toast;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Dialog.Add_ubicacion_favoritos_Dialog;
+import com.example.ricardopazdemiquel.moviles.Dialog.Producto_togo_Dialog;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_ubicacion_fragment;
 import com.google.android.gms.common.ConnectionResult;
@@ -259,10 +262,54 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if(v.getId() == R.id.lv_List_favoritos) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_context_producto, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        if(info == null || info.position < 0) {
+            return true;
+        }
+        View view = info.targetView;
+        int pos = info.position;
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(view.getTag().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        switch (item.getItemId()) {
+            case R.id.action_delate_producto:
+                removeItem(pos);
+                break;
+            case R.id.action_update_producto:
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                new Add_ubicacion_favoritos_Dialog(obj,pos,1).show(fragmentManager, "Dialog");
+                break;
+        }
+        return true;
+    }
+
+    public void removeItem(int pos){
+        adapter.removeiten(pos);
+        adapter.notifyDataSetChanged();
+        JSONArray arr = adapter.getArray();
+        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("lista_favoritos", arr.toString());
+        editor.commit();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //cargartogo();
-
     }
     private void cargar(){
         //carga un SharedPreferences de favoritos o crea uno vacio
@@ -272,7 +319,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
             SharedPreferences preferencias = favoritos_pruba.this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferencias.edit();
             productos=new JSONArray();
-            editor.putString("lista_favoritos", productos.toString());
+            editor.putString("c", productos.toString());
             editor.commit();
         }
         adapter = new Adapter_favoritos(favoritos_pruba.this,productos);
@@ -333,7 +380,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                new Add_ubicacion_favoritos_Dialog(obj).show(fragmentManager, "Dialog");
+                new Add_ubicacion_favoritos_Dialog(obj , 0 ,2).show(fragmentManager, "Dialog");
                 break;
         }
     }
