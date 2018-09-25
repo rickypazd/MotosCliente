@@ -165,6 +165,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo viaje"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="#626262"/>
+
+                <TextView
+                    android:id="@+id/text_tipo_carrera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="siete estandar"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:textColor="#626262"/>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
