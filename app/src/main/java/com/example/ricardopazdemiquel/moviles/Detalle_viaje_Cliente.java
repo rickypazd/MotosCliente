@@ -47,6 +47,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
     private TextView tipo_pago;
     private TextView html_tipos;
     private TextView html_costos;
+    private TextView text_tipo_carrera;
     private Button btn_ver_recorrido;
 
     private static final int EFECTIVO = 1;
@@ -62,7 +63,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-        btn_ver_recorrido=findViewById(R.id.btn_ver_recorrido);
+        btn_ver_recorrido = findViewById(R.id.btn_ver_recorrido);
         nombre = findViewById(R.id.text_nombre);
         fotoConductor = findViewById(R.id.img_perfil_conductor);
         placa_numerotelefono = findViewById(R.id.text_placa_telefono);
@@ -73,6 +74,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         tipo_pago = findViewById(R.id.text_tipo_pago);
         html_tipos = findViewById(R.id.text_html_tipos);
         html_costos = findViewById(R.id.text_html_montos);
+        text_tipo_carrera = findViewById(R.id.text_tipo_carrera);
 
         Intent intent = getIntent();
         if(intent != null){
@@ -152,6 +154,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         int estado= obj.getInt("estado");
                         int costo = obj.getInt("costo_final");
                         int tipo = obj.getInt("tipo_pago");
+                        int tipo_carrera = obj.getInt("tipo");
                         nombre.setText(obj.getString("nombre"));
                         placa_numerotelefono.setText(placa+" ° "+telefono);
                         fecha.setText(obj.getString("fecha_pedido").substring(0,16));
@@ -162,11 +165,32 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                                 verViaje(Integer.parseInt(id_carrera));
                             }
                         });
-
+                        switch (tipo_carrera){
+                            case 1:
+                                text_tipo_carrera.setText("Siete Estandar");
+                                break;
+                            case 2:
+                                tipo_pago.setText("Siete To go");
+                                break;
+                            case 3:
+                                tipo_pago.setText("Siete Maravilla");
+                                break;
+                            case 4:
+                                tipo_pago.setText("Super Siete");
+                                break;
+                            case 5:
+                                tipo_pago.setText("Siete 4x4");
+                                break;
+                            case 6:
+                                tipo_pago.setText("Siete Camioneta");
+                                break;
+                            case 7:
+                                tipo_pago.setText("Siete 3 filas");
+                                break;
+                        }
                         if(obj.getString("foto_perfil").length()>0){
                             new AsyncTaskLoadImage(fotoConductor).execute(getString(R.string.url_foto)+obj.getString("foto_perfil"));
                         }
-
                         switch (tipo){
                             case(EFECTIVO):
                                 tipo_pago.setText("Efectivo");

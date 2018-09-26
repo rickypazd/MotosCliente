@@ -247,6 +247,7 @@
                                             android:translationZ="3dp">
 
                                             <TextView
+                                                android:id="@+id/cont_amable"
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
                                                 android:text="0"
@@ -294,6 +295,7 @@
                                             android:translationZ="3dp">
 
                                             <TextView
+                                                android:id="@+id/cont_buena_ruta"
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
                                                 android:text="0"
@@ -338,6 +340,7 @@
                                             android:translationZ="3dp">
 
                                             <TextView
+                                                android:id="@+id/cont_auto_limpio"
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
                                                 android:text="0"
@@ -377,7 +380,7 @@
                                 android:layout_weight="1">
 
                                 <TextView
-                                    android:id="@+id/textView14"
+                                    android:id="@+id/text_ultimo_mensaje"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:alpha="0.5"

@@ -128,9 +128,6 @@ public class Producto_togo_Dialog extends DialogFragment implements View.OnClick
             case R.id.btn_confirmar_togo:
                 agregar_pedido(tipo);
                 break;
-            case R.id.btn_editar_togo:
-                agregar_pedido(tipo);
-                break;
             case R.id.btn_cancelar:
                 dismiss();
                 break;

@@ -323,7 +323,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                                 selected.setTag(new LatLng(location.getLatitude(), location.getLongitude()));
                                 mMap.clear();
                                 selected.setText(getCompleteAddressString(location.getLatitude(), location.getLongitude()));
-                                mAutocompleteTextView2.setTag(new LatLng(location.getLatitude(), location.getLongitude()));
                                 mAutocompleteTextView2.requestFocus();
                                 selected.dismissDropDown();
                                 CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14);
@@ -355,12 +354,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         if(i== GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE){
                             listo=true;
                             btn_ver_listo.setVisibility(View.VISIBLE);
-
                         }
                     }
                 });
-
-
             }
         });
         btn_ver_listo.setOnClickListener(new View.OnClickListener() {
@@ -373,7 +369,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 String addres=getCompleteAddressString(latlngtemp.latitude, latlngtemp.longitude);
                 selected.setText(addres);
                 selected.dismissDropDown();
-
             }
         });
 
@@ -615,7 +610,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     ///AL SELECCIONAR EL TIPO DEL SIETE EN EL MAPA
     public void CalcularRuta(int tipo_carrera){
-        if(mAutocompleteTextView.getText().toString().length() != 0 && mAutocompleteTextView2.getText().toString().length() != 0){
+       Object tag=mAutocompleteTextView2.getTag();
+        Object taga=mAutocompleteTextView.getTag();
+        if(mAutocompleteTextView.getTag()!=null && mAutocompleteTextView2.getTag()!=null){
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
@@ -708,7 +705,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,(int)(width*0.6),(int)(height*0.6),100);
                // googleMap.setPadding(200,200,200,200);
 
-                    googleMap.moveCamera(cu);
+                googleMap.moveCamera(cu);
 
 
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);

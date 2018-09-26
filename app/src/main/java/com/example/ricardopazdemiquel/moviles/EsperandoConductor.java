@@ -89,6 +89,8 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
 
+    private TextView cont_amable , cont_buena_ruta , cont_auto_limpio , text_ultimo_mensaje;
+
 
     private Button btn_enviar_mensaje;
     private Button btn_llamar;
@@ -120,6 +122,12 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         Container_cancelar = findViewById(R.id.Container_cancelar);
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
         btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
+        cont_amable = findViewById(R.id.cont_amable);
+        cont_buena_ruta = findViewById(R.id.cont_buena_ruta);
+        cont_auto_limpio = findViewById(R.id.cont_auto_limpio);
+        text_ultimo_mensaje = findViewById(R.id.text_ultimo_mensaje);
+
+
         btn_cancelar_viaje.setOnClickListener(this);
 
         try {
@@ -489,7 +497,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             urlConnection.disconnect();
         }
         return data;
-
     }
 
     private float dist=0;
@@ -697,12 +704,23 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         String modelo = object.getString("modelo").toString();
                         String marca = object.getString("marca").toString();
                         int viajes = object.getInt("cant_car");
+
+                        int amable = object.getInt("amable");
+                        int buena_ruta = object.getInt("buena_ruta");
+                        int auto_limpio = object.getInt("auto_limpio");
+                        String ultimo_mensaje = object.getString("ultimo_mensaje");
+
                         String placa = object.getString("placa");
                         text_nombreConductor.setText(nombreConductor + " " + apellido_pa + " " + apellido_ma);
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
-                        text_Viajes.setText("ha completado: " + viajes);
 
+                        cont_amable.setText(amable+"");
+                        cont_buena_ruta.setText(buena_ruta+"");
+                        cont_auto_limpio.setText(auto_limpio+"");
+                        text_ultimo_mensaje.setText(ultimo_mensaje);
+
+                        text_Viajes.setText("ha completado: " + viajes);
 
                         Container_verPerfil.setVisibility(View.VISIBLE);
                         btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {
@@ -748,7 +766,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         if(object.getString("foto_perfil").length()>0){
                             new AsyncTaskLoadImage(img_foto).execute(getString(R.string.url_foto)+object.getString("foto_perfil"));
                         }
-
                     }
                 }else{
                     Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
@@ -850,8 +867,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     }
 
     public class Confirmar_cancelacion extends AsyncTask<Void, String, String> {
-
-
 
         private ProgressDialog progreso;
         @Override

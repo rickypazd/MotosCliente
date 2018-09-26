@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,10 +25,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Elejir_tipo_siete extends Fragment implements View.OnClickListener {
 
@@ -97,12 +101,20 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
 
                 break;
             case R.id.btn_sieteMaravilla:
-                Intent intent2 = new Intent(getActivity(), PedirSieteMap.class);
-                    intent2.putExtra("lng", longitudeGPS);
-                    intent2.putExtra("lat", latitudeGPS);
-                    intent2.putExtra("tipo", 3);
-                    startActivity(intent2);
-
+                JSONObject obj = getUsr_log();
+                try {
+                    if(obj.getString("sexo") == "Mujer"){
+                        Intent intent2 = new Intent(getActivity(), PedirSieteMap.class);
+                        intent2.putExtra("lng", longitudeGPS);
+                        intent2.putExtra("lat", latitudeGPS);
+                        intent2.putExtra("tipo", 3);
+                        startActivity(intent2);
+                    }else{
+                        Toast.makeText(getActivity(),"Usted no puede tener esta opción.",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.btn_togo:
                 Intent intent_togo = new Intent(getActivity(), PedirSieteTogo.class);
@@ -111,6 +123,22 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
                     intent_togo.putExtra("tipo", 2);
                     startActivity(intent_togo);
                 break;
+        }
+    }
+
+    public JSONObject getUsr_log() {
+        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", MODE_PRIVATE);
+        String usr = preferencias.getString("usr_log", "");
+        if (usr.length() <= 0) {
+            return null;
+        } else {
+            try {
+                JSONObject usr_log = new JSONObject(usr);
+                return usr_log;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 }

@@ -18,10 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
+import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
 import com.example.ricardopazdemiquel.moviles.Detalle_viaje_Cliente;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_favoritos_fragment;
+import com.example.ricardopazdemiquel.moviles.PedirSieteTogo;
 import com.example.ricardopazdemiquel.moviles.R;
+import com.example.ricardopazdemiquel.moviles.favoritos_pruba;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,8 +87,10 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         btn_agregar_favorito.setOnClickListener(this);
 
 
+
         switch (tipo){
             case EDITAR:
+                btn_agregar_favorito.setText("Editar");
                 cargar(obj);
                 break;
             case AGREGAR:
@@ -116,24 +121,6 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         }
     }
 
-    private void agregar_ubicacion(){
-        boolean acept = true;
-        String nombre = edit_nombre_ubicacion.getText().toString().trim();
-        if(nombre.isEmpty()){
-            edit_nombre_ubicacion.setError("Campo obligatorio");
-            acept = false;
-        }
-        if(acept){
-            try {
-                obj.put("nombre_favorito", nombre);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            InsertList(obj);
-            dismiss();
-            getActivity().finish();
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -146,6 +133,42 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
                 break;
         }
     }
+
+
+    private void agregar_ubicacion(){
+        boolean acept = true;
+        String nombre = edit_nombre_ubicacion.getText().toString().trim();
+        if(nombre.isEmpty()){
+            edit_nombre_ubicacion.setError("Campo obligatorio");
+            acept = false;
+        }
+        if(acept) {
+            switch (tipo) {
+                case EDITAR:
+                    try {
+                        obj.put("nombre_favorito", nombre);
+                        ((favoritos_pruba)getActivity()).UpdateList(obj, pos);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    dismiss();
+                    //getActivity().finish();
+                    break;
+                case AGREGAR:
+                    try {
+                        obj.put("nombre_favorito", nombre);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    InsertList(obj);
+                    dismiss();
+                    getActivity().finish();
+                    break;
+            }
+        }
+    }
+
+
 
     public void InsertList(JSONObject object){
        // adapter.addItem(object);
@@ -177,15 +200,7 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
             }
         }
     }
-    public void UpdateList(JSONObject object , int pos){
-        adapter.updateItem(object,pos);
-        adapter.notifyDataSetChanged();
-        JSONArray arr = adapter.getArray();
-        SharedPreferences preferencias = getActivity().getSharedPreferences("myPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("lista_favoritos", arr.toString());
-        editor.commit();
-    }
+
 
     public void removeItem(int pos){
         adapter.removeiten(pos);

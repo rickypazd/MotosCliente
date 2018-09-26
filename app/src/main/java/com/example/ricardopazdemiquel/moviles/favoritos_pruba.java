@@ -88,7 +88,8 @@ import utiles.Contexto;
 import utiles.DirectionsJSONParser;
 import utiles.Token;
 
-public class favoritos_pruba extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
+public class favoritos_pruba extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks
+        ,AdapterView.OnItemClickListener {
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -137,6 +138,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         btn_agregar.setOnClickListener(this);
 
         lv_List_favoritos = findViewById(R.id.lv_List_favoritos);
+        lv_List_favoritos.setOnItemClickListener(this);
 
         cargar();
 
@@ -238,8 +240,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        if (mMapView != null &&
-                mMapView.findViewById(Integer.parseInt("1")) != null) {
+        /*if (mMapView != null && mMapView.findViewById(Integer.parseInt("1")) != null) {
             ImageView locationButton = (ImageView) ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
@@ -248,8 +249,8 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
             layoutParams.setMargins(0, 0, 150, 0);
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
 
-        }
-        mMapView.setOnTouchListener(new View.OnTouchListener() {
+        }*/
+       /* mMapView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.
@@ -257,7 +258,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 return true;
             }
-        });
+        });*/
 
     }
 
@@ -306,10 +307,25 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         editor.commit();
     }
 
+    public void UpdateList(JSONObject object , int pos) throws JSONException {
+        JSONArray arr = get_list_Favoritos();
+        if(arr==null){
+            arr= new JSONArray();
+        }else{
+            arr.put(pos,object);
+            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferencias.edit();
+            editor.putString("lista_favoritos", arr.toString());
+            editor.commit();
+            Adapter_favoritos adapters = new Adapter_favoritos(favoritos_pruba.this,arr);
+            lv_List_favoritos.setAdapter(adapters);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        //cargartogo();
+        cargar();
     }
     private void cargar(){
         //carga un SharedPreferences de favoritos o crea uno vacio
@@ -324,6 +340,7 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         }
         adapter = new Adapter_favoritos(favoritos_pruba.this,productos);
         lv_List_favoritos.setAdapter(adapter);
+                   //  lv_List_favoritos.setOn;
         JSONObject obj = new JSONObject();
     }
 
@@ -503,6 +520,11 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
                 "Google Places API connection failed with error code:" +
                         connectionResult.getErrorCode(),
                 Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        registerForContextMenu(lv_List_favoritos);
     }
 
 
