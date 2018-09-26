@@ -63,6 +63,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         edit_apellidoP= findViewById(R.id.edit_apellidoP);
         edit_telefono = findViewById(R.id.edit_telefono);
         radio_hombre = findViewById(R.id.radioHombre);
+
         radio_mujer = findViewById(R.id.radioMujer);
         edit_correo = findViewById(R.id.edit_correo);
         img_photo= findViewById(R.id.img_photo);
@@ -76,12 +77,27 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (it != null) {
             try {
                 JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
-                id = obj.getString("id");
-                String nombre1 = obj.getString("first_name");
-                String nombre2 = obj.getString("middle_mane");
-                edit_nombre.setText(nombre1 +" "+ nombre2);
-                edit_apellidoP.setText(obj.getString("last_name"));
-                edit_correo.setText(obj.getString("email"));
+                if(obj.has("id")){
+                    id = obj.getString("id");
+                }
+                String nombre1="";
+                String nombre2="";
+                if(obj.has("first_name")){
+                     nombre1 = obj.getString("first_name");
+                }
+                if(obj.has("middle_mane")){
+                     nombre2 = obj.getString("middle_mane");
+                }
+                edit_nombre.setText(nombre1+" "+nombre2);
+                if(obj.has("last_name")){
+                    edit_apellidoP.setText(obj.getString("last_name"));
+                }
+                if(obj.has("email")){
+                    edit_correo.setText(obj.getString("email"));
+                }
+
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -189,6 +205,9 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             isValid = false;
         }else if (validarEmailSimple(correoV) == false) {
             edit_correo.setError("email no valido");
+            isValid = false;
+        }if(getSexo().isEmpty()){
+            Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Elija su sexo.",Toast.LENGTH_LONG).show();
             isValid = false;
         }
         if (!isValid) {

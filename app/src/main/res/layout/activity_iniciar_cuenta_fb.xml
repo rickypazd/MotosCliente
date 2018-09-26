@@ -192,7 +192,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:text="Hombre"
-                android:checked="true"
                 android:buttonTint="@color/colorPrimary"
                 android:textSize="18dp" />
 

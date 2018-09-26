@@ -155,6 +155,7 @@ public class LoginSocial extends AppCompatActivity {
                                         String resp= new get_usr_face(id).execute().get();
                                         if(resp==null){
                                             Toast.makeText(LoginSocial.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                                            LoginManager.getInstance().logOut();
                                         }else{
                                             if (resp.contains("falso")) {
                                                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
@@ -197,7 +198,7 @@ public class LoginSocial extends AppCompatActivity {
                             }
                         });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,first_name,middle_name,last_name,email,gender,birthday");
+                parameters.putString("fields", "id,name,first_name,middle_name,last_name,email");
                 request.setParameters(parameters);
                 request.executeAsync();
 

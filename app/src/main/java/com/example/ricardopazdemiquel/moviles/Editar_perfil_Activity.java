@@ -132,7 +132,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         switch (view.getId()){
             case R.id.btn_guardar:
                 isValue();
-                finish();
+
             break;
         }
     }
@@ -273,7 +273,9 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (success != null || !success.isEmpty()){
+            if(success!=null){
+
+            if (!success.isEmpty()){
                 try {
                     JSONObject usr = new JSONObject(success);
                     if(usr.getString("exito").equals("si")){
@@ -285,6 +287,8 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                     e.printStackTrace();
                 }
             }
+            }
+            finish();
         }
         @Override
         protected void onProgressUpdate(String... values) {
