@@ -111,6 +111,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             public void onClick(View v) {
                 if (radio_hombre.isChecked() == true) {
                     setSexo("Hombre");
+                    radio_mujer.setChecked(false);
                     //radioButton_trabajar.setError(null);
                     //radioButton_trabajar.setChecked(false);
                 }
@@ -121,6 +122,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             public void onClick(View v) {
                 if (radio_mujer.isChecked() == true) {
                     setSexo("Mujer");
+                    radio_hombre.setChecked(false);
                     //radioButton_contrato.setError(null);
                     //radioButton_contrato.setChecked(false);
                 }
