@@ -254,13 +254,13 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         }
 
         @Override
-        protected void onPostExecute(String pacientes) {
-            super.onPostExecute(pacientes);
+        protected void onPostExecute(String Cliente) {
+            super.onPostExecute(Cliente);
             progreso.dismiss();
-            if(pacientes==null){
+            if(Cliente==null){
                 Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
-                if (pacientes.equals("falso")) {
+                if (Cliente.equals("falso")) {
                     return;
                 }else{
                     Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
