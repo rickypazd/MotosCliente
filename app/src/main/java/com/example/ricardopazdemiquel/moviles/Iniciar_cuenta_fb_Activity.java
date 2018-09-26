@@ -275,8 +275,5 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             super.onProgressUpdate(values);
         }
     }
-
-
-
 }
 
