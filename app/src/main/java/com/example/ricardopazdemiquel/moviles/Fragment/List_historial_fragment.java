@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_favoritos;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_historial;
+import com.example.ricardopazdemiquel.moviles.Carga;
 import com.example.ricardopazdemiquel.moviles.MainActivity;
 import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.R;
@@ -164,9 +165,12 @@ public class List_historial_fragment extends Fragment {
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty() || resp == null){
-                Toast.makeText(getActivity(),"Error al obtener Datos", Toast.LENGTH_SHORT).show();
-            }else  {
+            if(resp == null){
+                Toast.makeText(getActivity(),"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if(resp.isEmpty()){
+                Toast.makeText(getActivity(),"Error al obtener datos", Toast.LENGTH_SHORT).show();
+            }else {
                 try {
                     JSONArray array  = new JSONArray(resp);
                     Adapter_historial adapter = new Adapter_historial(getActivity(),array);

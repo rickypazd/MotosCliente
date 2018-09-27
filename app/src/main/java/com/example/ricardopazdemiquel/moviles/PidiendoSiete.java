@@ -141,23 +141,24 @@ public class PidiendoSiete extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String pacientes) {
-            super.onPostExecute(pacientes);
-            if (pacientes.equals("falso")) {
+        protected void onPostExecute(String Resp) {
+            super.onPostExecute(Resp);
+            if(Resp == null){
+                Toast.makeText(PidiendoSiete.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (Resp.equals("falso")) {
+                Toast.makeText(PidiendoSiete.this,"Ningún conductor confirmó el viaje", Toast.LENGTH_SHORT).show();
                 finish();
-                return;
             }else{
                 try {
-                    JSONObject obj = new JSONObject(pacientes);
+                    JSONObject obj = new JSONObject(Resp);
                     Intent inte = new Intent(PidiendoSiete.this,EsperandoConductor.class);
                     inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     inte.putExtra("obj_carrera",obj.toString());
                     startActivity(inte);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                finish();
             }
         }
 
@@ -192,22 +193,22 @@ public class PidiendoSiete extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String pacientes) {
-            super.onPostExecute(pacientes);
-            if (pacientes.equals("falso")) {
-                finish();
-                return;
+        protected void onPostExecute(String Resp) {
+            super.onPostExecute(Resp);
+            if(Resp == null){
+                Toast.makeText(PidiendoSiete.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (Resp.equals("falso")) {
+                Toast.makeText(PidiendoSiete.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
             }else{
                 try {
-                    JSONObject obj = new JSONObject(pacientes);
+                    JSONObject obj = new JSONObject(Resp);
                     Intent inte = new Intent(PidiendoSiete.this,Inicio_viaje_togo.class);
                     inte.putExtra("obj_carrera",obj.toString());
                     startActivity(inte);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                finish();
             }
         }
 

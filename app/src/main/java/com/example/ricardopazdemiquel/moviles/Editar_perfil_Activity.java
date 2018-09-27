@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,7 +133,6 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         switch (view.getId()){
             case R.id.btn_guardar:
                 isValue();
-
             break;
         }
     }
@@ -273,9 +273,10 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if(success!=null){
-
-            if (!success.isEmpty()){
+            if(success == null) {
+                Toast.makeText(Editar_perfil_Activity.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (!success.isEmpty()){
                 try {
                     JSONObject usr = new JSONObject(success);
                     if(usr.getString("exito").equals("si")){
@@ -286,9 +287,9 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }else{
+                Toast.makeText(Editar_perfil_Activity.this,"Error al obtener Datos.", Toast.LENGTH_SHORT).show();
             }
-            }
-            finish();
         }
         @Override
         protected void onProgressUpdate(String... values) {

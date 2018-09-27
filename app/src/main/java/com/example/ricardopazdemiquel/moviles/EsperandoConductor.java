@@ -528,6 +528,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             super.onPostExecute(resp);
             if(resp==null){
                 Toast.makeText(EsperandoConductor.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else{
                 if (resp.equals("falso")) {
                     Toast.makeText(EsperandoConductor.this,"No se Encontro Conductor Disculpe las Molestias",
@@ -646,14 +647,15 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
             return respuesta;
         }
-
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp == null || resp.isEmpty()) {
-                Toast.makeText(EsperandoConductor.this,"Error al optener Datos",
-                        Toast.LENGTH_SHORT).show();
+            if(resp == null){
+                Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (resp.isEmpty()) {
+                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
                     JSONObject obj = new JSONObject(resp);
@@ -663,7 +665,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 }
             }
         }
-
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
@@ -695,7 +696,11 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             try {
-                if(resp != null || !resp.isEmpty()) {
+                if(resp == null){
+                    Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                }
+                if(!resp.isEmpty()) {
                     final JSONObject object = new JSONObject(resp);
                     if (object != null) {
                         final String nombreConductor = object.getString("nombre").toString();
@@ -843,7 +848,10 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp.isEmpty() || resp == null) {
+            if(resp == null){
+                Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if(resp.isEmpty()) {
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
@@ -896,9 +904,12 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty() || resp == null){
+            if(resp == null){
+                Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if(resp.isEmpty()){
                 Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
-            }else if (resp.contains("exito")) {
+            }else if(resp.contains("exito")) {
                 Toast.makeText(EsperandoConductor.this,"viaje cancelado", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EsperandoConductor.this , MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

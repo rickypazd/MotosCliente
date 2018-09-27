@@ -96,8 +96,6 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                     edit_correo.setText(obj.getString("email"));
                 }
 
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
