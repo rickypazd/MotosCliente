@@ -57,6 +57,7 @@ public class List_favoritos_fragment extends Fragment implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
+
                     JSONObject obj = new JSONObject(view.getTag().toString());
                     String nombre = obj.getString("nombre_favorito");
                     Double latFin = obj.getDouble("latFin");

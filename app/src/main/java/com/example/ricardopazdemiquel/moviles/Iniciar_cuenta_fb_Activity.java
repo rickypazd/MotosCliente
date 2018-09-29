@@ -2,7 +2,9 @@ package com.example.ricardopazdemiquel.moviles;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -259,12 +262,29 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                 Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
                 if (Cliente.equals("falso")) {
-                    return;
+                    Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al obtner datos.",Toast.LENGTH_SHORT).show();
                 }else{
+                    try {
+                    SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = preferencias2.edit();
+                    JSONArray array =new JSONArray();
+                    JSONObject obj = new JSONObject();
+                    obj.put("nombre_favorito" , "Aeropuerto");
+                    Double lat = -17.6481;
+                    Double lng = -63.1404;
+                    obj.put("latFin" , lat);
+                    obj.put("lngFin" , lng);
+                    array.put(obj);
+                    editor2.putString("lista_favoritos", array.toString());
+                    editor2.commit();
+
                     Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
                     inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(inte);
                     finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

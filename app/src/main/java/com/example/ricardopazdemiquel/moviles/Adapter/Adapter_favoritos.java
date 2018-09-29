@@ -1,6 +1,8 @@
 package com.example.ricardopazdemiquel.moviles.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
@@ -78,12 +80,25 @@ public class Adapter_favoritos extends BaseAdapter {
 
         try {
             JSONObject obj =  array.getJSONObject(i);
-            latFin = obj.getDouble("latFin");
-            lngFin = obj.getDouble("lngFin");
-            String ubicacion = get_localizacion(latFin,lngFin);
-            text_nombre.setText(obj.getString("nombre_favorito"));
-            text_ubicacion.setText(ubicacion);
-            view.setTag(obj.toString());
+
+            if(obj.getString("nombre_favorito").equals("Aeropuerto")){
+                text_nombre.setText(obj.getString("nombre_favorito"));
+                latFin = obj.getDouble("latFin");
+                lngFin = obj.getDouble("lngFin");
+                String ubicacion = get_localizacion(latFin,lngFin);
+                text_ubicacion.setText(ubicacion.replaceAll("\n",""));
+                Drawable img = contexto.getResources().getDrawable(R.drawable.ic_icon_avion);
+                img.setBounds(0, 0, (int)text_nombre.getTextSize()+5, (int)text_nombre.getTextSize()+5);
+                text_nombre.setCompoundDrawables(img, null, null, null);
+                view.setTag(obj.toString());
+            }else{
+                latFin = obj.getDouble("latFin");
+                lngFin = obj.getDouble("lngFin");
+                String ubicacion = get_localizacion(latFin,lngFin);
+                text_nombre.setText(obj.getString("nombre_favorito"));
+                text_ubicacion.setText(ubicacion.replaceAll("\n",""));
+                view.setTag(obj.toString());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -102,7 +117,6 @@ public class Adapter_favoritos extends BaseAdapter {
                 ((PedirSieteMap)contexto).addpositionFavorito(latFin, lngFin);
             }
         });*/
-
         return view;
     }
 

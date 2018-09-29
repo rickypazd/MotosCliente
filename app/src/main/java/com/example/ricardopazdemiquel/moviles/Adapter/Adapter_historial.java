@@ -76,7 +76,7 @@ public class Adapter_historial extends BaseAdapter {
             Double latFin = obj.getDouble("latfinal");
             Double lngFin = obj.getDouble("lngfinal");
             String ubicacion = getCompleteAddressString(latFin,lngFin);
-            text_ubicacion.setText(ubicacion);
+            text_ubicacion.setText(ubicacion.replaceAll("\n",""));
             view.setTag(obj.toString());
         } catch (JSONException e) {
             e.printStackTrace();

@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Dialog.Aeropuerto_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog2;
 import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
@@ -122,6 +123,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     // inicializamos los iconos de confirmar carrera
     private ImageView icono2 ;
     double mont;
+    boolean aeropuerto = false;
 
     public Calcular_ruta_activity() {
     }
@@ -161,6 +163,35 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         final double lnginicio = getIntent().getDoubleExtra("lnginicio",0);
         final double latfinal = getIntent().getDoubleExtra("latfinal",0);
         final double lngfinal = getIntent().getDoubleExtra("lngfinal",0);
+
+        float[] results = new float[1];
+            Location.distanceBetween(
+                  latinicio,
+                    lnginicio,
+                    -17.6481,
+                    -63.1404,
+                    results);
+            if( results[0]<1000){
+                //punto 1 ae
+                aeropuerto = true;
+            }
+
+        float[] results2 = new float[1];
+        Location.distanceBetween(
+                latfinal,
+                lngfinal,
+                -17.6481,
+                -63.1404,
+                results2);
+        if( results2[0]<1000){
+            //punto 1 ae
+            aeropuerto = true;
+        }
+
+        if(aeropuerto){
+            android.app.FragmentManager fragmentManager = getFragmentManager();
+            new Aeropuerto_viaje_Dialog().show(fragmentManager, "Dialog");
+        }
 
         cargarTipo();
         mGoogleApiClient = new GoogleApiClient.Builder(Calcular_ruta_activity.this)
@@ -515,11 +546,19 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                             double costo_minuto = object.getDouble("costo_minuto");
                             double costo_basico = object.getDouble("costo_basico");
                             mont = costo_basico + (costo_metro * sum ) + ((sum/500)*costo_minuto);
+                            if(aeropuerto){
+                                mont+=50;
+                            }
                         }else {
                             return;
                         }
                         int montoaux = (int) mont;
-                        monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                        if(aeropuerto == true){
+                            monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                        }else{
+                            monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                        }
+
                     }
 
                 } catch (InterruptedException e) {

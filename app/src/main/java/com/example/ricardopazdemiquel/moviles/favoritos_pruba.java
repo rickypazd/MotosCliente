@@ -145,7 +145,6 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         cargar();
 
 
-
        /* View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);
         bottomSheetBehavior.setHideable(false);
@@ -289,11 +288,19 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         }
         switch (item.getItemId()) {
             case R.id.action_delate_producto:
-                removeItem(pos);
+                if(pos == 0 ){
+                    Toast.makeText(favoritos_pruba.this , "no se puede eliminar." ,Toast.LENGTH_LONG).show();
+                }else{
+                    removeItem(pos);
+                }
                 break;
             case R.id.action_update_producto:
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                new Add_ubicacion_favoritos_Dialog(obj,pos,1).show(fragmentManager, "Dialog");
+                if(pos == 0 ){
+                    Toast.makeText(favoritos_pruba.this , "no se puede editar." ,Toast.LENGTH_LONG).show();
+                }else{
+                    android.app.FragmentManager fragmentManager = getFragmentManager();
+                    new Add_ubicacion_favoritos_Dialog(obj,pos,1).show(fragmentManager, "Dialog");
+                }
                 break;
         }
         return true;

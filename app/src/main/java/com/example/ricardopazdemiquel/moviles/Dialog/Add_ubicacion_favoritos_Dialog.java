@@ -178,7 +178,7 @@ public class Add_ubicacion_favoritos_Dialog extends DialogFragment implements Vi
         if(arr==null){
             arr=new JSONArray();
         }
-        arr.put(obj);
+        arr.put(object);
         SharedPreferences preferencias = getActivity().getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("lista_favoritos", arr.toString());
