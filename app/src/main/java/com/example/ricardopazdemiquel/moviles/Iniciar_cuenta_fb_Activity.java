@@ -267,12 +267,12 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                     Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al obtner datos.",Toast.LENGTH_SHORT).show();
                 }else{
                     try {
-<<<<<<< HEAD
-                        JSONObject obj = new JSONObject(pacientes);
-                        if(obj.getString("exito").equals("si")) {
+
+                        JSONObject objs = new JSONObject(Cliente);
+                        if(objs.getString("exito").equals("si")) {
                             SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferencias.edit();
-                            editor.putString("usr_log", obj.toString());
+                            editor.putString("usr_log", objs.toString());
                             editor.commit();
                             Intent intent = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -282,8 +282,6 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
                         }
 
-
-=======
                     SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor2 = preferencias2.edit();
                     JSONArray array =new JSONArray();
@@ -301,7 +299,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                     inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(inte);
                     finish();
->>>>>>> 340a251950fb550cd7b6afcf12e4c1aeca927afe
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
