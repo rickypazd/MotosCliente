@@ -1,7 +1,9 @@
 package com.example.ricardopazdemiquel.moviles;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -141,7 +143,6 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         lv_List_favoritos.setOnItemClickListener(this);
 
         cargar();
-
 
 
        /* View view =findViewById(R.id.bottom_sheet);
@@ -287,24 +288,53 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
         }
         switch (item.getItemId()) {
             case R.id.action_delate_producto:
-                removeItem(pos);
+                if(pos == 0 ){
+                    Toast.makeText(favoritos_pruba.this , "no se puede eliminar." ,Toast.LENGTH_LONG).show();
+                }else{
+                    removeItem(pos);
+                }
                 break;
             case R.id.action_update_producto:
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                new Add_ubicacion_favoritos_Dialog(obj,pos,1).show(fragmentManager, "Dialog");
+                if(pos == 0 ){
+                    Toast.makeText(favoritos_pruba.this , "no se puede editar." ,Toast.LENGTH_LONG).show();
+                }else{
+                    android.app.FragmentManager fragmentManager = getFragmentManager();
+                    new Add_ubicacion_favoritos_Dialog(obj,pos,1).show(fragmentManager, "Dialog");
+                }
                 break;
         }
         return true;
     }
 
-    public void removeItem(int pos){
-        adapter.removeiten(pos);
-        adapter.notifyDataSetChanged();
-        JSONArray arr = adapter.getArray();
-        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("lista_favoritos", arr.toString());
-        editor.commit();
+    public void removeItem(final int pos){
+        /*new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Won't be able to recover this file!")
+                .setConfirmText("Yes,delete it!")
+                .show();*/
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Se eliminara de tu lista de favoritos.")
+                .setTitle("Eliminar")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // CONFIRM
+                        adapter.removeiten(pos);
+                        adapter.notifyDataSetChanged();
+                        JSONArray arr = adapter.getArray();
+                        SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferencias.edit();
+                        editor.putString("lista_favoritos", arr.toString());
+                        editor.commit();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // CANCEL
+                    }
+                });
+        // Create the AlertDialog object and return it
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void UpdateList(JSONObject object , int pos) throws JSONException {

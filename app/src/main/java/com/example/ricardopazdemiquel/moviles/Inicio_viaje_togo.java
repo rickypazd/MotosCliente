@@ -696,7 +696,10 @@ private Button btn_enviar_mensaje;
             super.onPostExecute(resp);
             try {
                 final JSONObject object = new JSONObject(resp);
-                if(object != null){
+                if(resp == null){
+                    Toast.makeText(Inicio_viaje_togo.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                }else if(object != null){
                     final String nombreConductor = object.getString("nombre").toString();
                     final String apellido_pa = object.getString("apellido_pa").toString();
                     final String apellido_ma = object.getString("apellido_ma").toString();
@@ -821,7 +824,10 @@ private Button btn_enviar_mensaje;
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if (resp.isEmpty()) {
+            if(resp == null){
+                Toast.makeText(Inicio_viaje_togo.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (resp.isEmpty()) {
                 Toast.makeText(Inicio_viaje_togo.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
@@ -883,7 +889,10 @@ private Button btn_enviar_mensaje;
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty()){
+            if(resp == null){
+                Toast.makeText(Inicio_viaje_togo.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if(resp.isEmpty()){
                 Toast.makeText(Inicio_viaje_togo.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else if (resp.contains("exito")) {
                 Toast.makeText(Inicio_viaje_togo.this,"viaje cancelado", Toast.LENGTH_SHORT).show();
@@ -943,7 +952,10 @@ private Button btn_enviar_mensaje;
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
             progreso.dismiss();
-            if(resp.isEmpty()){
+            if(resp == null){
+                Toast.makeText(Inicio_viaje_togo.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if(resp.isEmpty()){
                 Toast.makeText(Inicio_viaje_togo.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }else {
                 try {

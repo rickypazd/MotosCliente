@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -237,7 +239,7 @@ public class LoginCliente extends AppCompatActivity {
                 Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
                 if(success.equals("falso")){
-                    Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginCliente.this,"Error al cobtener datos.",Toast.LENGTH_SHORT).show();
                 }else{
                     try {
                         JSONObject usr = new JSONObject(success);
@@ -246,6 +248,19 @@ public class LoginCliente extends AppCompatActivity {
                             SharedPreferences.Editor editor = preferencias.edit();
                             editor.putString("usr_log", usr.toString());
                             editor.commit();
+
+                            SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor2 = preferencias2.edit();
+                            JSONArray array =new JSONArray();
+                            JSONObject obj = new JSONObject();
+                            obj.put("nombre_favorito" , "Aeropuerto");
+                            Double lat = -17.6481;
+                            Double lng = -63.1404;
+                            obj.put("latFin" , lat);
+                            obj.put("lngFin" , lng);
+                            array.put(obj);
+                            editor2.putString("lista_favoritos", array.toString());
+                            editor2.commit();
 
                             Intent intent = new Intent(LoginCliente.this,MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

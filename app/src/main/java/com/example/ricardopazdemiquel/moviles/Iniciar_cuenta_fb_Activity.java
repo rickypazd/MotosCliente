@@ -2,6 +2,7 @@ package com.example.ricardopazdemiquel.moviles;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,8 +99,6 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                 if(obj.has("email")){
                     edit_correo.setText(obj.getString("email"));
                 }
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -257,16 +257,17 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         }
 
         @Override
-        protected void onPostExecute(String pacientes) {
-            super.onPostExecute(pacientes);
+        protected void onPostExecute(String Cliente) {
+            super.onPostExecute(Cliente);
             progreso.dismiss();
-            if(pacientes==null){
+            if(Cliente==null){
                 Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
-                if (pacientes.equals("falso")) {
-                    return;
+                if (Cliente.equals("falso")) {
+                    Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al obtner datos.",Toast.LENGTH_SHORT).show();
                 }else{
                     try {
+<<<<<<< HEAD
                         JSONObject obj = new JSONObject(pacientes);
                         if(obj.getString("exito").equals("si")) {
                             SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
@@ -282,6 +283,25 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                         }
 
 
+=======
+                    SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = preferencias2.edit();
+                    JSONArray array =new JSONArray();
+                    JSONObject obj = new JSONObject();
+                    obj.put("nombre_favorito" , "Aeropuerto");
+                    Double lat = -17.6481;
+                    Double lng = -63.1404;
+                    obj.put("latFin" , lat);
+                    obj.put("lngFin" , lng);
+                    array.put(obj);
+                    editor2.putString("lista_favoritos", array.toString());
+                    editor2.commit();
+
+                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(inte);
+                    finish();
+>>>>>>> 340a251950fb550cd7b6afcf12e4c1aeca927afe
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -295,8 +315,5 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             super.onProgressUpdate(values);
         }
     }
-
-
-
 }
 

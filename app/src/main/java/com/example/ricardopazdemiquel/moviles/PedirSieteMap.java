@@ -1037,7 +1037,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             double costo_basico = object.getDouble("costo_basico");
                             mont = costo_basico + (costo_metro * sum ) + ((sum/500)*costo_minuto);
                         }else {
-                            return;
+                            Toast.makeText(PedirSieteMap.this,"Error al obtener datos.",Toast.LENGTH_SHORT).show();
                         }
                         int montoaux = (int) mont;
                         monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));

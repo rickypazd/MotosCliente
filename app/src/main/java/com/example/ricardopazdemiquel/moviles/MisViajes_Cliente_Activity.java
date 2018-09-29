@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.Adaptador_mis_viajes;
 
@@ -128,7 +129,10 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (success != null || !success.isEmpty()){
+            if(success == null ){
+                Toast.makeText(MisViajes_Cliente_Activity.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if (!success.isEmpty()){
                 try {
                     JSONArray jsonArray = new JSONArray(success);
                     Adaptador_mis_viajes mis_viajes= new Adaptador_mis_viajes(MisViajes_Cliente_Activity.this,jsonArray);
@@ -137,14 +141,12 @@ public class MisViajes_Cliente_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }else {
-                return;
+                Toast.makeText(MisViajes_Cliente_Activity.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
             }
         }
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
         }
     }
-
 }
