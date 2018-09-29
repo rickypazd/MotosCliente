@@ -3,6 +3,7 @@ package com.example.ricardopazdemiquel.moviles;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
+import utiles.Token;
 
 
 public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements View.OnClickListener{
@@ -249,6 +251,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             param.put("correo",correo);
             param.put("telefono", telefono);
             param.put("sexo",sexo);
+            param.put("token", Token.currentToken);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
             return respuesta;
         }
@@ -263,11 +266,28 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                 if (pacientes.equals("falso")) {
                     return;
                 }else{
-                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
-                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(inte);
-                    finish();
+                    try {
+                        JSONObject obj = new JSONObject(pacientes);
+                        if(obj.getString("exito").equals("si")) {
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("usr_log", obj.toString());
+                            editor.commit();
+                            Intent intent = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al registrar usuario..",Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+
             }
         }
         @Override

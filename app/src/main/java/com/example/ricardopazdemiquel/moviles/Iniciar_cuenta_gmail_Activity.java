@@ -3,16 +3,20 @@ package com.example.ricardopazdemiquel.moviles;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +28,8 @@ import java.util.regex.Pattern;
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
+import utiles.Contexto;
+import utiles.Token;
 
 
 public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements View.OnClickListener{
@@ -75,23 +81,33 @@ public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements 
         if (it != null) {
             try {
                 JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
+                JSONObject object = new JSONObject();
+
                 if(obj.has("id")){
                     id = obj.getString("id");
                 }
                 String nombre1="";
                 String nombre2="";
-                if(obj.has("first_name")){
-                     nombre1 = obj.getString("first_name");
+                if(obj.has("givenname")){
+                     nombre1 = obj.getString("givenname");
+                     if(!nombre1.equals("null")){
+                         edit_nombre.setText(nombre1);
+                     }
+
                 }
-                if(obj.has("middle_mane")){
-                     nombre2 = obj.getString("middle_mane");
+                if(obj.has("familyname")){
+                     nombre2 = obj.getString("familyname");
+
+                    if(!nombre2.equals("null")){
+                        edit_apellidoP.setText(obj.getString("familyname"));
+                    }
                 }
-                edit_nombre.setText(nombre1+" "+nombre2);
-                if(obj.has("last_name")){
-                    edit_apellidoP.setText(obj.getString("last_name"));
-                }
+
                 if(obj.has("email")){
-                    edit_correo.setText(obj.getString("email"));
+
+                    if(!obj.getString("email").equals("null")){
+                        edit_correo.setText(obj.getString("email"));
+                    }
                 }
 
 
@@ -206,7 +222,7 @@ public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements 
         }else if (validarEmailSimple(correoV) == false) {
             edit_correo.setError("email no valido");
             isValid = false;
-        }if(getSexo().isEmpty()){
+        }if(getSexo()==null ||getSexo().isEmpty()){
             Toast.makeText(Iniciar_cuenta_gmail_Activity.this,"Elija su sexo.",Toast.LENGTH_LONG).show();
             isValid = false;
         }
@@ -240,13 +256,14 @@ public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements 
         @Override
         protected String doInBackground(Void... params) {
             Hashtable<String,String> param = new Hashtable<>();
-            param.put("evento","registrar_usuario_face");
+            param.put("evento","registrar_usuario_gmail");
             param.put("id",id);
             param.put("nombre",nombre);
             param.put("apellidos",apellidos);
             param.put("correo",correo);
             param.put("telefono", telefono);
             param.put("sexo",sexo);
+            param.put("token", Token.currentToken);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
             return respuesta;
         }
@@ -261,11 +278,28 @@ public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements 
                 if (pacientes.equals("falso")) {
                     return;
                 }else{
-                    Intent inte = new Intent(Iniciar_cuenta_gmail_Activity.this,MainActivity.class);
-                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(inte);
-                    finish();
-                }
+                            try {
+                                JSONObject obj = new JSONObject(pacientes);
+                                if(obj.getString("exito").equals("si")) {
+                                    SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferencias.edit();
+                                    editor.putString("usr_log", obj.toString());
+                                    editor.commit();
+                                    Intent intent = new Intent(Iniciar_cuenta_gmail_Activity.this,MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(Iniciar_cuenta_gmail_Activity.this,"Error al registrar usuario..",Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
             }
         }
         @Override

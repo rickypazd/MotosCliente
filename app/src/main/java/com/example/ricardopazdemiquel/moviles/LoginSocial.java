@@ -50,6 +50,7 @@ import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
+import utiles.Token;
 import utils.Tools;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -191,6 +192,18 @@ public class LoginSocial extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
+
+            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            updateUI(null);
+        }
+    }
+    private void updateUI(@Nullable GoogleSignInAccount account) {
+        if (account != null) {
+            Toast.makeText(this,account.getDisplayName(),Toast.LENGTH_LONG).show();
             String id=account.getId();
             try {
                 String resp= new get_usr_gmail(id).execute().get();
@@ -221,7 +234,7 @@ public class LoginSocial extends AppCompatActivity {
                                 object.put("id",account.getId());
                                 object.put("familyname",account.getFamilyName());
                                 object.put("givenname",account.getGivenName());
-                                intent.putExtra("usr_face",account.toString());
+                                intent.putExtra("usr_face",object.toString());
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 //LoginManager.getInstance().logOut();
@@ -239,18 +252,6 @@ public class LoginSocial extends AppCompatActivity {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            updateUI(account);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
-        }
-    }
-    private void updateUI(@Nullable GoogleSignInAccount account) {
-        if (account != null) {
-            Toast.makeText(this,account.getDisplayName(),Toast.LENGTH_LONG).show();
-
         } else {
 
         }
@@ -488,6 +489,7 @@ public class LoginSocial extends AppCompatActivity {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_usuario_face");
             parametros.put("id_usr",id+"");
+            parametros.put("token", Token.currentToken);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
             return respuesta;
         }
@@ -519,6 +521,7 @@ public class LoginSocial extends AppCompatActivity {
             Hashtable<String, String> parametros = new Hashtable<>();
             parametros.put("evento", "get_usuario_gmail");
             parametros.put("id_usr",id+"");
+            parametros.put("token", Token.currentToken);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
             return respuesta;
         }
