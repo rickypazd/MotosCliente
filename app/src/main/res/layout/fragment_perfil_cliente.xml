@@ -199,6 +199,7 @@
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
                         android:paddingTop="5dp"
+
                         android:drawableEnd="@drawable/ic_pencil_edit"
                         android:paddingEnd="20dp"
                         android:paddingLeft="20dp"

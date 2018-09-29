@@ -222,6 +222,10 @@
             android:name=".Iniciar_cuenta_fb_Activity"
             android:theme="@style/AppThemeone"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Iniciar_cuenta_gmail_Activity"
+            android:theme="@style/AppThemeone"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
