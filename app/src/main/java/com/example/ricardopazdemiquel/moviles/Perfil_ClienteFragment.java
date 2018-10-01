@@ -203,11 +203,12 @@ public class Perfil_ClienteFragment extends AppCompatActivity implements View.On
                 String telefono= usr_log.getString("telefono");
                 String correo = usr_log.getString("correo");
                 String credito = usr_log.getString("creditos");
+                Double valor = Double.valueOf(credito);
                 textNombre.setText(nombre);
                 textApellido.setText(apellido_pa+" "+apellido_ma);
                 textTelefono.setText("+591 "+telefono);
                 textEmail.setText(correo);
-                textcredito.setText(credito);
+                textcredito.setText(String.format("%.2f",valor));
                 if(usr_log.getString("foto_perfil").length()>0){
                     new AsyncTaskLoadImage(img_photo).execute(getString(R.string.url_foto)+usr_log.getString("foto_perfil"));
                 }

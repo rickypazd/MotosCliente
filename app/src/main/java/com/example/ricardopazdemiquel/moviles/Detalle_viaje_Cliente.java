@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,9 +139,15 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             super.onPostExecute(success);
             progreso.dismiss();
-            if (success!= null){
+            if (success == null){
+                Toast.makeText(Detalle_viaje_Cliente.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else if( success.equals("falso")){
+                Toast.makeText(Detalle_viaje_Cliente.this,"error al obtener datos.", Toast.LENGTH_SHORT).show();
+                Log.e(Contexto.APP_TAG, "error al obtener datos.");
+            }else {
                 try {
-                    if(!success.isEmpty()){
+                    if (!success.isEmpty()) {
                         JSONObject obj = new JSONObject(success);
                         double latinicial = obj.getDouble("latinicial");
                         double latfinal = obj.getDouble("latfinal");
@@ -151,87 +158,89 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         final String id_carrera = obj.getString("id_carrera");
                         String placa = obj.getString("placa");
                         String telefono = obj.getString("telefono");
-                        int estado= obj.getInt("estado");
+                        int estado = obj.getInt("estado");
                         int costo = obj.getInt("costo_final");
                         int tipo = obj.getInt("tipo_pago");
                         int tipo_carrera = obj.getInt("tipo");
                         nombre.setText(obj.getString("nombre"));
-                        placa_numerotelefono.setText(placa+" ° "+telefono);
-                        fecha.setText(obj.getString("fecha_pedido").substring(0,16));
-                        marca_auto.setText(obj.getString("marca")+" "+obj.getString("modelo"));
+                        placa_numerotelefono.setText(placa + " ° " + telefono);
+                        fecha.setText(obj.getString("fecha_pedido").substring(0, 16));
+                        marca_auto.setText(obj.getString("marca") + " " + obj.getString("modelo"));
                         btn_ver_recorrido.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 verViaje(Integer.parseInt(id_carrera));
                             }
                         });
-                        switch (tipo_carrera){
+                        switch (tipo_carrera) {
                             case 1:
                                 text_tipo_carrera.setText("Siete Estandar");
                                 break;
                             case 2:
-                                tipo_pago.setText("Siete To go");
+                                text_tipo_carrera.setText("Siete To go");
                                 break;
                             case 3:
-                                tipo_pago.setText("Siete Maravilla");
+                                text_tipo_carrera.setText("Siete Maravilla");
                                 break;
                             case 4:
-                                tipo_pago.setText("Super Siete");
+                                text_tipo_carrera.setText("Super Siete");
                                 break;
                             case 5:
-                                tipo_pago.setText("Siete 4x4");
+                                text_tipo_carrera.setText("Siete 4x4");
                                 break;
                             case 6:
-                                tipo_pago.setText("Siete Camioneta");
+                                text_tipo_carrera.setText("Siete Camioneta");
                                 break;
                             case 7:
-                                tipo_pago.setText("Siete 3 filas");
+                                text_tipo_carrera.setText("Siete 3 filas");
                                 break;
                         }
-                        if(obj.getString("foto_perfil").length()>0){
-                            new AsyncTaskLoadImage(fotoConductor).execute(getString(R.string.url_foto)+obj.getString("foto_perfil"));
+                        if (obj.getString("foto_perfil").length() > 0) {
+                            new AsyncTaskLoadImage(fotoConductor).execute(getString(R.string.url_foto) + obj.getString("foto_perfil"));
                         }
-                        switch (tipo){
-                            case(EFECTIVO):
+                        switch (tipo) {
+                            case (EFECTIVO):
                                 tipo_pago.setText("Efectivo");
                                 break;
-                            case(CREDITO):
+                            case (CREDITO):
                                 tipo_pago.setText("Credito");
                                 break;
                         }
+                        if(estado == 10){
+                            tipo_pago.setText("Cancelado");
+                        }
                         JSONArray array = obj.getJSONArray("detalle_costo");
                         JSONObject object;
-                        String html_detalle ="";
-                        String html_costo="";
+                        String html_detalle = "";
+                        String html_costo = "";
                         double auxCosto;
                         for (int i = 0; i < array.length(); i++) {
                             object = array.getJSONObject(i);
                             auxCosto = Double.parseDouble(object.getString("costo"));
-                            html_detalle += "<p>"+object.getString("nombre")+"</p>";
-                            html_costo += "<p>"+String.format("%.2f", auxCosto) +" Bs.</p>";
+                            html_detalle += "<p>" + object.getString("nombre") + "</p>";
+                            html_costo += "<p>" + String.format("%.2f", auxCosto) + " Bs.</p>";
                         }
                         html_detalle += "<p>Total</p>";
 
-                        if(get_estado(estado)){
-                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                            direccion_final.setText(getCompleteAddressString(lat_final_real,lng_final_real));
-                            html_costo += "<p>"+costo+" Bs.</p>";
-                        }else if(!get_estado(estado)){
-                            direccion_inicio.setText(getCompleteAddressString(latinicial,lnginicial));
-                            direccion_final.setText(getCompleteAddressString(latfinal,lngfinal));
+                        if (get_estado(estado)) {
+                            direccion_inicio.setText(getCompleteAddressString(latinicial, lnginicial).replaceAll("\n" , ""));
+                            direccion_final.setText(getCompleteAddressString(lat_final_real, lng_final_real).replaceAll("\n" , ""));
+                            html_costo += "<p>" + costo + " Bs.</p>";
+                        } else if (!get_estado(estado)) {
+                            direccion_inicio.setText(getCompleteAddressString(latinicial, lnginicial));
+                            direccion_final.setText(getCompleteAddressString(latfinal, lngfinal));
                             html_costo += "<p>0 Bs.</p>";
                         }
 
-                        html_tipos.setText(Html.fromHtml(html_detalle),TextView.BufferType.SPANNABLE);
-                        html_costos.setText(Html.fromHtml(html_costo),TextView.BufferType.SPANNABLE);
-                    }else{
-                        return;
+                        html_tipos.setText(Html.fromHtml(html_detalle), TextView.BufferType.SPANNABLE);
+                        html_costos.setText(Html.fromHtml(html_costo), TextView.BufferType.SPANNABLE);
+                    } else {
+                        Toast.makeText(Detalle_viaje_Cliente.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
+                        Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }else{
-                return;
             }
         }
         @Override

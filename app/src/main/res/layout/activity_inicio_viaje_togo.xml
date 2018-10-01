@@ -91,7 +91,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="55dp"
                                 android:drawablePadding="20dp"
-                                android:drawableStart="@drawable/ic_down_arrow"
+                                android:drawableStart="@drawable/ic_arrow_and_up"
                                 android:padding="16dp"
                                 android:text="Productos (0)"
                                 android:textColor="@color/cardview_light_background"
@@ -322,7 +322,7 @@
                                         android:id="@+id/button3"
                                         android:layout_width="70dp"
                                         android:layout_height="70dp"
-                                        android:background="@drawable/ic_icon_buena_ruta"
+                                        android:background="@drawable/ic_buena_ruta2"
                                         />
 
                                     <TextView

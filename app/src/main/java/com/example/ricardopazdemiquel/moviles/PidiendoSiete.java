@@ -198,8 +198,10 @@ public class PidiendoSiete extends AppCompatActivity {
             if(Resp == null){
                 Toast.makeText(PidiendoSiete.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                finish();
             }else if (Resp.equals("falso")) {
                 Toast.makeText(PidiendoSiete.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
+                finish();
             }else{
                 try {
                     JSONObject obj = new JSONObject(Resp);

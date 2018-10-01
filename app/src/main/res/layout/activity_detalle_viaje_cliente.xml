@@ -85,7 +85,7 @@
                     android:id="@+id/text_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ricardo sebastian figueroa "
+                    android:text=" "
                     android:textColor="@color/colorGris"
                     android:textSize="17dp" />
 
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/ic_redondo1_finalizar"
-                    android:text="35454fbc ° +591 7765342"
+                    android:text=""
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:textAlignment="center"
@@ -187,7 +187,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="siete estandar"
+                    android:text=""
                     android:layout_weight="1"
                     android:textSize="15sp"
                     android:textColor="#626262"/>
@@ -206,7 +206,7 @@
                     android:id="@+id/text_fecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="domingo , 11:30 p.m"
+                    android:text=""
                     android:textSize="15sp"
                     android:layout_weight="1"
                     android:textColor="#626262"/>
@@ -253,7 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="Efectivo"
+                    android:text=""
                     android:layout_weight="1"
                     android:textSize="18sp"
                     android:textColor="@color/colorGris"/>

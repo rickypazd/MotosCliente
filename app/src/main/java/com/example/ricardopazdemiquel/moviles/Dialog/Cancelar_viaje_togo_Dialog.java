@@ -8,11 +8,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
-import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
+import com.example.ricardopazdemiquel.moviles.Inicio_viaje_togo;
 import com.example.ricardopazdemiquel.moviles.R;
 
 import org.json.JSONException;
@@ -23,7 +22,7 @@ import org.json.JSONObject;
  */
 
 @SuppressLint("ValidFragment")
-public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClickListener {
+public class Cancelar_viaje_togo_Dialog extends DialogFragment implements View.OnClickListener {
 
     private Button btn_cancelar;
     private Button btn_confirmar_cancelacion;
@@ -31,11 +30,11 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
 
     public static String APP_TAG = "registro";
 
-    private static final String TAG = Cancelar_viaje_Dialog.class.getSimpleName();
+    private static final String TAG = Cancelar_viaje_togo_Dialog.class.getSimpleName();
     private JSONObject obj;
 
     @SuppressLint("ValidFragment")
-    public Cancelar_viaje_Dialog(JSONObject json_cancelarViaje) {
+    public Cancelar_viaje_togo_Dialog(JSONObject json_cancelarViaje) {
         this.obj=json_cancelarViaje;
     }
 
@@ -50,7 +49,7 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogFragmanetstyle);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_cancelar_viaje, null);
+        View v = inflater.inflate(R.layout.dialog_cancelar_viaje_togo, null);
         builder.setView(v);
 
         btn_confirmar_cancelacion = v.findViewById(R.id.btn_cancelar);
@@ -81,7 +80,7 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancelar:
-                    ((EsperandoConductor)getActivity()).confirmar();
+                    ((Inicio_viaje_togo)getActivity()).confirmar();
                     dismiss();
                 break;
             case R.id.btn_confirmar_cancelacion:

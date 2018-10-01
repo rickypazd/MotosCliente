@@ -56,6 +56,43 @@ public class FinalizarViajeFragment_1 extends Fragment {
             double lng_f = carrera.getDouble("lngfinal");
             String inicial = get_localizacion(lat_i , lng_i);
             String finales =  get_localizacion(lat_f , lng_f);
+
+
+            /*switch (tipo) {
+                case (EFECTIVO):
+                    tipo_pago.setText("Efectivo");
+                    break;
+                case (CREDITO):
+                    tipo_pago.setText("Credito");
+                    break;
+            }*/
+
+            /*switch (tipo_carrera) {
+                case 1:
+                    text_tipo_carrera.setText("Siete Estandar");
+                    break;
+                case 2:
+                    tipo_pago.setText("Siete To go");
+                    break;
+                case 3:
+                    tipo_pago.setText("Siete Maravilla");
+                    break;
+                case 4:
+                    tipo_pago.setText("Super Siete");
+                    break;
+                case 5:
+                    tipo_pago.setText("Siete 4x4");
+                    break;
+                case 6:
+                    tipo_pago.setText("Siete Camioneta");
+                    break;
+                case 7:
+                    tipo_pago.setText("Siete 3 filas");
+                    break;
+            }*/
+
+
+
             textNombre.setText(nombre+" "+apellidoP+" "+apellidoM);
             textplaca.setText(placa + " ° " + telefono);
             textInicio.setText(inicial);

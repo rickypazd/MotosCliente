@@ -239,7 +239,7 @@ public class LoginCliente extends AppCompatActivity {
                 Toast.makeText(LoginCliente.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
                 if(success.equals("falso")){
-                    Toast.makeText(LoginCliente.this,"Error al cobtener datos.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginCliente.this,"Error al obtener datos.",Toast.LENGTH_SHORT).show();
                 }else{
                     try {
                         JSONObject usr = new JSONObject(success);
