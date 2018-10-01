@@ -2,13 +2,13 @@ package com.example.ricardopazdemiquel.moviles;
 
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +16,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.facebook.login.LoginManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,10 +28,11 @@ import java.util.regex.Pattern;
 import clienteHTTP.HttpConnection;
 import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
+import utiles.Contexto;
 import utiles.Token;
 
 
-public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements View.OnClickListener{
+public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements View.OnClickListener{
 
 
     private EditText edit_nombre;
@@ -56,7 +56,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
 
     protected void onCreate(Bundle onSaveInstanceState){
         super.onCreate(onSaveInstanceState);
-        setContentView(R.layout.activity_iniciar_cuenta_fb);
+        setContentView(R.layout.activity_iniciar_cuenta_gmail);
 
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
@@ -81,24 +81,36 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         if (it != null) {
             try {
                 JSONObject obj = new JSONObject(it.getStringExtra("usr_face"));
+                JSONObject object = new JSONObject();
+
                 if(obj.has("id")){
                     id = obj.getString("id");
                 }
                 String nombre1="";
                 String nombre2="";
-                if(obj.has("first_name")){
-                     nombre1 = obj.getString("first_name");
+                if(obj.has("givenname")){
+                     nombre1 = obj.getString("givenname");
+                     if(!nombre1.equals("null")){
+                         edit_nombre.setText(nombre1);
+                     }
+
                 }
-                if(obj.has("middle_mane")){
-                     nombre2 = obj.getString("middle_mane");
+                if(obj.has("familyname")){
+                     nombre2 = obj.getString("familyname");
+
+                    if(!nombre2.equals("null")){
+                        edit_apellidoP.setText(obj.getString("familyname"));
+                    }
                 }
-                edit_nombre.setText(nombre1+" "+nombre2);
-                if(obj.has("last_name")){
-                    edit_apellidoP.setText(obj.getString("last_name"));
-                }
+
                 if(obj.has("email")){
-                    edit_correo.setText(obj.getString("email"));
+
+                    if(!obj.getString("email").equals("null")){
+                        edit_correo.setText(obj.getString("email"));
+                    }
                 }
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -210,8 +222,8 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         }else if (validarEmailSimple(correoV) == false) {
             edit_correo.setError("email no valido");
             isValid = false;
-        }if(getSexo().isEmpty()){
-            Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Elija su sexo.",Toast.LENGTH_LONG).show();
+        }if(getSexo()==null ||getSexo().isEmpty()){
+            Toast.makeText(Iniciar_cuenta_gmail_Activity.this,"Elija su sexo.",Toast.LENGTH_LONG).show();
             isValid = false;
         }
         if (!isValid) {
@@ -234,7 +246,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progreso = new ProgressDialog(Iniciar_cuenta_fb_Activity.this);
+            progreso = new ProgressDialog(Iniciar_cuenta_gmail_Activity.this);
             progreso.setIndeterminate(true);
             progreso.setTitle("Esperando Respuesta");
             progreso.setCancelable(false);
@@ -244,7 +256,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         @Override
         protected String doInBackground(Void... params) {
             Hashtable<String,String> param = new Hashtable<>();
-            param.put("evento","registrar_usuario_face");
+            param.put("evento","registrar_usuario_gmail");
             param.put("id",id);
             param.put("nombre",nombre);
             param.put("apellidos",apellidos);
@@ -257,53 +269,35 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
         }
 
         @Override
-        protected void onPostExecute(String Cliente) {
-            super.onPostExecute(Cliente);
+        protected void onPostExecute(String pacientes) {
+            super.onPostExecute(pacientes);
             progreso.dismiss();
-            if(Cliente==null){
-                Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
+            if(pacientes==null){
+                Toast.makeText(Iniciar_cuenta_gmail_Activity.this,"Error al conectarse con el servidor.",Toast.LENGTH_SHORT).show();
             }else{
-                if (Cliente.equals("falso")) {
-                    Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al obtner datos.",Toast.LENGTH_SHORT).show();
+                if (pacientes.equals("falso")) {
+                    return;
                 }else{
-                    try {
+                            try {
+                                JSONObject obj = new JSONObject(pacientes);
+                                if(obj.getString("exito").equals("si")) {
+                                    SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferencias.edit();
+                                    editor.putString("usr_log", obj.toString());
+                                    editor.commit();
+                                    Intent intent = new Intent(Iniciar_cuenta_gmail_Activity.this,MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(Iniciar_cuenta_gmail_Activity.this,"Error al registrar usuario..",Toast.LENGTH_SHORT).show();
 
-                        JSONObject objs = new JSONObject(Cliente);
-                        if(objs.getString("exito").equals("si")) {
-                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferencias.edit();
-                            editor.putString("usr_log", objs.toString());
-                            editor.commit();
-                            Intent intent = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(Iniciar_cuenta_fb_Activity.this,"Error al registrar usuario..",Toast.LENGTH_SHORT).show();
+                                }
 
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-
-                    SharedPreferences preferencias2 = getSharedPreferences("myPref", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor2 = preferencias2.edit();
-                    JSONArray array =new JSONArray();
-                    JSONObject obj = new JSONObject();
-                    obj.put("nombre_favorito" , "Aeropuerto");
-                    Double lat = -17.6481;
-                    Double lng = -63.1404;
-                    obj.put("latFin" , lat);
-                    obj.put("lngFin" , lng);
-                    array.put(obj);
-                    editor2.putString("lista_favoritos", array.toString());
-                    editor2.commit();
-
-                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
-                    inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(inte);
-                    finish();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
 
 
             }
@@ -313,5 +307,8 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             super.onProgressUpdate(values);
         }
     }
+
+
+
 }
 

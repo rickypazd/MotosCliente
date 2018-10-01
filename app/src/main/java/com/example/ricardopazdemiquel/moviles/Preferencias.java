@@ -1,5 +1,6 @@
 package com.example.ricardopazdemiquel.moviles;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +24,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Hashtable;
+
+import clienteHTTP.HttpConnection;
+import clienteHTTP.MethodType;
+import clienteHTTP.StandarRequestConfiguration;
+import utiles.Token;
 
 public class Preferencias extends AppCompatActivity implements View.OnClickListener{
 
@@ -108,14 +116,20 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.liner_sign_out:
+                JSONObject usr = getUsr_log();
                 SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferencias.edit();
                 editor.putString("usr_log", "");
                 editor.commit();
+                try {
+                    new Desconectarse(usr.getInt("id"),Token.currentToken).execute();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(Preferencias.this, LoginSocial.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish();
+
                 break;
             case R.id.liner_ver_perfil:
                 Intent intent2 = new Intent(Preferencias.this, Perfil_ClienteFragment.class);
@@ -124,7 +138,6 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
 
     public class AsyncTaskLoadImage  extends AsyncTask<String, String, Bitmap> {
         private final static String TAG = "AsyncTaskLoadImage";
@@ -149,5 +162,38 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private class Desconectarse extends AsyncTask<Void, String, String> {
+        private int  id  ;
+        private String  nombre ;
+        public Desconectarse(int id ,String nombre ) {
+            this.id= id;
+            this.nombre= nombre;
+
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String,String> param = new Hashtable<>();
+            param.put("evento","desconectarse");
+            param.put("id",id+"");
+            param.put("token",nombre);
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
+            return respuesta;
+        }
+
+        @Override
+        protected void onPostExecute(String pacientes) {
+            super.onPostExecute(pacientes);
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+    }
 
 }
