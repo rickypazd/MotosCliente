@@ -538,7 +538,32 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         JSONObject obj=new JSONObject(resp);
                         LatLng ll1 = new LatLng(obj.getDouble("lat"),obj.getDouble("lng"));
                         LatLng ll2;
-                        if(json_carrera.getInt("estado")==4){
+                        if(obj.getInt("estado")!=json_carrera.getInt("estado")){
+                            int estado=obj.getInt("estado");
+                            json_carrera.put("estado",estado);
+                            switch (estado){
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    notificacionReciber(new Intent());
+                                    break;
+                                case 4:
+                                    Inicio_Carrera(new Intent());
+                                    break;
+                                case 5:
+                                    finalizo_carrera(new Intent().putExtra("carrera",json_carrera.toString()));
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                            }
+
+
+                        }
+                        if(obj.getInt("estado")==4){
                             ll2= new LatLng(json_carrera.getDouble("latfinal"),json_carrera.getDouble("lngfinal"));
                             //cfdfgd
                         }else{
@@ -595,7 +620,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
 
     private BitmapDescriptor Fin_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
-        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_pointer_map2);
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_icon_pointer_map3);
         background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
         vectorDrawable.setBounds(100, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
@@ -627,11 +652,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progreso = new ProgressDialog(EsperandoConductor.this);
-            progreso.setIndeterminate(true);
-            progreso.setTitle("obteniendo datos");
-            progreso.setCancelable(false);
-            progreso.show();
         }
 
         @Override
@@ -650,7 +670,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
-            progreso.dismiss();
             if(resp == null){
                 Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
@@ -665,11 +684,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 }
             }
         }
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-            progreso.setMessage(values[0]);
-        }
+
     }
 
     public class Get_ObtenerPerfilConductor extends AsyncTask<Void, String, String> {
