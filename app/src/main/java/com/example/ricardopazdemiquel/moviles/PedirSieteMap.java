@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -24,8 +25,11 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -131,6 +135,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private int tipo_pago;
     private BottomSheetBehavior bottomSheetBehavior;
 
+
+    //NAVIGATION BAR
+    private ImageView btn_nav_formaspago;
+    private ImageView btn_nav_miperfil;
+    private ImageView btn_nav_misviajes;
+    private ImageView btn_nav_preferencias;
+    //
+
+
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.9720));
 
@@ -173,13 +186,40 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedir_siete_map);
-
+        //Navigation Bar
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        btn_nav_formaspago=header.findViewById(R.id.btn_nav_formaspago);
+        btn_nav_miperfil=header.findViewById(R.id.btn_nav_miperfil);
+        btn_nav_misviajes=header.findViewById(R.id.btn_nav_misviajes);
+        btn_nav_preferencias=header.findViewById(R.id.btn_nav_preferencias);
+        btn_nav_formaspago.setOnClickListener(this);
+        btn_nav_miperfil.setOnClickListener(this);
+        btn_nav_misviajes.setOnClickListener(this);
+        btn_nav_preferencias.setOnClickListener(this); header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        ImageView fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else{
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+        ll_ubic = findViewById(R.id.linearLayoutPedir);
+        //
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
 
-        ll_ubic = findViewById(R.id.linearLayoutPedir);
+
 
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
         linearLayoutcarga=findViewById(R.id.cargando);
@@ -515,27 +555,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     }
 
-    // Opcion para ir atras sin reiniciar el la actividad anterior de nuevo
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
-    @Override
-    public void onBackPressed() {
-        if(bottomSheetBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        }else{
-            super.onBackPressed();
-        }
-
-    }
 
     public  void ok(){
         try {
@@ -560,6 +580,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.btn_pedir_super:
                 CalcularRuta(4);
@@ -570,6 +591,22 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case R.id.btn_elegir_destino:
                 iv_marker.setVisibility(View.VISIBLE);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
+                break;
+            case R.id.btn_nav_formaspago:
+                intent = new Intent(PedirSieteMap.this , Transaccion_cliente_Activity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_nav_miperfil:
+                intent =  new Intent(PedirSieteMap.this , Perfil_ClienteFragment.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_nav_misviajes:
+                intent =  new Intent(PedirSieteMap.this , MisViajes_Cliente_Activity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_nav_preferencias:
+                intent =  new Intent(PedirSieteMap.this , Preferencias.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -1094,6 +1131,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
         return data;
     }
+
 
     private void mostar_button(int tipo) {
             switch (tipo) {
