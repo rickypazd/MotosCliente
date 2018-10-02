@@ -54,8 +54,6 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-        setTitle("Editar perfil");
-        toolbar.setTitleTextColor(Color.WHITE);
 
         textNombre = findViewById(R.id.text_nombreCliente);
         text_titulo = findViewById(R.id.text_titulo);

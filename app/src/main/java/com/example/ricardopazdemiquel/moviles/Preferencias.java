@@ -50,7 +50,6 @@ public class Preferencias extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
         setTitle("Preferencias");
-        toolbar.setTitleTextColor(Color.WHITE);
 
         liner_ver_perfil = findViewById(R.id.liner_ver_perfil);
         liner_sign_out = findViewById(R.id.liner_sign_out);

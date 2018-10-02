@@ -23,7 +23,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark2</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-        <item name="android:windowBackground">@drawable/backgroundcolor</item>
+        <item name="android:windowBackground">@drawable/color_degradiente</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
