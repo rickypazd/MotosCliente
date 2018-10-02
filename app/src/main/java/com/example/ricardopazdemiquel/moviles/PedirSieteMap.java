@@ -203,7 +203,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes.setOnClickListener(this);
         btn_nav_preferencias.setOnClickListener(this);
-     barnombre=header.findViewById(R.id.barnombre);;
+     barnombre=header.findViewById(R.id.barnombre);
       bartelefono=header.findViewById(R.id.bartelefono);;
       JSONObject usr = getUsr_log();
       runtime_permissions();
@@ -436,6 +436,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
+        try {
+            new Get_validarCarrera(usr_log.getInt("id")).execute();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -1250,5 +1256,67 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public class Get_validarCarrera extends AsyncTask<Void, String, String>{
+        private int id;
+        public Get_validarCarrera(int id){
+            this.id=id;
+        }
 
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_carrera_cliente");
+            parametros.put("id_usr",id+"");
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            if(resp==null){
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else{
+                if (resp.contains("falso")) {
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                } else {
+                    try {
+                        JSONObject obj = new JSONObject(resp);
+                        if(obj.getBoolean("exito")) {
+                            if(obj.getInt("id_tipo")==2){//togo
+                                Intent intent = new Intent(PedirSieteMap.this, Inicio_viaje_togo.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }else{
+                                Intent intent = new Intent(PedirSieteMap.this, EsperandoConductor.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }
+
+                        }else{
+
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("chat_carrera", new JSONArray().toString());
+                            editor.commit();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
+    }
 }
