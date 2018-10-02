@@ -12,11 +12,12 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="15dp"
             android:translationZ="999dp"
             android:src="@drawable/ic_bar_menu"
             />
@@ -50,7 +51,7 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar2"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/backgroundcolor2"
                     app:titleTextColor="@color/colorBlack"
                     tools:layout_editor_absoluteX="8dp"
@@ -185,11 +186,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
                                     android:layout_margin="0dp"
-                                    android:background="@color/colorPrimary2"
+                                    android:background="@color/colorBlack"
                                     android:padding="0dp"
                                     android:text="Elegir destino en el mapa"
                                     android:textAllCaps="false"
-                                    android:textColor="#000" />
+                                    android:textColor="@color/colorPrimary2" />
                             </LinearLayout>
 
                         </android.support.design.widget.CoordinatorLayout>

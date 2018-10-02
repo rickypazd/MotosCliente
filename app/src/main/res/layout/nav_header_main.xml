@@ -56,7 +56,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linearLayout5"
+            android:id="@+id/btn_nav_formaspago"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
@@ -74,7 +74,6 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/btn_nav_formaspago"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_icon_imoto" />
@@ -83,7 +82,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout6"
+            android:id="@+id/btn_nav_miperfil"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
@@ -101,14 +100,13 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/btn_nav_miperfil"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_icon_perfil_moto"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout7"
+            android:id="@+id/btn_nav_misviajes"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
@@ -126,7 +124,6 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/btn_nav_misviajes"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_icon_viajes_moto" />
@@ -135,7 +132,7 @@
 
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/btn_nav_preferencias"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
@@ -153,7 +150,6 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/btn_nav_preferencias"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/ic_icon_preferencia_moto" />
