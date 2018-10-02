@@ -219,7 +219,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         //
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-
+        toolbar.setContentInsetsAbsolute(24,24);
 
 
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
@@ -1138,15 +1138,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             switch (tipo) {
             case 1:
                 recyclerView.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
+               // setTitle("¿A dónde vamos?");
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
+               // setTitle("¿A dónde vamos?");
                 break;
             case 4:
                 btn_pedir_super.setVisibility(View.VISIBLE);
-                setTitle("¿A dónde vamos?");
+               // setTitle("¿A dónde vamos?");
                 break;
         }
     }

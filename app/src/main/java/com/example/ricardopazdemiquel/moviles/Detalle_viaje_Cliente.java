@@ -172,7 +172,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                                 verViaje(Integer.parseInt(id_carrera));
                             }
                         });
-                        switch (tipo_carrera) {
+                        switch (8) {
                             case 1:
                                 text_tipo_carrera.setText("Siete Estándar");
                                 break;
@@ -193,6 +193,9 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                                 break;
                             case 7:
                                 text_tipo_carrera.setText("Siete 3 filas");
+                                break;
+                            case 8:
+                                text_tipo_carrera.setText("Estandar");
                                 break;
                         }
                         if (obj.getString("foto_perfil").length() > 0) {
