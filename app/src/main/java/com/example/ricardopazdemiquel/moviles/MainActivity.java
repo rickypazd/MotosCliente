@@ -36,6 +36,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BroadcastReceiver broadcastReceiver;
     private  BroadcastReceiver broadcastReceiverMessage;
 
-    private ImageView btn_nav_formaspago;
-    private ImageView btn_nav_miperfil;
-    private ImageView btn_nav_misviajes;
-    private ImageView btn_nav_preferencias;
+    private LinearLayout btn_nav_formaspago;
+    private LinearLayout btn_nav_miperfil;
+    private LinearLayout btn_nav_misviajes;
+    private LinearLayout btn_nav_preferencias;
     private JSONObject usr_log;
 
     @Override
