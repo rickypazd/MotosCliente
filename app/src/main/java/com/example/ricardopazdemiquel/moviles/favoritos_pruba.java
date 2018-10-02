@@ -144,6 +144,8 @@ public class favoritos_pruba extends AppCompatActivity implements View.OnClickLi
 
         cargar();
 
+        //esto es una pruebaaaa de escritura
+
 
        /* View view =findViewById(R.id.bottom_sheet);
         bottomSheetBehavior= BottomSheetBehavior.from(view);

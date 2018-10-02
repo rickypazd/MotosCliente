@@ -227,8 +227,8 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                             direccion_final.setText(getCompleteAddressString(lat_final_real, lng_final_real).replaceAll("\n" , ""));
                             html_costo += "<p>" + costo + " Bs.</p>";
                         } else if (!get_estado(estado)) {
-                            direccion_inicio.setText(getCompleteAddressString(latinicial, lnginicial));
-                            direccion_final.setText(getCompleteAddressString(latfinal, lngfinal));
+                            direccion_inicio.setText(getCompleteAddressString(latinicial, lnginicial).replaceAll("\n" , ""));
+                            direccion_final.setText(getCompleteAddressString(latfinal, lngfinal).replaceAll("\n" , ""));
                             html_costo += "<p>0 Bs.</p>";
                         }
 
@@ -242,6 +242,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
         }
         @Override
         protected void onProgressUpdate(String... values) {
