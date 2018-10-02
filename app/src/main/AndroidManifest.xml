@@ -19,9 +19,9 @@
 
     <application
         android:name="utiles.Contexto"
-        android:icon="@drawable/ic_icono_siete"
-        android:label="Siete"
-        android:roundIcon="@mipmap/ic_p_supersiete_round"
+        android:icon="@drawable/ic_icon_imoto"
+        android:label="iMoto"
+        android:roundIcon="@drawable/ic_icon_imoto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
