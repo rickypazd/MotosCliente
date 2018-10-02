@@ -36,10 +36,10 @@
                 android:id="@+id/btn_cancelar_viaje"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimaryButton_lila"
+                android:background="@color/colorPrimary2"
                 android:text="Cancelar viaje"
                 android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
+                android:textColor="#000"
                 android:textSize="22dp"/>
 
         </LinearLayout>
@@ -146,7 +146,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="45dp"
                                     android:textSize="18dp"
-                                    android:textColor="@color/colorWhite"
+                                    android:textColor="#000"
                                     android:gravity="center"
                                     android:background="@drawable/ic_redondo1_finalizar"
                                     android:inputType="textPersonName" />
@@ -168,7 +168,7 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:textSize="15dp"
-                                    android:textColor="@color/colorWhite"
+                                    android:textColor="#000"
                                     android:gravity="center"
                                     android:background="@drawable/botonred"
                                     android:inputType="textPersonName"
@@ -180,7 +180,7 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:textSize="15dp"
-                                    android:textColor="@color/colorWhite"
+                                    android:textColor="#000"
                                     android:gravity="center"
                                     android:layout_marginStart="20dp"
                                     android:background="@drawable/botonred"
@@ -204,7 +204,7 @@
                                     android:text="Ha completado 256 viajes"
                                     android:textAlignment="center"
                                     android:gravity="center"
-                                    android:textColor="#fff"
+                                    android:textColor="#000"
                                     android:textSize="18dp" />
 
                                 <TextView
@@ -213,7 +213,7 @@
                                     android:layout_height="45dp"
                                     android:gravity="center"
                                     android:text="Logros"
-                                    android:textColor="@color/colorWhite"
+                                    android:textColor="#000"
                                     android:textSize="22dp"
                                     android:textStyle="bold"
                                     android:background="@drawable/ic_redondo1_finalizar"
@@ -253,7 +253,7 @@
                                                 android:text="0"
                                                 android:textSize="20dp"
                                                 android:gravity="end|bottom"
-                                                android:textColor="@color/colorWhite"/>
+                                                android:textColor="@color/colorBlack"/>
                                         </LinearLayout>
 
                                         <ImageView
@@ -272,7 +272,7 @@
                                         android:layout_marginTop="0dp"
                                         android:textAlignment="center"
                                         android:text="Amable"
-                                        android:textColor="#fff" />
+                                        android:textColor="#000" />
 
                                 </LinearLayout>
 
@@ -301,7 +301,7 @@
                                                 android:text="0"
                                                 android:textSize="20dp"
                                                 android:gravity="end|bottom"
-                                                android:textColor="@color/colorWhite"/>
+                                                android:textColor="@color/colorBlack"/>
                                         </LinearLayout>
 
                                         <ImageView
@@ -318,7 +318,7 @@
                                         android:layout_marginTop="0dp"
                                         android:textAlignment="center"
                                         android:text="Buena Ruta"
-                                        android:textColor="#fff" />
+                                        android:textColor="#000" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -346,7 +346,7 @@
                                                 android:text="0"
                                                 android:textSize="20dp"
                                                 android:gravity="end|bottom"
-                                                android:textColor="@color/colorWhite"/>
+                                                android:textColor="@color/colorBlack"/>
                                         </LinearLayout>
 
                                         <ImageView

@@ -73,22 +73,22 @@ public class LoginSocial extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private MyViewPagerAdapter myViewPagerAdapter;
     private String about_title_array[] = {
-            "7 Estándar",
-            "7 To Go",
-            "7 Maravilla",
-            "Super 7"
+            "iMotos",
+            "iMotos",
+            "iMotos",
+            "iMotos"
     };
     private String about_description_array[] = {
-            "7 rápido y económico.",
-            "Pedidos 24 horas.",
-            "7 de mujeres para mujeres.",
-            "Conductor designado",
+            "Facilita tus compras",
+            "24 horas.",
+            "Ahorra Tiempo",
+            "Mas confiable",
     };
     private int about_images_array[] = {
-            R.drawable.fondosite,
-            R.drawable.fondosiete_togo,
-            R.drawable.fondosiete_maravilla,
-            R.drawable.fondosite_super
+            R.drawable.ic_icon_imoto,
+            R.drawable.ic_icon_perfil_moto,
+            R.drawable.ic_icon_preferencia_moto,
+            R.drawable.ic_icon_viajes_moto
     };
 
     @Override

@@ -81,8 +81,9 @@
                         android:id="@+id/logestandar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/button_border"
-                        android:text="SIETE"  />
+                        android:backgroundTint="@color/colorPrimary2"
+
+                        android:text="iMovil"  />
                 </LinearLayout>
             </LinearLayout>
 
