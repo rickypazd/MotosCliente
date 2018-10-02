@@ -262,7 +262,7 @@ public class LoginCliente extends AppCompatActivity {
                             editor2.putString("lista_favoritos", array.toString());
                             editor2.commit();
 
-                            Intent intent = new Intent(LoginCliente.this,MainActivity.class);
+                            Intent intent = new Intent(LoginCliente.this,PedirSieteMap.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }else{

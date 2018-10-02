@@ -274,7 +274,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                             SharedPreferences.Editor editor = preferencias.edit();
                             editor.putString("usr_log", objs.toString());
                             editor.commit();
-                            Intent intent = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                            Intent intent = new Intent(Iniciar_cuenta_fb_Activity.this,PedirSieteMap.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }else{
@@ -295,7 +295,7 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
                     editor2.putString("lista_favoritos", array.toString());
                     editor2.commit();
 
-                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,MainActivity.class);
+                    Intent inte = new Intent(Iniciar_cuenta_fb_Activity.this,PedirSieteMap.class);
                     inte.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(inte);
                     finish();
