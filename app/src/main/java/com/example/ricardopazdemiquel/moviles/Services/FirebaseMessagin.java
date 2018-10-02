@@ -12,7 +12,8 @@ import com.example.ricardopazdemiquel.moviles.CanceloViaje_Cliente;
 import com.example.ricardopazdemiquel.moviles.Chat_Activity;
 import com.example.ricardopazdemiquel.moviles.EsperandoConductor;
 import com.example.ricardopazdemiquel.moviles.Inicio_viaje_togo;
-import com.example.ricardopazdemiquel.moviles.MainActivity;
+import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
+import com.example.ricardopazdemiquel.moviles.PedirSieteMap;
 import com.example.ricardopazdemiquel.moviles.R;
 import com.example.ricardopazdemiquel.moviles.finalizar_viajeCliente;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -77,13 +78,13 @@ public class FirebaseMessagin extends FirebaseMessagingService
 
 
     private void Finalizo_Carrera(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         notificationIntent.putExtra("carrera",remoteMessage.getData().get("json"));
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
+                .setContentTitle("iMoto")
                 .setContentText("Tu viaje ha finalizado.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -97,13 +98,13 @@ public class FirebaseMessagin extends FirebaseMessagingService
 
 
     private void Inicio_Carrera(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
+                .setContentTitle("iMoto")
                 .setContentText("Tu viaje está en curso." +
                         "Que tengas un buen viaje.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -115,12 +116,12 @@ public class FirebaseMessagin extends FirebaseMessagingService
     }
 
     private void conductor_llego(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
-                .setContentText("Tu Siete ya llegó.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setContentTitle("iMoto")
+                .setContentText("Tu iMoto ya llegó.")
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -137,15 +138,15 @@ public class FirebaseMessagin extends FirebaseMessagingService
             JSONObject object = new JSONObject(s);
             int valor = (int) object.get("id_tipo");
             if(valor == 2){
-                notificationIntent= new Intent(this, MainActivity.class);
+                notificationIntent= new Intent(this, PedirSieteMap.class);
             }else{
-                notificationIntent = new Intent(this, MainActivity.class);
+                notificationIntent = new Intent(this, PedirSieteMap.class);
             }
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
-                .setContentText("Tu Siete está cerca.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setContentTitle("iMoto")
+                .setContentText("Tu iMoto está cerca.")
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -176,12 +177,12 @@ public class FirebaseMessagin extends FirebaseMessagingService
 
 
     private void Cancelo_carrera(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
+                .setContentTitle("iMoto")
                 .setContentText("El conductor canceló el viaje. Disculpa las molestias.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -193,12 +194,12 @@ public class FirebaseMessagin extends FirebaseMessagingService
     }
 
     private void confirmo_compra(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                .setContentTitle("Siete")
+                .setContentTitle("iMoto")
                 .setContentText("Ya compramos tu pedido.")
-                .setSmallIcon(R.drawable.ic_logosiete_background)
+                .setSmallIcon(R.drawable.ic_icon_imoto)
                 .setContentIntent(pendingIntent)
                 .build();
         NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -210,14 +211,14 @@ public class FirebaseMessagin extends FirebaseMessagingService
     }
 
     private void agrego_costo_extra(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         try {
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                    .setContentTitle("Siete")
+                    .setContentTitle("iMoto")
                     .setContentText("Se agregó \""+obj.getString("nombre")+"\" como costo extra, con un valor de Bs. "+obj.getString("costo")+".")
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_icon_imoto)
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -228,14 +229,14 @@ public class FirebaseMessagin extends FirebaseMessagingService
 
     }
     private void elimino_costo_extra(RemoteMessage remoteMessage) {
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, PedirSieteMap.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         try {
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                    .setContentTitle("Siete")
+                    .setContentTitle("iMoto")
                     .setContentText("Se eliminó \""+obj.getString("nombre")+"\" de tus costos extras.")
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_icon_imoto)
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -280,12 +281,12 @@ public class FirebaseMessagin extends FirebaseMessagingService
         try {
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
             setMensaje(obj);
-            Intent notificationIntent = new Intent(this, MainActivity.class);
+            Intent notificationIntent = new Intent(this, PedirSieteMap.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
-                    .setContentTitle("Siete: Nuevo mensaje.")
+                    .setContentTitle("iMoto: Nuevo mensaje.")
                     .setContentText(obj.getString("mensaje"))
-                    .setSmallIcon(R.drawable.ic_logosiete_background)
+                    .setSmallIcon(R.drawable.ic_icon_imoto)
                     .setContentIntent(pendingIntent)
                     .build();
             NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

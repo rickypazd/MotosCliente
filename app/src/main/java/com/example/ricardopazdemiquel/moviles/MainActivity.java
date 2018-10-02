@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent inten = new Intent(MainActivity.this,PedirSieteMap.class);
+        startActivity(inten);
+        finish();
 
         ImageView fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

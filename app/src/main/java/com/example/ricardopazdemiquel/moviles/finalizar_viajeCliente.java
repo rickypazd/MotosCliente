@@ -138,7 +138,7 @@ public class finalizar_viajeCliente extends AppCompatActivity implements View.On
                     return;
                 } else {
                     //new MapCarrera.buscar_carrera().execute();
-                    Intent intent = new Intent(finalizar_viajeCliente.this, MainActivity.class);
+                    Intent intent = new Intent(finalizar_viajeCliente.this, PedirSieteMap.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
