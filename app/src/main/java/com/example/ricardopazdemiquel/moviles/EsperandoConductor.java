@@ -633,7 +633,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
 
 
     private BitmapDescriptor Auto_bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
-        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_map_auto_plomo);
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_motoubicasset_2asd);
         background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
         vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);

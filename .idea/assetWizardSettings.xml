@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -14,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icon_preferencia_moto" />
-                            <entry key="sourceFile" value="C:\Users\ricky\Desktop\cnachas_icon\SVG\ic_icon_preferencia_motoRecurso 11.svg" />
+                            <entry key="outputName" value="ic_motoubicasset_2asd" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../SVG/motoUbicAsset 2asd.svg" />
                           </map>
                         </option>
                       </PersistentState>
