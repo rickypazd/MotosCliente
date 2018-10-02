@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
             android:maxWidth="340dp"
-            android:numStars="7"
-            android:progressTint="@color/colorPrimary"
+            android:numStars="5"
+            android:progressTint="@color/colorBlack"
             android:rating="0"
             android:stepSize="1" />
 

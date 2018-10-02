@@ -25,9 +25,9 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
     private static final String TAG = "fragment_explorar";
     private EditText edit_mensaje;
     private Button btn_enviar_mensaje;
-    private ImageView btn_amable;
+    /*private ImageView btn_amable;
     private ImageView btn_buena_ruta;
-    private ImageView btn_auto_limpio;
+    private ImageView btn_auto_limpio;*/
     boolean amable = false;
     boolean buenaRuta = false;
     boolean autoLimpio= false;
@@ -40,15 +40,15 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_finalizar_viaje_fragment_2, container, false);
 
         edit_mensaje = view.findViewById(R.id.edit_mensaje);
-        btn_amable = view.findViewById(R.id.btn_amable);
+        /*btn_amable = view.findViewById(R.id.btn_amable);
         btn_buena_ruta = view.findViewById(R.id.btn_buena_ruta);
-        btn_auto_limpio = view.findViewById(R.id.btn_auto_limpio);
+        btn_auto_limpio = view.findViewById(R.id.btn_auto_limpio);*/
         btn_enviar_mensaje = view.findViewById(R.id.btn_enviar_mensaje);
 
         btn_enviar_mensaje.setOnClickListener(this);
-        btn_amable.setOnClickListener(this);
+        /*btn_amable.setOnClickListener(this);
         btn_buena_ruta.setOnClickListener(this);
-        btn_auto_limpio.setOnClickListener(this);
+        btn_auto_limpio.setOnClickListener(this);*/
 
         return view;
     }
@@ -61,7 +61,7 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
                 ((finalizar_viajeCliente)getActivity()).finalizo(mensaje , amable , autoLimpio, buenaRuta);
 
                 break;
-            case R.id.btn_amable:
+            /*case R.id.btn_amable:
                 if(amable == false){
                     view.setAlpha(0.5f);
                     amable = true;
@@ -87,7 +87,7 @@ public class FinalizarViajeFragment_2 extends Fragment implements View.OnClickLi
                     view.setAlpha(1f);
                     autoLimpio = false;
                 }
-                break;
+                break;*/
         }
     }
 }
