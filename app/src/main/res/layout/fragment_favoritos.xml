@@ -24,8 +24,8 @@
                 android:layout_height="50dp"
                 android:text="Agregar a favoritos"
                 android:textAllCaps="false"
-                android:background="#5D3892"
-                android:textColor="@color/colorWhite" />
+                android:background="@color/colorPrimaryDark2"
+                android:textColor="#000" />
 
             <ListView
                 android:id="@+id/lista_favoritos"

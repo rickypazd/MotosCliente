@@ -54,8 +54,19 @@
                     android:background="@drawable/backgroundcolor2"
                     app:titleTextColor="@color/colorBlack"
                     tools:layout_editor_absoluteX="8dp"
-                    android:paddingStart="8dp"
-                    tools:layout_editor_absoluteY="0dp"></android.support.v7.widget.Toolbar>
+                    app:contentInsetStart="24dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="¿A donde vamos?"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="#000000"/>
+
+                </android.support.v7.widget.Toolbar>
 
             </LinearLayout>
 
@@ -174,11 +185,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="50dp"
                                     android:layout_margin="0dp"
-                                    android:background="#9A50EF"
+                                    android:background="@color/colorPrimary2"
                                     android:padding="0dp"
                                     android:text="Elegir destino en el mapa"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/colorWhite" />
+                                    android:textColor="#000" />
                             </LinearLayout>
 
                         </android.support.design.widget.CoordinatorLayout>
