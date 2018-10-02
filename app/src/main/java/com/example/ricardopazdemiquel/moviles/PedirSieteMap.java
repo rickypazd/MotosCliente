@@ -201,7 +201,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_nav_formaspago.setOnClickListener(this);
         btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes.setOnClickListener(this);
-        btn_nav_preferencias.setOnClickListener(this); header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        btn_nav_preferencias.setOnClickListener(this);
+
         ImageView fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
