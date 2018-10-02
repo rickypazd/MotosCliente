@@ -39,8 +39,6 @@ public class Transaccion_cliente_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-        setTitle("Transacciones");
-        toolbar.setTitleTextColor(Color.WHITE);
 
         lv = findViewById(R.id.list_transaccion);
 
