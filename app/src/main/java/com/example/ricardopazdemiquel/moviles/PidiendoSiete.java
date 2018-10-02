@@ -147,7 +147,7 @@ public class PidiendoSiete extends AppCompatActivity {
                 Toast.makeText(PidiendoSiete.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else if (Resp.equals("falso")) {
-                Toast.makeText(PidiendoSiete.this,"Ningún conductor confirmó el viaje", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PidiendoSiete.this,"No encontramos conductores cerca.", Toast.LENGTH_SHORT).show();
                 finish();
             }else{
                 try {

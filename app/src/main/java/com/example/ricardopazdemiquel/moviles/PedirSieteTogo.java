@@ -138,7 +138,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_left_arrow);
-        setTitle("Siete To go");
+        setTitle("Siete TO GO");
         toolbar.setTitleTextColor(Color.WHITE);
 
         lista_productos=findViewById(R.id.lista_productos);
@@ -536,11 +536,6 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.e(LOG_TAG, "Google Places API connection failed with error code: "
                 + connectionResult.getErrorCode());
-
-        Toast.makeText(this,
-                "Google Places API connection failed with error code:" +
-                        connectionResult.getErrorCode(),
-                Toast.LENGTH_LONG).show();
     }
 
 
@@ -739,7 +734,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                         else {
                             tipo_pago=1;
                             if(credito < 0){
-                                new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
+                                new Confirmar_viaje_Dialog(tipo_carrera,credito).show(fragmentManager, "Dialog");
                                 //esta en deuda , aler se cobrara el monto + viej
                                 acept=false;
                             }
@@ -751,7 +746,7 @@ public class PedirSieteTogo extends AppCompatActivity implements View.OnClickLis
                 }
             }
             }else{
-                Toast.makeText(PedirSieteTogo.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
+                Toast.makeText(PedirSieteTogo.this,"Selecciona una ubicación válida.",Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

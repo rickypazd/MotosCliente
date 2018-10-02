@@ -368,10 +368,10 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     public void cargarTipo(){
         switch (tipo_carrera){
             case 1:
-                setTitle("Siete Estandar");
+                setTitle("Siete Estándar");
                 break;
             case 2:
-                setTitle("Siete Togo");
+                setTitle("Siete TO GO");
                 break;
             case 3:
                 setTitle("Siete Maravilla");
@@ -641,7 +641,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                         else {
                             tipo_pago=1;
                             if(credito < 0){
-                                new Confirmar_viaje_Dialog(tipo_carrera).show(fragmentManager, "Dialog");
+                                new Confirmar_viaje_Dialog(tipo_carrera,credito).show(fragmentManager, "Dialog");
                                 //esta en deuda , aler se cobrara el monto + viej
                                 acept=false;
                             }

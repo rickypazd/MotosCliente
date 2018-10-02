@@ -91,8 +91,8 @@ public class Adapter_pedidos_togo extends BaseAdapter {
                 switch (view.getId()) {
                     case R.id.eliminar:
                         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
-                        builder.setMessage("Esta seguro que desea eliminar su producto")
-                                .setTitle("Eliminar Producto ")
+                        builder.setMessage("¿Estás seguro que deseas eliminar tu producto?")
+                                .setTitle("Eliminar producto ")
                                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // CONFIRM

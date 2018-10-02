@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,6 +82,7 @@ public class Editar_perfil_Activity extends AppCompatActivity implements View.On
                 String telefono = intent.getStringExtra("telefono");
                 text_titulo.setText("Teléfono");
                 textNombre.setText(telefono);
+                textNombre.setInputType(InputType.TYPE_CLASS_PHONE);
                 break;
             case CORREO_USUARIO:
                 String correo = intent.getStringExtra("correo");

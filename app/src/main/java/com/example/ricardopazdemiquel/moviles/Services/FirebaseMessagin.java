@@ -101,8 +101,8 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su viaje esta en curso." +
-                        "Que tenga un buen viaje.")
+                .setContentText("Tu viaje está en curso." +
+                        "Que tengas un buen viaje.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -180,7 +180,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("El conductor canceló el viaje. Disculpe las molestias.")
+                .setContentText("El conductor canceló el viaje. Disculpa las molestias.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -197,7 +197,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
         Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                 .setContentTitle("Siete")
-                .setContentText("Su pedidos fue comprado.")
+                .setContentText("Ya compramos tu pedido.")
                 .setSmallIcon(R.drawable.ic_logosiete_background)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -216,7 +216,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                     .setContentTitle("Siete")
-                    .setContentText("Se agrego "+obj.getString("nombre")+" como costo extra, con un valor de "+obj.getString("costo")+" Bs.")
+                    .setContentText("Se agregó \""+obj.getString("nombre")+"\" como costo extra, con un valor de Bs. "+obj.getString("costo")+".")
                     .setSmallIcon(R.drawable.ic_logosiete_background)
                     .setContentIntent(pendingIntent)
                     .build();
@@ -234,7 +234,7 @@ public class FirebaseMessagin extends FirebaseMessagingService
             JSONObject obj = new JSONObject(remoteMessage.getData().get("json"));
             Notification notification= new NotificationCompat.Builder(this, Contexto.CHANNEL_ID)
                     .setContentTitle("Siete")
-                    .setContentText("Se elimino "+obj.getString("nombre")+" de sus costo extras.")
+                    .setContentText("Se eliminó \""+obj.getString("nombre")+"\" de tus costos extras.")
                     .setSmallIcon(R.drawable.ic_logosiete_background)
                     .setContentIntent(pendingIntent)
                     .build();

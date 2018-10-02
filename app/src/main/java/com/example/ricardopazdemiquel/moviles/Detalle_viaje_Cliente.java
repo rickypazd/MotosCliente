@@ -174,7 +174,7 @@ public class Detalle_viaje_Cliente extends AppCompatActivity {
                         });
                         switch (tipo_carrera) {
                             case 1:
-                                text_tipo_carrera.setText("Siete Estandar");
+                                text_tipo_carrera.setText("Siete Estándar");
                                 break;
                             case 2:
                                 text_tipo_carrera.setText("Siete To go");

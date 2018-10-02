@@ -233,7 +233,7 @@ private Button btn_enviar_mensaje;
             broadcastReceiverMessageconductor = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    Toast.makeText(Inicio_viaje_togo.this,"El conductor Llego",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Inicio_viaje_togo.this,"Tu conductor llegó.",Toast.LENGTH_SHORT).show();
                     conductor_llego(intent);
                 }
             };
@@ -306,7 +306,7 @@ private Button btn_enviar_mensaje;
 
 
     private void notificacionReciber(Intent intent){
-        Toast.makeText(Inicio_viaje_togo.this,"El conductor esta serca",
+        Toast.makeText(Inicio_viaje_togo.this,"Tu conductor está cerca.",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -320,7 +320,7 @@ private Button btn_enviar_mensaje;
 
     private void Inicio_Carrera(Intent intent){
         Container_cancelar.setVisibility(View.GONE);
-        Toast.makeText(Inicio_viaje_togo.this,"Su viaje ha comenzado, Que tenga buen viaje.",
+        Toast.makeText(Inicio_viaje_togo.this,"Tu viaje ha comenzado. Que tenga buen viaje.",
                 Toast.LENGTH_SHORT).show();
         new buscar_carrera().execute();
         //perfil_condutor.setVisibility(View.VISIBLE);
@@ -357,7 +357,7 @@ private Button btn_enviar_mensaje;
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     callPhone();
                 } else {
-                    System.out.println("El usuario ha rechazado el permiso");
+                    System.out.println("El usuario ha rechazado el permiso.");
                 }
                 return;
             }

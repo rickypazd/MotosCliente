@@ -65,9 +65,9 @@ public class Cancelar_viaje_Dialog extends DialogFragment implements View.OnClic
             boolean tipo  = obj.getBoolean("cobro");
             int monto = obj.getInt("total");
             if(tipo){
-                text_mesaje.setText("Se le cobrara "+"bs. "+monto +" por la concelacion");
+                text_mesaje.setText("Se te cobrará Bs. "+monto +" por la cancelación.");
             }else{
-                text_mesaje.setText("cacelar en este punto aun es gratuito");
+                text_mesaje.setText("Todavía puedes cancelar este viaje sin costo.");
             }
         } catch (JSONException e) {
             e.printStackTrace();

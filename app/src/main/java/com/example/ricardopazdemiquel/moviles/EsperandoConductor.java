@@ -212,7 +212,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             broadcastReceiverMessageconductor = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    Toast.makeText(EsperandoConductor.this,"El conductor Llego",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EsperandoConductor.this,"Tu conductor llegó",Toast.LENGTH_SHORT).show();
                     conductor_llego(intent);
                 }
             };
@@ -307,7 +307,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     }
 
     private void notificacionReciber(Intent intent){
-        Toast.makeText(EsperandoConductor.this,"El conductor esta serca",
+        Toast.makeText(EsperandoConductor.this,"Tu conductor está cerca.",
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -321,7 +321,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     }
 
     private void Inicio_Carrera(Intent intent){
-        Toast.makeText(EsperandoConductor.this,"Su viaje ha comenzado, Que tenga buen viaje.",
+        Toast.makeText(EsperandoConductor.this,"Tu viaje ha comenzado. Que tengas buen viaje.",
                 Toast.LENGTH_SHORT).show();
         new buscar_carrera().execute();
         //perfil_condutor.setVisibility(View.VISIBLE);
@@ -531,7 +531,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else{
                 if (resp.equals("falso")) {
-                    Toast.makeText(EsperandoConductor.this,"No se Encontro Conductor Disculpe las Molestias",
+                    Toast.makeText(EsperandoConductor.this,"Perdimos la conexión con tu conductor.",
                             Toast.LENGTH_SHORT).show();
                 }else{
                     try {
@@ -674,7 +674,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else if (resp.isEmpty()) {
-                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EsperandoConductor.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
             }else{
                 try {
                     JSONObject obj = new JSONObject(resp);
@@ -867,7 +867,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else if(resp.isEmpty()) {
-                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EsperandoConductor.this,"Error al obtener datos", Toast.LENGTH_SHORT).show();
             }else{
                 try {
                     Json_cancelarViaje = new JSONObject(resp);
@@ -923,14 +923,14 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Hubo un error al conectarse al servidor.", Toast.LENGTH_SHORT).show();
                 Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
             }else if(resp.isEmpty()){
-                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EsperandoConductor.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
             }else if(resp.contains("exito")) {
-                Toast.makeText(EsperandoConductor.this,"viaje cancelado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EsperandoConductor.this,"Viaje cancelado.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EsperandoConductor.this , MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }else{
-                Toast.makeText(EsperandoConductor.this,"Error al obtener Datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EsperandoConductor.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
             }
         }
         @Override

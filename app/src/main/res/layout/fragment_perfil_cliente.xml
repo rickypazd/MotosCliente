@@ -97,7 +97,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="creditos"
+                                android:text="Créditos"
                                 android:textColor="@color/colorPrimaryButton_lila"
                                 android:textSize="20sp" />
 
@@ -231,7 +231,7 @@
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
                         android:paddingLeft="20dp"
-                        android:text="Numero de teléfono"
+                        android:text="Número de teléfono"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimaryButton_lila"
                         android:textSize="15sp" />

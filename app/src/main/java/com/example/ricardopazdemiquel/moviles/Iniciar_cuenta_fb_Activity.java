@@ -249,8 +249,8 @@ public class Iniciar_cuenta_fb_Activity extends AppCompatActivity implements Vie
             param.put("nombre",nombre);
             param.put("apellidos",apellidos);
             param.put("correo",correo);
-            param.put("telefono", telefono);
-            param.put("sexo",sexo);
+            param.put("telefonos", telefono);
+            param.put("Sexo",sexo);
             param.put("token", Token.currentToken);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_admin), MethodType.POST, param));
             return respuesta;

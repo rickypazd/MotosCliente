@@ -1099,17 +1099,17 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             switch (tipo) {
             case 1:
                 recyclerView.setVisibility(View.VISIBLE);
-                setTitle("A dónde vamos");
+                setTitle("¿A dónde vamos?");
                 toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 3:
                 btn_pedir_maravilla.setVisibility(View.VISIBLE);
-                setTitle("A dónde vamos");
+                setTitle("¿A dónde vamos?");
                 toolbar.setTitleTextColor(Color.WHITE);
                 break;
             case 4:
                 btn_pedir_super.setVisibility(View.VISIBLE);
-                setTitle("A dónde vamos");
+                setTitle("¿A dónde vamos?");
                 toolbar.setTitleTextColor(Color.WHITE);
                 break;
         }

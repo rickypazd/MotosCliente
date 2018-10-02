@@ -43,7 +43,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="ha seleccionado un viaje al aeropuerto, este servicio esta sujeto a una tarifa extra. \n bs 50"
+                android:text="Ten en cuenta que este servicio tiene un costo adicional de \n Bs. 50."
                 android:textAlignment="center"
                 android:gravity="center"
                 android:inputType="textMultiLine"

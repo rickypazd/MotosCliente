@@ -73,16 +73,16 @@ public class LoginSocial extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private MyViewPagerAdapter myViewPagerAdapter;
     private String about_title_array[] = {
-            "7 Estandar",
+            "7 Estándar",
             "7 To Go",
             "7 Maravilla",
             "Super 7"
     };
     private String about_description_array[] = {
-            "7 Rapido y economico.",
-            "Pedidos 24 Horas.",
-            "7 De Mujeres para Mujeres.",
-            "Conductor Designado",
+            "7 rápido y económico.",
+            "Pedidos 24 horas.",
+            "7 de mujeres para mujeres.",
+            "Conductor designado",
     };
     private int about_images_array[] = {
             R.drawable.fondosite,
@@ -298,7 +298,7 @@ public class LoginSocial extends AppCompatActivity {
                                                     }else{
 
                                                         ////esteeee <=-------
-                                                        Intent intent = new Intent(LoginSocial.this,Iniciar_cuenta_gmail_Activity.class);
+                                                        Intent intent = new Intent(LoginSocial.this,Iniciar_cuenta_fb_Activity.class);
                                                         intent.putExtra("usr_face",object.toString());
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         startActivity(intent);

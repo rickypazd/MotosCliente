@@ -38,7 +38,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Iniciar Session"
+                        android:text="Iniciar sesión"
                         android:textColor="@color/colorBlack"
                         android:textSize="24sp" />
 
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_border"
-                        android:text="SIETE" />
+                        android:text="SIETE"  />
                 </LinearLayout>
             </LinearLayout>
 

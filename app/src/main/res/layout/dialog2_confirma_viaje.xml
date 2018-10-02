@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:inputType="textMultiLine"
-                android:text="Lo sientimos usted no cuenta con creditos suficientes."
+                android:text="Lo sentimos, no cuentas con créditos suficientes."
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="24sp" />

@@ -103,7 +103,7 @@ public class Elejir_tipo_siete extends Fragment implements View.OnClickListener 
             case R.id.btn_sieteMaravilla:
                 JSONObject obj = getUsr_log();
                 try {
-                    if(obj.getString("sexo") == "Mujer"){
+                    if(obj.getString("sexo").equals("Mujer")){
                         Intent intent2 = new Intent(getActivity(), PedirSieteMap.class);
                         intent2.putExtra("lng", longitudeGPS);
                         intent2.putExtra("lat", latitudeGPS);
