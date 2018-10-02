@@ -40,8 +40,8 @@
             android:layout_margin="20dp"
             android:text="Agregar"
             android:textSize="18dp"
-            android:background="@color/colorPrimaryButton_lila"
-            android:textColor="@color/colorWhite"
+            android:background="@color/colorBlack"
+            android:textColor="@color/colorPrimary2"
             android:textAllCaps="false"
             android:visibility="gone"
             android:layout_gravity="bottom"/>
@@ -82,7 +82,7 @@
             android:textSize="30dp"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorBlack"/>
 
     </LinearLayout>
 
@@ -106,10 +106,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Elegir destino en el mapa"
-                    android:background="#9A50EF"
+                    android:background="@color/colorPrimary2"
                     android:textAllCaps="false"
                     android:textSize="15dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorBlack"
                     android:layout_gravity="bottom"/>
 
 
