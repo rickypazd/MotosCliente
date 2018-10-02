@@ -3,14 +3,14 @@
     android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/accent"
+
     android:orientation="vertical"
-    android:clickable="true"
-    android:padding="16dp">
+    android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="120dp"
+        android:background="@drawable/color_degradiente"
         android:layout_alignParentBottom="true">
 
         <TextView
@@ -37,8 +37,7 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_alignParentRight="true"
-            android:padding="16dp"
-            android:src="@mipmap/ic_miperfil_round" />
+            android:src="@drawable/ic_icon_perfil" />
 
     </RelativeLayout>
 
@@ -50,51 +49,53 @@
 
 
         <LinearLayout
-            android:id="@+id/linearLayout6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/btn_nav_miperfil"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_icon_perfil"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mi perfil"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/btn_nav_formaspago"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_icon_credito" />
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Créditos"
+                android:layout_weight="1"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
+            <ImageView
+                android:id="@+id/btn_nav_formaspago"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_icon_credito" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mi perfil"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/btn_nav_miperfil"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_icon_perfil"/>
         </LinearLayout>
 
 
@@ -104,21 +105,22 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/btn_nav_preferencias"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_icon_preferencia" />
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Preferencias"
                 android:textAlignment="center"
+                android:layout_weight="1"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/btn_nav_preferencias"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_icon_preferencia" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,21 +129,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/btn_nav_misviajes"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_icon_mis_viajes" />
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mis viajes"
+                android:layout_weight="1"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/btn_nav_misviajes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_icon_mis_viajes" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
