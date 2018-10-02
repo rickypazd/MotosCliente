@@ -16,16 +16,9 @@
             android:id="@+id/toolbar_detalle_viaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:title="Detalle del viaje"
+            app:titleTextColor="@color/colorBlack"
             android:background="@drawable/backgroundcolor2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Detalles del viaje"
-                android:textColor="@color/colorWhite"
-                android:textSize="20dp"
-                android:fontFamily="sans-serif"
-                android:textStyle="normal" />
         </android.support.v7.widget.Toolbar>
 
     </LinearLayout>
