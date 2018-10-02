@@ -100,8 +100,12 @@ public class Carga extends AppCompatActivity {
                 if (usr_log != null) {
                     try {
                         if (usr_log.getInt("id_rol") == 4) {
-                            Intent intent = new Intent(Carga.this, MainActivity.class);
+
+                            Intent intent = new Intent(Carga.this, PedirSieteMap.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("lng", 0);
+                            intent.putExtra("lat", 0);
+                            intent.putExtra("tipo", 1);
                             startActivity(intent);
                             finish();
                         }
