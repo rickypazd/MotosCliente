@@ -285,7 +285,7 @@ public class Iniciar_cuenta_gmail_Activity extends AppCompatActivity implements 
                                     SharedPreferences.Editor editor = preferencias.edit();
                                     editor.putString("usr_log", obj.toString());
                                     editor.commit();
-                                    Intent intent = new Intent(Iniciar_cuenta_gmail_Activity.this,MainActivity.class);
+                                    Intent intent = new Intent(Iniciar_cuenta_gmail_Activity.this,PedirSieteMap.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }else{
