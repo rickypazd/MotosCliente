@@ -206,7 +206,7 @@
                         android:background="@drawable/ic_button_border_white"
                         android:text="Listo"
                         android:textAllCaps="false"
-                        android:textColor="#9A50EF"
+                        android:textColor="#000"
                         android:textSize="20dp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
