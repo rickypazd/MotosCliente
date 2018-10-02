@@ -10,7 +10,7 @@
         android:id="@+id/gift"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundcolor"
+        android:background="@drawable/color_degradiente"
         android:focusableInTouchMode="true"
         android:src="@drawable/loading" />
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="Pidiendo"
             android:textAppearance="@style/Bubble.TextAppearance.Light"
             android:textColor="@android:color/background_light"

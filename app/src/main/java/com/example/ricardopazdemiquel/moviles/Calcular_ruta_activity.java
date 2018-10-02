@@ -368,7 +368,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     public void cargarTipo(){
         switch (tipo_carrera){
             case 1:
-                setTitle("Siete Estándar");
+                setTitle("iMotos");
                 break;
             case 2:
                 setTitle("Siete TO GO");
@@ -710,7 +710,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     private void mostraConfirmar_icon(int valor){
         switch (valor){
             case 1:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_estandar));
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icon_imoto));
                 break;
             case 3:
                 icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_siete_maravilla));
