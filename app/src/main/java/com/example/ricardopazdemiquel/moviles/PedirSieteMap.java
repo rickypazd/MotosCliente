@@ -141,6 +141,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private LinearLayout btn_nav_miperfil;
     private LinearLayout btn_nav_misviajes;
     private LinearLayout btn_nav_preferencias;
+
+    private TextView barnombre;
+    private TextView bartelefono;
     //
 
 
@@ -199,7 +202,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes.setOnClickListener(this);
         btn_nav_preferencias.setOnClickListener(this);
-
+     barnombre=header.findViewById(R.id.barnombre);;
+      bartelefono=header.findViewById(R.id.bartelefono);;
+      JSONObject usr = getUsr_log();
+        try {
+            barnombre.setText(usr.getString("nombre")+" "+usr.getString("apellido_pa"));
+            bartelefono.setText("+591 "+usr.getString("telefono"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         ImageView fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

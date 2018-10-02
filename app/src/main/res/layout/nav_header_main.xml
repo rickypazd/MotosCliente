@@ -22,18 +22,19 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/barnombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nombre nombre nombre"
+                android:text=""
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/bottomText"
+                android:id="@+id/bartelefono"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Numero de telefono"
+                android:text=""
                 android:textColor="@color/colorBlack"
                 android:layout_marginEnd="10dp"
                 android:textSize="16sp" />
@@ -44,6 +45,8 @@
             android:id="@+id/arrow"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorWhite"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_icon_perfil" />
 

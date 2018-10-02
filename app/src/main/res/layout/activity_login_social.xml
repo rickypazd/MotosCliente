@@ -43,12 +43,12 @@
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimary2"
             android:gravity="center"
             android:text="Siguiente"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@android:color/white"
+            android:textColor="#000"
             android:textStyle="bold" />
 
     </com.balysv.materialripple.MaterialRippleLayout>
