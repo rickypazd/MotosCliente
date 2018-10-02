@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -205,6 +206,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
      barnombre=header.findViewById(R.id.barnombre);;
       bartelefono=header.findViewById(R.id.bartelefono);;
       JSONObject usr = getUsr_log();
+      runtime_permissions();
         try {
             barnombre.setText(usr.getString("nombre")+" "+usr.getString("apellido_pa"));
             bartelefono.setText("+591 "+usr.getString("telefono"));
@@ -1228,5 +1230,25 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
+    private boolean runtime_permissions() {
+        if(Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){      requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},100);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 100){
+            if( grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+
+            }else {
+                runtime_permissions();
+            }
+        }
+    }
+
 
 }
