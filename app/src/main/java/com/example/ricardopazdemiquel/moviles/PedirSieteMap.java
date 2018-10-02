@@ -152,15 +152,12 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private ImageView btn_pedir_super, btn_pedir_maravilla;
 
     //iniciamos los buton del view pager
-    private static final int MAX_STEP = 4;
+    private static final int MAX_STEP = 1;
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int logo_array[] = {
-            R.drawable.background_siete_estadar,
-            R.drawable.background_siete_4x4,
-            R.drawable.background_siete_camioneta,
-            R.drawable.backgroud_tres_filas
+            R.drawable.pedirmoto
     };
 
     private int tipo_carrera;
