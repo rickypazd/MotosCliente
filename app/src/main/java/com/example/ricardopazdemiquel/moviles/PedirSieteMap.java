@@ -137,10 +137,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
 
     //NAVIGATION BAR
-    private ImageView btn_nav_formaspago;
-    private ImageView btn_nav_miperfil;
-    private ImageView btn_nav_misviajes;
-    private ImageView btn_nav_preferencias;
+    private LinearLayout btn_nav_formaspago;
+    private LinearLayout btn_nav_miperfil;
+    private LinearLayout btn_nav_misviajes;
+    private LinearLayout btn_nav_preferencias;
     //
 
 
