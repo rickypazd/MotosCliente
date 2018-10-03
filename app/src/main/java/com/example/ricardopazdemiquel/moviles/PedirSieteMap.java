@@ -161,7 +161,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int logo_array[] = {
-            R.drawable.pedirmoto
+            R.drawable.btnmoto
     };
 
     private int tipo_carrera;
