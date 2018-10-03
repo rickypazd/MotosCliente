@@ -25,7 +25,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#4d4f4e">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" "
-                    android:textColor="@color/colorGris"
+                    android:textColor="@color/colorWhite"
                     android:textSize="17dp" />
 
                 <TextView
@@ -173,7 +174,7 @@
                     android:text="Tipo viaje"
                     android:textSize="15sp"
                     android:layout_weight="1"
-                    android:textColor="#626262"/>
+                    android:textColor="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/text_tipo_carrera"
@@ -183,7 +184,7 @@
                     android:text=""
                     android:layout_weight="1"
                     android:textSize="15sp"
-                    android:textColor="#626262"/>
+                    android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
 
@@ -202,7 +203,7 @@
                     android:text=""
                     android:textSize="15sp"
                     android:layout_weight="1"
-                    android:textColor="#626262"/>
+                    android:textColor="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/text_auto_marca"
@@ -212,7 +213,7 @@
                     android:text="Kia picanto"
                     android:layout_weight="1"
                     android:textSize="15sp"
-                    android:textColor="#626262"/>
+                    android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
 
@@ -239,7 +240,7 @@
                     android:text="Forma de pago"
                     android:textSize="18sp"
                     android:layout_weight="1"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/text_tipo_pago"
@@ -249,7 +250,7 @@
                     android:text=""
                     android:layout_weight="1"
                     android:textSize="18sp"
-                    android:textColor="@color/colorGris"/>
+                    android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
 
@@ -268,7 +269,7 @@
                     android:textSize="18sp"
                     android:layout_weight="1"
                     android:text=""
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorWhite"/>
 
                 <TextView
                     android:id="@+id/text_html_montos"
@@ -276,7 +277,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:textColor="@color/colorGris"
+                    android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
 
             </LinearLayout>

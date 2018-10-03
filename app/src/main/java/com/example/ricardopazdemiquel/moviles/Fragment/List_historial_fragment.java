@@ -80,9 +80,6 @@ public class List_historial_fragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
 
