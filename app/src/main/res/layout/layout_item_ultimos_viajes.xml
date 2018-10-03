@@ -103,6 +103,12 @@
                             android:textColor="#4d4f4e"
                             tools:text="ave tres passos al f" />
 
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/backgroundcolor" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
