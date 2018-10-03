@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ricardopazdemiquel.moviles.Detalle_viaje_Cliente;
@@ -64,7 +65,7 @@ public class Adaptador_mis_viajes extends BaseAdapter {
         TextView text_fin = view.findViewById(R.id.text_FinViaje);
         TextView text_tipo_pago = view.findViewById(R.id.text_tipoPago);
         TextView text_monto= view.findViewById(R.id.text_monto);
-        ImageView btn_next = view.findViewById(R.id.btn_next);
+        LinearLayout btn_next = view.findViewById(R.id.btn_next);
 
         try {
             final JSONObject viajes = array.getJSONObject(i);

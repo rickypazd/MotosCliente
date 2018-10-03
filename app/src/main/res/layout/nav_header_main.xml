@@ -11,15 +11,35 @@
         android:layout_height="200dp"
         android:background="@drawable/color_degradiente"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:paddingStart="20dp"
             android:layout_weight="1"
+            android:gravity="center|start"
             android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/arrow"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@color/colorWhite"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/ic_miperfil" />
+
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
             <TextView
                 android:id="@+id/barnombre"
@@ -39,16 +59,9 @@
                 android:layout_marginEnd="10dp"
                 android:textSize="14sp" />
 
-        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/arrow"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/colorWhite"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_icon_perfil" />
+            </LinearLayout>
+
 
     </LinearLayout>
 
