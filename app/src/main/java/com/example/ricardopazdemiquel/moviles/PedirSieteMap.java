@@ -432,7 +432,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            layoutParams.setMargins(0, 220, 10, 0);
+            layoutParams.setMargins(0, 400, 10, 0);
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
@@ -1060,7 +1060,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 //polylineOption
                 lineOptions.addAll(points);
                 lineOptions.width(5);
-                lineOptions.color(Color.rgb(93,56,146));
+                lineOptions.color(Color.rgb(0,0,0));
             }
             if(lineOptions!=null) {
                 googleMap.addPolyline(lineOptions);

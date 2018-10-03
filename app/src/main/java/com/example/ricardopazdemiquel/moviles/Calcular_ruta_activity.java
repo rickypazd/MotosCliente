@@ -516,7 +516,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                 //polylineOption
                 lineOptions.addAll(points);
                 lineOptions.width(5);
-                lineOptions.color(Color.rgb(93,56,146));
+                lineOptions.color(Color.rgb(0,0,0));
             }
             if(lineOptions!=null) {
                 googleMap.addPolyline(lineOptions);

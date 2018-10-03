@@ -684,7 +684,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 }
             }
         }
-
     }
 
     public class Get_ObtenerPerfilConductor extends AsyncTask<Void, String, String> {
@@ -926,7 +925,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                 Toast.makeText(EsperandoConductor.this,"Error al obtener datos.", Toast.LENGTH_SHORT).show();
             }else if(resp.contains("exito")) {
                 Toast.makeText(EsperandoConductor.this,"Viaje cancelado.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EsperandoConductor.this , MainActivity.class);
+                Intent intent = new Intent(EsperandoConductor.this , PedirSieteMap.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }else{
