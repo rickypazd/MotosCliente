@@ -676,6 +676,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,width,height,100);
+
         googleMap.moveCamera(cu);
         Calcular_ruta_activity.DownloadTask downloadTask= new Calcular_ruta_activity.DownloadTask();
         downloadTask.execute(url);

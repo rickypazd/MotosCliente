@@ -1114,9 +1114,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
-        HttpURLConnection urlConnection = null;
-        try{
-            URL url = new URL(strUrl);
+                  HttpURLConnection urlConnection = null;
+            try{
+                URL url = new URL(strUrl);
 
             // Creamos una conexion http
             urlConnection = (HttpURLConnection) url.openConnection();
