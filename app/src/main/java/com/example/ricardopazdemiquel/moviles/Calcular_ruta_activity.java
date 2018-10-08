@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -117,13 +118,22 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
 
     JSONObject usr_log;
     //inicializamos los botones para pedir siete togo y el tipo de carrera
-    private int tipo_carrera;
     private RadioButton radio_efectivo;
     private RadioButton radio_credito;
     // inicializamos los iconos de confirmar carrera
     private ImageView icono2 ;
     double mont;
     boolean aeropuerto = false;
+
+    JSONObject obj ;
+    private int tipo_carrera;
+    double longitudeGPS;
+    double latitudeGPS;
+    double latinicio;
+    double lnginicio;
+    double latfinal;
+    double lngfinal;
+    String mensaje;
 
     public Calcular_ruta_activity() {
     }
@@ -156,15 +166,25 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         btn_confirmar.setOnClickListener(this);
         icono2 = findViewById(R.id.icono2);
 
-        final double longitudeGPS=getIntent().getDoubleExtra("lng",0);
-        final double latitudeGPS=getIntent().getDoubleExtra("lat",0);
-        tipo_carrera = getIntent().getIntExtra("tipo",0);
-        final double latinicio = getIntent().getDoubleExtra("latinicio",0);
-        final double lnginicio = getIntent().getDoubleExtra("lnginicio",0);
-        final double latfinal = getIntent().getDoubleExtra("latfinal",0);
-        final double lngfinal = getIntent().getDoubleExtra("lngfinal",0);
+        String str = getIntent().getStringExtra("JSON");
 
-        float[] results = new float[1];
+        try {
+            obj = new JSONObject(str);
+            tipo_carrera = obj.getInt("tipo");
+            latinicio = obj.getDouble("latinicio");
+            lnginicio = obj.getDouble("lnginicio");
+            latfinal = obj.getDouble("latfinal");
+            lngfinal = obj.getDouble("lngfinal");
+            longitudeGPS = obj.getDouble("lng");
+            latitudeGPS = obj.getDouble("lat");
+            if(tipo_carrera == 2){
+                mensaje = obj.getString("mensaje");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+       /* float[] results = new float[1];
             Location.distanceBetween(
                   latinicio,
                     lnginicio,
@@ -187,11 +207,10 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
             //punto 1 ae
             aeropuerto = true;
         }
-
         if(aeropuerto){
             android.app.FragmentManager fragmentManager = getFragmentManager();
             new Aeropuerto_viaje_Dialog().show(fragmentManager, "Dialog");
-        }
+        }*/
 
         cargarTipo();
         mGoogleApiClient = new GoogleApiClient.Builder(Calcular_ruta_activity.this)
@@ -276,6 +295,9 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         inte.putExtra("id_usr", usr_log.getInt("id") + "");
         inte.putExtra("tipo", tipo_carrera + "");
         inte.putExtra("tipo_pago", tipo_pago + "");
+        if(tipo_carrera == 2){
+            inte.putExtra("mensaje", mensaje + "");
+        }
         startActivity(inte);
     }
 
@@ -289,18 +311,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         }
     }
 
-    public void ok_predir_viaje() throws JSONException {
-        Intent inte = new Intent(Calcular_ruta_activity.this, PidiendoSiete.class);
-        inte.putExtra("latInicio", inicio.latitude + "");
-        inte.putExtra("lngInicio", inicio.longitude + "");
-        inte.putExtra("latFin", fin.latitude + "");
-        inte.putExtra("lngFin", fin.longitude + "");
-        inte.putExtra("token", Token.currentToken);
-        inte.putExtra("id_usr", usr_log.getInt("id") + "");
-        inte.putExtra("tipo", tipo_carrera + "");
-        inte.putExtra("tipo_pago", tipo_pago + "");
-        startActivity(inte);
-    }
 
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
@@ -371,22 +381,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                 setTitle("iMotos");
                 break;
             case 2:
-                setTitle("Siete TO GO");
-                break;
-            case 3:
-                setTitle("Siete Maravilla");
-                break;
-            case 4:
-                setTitle("Super Siete");
-                break;
-            case 5:
-                setTitle("Siete 4x4");
-                break;
-            case 6:
-                setTitle("Siete Camioneta");
-                break;
-            case 7:
-                setTitle("Siete 6 Pasajeros");
+                setTitle("iMotos");
                 break;
         }
     }
@@ -713,20 +708,8 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
             case 1:
                 icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icon_imoto));
                 break;
-            case 3:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_siete_maravilla));
-                break;
-            case 4:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_logo_icon_super_siete));
-                break;
-            case 5:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_4x4));
-                break;case 2:
-            case 6:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_camioneta));
-                break;
-            case 7:
-                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icono_3_filas));
+            case 2:
+                icono2.setBackground(getApplication().getResources().getDrawable(R.drawable.ic_icon_imoto));
                 break;
         }
     }

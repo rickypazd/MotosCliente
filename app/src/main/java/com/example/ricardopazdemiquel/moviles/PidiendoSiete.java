@@ -33,9 +33,8 @@ public class PidiendoSiete extends AppCompatActivity {
     private String id_usr;
     private String tipoCarrera;
     private String tipo_pago;
-    private String productos;
-    private JSONArray array;
-    private static final int TIPO_TOGO = 2;
+    private String mensaje;
+    private static final int iMotos_mensaje = 2;
     private int tipo;
     private BroadcastReceiver broadcastReceiverConfirmoCarrera;
     @Override
@@ -47,18 +46,15 @@ public class PidiendoSiete extends AppCompatActivity {
 
         tipoCarrera = intent.getStringExtra("tipo");
         tipo = Integer.valueOf(tipoCarrera);
-        if(tipo == TIPO_TOGO){
+        if(tipo == iMotos_mensaje){
             latFin=intent.getStringExtra("latFin");
             lngFin=intent.getStringExtra("lngFin");
+            latInicio=intent.getStringExtra("latInicio");
+            lngInicio=intent.getStringExtra("lngInicio");
             token=intent.getStringExtra("token");
             id_usr=intent.getStringExtra("id_usr");
-            productos = intent.getStringExtra("productos");
+            mensaje = intent.getStringExtra("mensaje");
             tipo_pago = intent.getStringExtra("tipo_pago");
-            try {
-                array = new JSONArray(productos);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }else{
             latInicio=intent.getStringExtra("latInicio");
             lngInicio=intent.getStringExtra("lngInicio");
@@ -103,7 +99,7 @@ public class PidiendoSiete extends AppCompatActivity {
         @Override
         protected void onPostExecute(String resp) {
             super.onPostExecute(resp);
-            if(tipo == TIPO_TOGO){
+            if(tipo == iMotos_mensaje){
                 new buscar_carrera_togo().execute();
             }else{
                 new buscar_carrera().execute();
@@ -180,14 +176,16 @@ public class PidiendoSiete extends AppCompatActivity {
         protected String doInBackground(Void... params) {
 
             Hashtable<String,String> param = new Hashtable<>();
-            param.put("evento","buscar_carrera_togo");
+            param.put("evento","buscar_carrera");
             param.put("latFin",latFin);
             param.put("lngFin",lngFin);
+            param.put("latInicio",latInicio);
+            param.put("lngInicio",lngInicio);
             param.put("token", token);
             param.put("id",id_usr);
             param.put("tipo",tipoCarrera);
             param.put("tipo_pago",tipo_pago);
-            param.put("productos" , array.toString());
+            param.put("productos_str" , mensaje);
             String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, param));
             return respuesta;
         }
@@ -205,7 +203,7 @@ public class PidiendoSiete extends AppCompatActivity {
             }else{
                 try {
                     JSONObject obj = new JSONObject(Resp);
-                    Intent inte = new Intent(PidiendoSiete.this,Inicio_viaje_togo.class);
+                    Intent inte = new Intent(PidiendoSiete.this,EsperandoConductor.class);
                     inte.putExtra("obj_carrera",obj.toString());
                     startActivity(inte);
                 } catch (JSONException e) {

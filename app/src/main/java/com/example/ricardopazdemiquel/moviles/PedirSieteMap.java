@@ -60,8 +60,10 @@ import android.widget.Toast;
 
 import com.example.ricardopazdemiquel.moviles.Adapter.AdaptadorSieteEstandar;
 import com.example.ricardopazdemiquel.moviles.Adapter.Adapter_pedidos_togo;
+import com.example.ricardopazdemiquel.moviles.Dialog.Aeropuerto_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog;
 import com.example.ricardopazdemiquel.moviles.Dialog.Confirmar_viaje_Dialog2;
+import com.example.ricardopazdemiquel.moviles.Dialog.Producto_imoto_Dialog;
 import com.example.ricardopazdemiquel.moviles.Fragment.List_historial_fragment;
 import com.example.ricardopazdemiquel.moviles.Fragment.Producto_togo_Activity;
 import com.example.ricardopazdemiquel.moviles.Fragment.SetupViewPager_fragment;
@@ -162,12 +164,13 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private ImageView btn_pedir_super, btn_pedir_maravilla;
 
     //iniciamos los buton del view pager
-    private static final int MAX_STEP = 1;
+    private static final int MAX_STEP = 2;
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int logo_array[] = {
-            R.drawable.btnmoto
+            R.drawable.btnmoto,
+            R.drawable.backgroud_tres_filas
     };
 
     private int tipo_carrera;
@@ -522,13 +525,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                             CalcularRuta(1);
                             break;
                         case 1:
-                            CalcularRuta(5);
-                            break;
-                        case 2:
-                            CalcularRuta(6);
-                            break;
-                        case 3:
-                            CalcularRuta(7);
+                            PedirImotoMensaje(2);
                             break;
                     }
                 }
@@ -758,17 +755,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(PedirSieteMap.this, Calcular_ruta_activity.class);
             LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
             LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
-            intent.putExtra("tipo", tipo_carrera);
-            intent.putExtra("lng", longitudeGPS);
-            intent.putExtra("lat", latitudeGPS);
-            intent.putExtra("latinicio", latlng1.latitude);
-            intent.putExtra("lnginicio", latlng1.longitude);
-            intent.putExtra("latfinal", latlng2.latitude);
-            intent.putExtra("lngfinal", latlng2.longitude);
 
             float[] results = new float[1];
-            float sum = 0;
-
             Location.distanceBetween(
                     inicio.latitude,
                     inicio.longitude,
@@ -778,7 +766,20 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             if(results[0]>Float.valueOf(getString(R.string.maxima_km_busqueda))){
                 Toast.makeText(PedirSieteMap.this,"Por favor marque dentro de Santa Cruz.",Toast.LENGTH_LONG).show();
                 return;
-            }else{
+            }else if (tipo_carrera == 1){
+                JSONObject obj  = new JSONObject();
+                try {
+                    obj.put("tipo" ,tipo_carrera);
+                    obj.put("lng" ,longitudeGPS);
+                    obj.put("lat" ,latitudeGPS);
+                    obj.put("latinicio" ,latlng1.latitude);
+                    obj.put("lnginicio" ,latlng1.longitude);
+                    obj.put("latfinal" ,latlng2.latitude);
+                    obj.put("lngfinal" ,latlng2.longitude);
+                    intent.putExtra("JSON", String.valueOf(obj));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 startActivity(intent);
             }
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -787,6 +788,51 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             Toast.makeText(PedirSieteMap.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
         }
     }
+
+
+    ///AL SELECCIONAR EL TIPO DEL SIETE EN EL MAPA
+    public void PedirImotoMensaje(int tipo_carrera){
+        Object tag=mAutocompleteTextView2.getTag();
+        Object taga=mAutocompleteTextView.getTag();
+        if(mAutocompleteTextView.getTag()!=null && mAutocompleteTextView2.getTag()!=null){
+            LatLng latlng1=(LatLng) mAutocompleteTextView.getTag();
+            LatLng latlng2=(LatLng) mAutocompleteTextView2.getTag();
+            float[] results = new float[1];
+            float sum = 0;
+            Location.distanceBetween(
+                    inicio.latitude,
+                    inicio.longitude,
+                    fin.latitude,
+                    fin.longitude,
+                    results);
+            if(results[0]>Float.valueOf(getString(R.string.maxima_km_busqueda))){
+                Toast.makeText(PedirSieteMap.this,"Por favor marque dentro de Santa Cruz.",Toast.LENGTH_LONG).show();
+                return;
+            }else if(tipo_carrera == 2){
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                JSONObject obj  = new JSONObject();
+                try {
+                    obj.put("tipo" ,tipo_carrera);
+                    obj.put("lng" ,longitudeGPS);
+                    obj.put("lat" ,latitudeGPS);
+                    obj.put("latinicio" ,latlng1.latitude);
+                    obj.put("lnginicio" ,latlng1.longitude);
+                    obj.put("latfinal" ,latlng2.latitude);
+                    obj.put("lngfinal" ,latlng2.longitude);
+                    new Producto_imoto_Dialog(obj , 0 , 2).show(fragmentManager, "Dialog");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }else{
+            Toast.makeText(PedirSieteMap.this,"Seleccione una ubicación valida.",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
 
     public void Aux_CalcularRuta(int tipo_carrera, Double lat ,Double lng ){
         if(mAutocompleteTextView.getText().toString().length() != 0 && mAutocompleteTextView2.getText().toString().length() != 0){
@@ -1386,7 +1432,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         JSONObject obj = new JSONObject(resp);
                         if(obj.getBoolean("exito")) {
                             if(obj.getInt("id_tipo")==2){//togo
-                                Intent intent = new Intent(PedirSieteMap.this, Inicio_viaje_togo.class);
+                                Intent intent = new Intent(PedirSieteMap.this, EsperandoConductor.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.putExtra("obj_carrera", obj.toString());
                                 startActivity(intent);

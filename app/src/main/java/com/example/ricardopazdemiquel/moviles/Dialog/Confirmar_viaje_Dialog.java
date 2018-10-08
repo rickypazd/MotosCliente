@@ -70,7 +70,7 @@ public class Confirmar_viaje_Dialog extends DialogFragment implements View.OnCli
             case R.id.btn_confirmarD:
                 try {
                     if(tipo == TIPO_TOGO){
-                        ((PedirSieteTogo)getActivity()).ok_pedir_viaje();
+                        ((Calcular_ruta_activity)getActivity()).ok_pedir_viaje();
                         dismiss();
                     }else {
                         ((Calcular_ruta_activity)getActivity()).ok_pedir_viaje();
