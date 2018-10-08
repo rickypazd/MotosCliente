@@ -102,7 +102,7 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
     private TextView monto;
     private TextView tv_cantidad;
     private Button btn_confirmar;
-    private ImageView iv_marker;
+
     private LinearLayout ll_ubic;
     private LinearLayout linear_confirm;
     private LinearLayout linearLayoutTogo;
@@ -155,8 +155,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
             startActivity(intent);
             finish();
         }
-
-        iv_marker=findViewById(R.id.ivmarker);
         monto = findViewById(R.id.tv_monto);
         radio_efectivo = findViewById(R.id.radio_efectivo);
         radio_credito = findViewById(R.id.radio_credito);
@@ -549,9 +547,9 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
                         }
                         int montoaux = (int) mont;
                         if(aeropuerto == true){
-                            monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                            monto.setText("BS. " +(montoaux-1)+" - "+(montoaux+1));
                         }else{
-                            monto.setText("Monto aproximado: " +(montoaux-2)+" - "+(montoaux+2));
+                            monto.setText("BS. " +(montoaux-1)+" - "+(montoaux+1));
                         }
 
                     }
@@ -661,7 +659,6 @@ public class Calcular_ruta_activity extends AppCompatActivity implements View.On
         inicio=latlng1;
         fin=latlng2;
         String url = obtenerDireccionesURL(latlng1,latlng2);
-        iv_marker.setVisibility(View.GONE);
         googleMap.addMarker(new MarkerOptions().position(latlng1).title("INICIO").icon(Inicio_bitmapDescriptorFromVector(this , R.drawable.asetmar)));
         googleMap.addMarker(new MarkerOptions().position(latlng2).title("FIN").icon(Fin_bitmapDescriptorFromVector(this, R.drawable.asetmar)));
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
