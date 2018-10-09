@@ -9,9 +9,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="0.8"
         android:backgroundTint="@color/colorWhite"
         android:elevation="20dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,11 +23,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -37,66 +32,21 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/text_fecha"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|start"
-                            android:text="23-12-18"
-                            android:textColor="#4d4f4e"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/text_auto"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|end"
-                            android:text="kia celerio"
-                            android:textColor="#4d4f4e"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginEnd="30dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/colorBlack">
-
-                        </View>
 
                         <TextView
                             android:id="@+id/text_inicioViaje"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="10dp"
-                            android:layout_weight="1"
-                            android:drawableLeft="@drawable/ic_icon_pointer_map"
+                            android:layout_weight="1" android:drawableLeft="@drawable/ic_icon_pointer_map"
                             android:drawablePadding="10dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:padding="10dp"
                             android:textColor="#4d4f4e"
                             android:textSize="15sp"
                             tools:text="callea capitan velarde" />
-
-                        <View
-                            android:id="@+id/view"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginEnd="30dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/colorBlack"></View>
 
                         <TextView
                             android:id="@+id/text_FinViaje"
@@ -104,39 +54,34 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:drawableLeft="@drawable/ic_icon_pointer_map2"
-                            android:drawablePadding="5dp"
+                            android:drawablePadding="10dp"
+                            android:background="@drawable/ic_button_border_gris"
+                            android:padding="10dp"
                             android:textColor="#4d4f4e"
                             android:textSize="15sp"
                             tools:text="ave tres passos al f" />
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/backgroundcolor" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginEnd="30dp"
                             android:layout_marginTop="10dp"
                             android:background="@color/colorBlack"></View>
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
 
                             <TextView
                                 android:id="@+id/text_tipoPago"
@@ -153,30 +98,61 @@
                                 android:layout_weight="1"
                                 android:textColor="#4d4f4e"
                                 tools:text="55 bs" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="#4d4f4e"
+                                android:textAlignment="center"
+                                tools:text="Modelo" />
+
+                            <TextView
+                                android:id="@+id/text_auto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textAlignment="center"
+                                android:text="kia celerio"
+                                android:textColor="#4d4f4e"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|end"
-                            android:paddingEnd="20dp">
+                            android:orientation="vertical"
+                            android:gravity="end"
+                            android:layout_weight="1">
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_next_viajes"
-                                android:padding="10dp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:textColor="#4d4f4e"
+                                tools:text="Fecha" />
 
+                            <TextView
+                                android:id="@+id/text_fecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="23-12-18"
+                                android:textColor="#4d4f4e"
+                                />
 
                         </LinearLayout>
 
-
                     </LinearLayout>
-
-
-                </LinearLayout>
 
             </LinearLayout>
 

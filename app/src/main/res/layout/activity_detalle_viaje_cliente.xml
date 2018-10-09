@@ -41,11 +41,53 @@
                 android:orientation="vertical"
                 android:paddingTop="30dp">
 
+                <TextView
+                    android:id="@+id/text_direccion_inicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10sp"
+                    android:background="@drawable/ic_button_border_gris"
+                    android:drawableLeft="@drawable/ic_icon_pointer_map"
+                    android:drawablePadding="5dp"
+                    android:padding="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColorLink="#fff"
+                    android:textColorHint="#fff"
+                    android:textColorHighlight="#ffffff"
+                    android:text="direccion direcion"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/text_direccion_fin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/ic_button_border_gris"
+                    android:drawableLeft="@drawable/ic_icon_pointer_map2"
+                    android:textColorLink="#fff"
+                    android:textColorHint="#fff"
+                    android:textColorHighlight="#fff"
+                    android:drawablePadding="5dp"
+                    android:paddingStart="10dp"
+                    android:inputType="textMultiLine"
+                    android:padding="5dp"
+                    android:paddingEnd="10dp"
+                    android:text="direccion"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -60,7 +102,8 @@
                             android:layout_gravity="center"
                             android:padding="10dp"
                             android:src="@mipmap/ic_miperfil"
-                            app:civ_border_width="2dp"></com.mikhaellopez.circularimageview.CircularImageView>
+                            app:civ_border_width="2dp">
+                        </com.mikhaellopez.circularimageview.CircularImageView>
 
                     </LinearLayout>
 
@@ -97,48 +140,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/text_direccion_inicio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10sp"
-                    android:background="@drawable/ic_button_border_black"
-                    android:drawableLeft="@drawable/ic_icon_pointer_map"
-                    android:drawablePadding="5dp"
-                    android:padding="5dp"
-                    android:paddingEnd="10dp"
-                    android:backgroundTint="#4d4f4e"
-                    android:textColorLink="#fff"
-                    android:textColorHint="#fff"
-                    android:textColorHighlight="#ffffff"
-                    android:text="direccion direcion"
-                    android:textColor="#fff"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/text_direccion_fin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="5sp"
-                    android:background="@drawable/ic_button_border_black"
-                    android:drawableLeft="@drawable/ic_icon_pointer_map2"
-                    android:backgroundTint="#4d4f4e"
-                    android:textColorLink="#fff"
-                    android:textColorHint="#fff"
-                    android:textColorHighlight="#fff"
-                    android:drawablePadding="5dp"
-
-                    android:inputType="textMultiLine"
-                    android:padding="5dp"
-                    android:paddingEnd="10dp"
-                    android:text="direccion"
-                    android:textColor="#fff"
-                    android:textSize="15dp" />
 
                 <Button
                     android:id="@+id/btn_ver_recorrido"
