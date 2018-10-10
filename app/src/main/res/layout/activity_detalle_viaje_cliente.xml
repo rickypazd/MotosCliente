@@ -58,7 +58,7 @@
                     android:textColorHint="#fff"
                     android:textColorHighlight="#ffffff"
                     android:text="direccion direcion"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorGris2"
                     android:textSize="15dp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:padding="5dp"
                     android:paddingEnd="10dp"
                     android:text="direccion"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorGris2"
                     android:textSize="15dp" />
 
                 <LinearLayout

@@ -112,8 +112,6 @@ public class Adaptador_mis_viajes extends BaseAdapter {
                     }
                 }
             });
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

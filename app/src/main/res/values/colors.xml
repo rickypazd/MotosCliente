@@ -9,6 +9,7 @@
     <color name="colorAccent">#C23E54</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGris">#626262</color>
+    <color name="colorGris2">#4d4f4e</color>
     <color name="colorWhite">#fff</color>
 
     <color name="overlay_dark_10">#1A000000</color>
