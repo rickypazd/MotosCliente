@@ -142,8 +142,8 @@
                                         android:inputType="text"
                                         android:paddingLeft="10dp"
                                         android:paddingTop="5dp"
-                                        android:textColor="#4d4f4e"
-                                        android:textColorHint="#4d4f4e"
+                                        android:textColor="@color/colorBlack"
+                                        android:textColorHint="@color/colorGris"
                                         android:padding="10dp"
                                         android:textSize="15sp" />
 
@@ -174,8 +174,8 @@
                                             android:drawableStart="@drawable/ic_icon_pointer_map2"
                                             android:hint="Dirección final"
                                             android:paddingLeft="10dp"
-                                            android:textColorHint="#4d4f4e"
-                                            android:textColor="#4d4f4e"
+                                            android:textColorHint="@color/colorGris"
+                                            android:textColor="@color/colorBlack"
                                             android:paddingTop="5dp"
                                             android:textSize="15sp"
                                             android:padding="10dp"/>
