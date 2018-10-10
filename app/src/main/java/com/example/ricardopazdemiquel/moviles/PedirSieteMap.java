@@ -242,6 +242,11 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
 
         iv_marker = findViewById(R.id.ivmarker);
+
+
+        //iv_marker.drawableHotspotChanged(0.2f,23.2f);
+        //iv_marker.setBackground(getDrawable(Fin_bitmapDescriptorFromVector(this, R.drawable.asetmar)));
+
         //esto es prueba
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
         latitudeGPS = getIntent().getDoubleExtra("lat", 0);
