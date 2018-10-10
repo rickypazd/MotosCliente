@@ -12,6 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:translationZ="999dp"
+            android:src="@drawable/ic_bar_menu"
+            />
+
+        <LinearLayout
+            android:id="@+id/cargando"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/backgroundcolor2"
+            android:orientation="vertical"
+            android:translationZ="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,16 +56,8 @@
                     android:background="@drawable/backgroundcolor2"
                     app:titleTextColor="@color/colorBlack"
                     tools:layout_editor_absoluteX="8dp"
-                    app:contentInsetStart="1dp"
+                    app:contentInsetStart="24dp"
                     tools:layout_editor_absoluteY="0dp">
-
-                    <ImageView
-                        android:id="@+id/fab"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:src="@drawable/ic_bar_menu"
-                        />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -181,7 +196,6 @@
                                             android:padding="10dp"/>
 
                                         <ImageView
-                                            android:id="@+id/next_historial"
                                             android:layout_width="30dp"
                                             android:layout_height="match_parent"
                                             android:gravity="center"
@@ -245,11 +259,9 @@
 
             <android.support.design.widget.CoordinatorLayout
                 android:id="@+id/Container_verPerfil"
+                android:translationZ="99999dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:translationZ="999dp"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -258,7 +270,6 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorWhite"
                     android:orientation="vertical"
-                    android:translationZ="999dp"
                     app:behavior_hideable="true"
                     app:behavior_peekHeight="0dp"
                     app:layout_behavior="utiles.BehaviorCuston">
@@ -268,8 +279,7 @@
                         android:id="@+id/contenedorFragment"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:layout_weight="1"
-                        android:translationZ="999dp"></FrameLayout>
+                        android:layout_weight="1"></FrameLayout>
 
                 </LinearLayout>
 

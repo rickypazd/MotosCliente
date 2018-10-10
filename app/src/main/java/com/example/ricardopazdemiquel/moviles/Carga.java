@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.facebook.share.model.CameraEffectArguments;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
@@ -85,13 +86,12 @@ public class Carga extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /*try {
+        try {
             new Get_validarCarrera(usr_log.getInt("id")).execute();
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        ejecutar();
     }
     public void ejecutar(){
         new Handler().postDelayed(new Runnable() {
@@ -200,6 +200,70 @@ public class Carga extends AppCompatActivity {
                             SharedPreferences.Editor editor = preferencias.edit();
                             editor.putString("usr_log", "");
                             usr_log=null;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+        }
+    }
+
+
+    public class Get_validarCarrera extends AsyncTask<Void, String, String>{
+        private int id;
+        public Get_validarCarrera(int id){
+            this.id=id;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+            Hashtable<String, String> parametros = new Hashtable<>();
+            parametros.put("evento", "get_carrera_cliente");
+            parametros.put("id_usr",id+"");
+            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
+            return respuesta;
+        }
+        @Override
+        protected void onPostExecute(String resp) {
+            super.onPostExecute(resp);
+            if(resp==null){
+                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+            }else{
+                if (resp.contains("falso")) {
+                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
+                } else {
+                    try {
+                        JSONObject obj = new JSONObject(resp);
+                        if(obj.getBoolean("exito")) {
+                            if(obj.getInt("id_tipo")== 2){//togo
+                                Intent intent = new Intent(Carga.this, EsperandoConductor.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }else{
+                                Intent intent = new Intent(Carga.this, EsperandoConductor.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("obj_carrera", obj.toString());
+                                startActivity(intent);
+                            }
+                        }else{
+                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferencias.edit();
+                            editor.putString("chat_carrera", new JSONArray().toString());
+                            editor.commit();
+                            ejecutar();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

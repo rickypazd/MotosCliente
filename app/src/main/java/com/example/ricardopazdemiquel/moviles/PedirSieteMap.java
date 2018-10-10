@@ -127,7 +127,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private AutoCompleteTextView selected;
     private TextView monto;
     private TextView tv_cantidad;
-    private Button btn_confirmar;
     private ImageView iv_marker;
     private LinearLayout ll_ubic;
     private LinearLayout linear_confirm;
@@ -177,7 +176,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     double mont;
 
-    private Button btn_elegir_destino;
     private Boolean listo=false;
     Fragment fragment_favoritos = null;
     Fragment fragment_historial = null;
@@ -188,6 +186,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     private Button btn_ver_listo;
     private LatLng latlngtemp;
     Toolbar toolbar;
+    private ImageView next_historial;
 
     public PedirSieteMap() {
     }
@@ -212,10 +211,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_nav_miperfil.setOnClickListener(this);
         btn_nav_misviajes.setOnClickListener(this);
         btn_nav_preferencias.setOnClickListener(this);
-     barnombre=header.findViewById(R.id.barnombre);
-      bartelefono=header.findViewById(R.id.bartelefono);;
-      JSONObject usr = getUsr_log();
-      runtime_permissions();
+        barnombre=header.findViewById(R.id.barnombre);
+        bartelefono=header.findViewById(R.id.bartelefono);
+        JSONObject usr = getUsr_log();
+        runtime_permissions();
         try {
             barnombre.setText(usr.getString("nombre")+" "+usr.getString("apellido_pa"));
             bartelefono.setText("+591 "+usr.getString("telefono"));
@@ -232,13 +231,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 } else{
                     drawer.openDrawer(GravityCompat.START);
                 }
-                ViewAnimation.expand(lyt_expand_text, new ViewAnimation.AnimListener() {
-                    @Override
-                    public void onFinish() {
-                        Tools.nestedScrollTo(nested_scroll_view, lyt_expand_text);
-
-                    }
-                });
             }
         });
         ll_ubic = findViewById(R.id.linearLayoutPedir);
@@ -247,7 +239,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         toolbar.setContentInsetsAbsolute(24,24);
         linearLayoutPedir = findViewById(R.id.linearLayoutPedir);
-        linearLayoutcarga=findViewById(R.id.cargando);
+
         iv_marker = findViewById(R.id.ivmarker);
         //esto es prueba
         longitudeGPS = getIntent().getDoubleExtra("lng", 0);
@@ -259,9 +251,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                 .addConnectionCallbacks(this)
                 .build();
 
-        btn_pedir_super = findViewById(R.id.btn_pedir_super);
-        btn_pedir_maravilla = findViewById(R.id.btn_pedir_maravilla);
-        btn_elegir_destino= findViewById(R.id.btn_elegir_destino);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         // adding bottom dots
         bottomProgressDots(0);
@@ -273,9 +262,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         recyclerView = findViewById(R.id.reciclerView);
         parent_view = findViewById(android.R.id.content);
 
-
-
-        initComponent();
+        //initComponent();
         /*recyclerView.setHasFixedSize(true);
         LinearLayoutManager mylinear = new LinearLayoutManager(this);
         mylinear.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -304,16 +291,15 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }*/
 
+        next_historial = findViewById(R.id.next_historial);
+        next_historial.setOnClickListener(this);
 
-        btn_pedir_super.setOnClickListener(this);
-        btn_pedir_maravilla.setOnClickListener(this);
-        btn_elegir_destino.setOnClickListener(this);
         mostar_button(tipo_carrera);
 
         View view = findViewById(R.id.button_sheetss);
         bottomSheetBehavior = BottomSheetBehavior.from(view);
         //bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+        //bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
 
         SetupViewPager_fragment = new SetupViewPager_fragment();
         List_historial_fragment pagguer=new List_historial_fragment();
@@ -326,10 +312,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 selected=(AutoCompleteTextView) v;
-                toggleSectionText(bt_toggle_text);
                 AutoCompleteTextView auto =(AutoCompleteTextView)v;
                 selected.setText("");
-                bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+                //bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
             }
         });
         mAutocompleteTextView.setThreshold(3);
@@ -345,8 +330,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         mAutocompleteTextView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected=(AutoCompleteTextView) v;  toggleSectionText(bt_toggle_text);
-                bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+                selected=(AutoCompleteTextView) v;
+                //bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
                 AutoCompleteTextView auto =(AutoCompleteTextView)v;
                 selected.setText("");
             }
@@ -388,7 +373,6 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
                         if (!entroLocation) {
                             if(selected!=mAutocompleteTextView2){
                                 entroLocation = true;
-                                linearLayoutcarga.setVisibility(View.GONE);
                                 selected.setTag(new LatLng(location.getLatitude(), location.getLongitude()));
                                 mMap.clear();
                                 selected.setText(getCompleteAddressString(location.getLatitude(), location.getLongitude()));
@@ -454,11 +438,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
             locationButton.setImageResource(R.drawable.ic_mapposition_foreground);
         }
-        try {
-            new Get_validarCarrera(usr_log.getInt("id")).execute();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
     }
 
@@ -555,7 +535,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
     private View parent_view;
 
-    private NestedScrollView nested_scroll_view;
+    /*private NestedScrollView nested_scroll_view;
     private ImageButton bt_toggle_text, bt_toggle_input;
     private Button bt_save_input, bt_hide_input;
     private View lyt_expand_text, lyt_expand_input;
@@ -581,9 +561,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
 
         // nested scrollview
         nested_scroll_view = (NestedScrollView) findViewById(R.id.nested_scroll_view);
-    }
+    }*/
 
-    private void toggleSectionText(View view) {
+    /*private void toggleSectionText(View view) {
         boolean show = toggleArrow(view);
         if (show) {
             ViewAnimation.expand(lyt_expand_text, new ViewAnimation.AnimListener() {
@@ -609,7 +589,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         } else {
             ViewAnimation.collapse(lyt_expand_input);
         }
-    }
+    }*/
 
     public boolean toggleArrow(View view) {
         if (view.getRotation() == 0) {
@@ -632,10 +612,10 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         btn_ver_listo.setVisibility(View.GONE);
     }
     private Boolean active;
+
     public void close() {
         if (bottomSheetBehavior instanceof BehaviorCuston) {
             ((BehaviorCuston) bottomSheetBehavior).setLocked(true);
-
         }
     }
 
@@ -645,12 +625,9 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
-    private void notificacionReciber(Intent intent) {
-
+    public void close_behavior(){
+        bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
     }
-
-
 
     public  void ok(){
         try {
@@ -677,16 +654,8 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.btn_pedir_super:
-                CalcularRuta(4);
-                break;
-            case R.id.btn_pedir_maravilla:
-                CalcularRuta(3);
-                break;
-            case R.id.btn_elegir_destino:
-                iv_marker.setVisibility(View.VISIBLE);
-                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
+            case R.id.next_historial:
+                bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
                 break;
             case R.id.btn_nav_formaspago:
                 intent = new Intent(PedirSieteMap.this , Transaccion_cliente_Activity.class);
@@ -711,8 +680,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         switch (tipo){
             case 1:
                 calculando_ruta(tipo_carrera ,nombre,lat,lng);
-                bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
+                //bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
                 break;
             case 2:
                 break;
@@ -722,27 +690,22 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
             case 4:
                 Aux_CalcularRuta(tipo_carrera, lat,lng);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 break;
             case 5:
                 calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 break;
             case 6:
                 calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 break;
             case 7:
                 calculando_ruta(tipo_carrera ,nombre  ,lat,lng);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 break;
             case 10:
                 calculando_ruta(tipo ,nombre  ,lat,lng);
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 break;
         }
     }
@@ -924,10 +887,7 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
              //   googleMap.setPadding(200,200,200,200);
 
                     googleMap.moveCamera(cu);
-
-
                 bottomSheetBehavior.setState(BehaviorCuston.STATE_HIDDEN);
-                ViewAnimation.collapse(lyt_expand_text);
                 listo=true;
             }
         }
@@ -1059,17 +1019,17 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
     public void onFocusChange(View v, boolean hasFocus) {
         if(hasFocus){
             selected=(AutoCompleteTextView) v;
-            bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
+            //bottomSheetBehavior.setState(BehaviorCuston.STATE_EXPANDED);
 
             iv_marker.setVisibility(View.VISIBLE);
             selected.setText("");
-            ViewAnimation.expand(lyt_expand_text, new ViewAnimation.AnimListener() {
+           /* ViewAnimation.expand(lyt_expand_text, new ViewAnimation.AnimListener() {
                 @Override
                 public void onFinish() {
                     Tools.nestedScrollTo(nested_scroll_view, lyt_expand_text);
 
                     }
-            });
+            });*/
         }
     }
     public void closeSoftKeyBoard() {
@@ -1400,67 +1360,5 @@ public class PedirSieteMap extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public class Get_validarCarrera extends AsyncTask<Void, String, String>{
-        private int id;
-        public Get_validarCarrera(int id){
-            this.id=id;
-        }
 
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-        }
-        @Override
-        protected String doInBackground(Void... params) {
-            Hashtable<String, String> parametros = new Hashtable<>();
-            parametros.put("evento", "get_carrera_cliente");
-            parametros.put("id_usr",id+"");
-            String respuesta = HttpConnection.sendRequest(new StandarRequestConfiguration(getString(R.string.url_servlet_index), MethodType.POST, parametros));
-            return respuesta;
-        }
-        @Override
-        protected void onPostExecute(String resp) {
-            super.onPostExecute(resp);
-            if(resp==null){
-                Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-            }else{
-                if (resp.contains("falso")) {
-                    Log.e(Contexto.APP_TAG, "Hubo un error al conectarse al servidor.");
-                } else {
-                    try {
-                        JSONObject obj = new JSONObject(resp);
-                        if(obj.getBoolean("exito")) {
-                            if(obj.getInt("id_tipo")==2){//togo
-                                Intent intent = new Intent(PedirSieteMap.this, EsperandoConductor.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.putExtra("obj_carrera", obj.toString());
-                                startActivity(intent);
-                            }else{
-                                Intent intent = new Intent(PedirSieteMap.this, EsperandoConductor.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.putExtra("obj_carrera", obj.toString());
-                                startActivity(intent);
-                            }
-
-                        }else{
-
-                            SharedPreferences preferencias = getSharedPreferences("myPref",MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferencias.edit();
-                            editor.putString("chat_carrera", new JSONArray().toString());
-                            editor.commit();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-
-        }
-    }
 }

@@ -127,7 +127,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         cont_auto_limpio = findViewById(R.id.cont_auto_limpio);
         text_ultimo_mensaje = findViewById(R.id.text_ultimo_mensaje);
 
-
         btn_cancelar_viaje.setOnClickListener(this);
 
         try {
@@ -135,7 +134,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
             if(json_carrera.getInt("estado")>=3){
                     conductor_llego(getIntent());
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

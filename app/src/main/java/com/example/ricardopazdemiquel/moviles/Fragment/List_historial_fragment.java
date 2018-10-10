@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,15 +41,19 @@ import clienteHTTP.MethodType;
 import clienteHTTP.StandarRequestConfiguration;
 import utiles.Contexto;
 
-public class List_historial_fragment extends Fragment {
+public class List_historial_fragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG ="fragment_explorar";
     private ListView lv;
+    private ImageView close_fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historial, container, false);
+
         lv = view.findViewById(R.id.lista_historial);
+        close_fragment = view.findViewById(R.id.close_fragment);
+        close_fragment.setOnClickListener(this);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,6 +125,15 @@ public class List_historial_fragment extends Fragment {
                 e.printStackTrace();
                 return null;
             }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.close_fragment:
+                ((PedirSieteMap)getActivity()).close_behavior();
+                break;
         }
     }
 
