@@ -89,7 +89,7 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
     private TextView text_Viajes;
     private Button btn_cancelar_viaje;
 
-    private TextView cont_amable , cont_buena_ruta , cont_auto_limpio , text_ultimo_mensaje;
+    private TextView text_ultimo_mensaje;
 
 
     private Button btn_enviar_mensaje;
@@ -122,9 +122,6 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
         Container_cancelar = findViewById(R.id.Container_cancelar);
         Container_verPerfil = findViewById(R.id.Container_verPerfil);
         btn_cancelar_viaje = findViewById(R.id.btn_cancelar_viaje);
-        cont_amable = findViewById(R.id.cont_amable);
-        cont_buena_ruta = findViewById(R.id.cont_buena_ruta);
-        cont_auto_limpio = findViewById(R.id.cont_auto_limpio);
         text_ultimo_mensaje = findViewById(R.id.text_ultimo_mensaje);
 
         btn_cancelar_viaje.setOnClickListener(this);
@@ -722,9 +719,9 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         String marca = object.getString("marca").toString();
                         int viajes = object.getInt("cant_car");
 
-                        int amable = object.getInt("amable");
-                        int buena_ruta = object.getInt("buena_ruta");
-                        int auto_limpio = object.getInt("auto_limpio");
+                       // int amable = object.getInt("amable");
+                       // int buena_ruta = object.getInt("buena_ruta");
+                       // int auto_limpio = object.getInt("auto_limpio");
                         String ultimo_mensaje = object.getString("ultimo_mensaje");
 
                         String placa = object.getString("placa");
@@ -732,12 +729,10 @@ public class EsperandoConductor extends AppCompatActivity implements View.OnClic
                         text_nombreAuto.setText(marca + "-" + modelo);
                         text_numeroPlaca.setText(placa);
 
-                        cont_amable.setText(amable+"");
-                        cont_buena_ruta.setText(buena_ruta+"");
-                        cont_auto_limpio.setText(auto_limpio+"");
+
                         text_ultimo_mensaje.setText(ultimo_mensaje);
 
-                        text_Viajes.setText("ha completado: " + viajes);
+                        text_Viajes.setText("ha completado: " + viajes + " viajes");
 
                         Container_verPerfil.setVisibility(View.VISIBLE);
                         btn_enviar_mensaje.setOnClickListener(new View.OnClickListener() {

@@ -59,343 +59,240 @@
                     app:behavior_peekHeight="55dp"
                     app:layout_behavior="@string/bottom_sheet_behavior">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/colorWhite">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:text="Ver Conductor"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorBlack"
+                            android:background="@color/colorPrimary2"
+                            android:textSize="22dp"
+                            android:gravity="center" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:background="@drawable/backgroundcolor2">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="55dp"
-                                android:text="Ver perfil"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="22dp"
-                                android:gravity="center" />
+                            android:layout_height="100dp"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_weight="1">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <Button
-                                        android:id="@+id/btn_llamar"
-                                        android:layout_width="60dp"
-                                        android:layout_height="60dp"
-                                        android:layout_gravity="center"
-                                        android:background="@drawable/ic_logo_phone"
-                                        android:drawableStart="@drawable/ic_telefono"
-                                        android:padding="17dp" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:id="@+id/img_foto"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_gravity="center"
-                                        android:drawableStart="@drawable/ic_sobre"
-                                        android:padding="17dp"
-                                        android:src="@mipmap/ic_miperfil_round" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <Button
-                                        android:id="@+id/btn_enviar_mensaje"
-                                        android:layout_width="60dp"
-                                        android:layout_height="60dp"
-                                        android:layout_gravity="center"
-                                        android:background="@drawable/ic_logo_phone"
-                                        android:drawableStart="@drawable/ic_sobre"
-                                        android:padding="17dp" />
-
-                                </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/btn_llamar"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/ic_phone2"
+                                    android:padding="10dp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:layout_marginEnd="40dp"
-                                android:layout_marginStart="40dp"
-                                android:layout_weight="1.1">
+                                android:layout_weight="1"
+                                android:gravity="center">
 
-                                <TextView
-                                    android:id="@+id/text_nombreConductor"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:textSize="18dp"
-                                    android:textColor="#000"
-                                    android:gravity="center"
-                                    android:background="@drawable/ic_redondo1_finalizar"
-                                    android:inputType="textPersonName" />
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/img_photo"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:src="@drawable/ic_icon_perfil">
+                                </com.mikhaellopez.circularimageview.CircularImageView>
 
                             </LinearLayout>
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_marginStart="40dp"
-                                android:layout_marginEnd="40dp"
-                                android:layout_weight="1.1">
+                                android:layout_weight="1"
+                                android:gravity="center">
 
-                                <TextView
-                                    android:id="@+id/text_nombreAuto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="45dp"
+                                <ImageView
+                                    android:id="@+id/btn_enviar_mensaje"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
                                     android:layout_gravity="center"
-                                    android:textSize="15dp"
-                                    android:textColor="#000"
-                                    android:gravity="center"
-                                    android:background="@drawable/botonred"
-                                    android:inputType="textPersonName"
-                                    android:layout_weight="1"/>
-
-                                <TextView
-                                    android:id="@+id/text_numeroPlaca"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:layout_gravity="center"
-                                    android:textSize="15dp"
-                                    android:textColor="#000"
-                                    android:gravity="center"
-                                    android:layout_marginStart="20dp"
-                                    android:background="@drawable/botonred"
-                                    android:inputType="textPersonName"
-                                    android:layout_weight="1"/>
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:layout_weight="1.01">
-
-                                <TextView
-                                    android:id="@+id/text_Viajes"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:text="Ha completado 256 viajes"
-                                    android:textAlignment="center"
-                                    android:gravity="center"
-                                    android:textColor="#000"
-                                    android:textSize="18dp" />
-
-                                <TextView
-                                    android:id="@+id/text_Logros"
-                                    android:layout_width="180dp"
-                                    android:layout_height="45dp"
-                                    android:gravity="center"
-                                    android:text="Logros"
-                                    android:textColor="#000"
-                                    android:textSize="22dp"
-                                    android:textStyle="bold"
-                                    android:background="@drawable/ic_redondo1_finalizar"
-                                    android:inputType="textPersonName" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:visibility="gone"
-                                android:layout_weight="1">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:layout_weight="1">
-
-
-                                    <RelativeLayout
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_horizontal">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="top|end"
-                                            android:translationZ="3dp">
-
-                                            <TextView
-                                                android:id="@+id/cont_amable"
-                                                android:layout_width="20dp"
-                                                android:layout_height="20dp"
-                                                android:text="0"
-                                                android:textSize="20dp"
-                                                android:gravity="end|bottom"
-                                                android:textColor="@color/colorBlack"/>
-                                        </LinearLayout>
-
-                                        <ImageView
-                                            android:id="@+id/button6"
-                                            android:layout_width="70dp"
-                                            android:layout_height="70dp"
-                                            android:background="@drawable/ic_icon_amable"
-                                            />
-
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:id="@+id/textView12"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="0dp"
-                                        android:textAlignment="center"
-                                        android:text="Amable"
-                                        android:textColor="#000" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:visibility="gone"
-                                    android:layout_weight="1">
-
-                                    <RelativeLayout
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_horizontal">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="top|end"
-                                            android:translationZ="3dp">
-
-                                            <TextView
-                                                android:id="@+id/cont_buena_ruta"
-                                                android:layout_width="20dp"
-                                                android:layout_height="20dp"
-                                                android:text="0"
-                                                android:textSize="20dp"
-                                                android:gravity="end|bottom"
-                                                android:textColor="@color/colorBlack"/>
-                                        </LinearLayout>
-
-                                        <ImageView
-                                            android:id="@+id/button3"
-                                            android:layout_width="70dp"
-                                            android:layout_height="70dp"
-                                            android:background="@drawable/ic_buena_ruta2" />
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:id="@+id/textView11"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="0dp"
-                                        android:textAlignment="center"
-                                        android:text="Buena Ruta"
-                                        android:textColor="#000" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:layout_weight="1">
-
-                                    <RelativeLayout
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:layout_gravity="center_horizontal">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:gravity="top|end"
-                                            android:translationZ="3dp">
-
-                                            <TextView
-                                                android:id="@+id/cont_auto_limpio"
-                                                android:layout_width="20dp"
-                                                android:layout_height="20dp"
-                                                android:text="0"
-                                                android:textSize="20dp"
-                                                android:gravity="end|bottom"
-                                                android:textColor="@color/colorBlack"/>
-                                        </LinearLayout>
-
-                                        <ImageView
-                                            android:id="@+id/button7"
-                                            android:layout_width="70dp"
-                                            android:layout_height="70dp"
-                                            android:background="@drawable/ic_icon_auto_limpio" />
-
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:id="@+id/textView13"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Auto limpio"
-                                        android:textAlignment="center"
-                                        android:paddingTop="0dp"
-                                        android:textColor="#fff" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="40dp"
-                                android:layout_marginStart="40dp"
-                                android:layout_marginBottom="20dp"
-                                android:gravity="center"
-                                android:layout_weight="1">
-
-                                <TextView
-                                    android:id="@+id/text_ultimo_mensaje"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:alpha="0.5"
-                                    android:background="@drawable/rounded_corner"
-                                    android:padding="10dp"
-                                    android:inputType="textMultiLine"
-                                    android:text="Tuve un excelente servicio"
-                                    android:textColor="@color/colorBlack" />
-
+                                    android:src="@drawable/ic_chat"
+                                    android:drawableStart="@drawable/ic_sobre"
+                                    android:padding="10dp" />
 
                             </LinearLayout>
 
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:textSize="18dp"
+                                android:textColor="@color/colorPrimary2"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:text="NOMBRE"
+                                android:inputType="textPersonName" />
+
+                            <TextView
+                                android:id="@+id/text_nombreConductor"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:textSize="18dp"
+                                android:text="asdhasuhdaskdsaha"
+                                android:textColor="@color/colorBlack"
+                                android:gravity="center"
+                                android:inputType="textPersonName" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:textSize="20dp"
+                                    android:textColor="@color/colorPrimary2"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:text="MODELO"
+                                    android:inputType="textPersonName" />
+
+                                <TextView
+                                    android:id="@+id/text_nombreAuto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:textSize="15dp"
+                                    android:text="sdfsdfsdgd"
+                                    android:textColor="@color/colorBlack"
+                                    android:gravity="center"
+                                    android:inputType="textPersonName"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:textSize="20dp"
+                                    android:textColor="@color/colorPrimary2"
+                                    android:gravity="center"
+                                    android:text="MARCA"
+                                    android:textStyle="bold"
+                                    android:inputType="textPersonName" />
+
+                                <TextView
+                                    android:id="@+id/text_numeroPlaca"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:textSize="15dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:gravity="center"
+                                    android:text="sdgfsdgsdgsd"
+                                    android:inputType="textPersonName"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/text_Viajes"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:text="Ha completado 256 viajes"
+                                android:textAlignment="center"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="20dp"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="40dp"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                app:cardCornerRadius="20dp"
+                                android:backgroundTint="@color/amber_A100">
+
+                                <TextView
+                                    android:id="@+id/text_ultimo_mensaje"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:padding="10dp"
+                                    android:inputType="textMultiLine"
+                                    android:text="nombre"
+                                    android:textColor="@color/colorBlack" />
+
+
+                            </android.support.v7.widget.CardView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     </LinearLayout>
 
