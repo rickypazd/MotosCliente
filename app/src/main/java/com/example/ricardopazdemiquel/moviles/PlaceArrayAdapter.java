@@ -85,10 +85,9 @@ public class PlaceArrayAdapter
             ArrayList resultList = new ArrayList<>();
             while (iterator.hasNext()) {
                 AutocompletePrediction prediction = iterator.next();
-                if(String.valueOf(prediction.getFullText(null)).contains("Bolivia")){
+
                     resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),
                             prediction.getFullText(null)));
-                }
 
             }
             // Buffer release
